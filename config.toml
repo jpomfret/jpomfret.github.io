@@ -1,0 +1,15 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'Jess Pomfret'
+theme = "m10c"
+publishDir = "docs"
+baseurl = 'https://jpomfret.github.io'
+
+[params]
+  author = 'Jess Pomfret'
+  description = 'Database Engineer with a passion for automation'
+
+[[params.social]]
+  icon = "github"
+  name = "My Github"
+  url = "https://github.com/jpomfret"
