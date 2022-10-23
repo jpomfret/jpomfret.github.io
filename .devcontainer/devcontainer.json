@@ -8,7 +8,7 @@
 			// Update VARIANT to pick hugo variant.
 			// Example variants: hugo, hugo_extended
 			// Rebuild the container if it already exists to update.
-			"VARIANT": "hugo",
+			"VARIANT": "hugo_extended",
 			// Update VERSION to pick a specific hugo version.
 			// Example versions: latest, 0.73.0, 0,71.1
 			// Rebuild the container if it already exists to update.
@@ -18,19 +18,32 @@
 		}
 	},
 
+
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
-			"settings": { 
+			"settings": {
 				"html.format.templating": true
 			},
-			
+
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"bungcip.better-toml",
-				"davidanson.vscode-markdownlint"
+				"davidanson.vscode-markdownlint",
+				"ms-vscode.powershell",
+				"mhutchie.git-graph",
+				"github.vscode-pull-request-github",
+				"2gua.rainbow-brackets",
+				"oderwat.indent-rainbow",
+				"usernamehw.errorlens",
+				"cschleiden.vscode-github-actions",
+				"redhat.vscode-yaml", // for the gihub action intellisense
+				"bungcip.better-toml",
+				"davidanson.vscode-markdownlint",
+				"eamodio.gitlens",
+				"streetsidesoftware.code-spell-checker"
 			]
 		}
 	},
@@ -47,6 +60,9 @@
 	"remoteUser": "node",
 	"features": {
 		"git": "latest",
-		"powershell": "latest"
+		"powershell": "latest",
+		"ghcr.io/devcontainers/features/go:1": {
+			"version": "1.18"
+		}
 	}
 }
