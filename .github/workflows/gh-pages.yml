@@ -6,6 +6,10 @@ on:
       - main  # Set a branch to deploy
   pull_request:
 
+defaults:
+  run:
+    working-directory: blog
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
