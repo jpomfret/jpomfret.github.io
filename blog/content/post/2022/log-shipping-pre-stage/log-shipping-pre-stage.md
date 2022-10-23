@@ -1,14 +1,16 @@
 ---
 title: "Log Shipping – Pre-stage database backups with dbatools"
+description: Log shipping is a SQL Server feature used for disaster-recovery where the transaction log backups are ‘shipped’ from your production instance to a secondary instance.
 date: "2022-05-24"
-categories: 
+categories:
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "dbatools"
   - "log-shipping"
   - "powershell"
-coverImage: "ibrahim-rifath-pPftEflZH-U-unsplash.jpg"
+image: "cover.jpg"
+slug: log-ship-staged
 ---
 
 Log shipping is a SQL Server feature used for disaster-recovery where the transaction log backups are ‘shipped’ from your production instance to a secondary instance. This enables you to cutover to this secondary server in the event of a disaster where you lose your primary instance. Log shipping is not a new feature but is still quite popular.
@@ -26,15 +28,19 @@ Restore-DbaDatabase -SqlInstance mssql2 -NoRecovery -UseDestinationDefaultDirect
 
 Depending on how long the restores take you might have new log backups to apply to the secondary database, like those that have been taken on the primary since we ran the last command.  Again, we can use dbatools to help us with this. I will execute the same call to `Get-DbaDbBackupHistory` to get the last backup chain, but instead of piping it straight to `Restore-DbaDatabase` I will use `Out-GridView` with the `-PassThru` switch to effectively create a GUI window where I can select the backups I want to restore (any since the last log backup we applied), and then pass them on down the pipeline to be restored by `Restore-DbaDatabase`.
 
+```PowerShell
 Get-DbaDbBackupHistory -SqlInstance mssql1 -Database productionDb -Last |
 Out-GridView -PassThru |
 Restore-DbaDatabase -SqlInstance mssql2 -NoRecovery -UseDestinationDefaultDirectories -Continue
+```
 
 ## Check on what we restored
 
 Once the restores are complete we can view what was restored using `Get-DbaDbRestoreHistory`.
 
+```PowerShell
 Get-DbaDbRestoreHistory -SqlInstance mssql2 -Database productionDb -Last
+```
 
 ## What’s next?
 
