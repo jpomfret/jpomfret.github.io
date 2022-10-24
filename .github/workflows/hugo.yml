@@ -24,7 +24,6 @@ concurrency:
 defaults:
   run:
     shell: bash
-    working-directory: blog
 
 jobs:
   # Build job
