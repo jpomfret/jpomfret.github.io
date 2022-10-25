@@ -1,5 +1,6 @@
 ---
 title: "Run ActiveDirectory PowerShell commands against another domain"
+slug: "ad-powershell-domain"
 description: "Active Directory groups are used all over our IT estates. They can be used to simplify managing SQL Server access as well as for other applications."
 date: "2022-07-07"
 categories:
