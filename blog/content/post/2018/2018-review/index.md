@@ -1,6 +1,6 @@
 ---
 title: "2018 Comes to a Close"
-description: "A look at some achievements from 2018.
+description: "A look at some achievements from 2018."
 date: "2018-12-29"
 categories:
   - "personal"
