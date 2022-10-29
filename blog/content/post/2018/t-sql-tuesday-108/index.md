@@ -24,7 +24,7 @@ The side goal is docker/containers/kubernetes (maybe), I’m wondering if I coul
 
 I saw the tweet below last week from the beard, [Rob Sewell](https://twitter.com/sqldbawithbeard), that quoted [Bob Ward’s](https://twitter.com/bobwardms) thoughts on learning directions.  Feels like this is probably solid advice to justify my side goal.
 
-https://twitter.com/sqldbawithbeard/status/1061032613979267072
+{{< tweet user="sqldbawithbeard" id="1061032613979267072" >}}
 
 ## Learning Plan
 

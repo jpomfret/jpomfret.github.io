@@ -15,7 +15,7 @@ Well tonight marks three weeks since I gave my first user group presentation and
 
 TL;DR I didn’t die, the SQL Server community is fantastic and I have amazing supportive friends.
 
-https://twitter.com/Pittfurg/status/1004125722082934784
+{{< tweet user="Pittfurg" id="1004125722082934784" >}}
 
 ## Why Present?
 

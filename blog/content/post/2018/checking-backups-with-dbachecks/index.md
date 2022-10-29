@@ -25,7 +25,7 @@ You can download a copy of the module from the PowerShell Gallery (if this does
 Install-Module dbachecks
 ```
 
-First off let's take a look at `Get-DbcCheck` to look for checks we may want to implement: ![](Get-DbCCheck.jpg)
+First off let's take a look at `Get-DbcCheck` to look for checks we may want to implement: ![PowerShell console showing Get-DbcCheck output](Get-DbCCheck.jpg)
 
 Each check has one unique tag which basically names the check and then a number of other tags that can also be used to call a collection of checks.
 
@@ -44,13 +44,13 @@ $server = "ServerName"
 Invoke-DbcCheck -SqlInstance $server -Check LastBackup
 ```
 
-![](ChecksFailing.jpg)
+![PowerShell console showing some failed checks](ChecksFailing.jpg)
 
 As you can clearly see from the test results there is a lot of red, meaning I'm not meeting backup requirements. However looking closer at the context we can see that the check is not configured for my specific needs "StackOverflow full backups on Server should be less than 1 days", but I only require a full backup within 7 days.
 
 The checks are set up in a way that make them extremely flexible. You can configure them to meet your needs exactly. We can use `Get-DbcConfig` to review the backup configurations.  Here you can see we're looking for full backups every 1 day (policy.backup.fullmaxdays), differentials every 25 hours (policy.backup.diffmaxhours) and log backups every 15 minutes (policy.backup.logmaxminutes).
 
-![](Get-DbcConfig.jpg)
+![PowerShell console showing Get-DbcConfig for backup checks](Get-DbcConfig.jpg)
 
 Let's change these configuration properties to match our requirements of a full backup within the last 7 days and a log backup in the last 60 minutes.
 
@@ -61,7 +61,7 @@ Set-DbcConfig -Name policy.backup.logmaxminutes -Value 60
 
 Now that the configuration is setup correctly we can rerun and confirm our environment backups are in the green.
 
-![](ChecksSuccess.jpg)
+![PowerShell console showing all our checks passing!](ChecksSuccess.jpg)
 
 Validating your backups are running is just one small example of how you can utilize dbachecks to keep your environment in line.  In fact this is just the tip of the iceberg, there are 80 checks as of writing this post as well as multiple ways to display the results (including a pretty impressive PowerBi dashboard - [Cláudio Silva has a great post on that](http://claudioessilva.eu/2018/02/22/dbachecks-using-power-bi-dashboards-to-analyse-results/)).
 
