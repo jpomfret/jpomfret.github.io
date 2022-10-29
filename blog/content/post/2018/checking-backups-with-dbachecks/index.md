@@ -1,6 +1,7 @@
 ---
 title: "Checking backups with dbachecks"
 description: "Introduction to the new module, dbachecks, from the creators of dbatools! Let's look at how easy it is to confirm our databases are all backed up to meet our SLAs."
+slug: "checking-backups-with-dbachecks"
 date: "2018-02-22"
 categories:
   - "dbachecks"

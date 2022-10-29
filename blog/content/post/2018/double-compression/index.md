@@ -1,6 +1,7 @@
 ---
 title: "Data Compression + Backup Compression = Double Compression?"
 description: "Let's take a look at the question 'What happens if I use data compression and backup compression, do I get double compression?'"
+slug: "double-compression"
 date: "2018-08-20"
 categories:
   - "data-compression"
@@ -10,9 +11,13 @@ tags:
   - "dbatools"
 ---
 
+<!--
+TODO: table missing
+-->
+
 I recently gave my [first usergroup presentation in Cleveland](http://jesspomfret.com/first-user-group-presentation-i-survived/), closely followed by my first SQL Saturday presentation in Columbus. My chosen topic was row store data compression and I had a few great questions that I plan on answering with blog posts. First up...
 
-### What happens if I use data compression and backup compression, do I get double compression?
+## What happens if I use data compression and backup compression, do I get double compression?
 
 This is a great question, and without diving too deeply into how backup compression works I'm going to do a simple experiment on the WideWorldImporters database.  I've restored this database to my local SQL Server 2016 instance and I'm simply going to back it up several times under different conditions.
 

@@ -1,6 +1,7 @@
 ---
 title: "Extended Events - Hidden Treasure"
 description: "Discovering hidden events within Extended Events, under the debug type."
+slug: "extended-events-hidden-treasure"
 date: "2018-05-29"
 categories:
   - "xevents"

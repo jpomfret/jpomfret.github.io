@@ -1,6 +1,7 @@
 ---
 title: "First User Group Presentation - I Survived!"
 description: "A recap of my first every presentation, and a shout out to the friends that helped me through it!"
+slug: "first-user-group-presentation-i-survived"
 date: "2018-06-27"
 categories:
   - "presenting"
