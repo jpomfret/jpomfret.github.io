@@ -1,0 +1,9 @@
+Things to fix
+- t-sql tues logos
+- tables (\[table id=6 /\])
+- photo gallery on t-sql 99
+
+
+Export final stats for Wordpress views
+Add dbatools mol book link
+comments?
