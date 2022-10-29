@@ -23,7 +23,7 @@ This is a great question, and without diving too deeply into how backup compress
 
 After restoring the database it's about 3GB in size, so our testing will be on a reasonably small database.  It would be interesting to see how the results change as the database size increases, perhaps a future blog post.
 
-![](WideWorldImporters-1-300x99.jpg)
+![Properties pane showing size of the WideWorldImporters database](WideWorldImporters-1.jpg)
 
 Now I'm not sure how to write a blog post without mentioning [dbatools](http://dbatools.io), I'm using my favourite PowerShell module to check current database compression (Get-DbaDbCompression), apply data compression (Set-DbaDbCompression) and to create the backups with and without compression (Backup-DbaDatabase).
 
