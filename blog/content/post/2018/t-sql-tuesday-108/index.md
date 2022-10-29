@@ -14,7 +14,7 @@ tags:
   - "tsql2sday"
 ---
 
-[![T-SQL Tuesday logo](images/tsqltues.png)](https://curiousaboutdata.com/2018/10/29/t-sql-tuesday-108-invitation-non-sql-server-technologies/)It’s T-SQL Tuesday time again, I have struggled in the last month or two to get anything up on my blog. Turns out weddings are pretty time consuming ?! Now that I’m happily married and home from an amazing [honeymoon in Hawaii](https://www.instagram.com/jpomfret/) it’s back to work on my blog and professional development.  Which makes this T-SQL Tuesday topic a perfect one to get back to, so thanks to Malathi Mahadeven ([B](https://curiousaboutdata.com)|[T](https://twitter.com/sqlmal)) for hosting this month.
+[![T-SQL Tuesday logo](tsqltues.png)](https://curiousaboutdata.com/2018/10/29/t-sql-tuesday-108-invitation-non-sql-server-technologies/)It’s T-SQL Tuesday time again, I have struggled in the last month or two to get anything up on my blog. Turns out weddings are pretty time consuming ?! Now that I’m happily married and home from an amazing [honeymoon in Hawaii](https://www.instagram.com/jpomfret/) it’s back to work on my blog and professional development.  Which makes this T-SQL Tuesday topic a perfect one to get back to, so thanks to Malathi Mahadeven ([B](https://curiousaboutdata.com)|[T](https://twitter.com/sqlmal)) for hosting this month.
 
 I feel like with last week’s PASS Summit (I didn’t attend this year so just watching from afar) it makes it even harder than usual to pick just one thing to learn.  There are so many things right now that I want to read about or fiddle with.
 
