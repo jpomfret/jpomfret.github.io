@@ -39,7 +39,7 @@ We are so lucky to live and work in a community that has this concept of #SQLFam
 
 The second gift I will talk about is I have the most supportive friends and family. Thanks to the #SQLFamily, I have met and made connections with folks from all over the world.  Thanks to Twitter, I randomly stumbled across this tweet one afternoon:
 
-{{< tweet user="SQLDiplomat" id="1161342206675955713" >}}
+[Tweet from John Martin about builing a team in Southampton](JohnMartin.png)
 
 I’m originally from Chippenham in the South West of England (about 1.5 hours from Southampton), and my wife, who’s American, wasn’t opposed to living in England at some point in our lives. Although it wasn’t in the immediate plan we decided to find out more and it turned out this opportunity was too good to miss. I’m really looking forward to 2020 and this new opportunity.
 
