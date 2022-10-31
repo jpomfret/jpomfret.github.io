@@ -1,3 +1,9 @@
 .float-left {
     float: left;
 }
+
+figure.float-left {
+    max-width: fit-content;
+    margin-right: var(--card-padding);
+    margin-left: var(--card-padding);
+}
