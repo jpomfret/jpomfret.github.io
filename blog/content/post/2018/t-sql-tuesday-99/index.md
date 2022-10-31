@@ -15,7 +15,16 @@ TODO:
  - photo gallery
 -->
 
-[![MJTuesday](tsqltues-300x300.png)](https://sqlblog.org/2018/02/06/t-sql-tuesday-99)First off, welcome to my first T-SQL Tuesday which seems like the perfect first blog post to introduce myself and my non-SQL Server life.  Starting this blog and becoming more involved with the SQL Server community (read speaking) is my goal for 2018 so here goes nothing. Thanks to [Aaron Bertrand](http://twitter.com/AaronBertrand) for hosting and picking a great topic.
+{{<
+  figure src="tsqltues-300x300.png"
+         link="https://sqlblog.org/2018/02/06/t-sql-tuesday-99"
+         class="float-left"
+         alt="JTuesday"
+         width="300px"
+         height="300px"
+>}}
+
+First off, welcome to my first T-SQL Tuesday which seems like the perfect first blog post to introduce myself and my non-SQL Server life.  Starting this blog and becoming more involved with the SQL Server community (read speaking) is my goal for 2018 so here goes nothing. Thanks to [Aaron Bertrand](http://twitter.com/AaronBertrand) for hosting and picking a great topic.
 
 I was born in Oxford, England before my family moved to the small market town of [Chippenham, Wiltshire](https://en.wikipedia.org/wiki/chippenham) where I was raised.  Leading to my main passion being proper football. We can argue about why this is the proper football in a later post perhaps (hint: you use your feet to kick a ball, no hands or egg-shaped objects here).
 
