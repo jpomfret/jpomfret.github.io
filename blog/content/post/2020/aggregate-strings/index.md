@@ -1,12 +1,14 @@
 ---
 title: "Using T-SQL to Aggregate Strings"
+description: "Sharing a really great T-SQL aggregate function that I had no idea existed."
+slug: "aggregate-strings"
 date: "2020-06-23"
-categories: 
+categories:
   - "t-sql"
-tags: 
+tags:
   - "aggregates"
   - "tsql"
-coverImage: "martin-sanchez-MD6E2Sv__iA-unsplash.jpg"
+image: "cover.jpg"
 ---
 
 I’m a SQL Server Database Engineer by day, but I must say my blog has a lot more PowerShell and automation posts than T-SQL.  However, last week I found a really great T-SQL aggregate function that I had no idea existed, so I thought I’d share it with you.
@@ -15,10 +17,12 @@ I have been working on a project to document our SQL Server environment and crea
 
 Long story short I wanted a way to be able to list all the SQL Server instances on the server I was logging the issue for. I have a database with two tables, one that contains server information and one that contains instance information. Running the following gets me one row per server/instance combination.
 
+```SQL
 SELECT s.ServerListId, s.ServerName, i.InstanceListId, i.InstanceName
 FROM ServerList s
 INNER JOIN InstanceList i
     ON s.ServerListId = i.ServerListId
+```
 
 | ServerListId | ServerName | InstanceListId | InstanceName |
 | --- | --- | --- | --- |
@@ -32,11 +36,13 @@ I started thinking about how to group this data by server name and then concaten
 
 For this example I’ll group by ServerName, and aggregate the InstanceName column using a comma to separate the values.
 
-SELECT ServerName, STRING\_AGG(InstanceName,', ') as InstanceName
+```SQL
+SELECT ServerName, STRING_AGG(InstanceName,', ') as InstanceName
 FROM ServerList s
 INNER JOIN InstanceList i
     ON s.ServerListId = i.ServerListId
 GROUP BY ServerName
+```
 
 | ServerName | InstanceName |
 | --- | --- |
