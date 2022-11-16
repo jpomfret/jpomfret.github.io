@@ -46,7 +46,9 @@
 				"streetsidesoftware.code-spell-checker",
 				"budparr.language-hugo-vscode",
 				"eliostruyf.vscode-hugo-themer",
-				"Gruntfuggly.todo-tree"
+				"Gruntfuggly.todo-tree",
+				"DavidAnson.vscode-markdownlint",
+				"yzhang.markdown-all-in-one"
 			]
 		}
 	},
