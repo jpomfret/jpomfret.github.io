@@ -1,6 +1,6 @@
 ---
 title: "Advent of Code 2020"
-descripton: ""
+descripton: "A few PowerShell tips I learnt while participating in the Advent of Code 2020 puzzles."
 slug: "advent-of-code-2020"
 date: "2020-12-31"
 categories:
