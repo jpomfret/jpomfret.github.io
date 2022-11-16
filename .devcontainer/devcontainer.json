@@ -39,11 +39,14 @@
 				"oderwat.indent-rainbow",
 				"usernamehw.errorlens",
 				"cschleiden.vscode-github-actions",
-				"redhat.vscode-yaml", // for the gihub action intellisense
+				"redhat.vscode-yaml",
 				"bungcip.better-toml",
 				"davidanson.vscode-markdownlint",
 				"eamodio.gitlens",
-				"streetsidesoftware.code-spell-checker"
+				"streetsidesoftware.code-spell-checker",
+				"budparr.language-hugo-vscode",
+				"eliostruyf.vscode-hugo-themer",
+				"Gruntfuggly.todo-tree"
 			]
 		}
 	},
