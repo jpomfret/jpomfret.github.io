@@ -11,7 +11,6 @@ tags:
 
 <!--
 TODO:
- - T-SQL image float left
  - photo gallery
 -->
 

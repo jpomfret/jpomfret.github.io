@@ -9,7 +9,7 @@ tags:
   - "adventofcode"
   - "aoc"
   - "powershell"
-Image: "cover.png"
+image: "cover.png"
 ---
 
 This was the 3rd year I participated in the [Advent of Code](https://adventofcode.com/) (AoC). If you haven’t heard of AoC, it’s an advent calendar of coding puzzles.  Each day between December 1st and 25th a two part puzzle is released, you can use whatever language you want to solve it, with the goal being just to get the right answer.  Once you solve part 1 for the day, part 2 is unlocked and that builds on top of the story you had for part 1. For each part of each puzzle you complete you get a star, so there are two available per day.
