@@ -1,12 +1,14 @@
 ---
 title: "Some 2021 Goals Guaranteed To Keep Me On Track"
+description: "A quick look back on an interesting 2020, and some goal setting for 2021."
+slug: "2021-goals"
 date: "2021-01-05"
-categories: 
+categories:
   - "personal"
   - "presenting"
-tags: 
+tags:
   - "goals"
-coverImage: "danielle-macinnes-IuLgi9PWETU-unsplash.jpg"
+coverImage: "cover.jpg"
 ---
 
 Well 2020 was certainly an interesting year. I’m pretty sure none of us could have predicted how the world would look now and it won’t be regarded as the best year ever. However, there were definitely still some bright points I’d like to make note of before setting some targets for 2021.
@@ -30,8 +32,7 @@ I’m going to set some targets to aim for that won’t depend on what 2021 look
 - Cycle 1000 miles – this would be more than I’ve ever cycled in a year, but without a commute in 2020 I found a lot more time for cycling before/after work.
 - Duolingo streak – another non tech goal. I’ve been using Duolingo to work on my French and hope to keep the streak alive throughout 2021.
 
-All in all, I hope 2021 is an improvement on 2020 – here’s to doing everything I can to make it a good one. I'll leave you with a couple of local views I've enjoyed while cycling\\walking this past year.
+All in all, I hope 2021 is an improvement on 2020 – here’s to doing everything I can to make it a good one. I'll leave you with a couple of local views I've enjoyed while cycling\walking this past year.
 
-https://www.instagram.com/p/CDhAVEXBjLq/?utm\_source=ig\_web\_copy\_link
-
-https://www.instagram.com/p/CAP8ta7huch/?utm\_source=ig\_web\_copy\_link
+[Biking in a beautiful part of the world](https://www.instagram.com/p/CDhAVEXBjLq)
+[Getting outside with @kpomfret12 this morning.](https://www.instagram.com/p/CAP8ta7huch/)

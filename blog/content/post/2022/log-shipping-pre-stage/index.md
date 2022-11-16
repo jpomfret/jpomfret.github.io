@@ -10,7 +10,7 @@ tags:
   - "log-shipping"
   - "powershell"
 image: "cover.jpg"
-slug: log-ship-staged
+slug: log-shipping-pre-stage
 ---
 
 Log shipping is a SQL Server feature used for disaster-recovery where the transaction log backups are ‘shipped’ from your production instance to a secondary instance. This enables you to cutover to this secondary server in the event of a disaster where you lose your primary instance. Log shipping is not a new feature but is still quite popular.
@@ -23,8 +23,10 @@ In order for us to stage the database on the secondary at the point in time wher
 
 This could be a lot of backup files to find, put in the right order, and then restore (with no recovery) onto the secondary server. dbatools makes this so easy! We can use `Get-DbaDbBackupHistory` with the `-Last` switch to get the latest backup chain. Then by piping that to `Restore-DbaDatabase` we can automatically restore each piece of the puzzle. First, the full backups and then any differentials or log backups we need to get us to the point in time we are now.
 
+```PowerShell
 Get-DbaDbBackupHistory -SqlInstance mssql1 -Database productionDb -Last |
 Restore-DbaDatabase -SqlInstance mssql2 -NoRecovery -UseDestinationDefaultDirectories
+```
 
 Depending on how long the restores take you might have new log backups to apply to the secondary database, like those that have been taken on the primary since we ran the last command.  Again, we can use dbatools to help us with this. I will execute the same call to `Get-DbaDbBackupHistory` to get the last backup chain, but instead of piping it straight to `Restore-DbaDatabase` I will use `Out-GridView` with the `-PassThru` switch to effectively create a GUI window where I can select the backups I want to restore (any since the last log backup we applied), and then pass them on down the pipeline to be restored by `Restore-DbaDatabase`.
 
