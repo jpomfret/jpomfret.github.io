@@ -1,15 +1,15 @@
 ---
 title: "Keeping the demo gods at bay with Pester"
 date: "2020-03-10"
-categories: 
+categories:
   - "pester"
   - "powershell"
   - "presenting"
-tags: 
+tags:
   - "pester"
   - "powershell"
   - "tests"
-coverImage: "pesterResults2.jpg"
+image: "pesterResults2.jpg"
 ---
 
 A short while ago (it’s getting further and further away, but let’s stick with short for now) I was a football/soccer player. As with many athletes, I was pretty superstitious as far as my pregame routine. I always felt better going out onto the pitch if everything had gone smoothly as I got ready.  I put my boots, shin-pads and socks on in a certain order and even taped my socks up in a certain way. The good news is I’ve managed to find a slightly more reliable way to get ready for my presentations – and I’m going to share the secret.
@@ -230,6 +230,6 @@ Executing script .\\Tests\\demo.tests.ps1
       \[+\] Slack is not running 43ms
       \[+\] Teams is not running 17ms
 Tests completed in 6.86s
-Tests Passed: 21, Failed: 0, Skipped: 0, Pending: 0, Inconclusive: 0 
+Tests Passed: 21, Failed: 0, Skipped: 0, Pending: 0, Inconclusive: 0
 
 Good news, all passed and I'm ready to give my demos!

@@ -1,14 +1,14 @@
 ---
 title: "Log Shipping – Pre-stage database backups with dbatools"
 date: "2022-05-24"
-categories: 
+categories:
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "dbatools"
   - "log-shipping"
   - "powershell"
-coverImage: "ibrahim-rifath-pPftEflZH-U-unsplash.jpg"
+image: "ibrahim-rifath-pPftEflZH-U-unsplash.jpg"
 ---
 
 Log shipping is a SQL Server feature used for disaster-recovery where the transaction log backups are ‘shipped’ from your production instance to a secondary instance. This enables you to cutover to this secondary server in the event of a disaster where you lose your primary instance. Log shipping is not a new feature but is still quite popular.

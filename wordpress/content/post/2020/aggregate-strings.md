@@ -1,12 +1,12 @@
 ---
 title: "Using T-SQL to Aggregate Strings"
 date: "2020-06-23"
-categories: 
+categories:
   - "t-sql"
-tags: 
+tags:
   - "aggregates"
   - "tsql"
-coverImage: "martin-sanchez-MD6E2Sv__iA-unsplash.jpg"
+image: "martin-sanchez-MD6E2Sv__iA-unsplash.jpg"
 ---
 
 I’m a SQL Server Database Engineer by day, but I must say my blog has a lot more PowerShell and automation posts than T-SQL.  However, last week I found a really great T-SQL aggregate function that I had no idea existed, so I thought I’d share it with you.

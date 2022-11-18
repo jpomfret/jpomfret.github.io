@@ -1,14 +1,14 @@
 ---
 title: "T-SQL Tuesday #136: Blog About Your Favorite Data Type (Or Least Favorite)"
 date: "2021-03-09"
-categories: 
+categories:
   - "t-sql-tuesday"
-tags: 
+tags:
   - "datatypes"
   - "t-sql-tuesday"
   - "tsql"
   - "tsql2sday"
-coverImage: "waldemar-brandt-sXCxht5Ivu4-unsplash.jpg"
+image: "waldemar-brandt-sXCxht5Ivu4-unsplash.jpg"
 ---
 
 [![T-SQL Tuesday Logo](images/tsqltues.png)](https://www.brentozar.com/archive/2021/03/tsql2sday-136-invitation-blog-about-your-favorite-data-type-or-least-favorite/)
@@ -28,8 +28,8 @@ First things first, let’s review our options when it comes to storing dates in
 | Date | One day | 3 bytes | Doesn't include time |
 | SmallDateTime | One minute | 4 bytes |  |
 | DateTime | Rounded to increments of .000, .003, or .007 seconds | 8 bytes |  |
-| DateTime2 | 100 nanoseconds | 6 bytes for precision less than 3. 
-7 bytes for precision 3 or 4. 
+| DateTime2 | 100 nanoseconds | 6 bytes for precision less than 3.
+7 bytes for precision 3 or 4.
 All other precision require 8 bytes. |  |
 | Time | 100 nanoseconds (1 millisecond in Informatica) | 5 bytes | Doesn't include date |
 | DateTimeOffset | 100 nanoseconds | 10 bytes | Includes time zone awareness |
@@ -45,15 +45,15 @@ In order to demonstrate the importance of choosing the right datatype I’m goin
 create table dataTypeDate (
 batchDate date default (convert(date,getdate()))
 )
- 
+
 create table dataTypeSmallDateTime (
 batchSmallDateTime smalldatetime default (convert(date,getdate()))
 )
- 
+
 create table dataTypeDateTime (
 batchDateTime datetime default (convert(date,getdate()))
 )
- 
+
 create table dataTypeDateTime2 (
 batchDateTime2 datetime2 default (convert(date,getdate()))
 )
@@ -63,15 +63,15 @@ Once we have four tables we can run the following to load our batch for the day.
 insert into dataTypeDate
 default values;
 GO 500000
- 
+
 insert into dataTypeSmallDateTime
 default values;
 GO 500000
- 
+
 insert into dataTypeDateTime
 default values;
 GO 500000
- 
+
 insert into dataTypeDateTime2
 default values;
 GO 500000

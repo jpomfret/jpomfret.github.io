@@ -1,13 +1,13 @@
 ---
 title: "T-SQL Tuesday #143: Short code examples"
 date: "2021-10-13"
-categories: 
+categories:
   - "powershell"
   - "t-sql-tuesday"
-tags: 
+tags:
   - "powershell"
   - "t-sql-tuesday"
-coverImage: "tekton-EcE9dFfXwwE-unsplash.jpg"
+image: "tekton-EcE9dFfXwwE-unsplash.jpg"
 ---
 
 [![T-SQL Tuesday Logo](images/tsqltues.png)](https://johnmccormack.it/2021/10/t-sql-tuesday-143-short-code-examples/)
@@ -24,7 +24,7 @@ This morning I was working on pulling together some information which included w
 
 The following PowerShell snippet uses the `net localgroup` command line tool to retrieve the results and parse them so we just get the account names.  The final line includes the `-ComputerName` parameter so you can easily run it against remote machines.
 
-Invoke-Command -ScriptBlock { net localgroup administrators | 
+Invoke-Command -ScriptBlock { net localgroup administrators |
     Where-Object { $\_ -AND $\_ -notmatch "command completed successfully" } |
     Select -skip 4
 } -ComputerName mssql1

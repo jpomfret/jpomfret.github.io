@@ -1,15 +1,15 @@
 ---
 title: "Collating index usage stats across Availability Group replicas"
 date: "2021-11-16"
-categories: 
+categories:
   - "availability-groups"
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "availability-groups"
   - "dbatools"
   - "powershell"
-coverImage: "maksym-kaharlytskyi-Q9y3LRuuxmg-unsplash.jpg"
+image: "maksym-kaharlytskyi-Q9y3LRuuxmg-unsplash.jpg"
 ---
 
 One of the benefits available to us when using SQL Server Availability Groups is that we can offload read activity to a secondary replica. This can be useful if we need to run reports against our OLTP databases. Instead of this taking up valuable resources on the primary instance we can make use of the otherwise idle secondary replica.

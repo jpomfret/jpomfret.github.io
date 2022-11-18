@@ -1,15 +1,15 @@
 ---
 title: "Creating my first SQL Managed Instance"
 date: "2019-11-04"
-categories: 
+categories:
   - "azure"
   - "managed-instance"
-tags: 
+tags:
   - "azure"
   - "cloud"
   - "managed-instance"
   - "mi"
-coverImage: "cloud-header.jpg"
+image: "cloud-header.jpg"
 ---
 
 I’ve been thinking about the cloud a lot lately, and I feel it’s an area that I would benefit from learning more about. I’ve attended a couple of presentations on SQL Managed Instances and have read enough to be dangerous (or accidentally spend a lot of money, one of my biggest fears when working in the cloud). However, I always find I learn best and really get to understanding a topic by building something.

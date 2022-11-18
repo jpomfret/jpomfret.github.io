@@ -1,14 +1,14 @@
 ---
 title: "Searching Stored Procedures for a pattern made easy with dbatools"
 date: "2021-05-25"
-categories: 
+categories:
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "dbatools"
   - "powershell"
   - "stored-procedures"
-coverImage: "matthew-ansley-8SjeH5pZbjw-unsplash.jpg"
+image: "matthew-ansley-8SjeH5pZbjw-unsplash.jpg"
 ---
 
 Well folks, after starting the year off on a strong foot it’s been a while since I’ve published any blog posts. Hope you didn’t miss me too much, but I’m back now and I’ve got a useful dbatools snippet for you today.  Last week at the day job I had a situation where I needed to find all stored procedures that referenced a certain string, across any database on a specific server.  This is a pretty trivial task in SSMS when you’re just talking about one database. For example, if we’re looking for any reference to ‘Person’ perhaps we could run this T-SQL within the context of the database:

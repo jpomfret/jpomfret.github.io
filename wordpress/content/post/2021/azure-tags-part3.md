@@ -1,10 +1,10 @@
 ---
 title: "Keeping track of Azure resources with tags – Part 3"
 date: "2021-03-31"
-categories: 
+categories:
   - "azure"
   - "powershell"
-coverImage: "anas-alshanti-feXpdV001o4-unsplash.jpg"
+image: "anas-alshanti-feXpdV001o4-unsplash.jpg"
 ---
 
 This is now the third post in a series on Azure tags. You can read the other two posts here to get up to speed with where we’ve been, however that isn’t required for this post .

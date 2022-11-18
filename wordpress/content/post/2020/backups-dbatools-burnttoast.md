@@ -1,14 +1,14 @@
 ---
 title: "Backups with dbatools & BurntToast"
 date: "2020-02-25"
-categories: 
+categories:
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "burnttoast"
   - "dbatools"
   - "powershell"
-coverImage: "toast-toaster-food-white-bread-preview.jpg"
+image: "toast-toaster-food-white-bread-preview.jpg"
 ---
 
 I have just a quick tip for you today using the [BurntToast](https://github.com/Windos/BurntToast) module to notify us when a backup is complete. As DBAs there is always plenty to do, so we don’t want to have to sit and watch a long running script to catch the moment when it finishes.  Usually what happens to me is I kick off the script, move on to something else and then totally forget about it, perhaps until someone asks if it’s done yet. Oops. Well this tip will help avoid that.

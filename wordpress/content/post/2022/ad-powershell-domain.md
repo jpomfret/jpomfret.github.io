@@ -1,12 +1,12 @@
 ---
 title: "Run ActiveDirectory PowerShell commands against another domain"
 date: "2022-07-07"
-categories: 
+categories:
   - "powershell"
-tags: 
+tags:
   - "activedirectory"
   - "powershell"
-coverImage: "PXL_20220629_055908666-scaled-e1657201620397.jpg"
+image: "PXL_20220629_055908666-scaled-e1657201620397.jpg"
 ---
 
 Active Directory groups are used all over our IT estates. They can be used to simplify managing SQL Server access ([Discover SQL Server Permissions hidden via AD Group Membership](https://jesspomfret.com/sql-server-permissions-via-ad/)) as well as for other applications. One of my favourite commands from the [ActiveDirectory PowerShell module](https://docs.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2022-ps) is `Get-AdUser`, specifically when used in the following snippet:

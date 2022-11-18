@@ -1,12 +1,12 @@
 ---
 title: "T-SQL Tuesday #132: How Are You Coping with Pandemic?"
 date: "2020-11-10"
-categories: 
+categories:
   - "t-sql-tuesday"
-tags: 
+tags:
   - "t-sql-tuesday"
   - "tsql2sday"
-coverImage: "georg-bommeli-ybtUqjybcjE-unsplash.jpg"
+image: "georg-bommeli-ybtUqjybcjE-unsplash.jpg"
 ---
 
 [![T-SQL Tuesday Logo](images/tsqltues.png)](https://sqlworldwide.com/t-sql-tuesday-132-how-are-you-coping-with-pandemic/)

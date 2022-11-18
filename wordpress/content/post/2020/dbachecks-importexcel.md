@@ -1,14 +1,14 @@
 ---
 title: "dbachecks meets ImportExcel"
 date: "2020-08-28"
-categories: 
+categories:
   - "dbachecks"
   - "powershell"
-tags: 
+tags:
   - "dbatools"
   - "importexcel"
   - "powershell"
-coverImage: "pivot.jpg"
+image: "pivot.jpg"
 ---
 
 I got a message from a friend on Twitter last night asking ‘Is there an easy way to get dbachecks backup info into an Excel spreadsheet?’.  I sent them a couple of ideas, but figured this is a great use case that many people might be interested in. Pairing infrastructure testing using dbachecks with creating Excel reports with the ImportExcel module is a great addition to your automation tool belt. I also had ImportExcel on my mind this week after watching some great demos from Mikey Bronowski ([b](https://www.bronowski.it/blog/2020/06/powershell-into-excelimportexcel-module-part-1/)|[t](https://twitter.com/mikeybronowski)) at a user group earlier this week.
@@ -45,7 +45,7 @@ The second option is to use the ImportExcel module. This is easily in my top 5 a
 $ConditionalFormat =$(
     New-ConditionalText -Text Failed -Range 'D:D'
 )
- 
+
 $excelSplat = @{
     Path               = 'C:\\Temp\\Backups.xlsx'
     WorkSheetName      = 'TestResults'
@@ -59,7 +59,7 @@ $excelSplat = @{
     IncludePivotChart  = $true
     ChartType          = 'ColumnStacked'
 }
- 
+
 $testResults.TestResult |
 Select-Object Describe, Context, Name, Result, FailureMessage |
 Export-Excel @excelSplat

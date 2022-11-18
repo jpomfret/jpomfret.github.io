@@ -1,11 +1,11 @@
 ---
 title: "Data Compression Internals"
 date: "2019-02-19"
-categories: 
+categories:
   - "data-compression"
-tags: 
+tags:
   - "data-compression"
-coverImage: "compressionInfo_Page.jpg"
+image: "compressionInfo_Page.jpg"
 ---
 
 Last year I gave my first user group presentation on data compression and since then I’ve also given this talk at both SQL Saturday Columbus 2018 and SQL Saturday Cleveland 2019. One of my favourite demos from the presentation is taking a look under the covers to see what SQL Server does with compressed data at the page level. This blog post is going to walk through this demo.  If you’d like to follow along you can pull down my docker image and have your own environment up and running in no time. As long as you already have docker running on your machine you can use the following to get setup and the full demo script is available on [GitHub](https://github.com/jpomfret/demos/blob/master/DataCompression/01_Page_Internals.sql).
@@ -144,8 +144,8 @@ SQL Server outsmarted us a little here. I have only inserted three rows into the
 Running the following will insert 200 more rows into my employee table. I’m getting the data from the `vEmployee` view within `AdventureWorks2017`.
 
 INSERT INTO employee (employeeId, firstName,lastName, address1, city)
-SELECT TOP 200 BusinessEntityID, FirstName, LastName, AddressLine1, CITY 
-FROM AdventureWorks2017.HumanResources.vEmployee 
+SELECT TOP 200 BusinessEntityID, FirstName, LastName, AddressLine1, CITY
+FROM AdventureWorks2017.HumanResources.vEmployee
 WHERE BusinessEntityID > 3
 
 Now when I run `DBCC IND` I can see the employee table uses four pages, two of them being data pages.

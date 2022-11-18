@@ -1,14 +1,14 @@
 ---
 title: "Keeping track of Azure resources with tags – Part 1"
 date: "2021-03-16"
-categories: 
+categories:
   - "azure"
   - "powershell"
-tags: 
+tags:
   - "azure"
   - "powershell"
   - "tags"
-coverImage: "tag-654697_1280.jpg"
+image: "tag-654697_1280.jpg"
 ---
 
 I’ve been working on some Azure exams recently, and I personally learn best by fiddling with things.  The [Microsoft learn](https://docs.microsoft.com/en-us/learn/) content is excellent, and I’d highly recommend that for any of the Azure exams I’ve taken so far.  However, I also like to build things myself and experiment a little with all the available options.
@@ -59,7 +59,7 @@ Select-Object Name, ResourceType, Tags
 
 Once we know which resources are missing tags we can easily update them using `Update-AzTag`, the operation parameter that controls what should happen if there are existing tags. Merge will ensure we don’t overwrite the current tags.
 
-$resources = Get-AzResource -ResourceGroupName missingtag | 
+$resources = Get-AzResource -ResourceGroupName missingtag |
 Where-Object {$\_.tags.Keys -notcontains 'dateCreated'}
 
 Update-AzTag -ResourceId $resources.ResourceId -Tag @{'dateCreated' = (Get-Date -Format "yyyy-MM-dd")} -Operation Merge

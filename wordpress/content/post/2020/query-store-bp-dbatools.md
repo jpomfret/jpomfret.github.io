@@ -1,14 +1,14 @@
 ---
 title: "Ensure Query Store meets best practice across your environment"
 date: "2020-11-24"
-categories: 
+categories:
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "dbatools"
   - "open-source"
   - "query-store"
-coverImage: "simon-berger-twukN12EN7c-unsplash.jpg"
+image: "simon-berger-twukN12EN7c-unsplash.jpg"
 ---
 
 It’s no secret that I love dbatools and dbachecks. I am certain that I run a dbatools command at least once a day. It has fundamentally changed how I work as a dba, and it makes my life so much easier.  I mention this when I’m presenting on these topics, but today I want to highlight what I consider the special sauce of open-source software.
@@ -27,7 +27,7 @@ $queryStoreBP = @{
     SqlInstance        = 'mssql1'
     Database           = 'TestDb'
     State              = 'ReadWrite'
-    MaxSize            = 2048 
+    MaxSize            = 2048
     CaptureMode        = 'Auto'
     CollectionInterval = 30
 }

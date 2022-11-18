@@ -1,14 +1,14 @@
 ---
 title: "Changing focus on code execution in VSCode"
 date: "2020-05-06"
-categories: 
+categories:
   - "powershell"
   - "vscode"
-tags: 
+tags:
   - "life-hacks"
   - "powershell"
   - "vscode"
-coverImage: "VsCode.jpg"
+image: "VsCode.jpg"
 ---
 
 I wrote previously about how I loved little life hacks and shortcuts for my [February T-SQL Tuesday prompt](https://jesspomfret.com/t-sql-tuesday-123-summary). If you read that you’ll know I use VSCode a lot and really love all the shortcuts available in that program. This is just a quick tip that I’m so glad I found, read – took the time to work out.
@@ -35,9 +35,9 @@ If you have more than one editor group open you can use CTRL+2 to get to the sec
 
 Also, as with most shortcuts in VSCode, you can also customise the key bindings, by opening the command palette (F1) and choosing ‘Open Keyboard Shortcuts’ either in the GUI or JSON format.
 
-The commands to customise are below with the defaults:  
-\- workbench.action.focusFirstEditorGroup: Ctrl+1  
-\- workbench.action.focusSecondEditorGroup: Ctrl+2  
+The commands to customise are below with the defaults:
+\- workbench.action.focusFirstEditorGroup: Ctrl+1
+\- workbench.action.focusSecondEditorGroup: Ctrl+2
 \- workbench.action.focusThirdEditorGroup: Ctrl+3 (and so on up to the eighth editor group)
 
 A bonus tip for you: If you’re in the GUI keyboard shortcut editor and you right click and copy, or press Ctrl+C, you’ll actually copy the JSON you’d need to customise your key bindings in the keyboard shortcuts (JSON) file.

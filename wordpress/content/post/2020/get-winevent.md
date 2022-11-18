@@ -1,13 +1,13 @@
 ---
 title: "Using Get-WinEvent to look into the past"
 date: "2020-08-04"
-categories: 
+categories:
   - "powershell"
-tags: 
+tags:
   - "event-log"
   - "get-winevent"
   - "powershell"
-coverImage: "zulfa-nazer-W9jfKmGYb1Q-unsplash.jpg"
+image: "zulfa-nazer-W9jfKmGYb1Q-unsplash.jpg"
 ---
 
 Recently I was tasked with troubleshooting an incident on a SQL Server at a certain point in the past, the issue being a high CPU alert.  It’s hard (without monitoring solutions set up) to go back in time and determine what the issue is.  However, one thing we can check is the windows event log to see if there was anything happening on the server at that time.
@@ -22,8 +22,8 @@ First things first, let's see what logs we have available on our target machine.
 
 This snippet will output all of the logs on my remote machine that contain records to a gridview. I love to use `Out-GridView` for these kinds of tasks because this returned 101 logs and I can now add some text into the search bar to filter for things I might be interested in.
 
-Get-WinEvent -ListLog \* -ComputerName dscsvr2 | 
-Where-Object RecordCount | 
+Get-WinEvent -ListLog \* -ComputerName dscsvr2 |
+Where-Object RecordCount |
 Out-GridView
 
 You can see if I add dsc into the search bar of `Out-Grid View` I have one log with records in that I could investigate further.
@@ -61,7 +61,7 @@ ProviderName,
 TimeCreated,
 Id,
 LevelDisplayName,
-@{l='UserName';e={(New-Object System.Security.Principal.SecurityIdentifier($\_.UserId)).Translate(\[System.Security.Principal.NTAccount\])}}, 
+@{l='UserName';e={(New-Object System.Security.Principal.SecurityIdentifier($\_.UserId)).Translate(\[System.Security.Principal.NTAccount\])}},
 Message | Format-Table
 
 As you can see below, the results are returned from both the application and system logs along with the time, level, username and message.  Now, this is just a test box in my lab, but this is a great way of grabbing a window of events from your server to help troubleshoot issues in the past.

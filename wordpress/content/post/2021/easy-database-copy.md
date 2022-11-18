@@ -1,14 +1,14 @@
 ---
 title: "Easily Create A Copy Of Your Database For Testing"
 date: "2021-01-19"
-categories: 
+categories:
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "copy-dbadatabase"
   - "dbatools"
   - "powershell"
-coverImage: "fabio-oyXis2kALVg-unsplash.jpg"
+image: "fabio-oyXis2kALVg-unsplash.jpg"
 ---
 
 Have you ever wanted to quickly backup/restore a database to the same instance to do some side by side testing? Perhaps to make some index changes or code changes, without actually changing the live copy of the database?  Ideally you’d already have another environment for this sort of work, but even then sometimes it’s handy to have a quick option.
@@ -41,15 +41,15 @@ That’s all the groundwork done- we have our instance, database, and a location
 
 I’ve already spoken and blogged a lot about the power of this command (related links at the end of this post), but today’s tip is centred around a less than well-known parameter.  Hidden deep in the comment based help (another great reason to read all of `Get-Help Copy-DbaDatabase -ShowWindow`) you’ll find the ‘Prefix’ parameter. This will allow us to easily add a prefix to both the database and the associated files, meaning we won’t have any issues restoring the database to the same server.
 
-\-Prefix <String>        
-All copied database names and physical files will be prefixed with this string            	
+\-Prefix <String>
+All copied database names and physical files will be prefixed with this string
 
 This option is mutually exclusive of NewName
-        
+
 Required?                    false
 Position?                    named
-Default value            
-Accept pipeline input?       False 
+Default value
+Accept pipeline input?       False
 Accept wildcard characters?  false
 
 Here I’ve set a SqlInstance variable so I can reuse the same value multiple times in my code. Then created a hash table ‘$copySplat’ with the necessary parameters so we can utilise splatting (a way to improve code readability) to pass the whole set into `Copy-DbaDatabase`. 
@@ -57,7 +57,7 @@ Here I’ve set a SqlInstance variable so I can reuse the same value multiple ti
 Two parameters I want to highlight- I’ve set ‘Prefix’, meaning the database and files for the restored database will start with ‘Test’.  I’ve also set SharedPath and used the code we already wrote to get the default backup path.
 
 $sqlInstance = 'mssql1'
- 
+
 $copySplat = @{
     Source        = $sqlInstance
     Destination   = $sqlInstance

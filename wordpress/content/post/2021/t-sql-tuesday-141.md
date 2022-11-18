@@ -1,13 +1,13 @@
 ---
 title: "T-SQL Tuesday #141: Work/Life balance"
 date: "2021-08-10"
-categories: 
+categories:
   - "t-sql-tuesday"
-tags: 
+tags:
   - "crossfit"
   - "tsql2sday"
   - "tsqltuesday"
-coverImage: "victor-freitas-Yuv-iwByVRQ-unsplash.jpg"
+image: "victor-freitas-Yuv-iwByVRQ-unsplash.jpg"
 ---
 
 [![T-SQL Tuesday Logo](images/tsqltues.png)](https://tjaybelt.blogspot.com/2021/08/t-sql-tuesday-141-worklife-balance.html)

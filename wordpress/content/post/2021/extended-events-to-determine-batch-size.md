@@ -1,12 +1,12 @@
 ---
 title: "Using Extended Events to determine the best batch size for deletes"
 date: "2021-12-07"
-categories: 
+categories:
   - "xevents"
-tags: 
+tags:
   - "extended-events"
   - "tsql"
-coverImage: "hans-reniers-lQGJCMY5qcM-unsplash.jpg"
+image: "hans-reniers-lQGJCMY5qcM-unsplash.jpg"
 ---
 
 I found myself needing to clear out a large amount of data from a table this week as part of a clean up job.  In order to avoid the transaction log catching fire from a long running, massive delete, I wrote the following T-SQL to chunk through the rows that needed to be deleted in batches. The question is though, what’s the optimal batch size?
@@ -26,7 +26,7 @@ BEGIN
     -- if we deleted less than a full batch we're done
     IF @@rowcount < @BatchSize
             BREAK;
-    
+
     -- add a delay between batches
     WAITFOR DELAY '00:00:01'
 END

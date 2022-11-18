@@ -1,13 +1,13 @@
 ---
 title: "T-SQL Tuesday #133: What (Else) Have You Learned from Presenting?"
 date: "2020-12-08"
-categories: 
+categories:
   - "presenting"
   - "t-sql-tuesday"
-tags: 
+tags:
   - "presenting"
   - "t-sql-tuesday"
-coverImage: "pexels-photo-459301.jpeg"
+image: "pexels-photo-459301.jpeg"
 ---
 
 [![T-SQL Tuesday Logo](images/tsqltues.png)](https://lisagb.info/archives/77)

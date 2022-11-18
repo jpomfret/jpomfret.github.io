@@ -1,12 +1,12 @@
 ---
 title: "Anyone know what day it is?"
 date: "2020-04-21"
-categories: 
+categories:
   - "powershell"
-tags: 
+tags:
   - "powershell"
   - "prompt"
-coverImage: "eric-rothermel-FoKO4DpXamQ-unsplash-1.jpg"
+image: "eric-rothermel-FoKO4DpXamQ-unsplash-1.jpg"
 ---
 
 It’s an interesting time we’re living in right now. I’m based in the UK and we just received the announcement last week that we have at least three more weeks of lockdown. I’ve been working at home for over a month now and I feel really lucky that I can work from home. There are a lot of folks who can’t and are instead working hard on the front lines to keep us safe and well. Firstly, a shout out to those folks! Thanks for all your doing.
@@ -19,7 +19,7 @@ function Find-WhatDayAreWeDoing {
     param (
         \[switch\]$Raw
     )
- 
+
     if($raw) {
         (Get-Date).DayOfWeek
     }

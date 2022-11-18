@@ -1,16 +1,16 @@
 ---
 title: "Discover SQL Server Permissions hidden via AD Group Membership"
 date: "2021-01-26"
-categories: 
+categories:
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "active-directory"
   - "activedirectory"
   - "dbatools"
   - "permissions"
   - "powershell"
-coverImage: "edvard-alexander-rolvaag-E75ZuAIpCzo-unsplash.jpg"
+image: "edvard-alexander-rolvaag-E75ZuAIpCzo-unsplash.jpg"
 ---
 
 When granting permissions to SQL Server resources we have a few options. One option is to grant permissions to Active Directory groups instead of individual users.  This has several benefits, for example, improved security over using SQL logins, and the ability to create a separation of duties when controlling database access.
@@ -52,12 +52,12 @@ Add-ADGroupMember @addMemberGroup
 The second part of the setup was to add an AD group and an AD user to the SQL Server and grant some permissions using dbatools.
 
 \# setup - grant permissions to ad users\\groups using dbatools
- 
+
 # add ad group and grant permissions (db\_datareader to AdventureWorks)
 New-DbaLogin -SqlInstance dscsvr1 -Login 'Pomfret\\AdventureWorksReadOnly'
 New-DbaDbUser -SqlInstance dscsvr1 -Database AdventureWorks2017 -Login 'Pomfret\\AdventureWorksReadOnly'
 Add-DbaDbRoleMember -SqlInstance dscsvr1 -Database AdventureWorks2017 -Role db\_datareader -User 'Pomfret\\AdventureWorksReadOnly' -Confirm:$false
- 
+
 # add ad user to sql server and provide permissions (db\_owner to AdventureWorks)
 New-DbaLogin -SqlInstance dscsvr1 -Login 'Pomfret\\smithA'
 New-DbaDbUser -SqlInstance dscsvr1 -Database AdventureWorks2017 -Login 'Pomfret\\smithA'

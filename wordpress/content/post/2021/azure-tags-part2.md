@@ -1,15 +1,15 @@
 ---
 title: "Keeping track of Azure resources with tags – Part 2"
 date: "2021-03-23"
-categories: 
+categories:
   - "azure"
   - "powershell"
-tags: 
+tags:
   - "azure"
   - "policy"
   - "powershell"
   - "tags"
-coverImage: "header.png"
+image: "header.png"
 ---
 
 Last week, in [Part 1](https://jesspomfret.com/azure-tags-part1/), we talked about how to easily keep track of our resources with tags. There are many strategies for tagging your resources but I specifically focused on adding a ‘dateCreated’ tag so we could see when resources were created – since this isn’t available by default.  During that post we identified the biggest issue we had was that we were relying on a human to remember to add the ‘dateCreated’ tag for every resource they created. I’ve got two ideas on how to fix that – today we’ll look at the first option, using [Azure Policy](https://docs.microsoft.com/en-us/azure/governance/policy/overview).

@@ -1,12 +1,12 @@
 ---
 title: "T-SQL Tuesday #134 - Give me a break"
 date: "2021-01-12"
-categories: 
+categories:
   - "personal"
   - "t-sql-tuesday"
-tags: 
+tags:
   - "t-sql-tuesday"
-coverImage: "20181031_062105-scaled.jpg"
+image: "20181031_062105-scaled.jpg"
 ---
 
 [![T-SQL Tuesday Logo](images/tsqltues.png)](https://jimbabwe.co.za/2021/01/04/tsqltuesday-134-invitation/)

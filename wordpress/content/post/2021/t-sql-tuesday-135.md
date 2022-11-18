@@ -1,19 +1,19 @@
 ---
 title: "T-SQL Tuesday #135: The outstanding tools of the trade that make your job awesome"
 date: "2021-02-09"
-categories: 
+categories:
   - "dbachecks"
   - "dbatools"
   - "pester"
   - "powershell"
   - "t-sql-tuesday"
-tags: 
+tags:
   - "dbachecks"
   - "dbatools"
   - "excel"
   - "tsql2sday"
   - "tsqltuesday"
-coverImage: "neonbrand-60krlMMeWxU-unsplash-scaled.jpg"
+image: "neonbrand-60krlMMeWxU-unsplash-scaled.jpg"
 ---
 
 [![T-SQL Tuesday Logo](images/tsqltues.png)](https://www.bronowski.it/blog/2021/02/t-sql-tuesday-135-the-outstanding-tools-of-the-trade-that-make-your-job-awesome/)

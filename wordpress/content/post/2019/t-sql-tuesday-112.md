@@ -1,13 +1,13 @@
 ---
 title: "T-SQL Tuesday #112 - Dipping into your Cookie Jar"
 date: "2019-03-12"
-categories: 
+categories:
   - "presenting"
   - "t-sql-tuesday"
-tags: 
+tags:
   - "presenting"
   - "tsql2sday"
-coverImage: "abundance-bazaar-biscuits-375904-e1552343553342.jpg"
+image: "abundance-bazaar-biscuits-375904-e1552343553342.jpg"
 ---
 
 [![](images/tsqltues-300x300.png)](https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/)

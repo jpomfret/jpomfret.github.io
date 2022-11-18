@@ -1,13 +1,13 @@
 ---
 title: "Advent of Code 2020"
 date: "2020-12-31"
-categories: 
+categories:
   - "powershell"
-tags: 
+tags:
   - "adventofcode"
   - "aoc"
   - "powershell"
-coverImage: "AdventOfCode.png"
+image: "AdventOfCode.png"
 ---
 
 This was the 3rd year I participated in the [Advent of Code](https://adventofcode.com/) (AoC). If you haven’t heard of AoC, it’s an advent calendar of coding puzzles.  Each day between December 1st and 25th a two part puzzle is released, you can use whatever language you want to solve it, with the goal being just to get the right answer.  Once you solve part 1 for the day, part 2 is unlocked and that builds on top of the story you had for part 1. For each part of each puzzle you complete you get a star, so there are two available per day.
@@ -21,7 +21,7 @@ My goal was to gain more stars than last year, which I succeeded at. I only got 
 A lot of the puzzles involve iterating over an object and manipulating it. I depended on a lot of loops for this. My day 1, part 1 solution is below.  You can see I nested two loops to iterate over the array and calculate the total. Without the named loops this worked – it just didn’t stop when it found the correct answer and I got duplicates.  By naming the outer loop with `:expenses` you can then break all the way out of that loop with `break expenses`.  Pretty useful!
 
 $expenses = Get-Content .\\Day01\\Input.txt
- 
+
 # Part 1 - 514579
 :expenses
 foreach ($e in $expenses) {
