@@ -1,10 +1,12 @@
 ---
 title: "Keeping track of Azure resources with tags – Part 3"
+description: "Part 3 in my Azure tags series. This time using Azure Functions to automatically tag resources with a DateCreated tag."
+slug: "azure-tags-part3"
 date: "2021-03-31"
 categories:
   - "azure"
   - "powershell"
-coverImage: "anas-alshanti-feXpdV001o4-unsplash.jpg"
+image: "cover.jpg"
 ---
 
 This is now the third post in a series on Azure tags. You can read the other two posts here to get up to speed with where we’ve been, however that isn’t required for this post .
@@ -14,21 +16,23 @@ This is now the third post in a series on Azure tags. You can read the other two
 
 In part one I discussed how useful Azure tags can be, and specifically about how adding a ‘dateCreated’ tag can help you keep track of your resources, and how to find resources with certain tags using PowerShell.  Part 2 and 3 are based around the fact that adding the ‘dateCreated’ tag is a great idea, but relying on a human to remember to add it is less than ideal. In part 2 we looked at using Azure Policy to automatically add the tag. Today’s post will cover another option using Azure Functions.
 
-Azure Functions gives us a way of running serverless code, written in a number of different languages, triggered by specific events or timings.  Looking through the [documentation](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview) there are many use cases from processing files to analysing IoT workstreams.  Our use case is to run a PowerShell script that tags any resources that are missing the ‘dateCreated’.
+Azure Functions gives us a way of running serverless code, written in a number of different languages, triggered by specific events or timings.  Looking through the [documentation](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview) there are many use cases from processing files to analysing IoT work streams.  Our use case is to run a PowerShell script that tags any resources that are missing the ‘dateCreated’.
 
 ## Step 1 - Create a function
 
 Azure Functions live within a function app, so the first thing we have to do is create this logical container. At this level we’ll decide on a ‘Function App name’, I’ve called mine ‘resourceTagJp’, and choosing ‘Code’ for the publish option we can then choose PowerShell as our language of choice. There are some other options for selecting a storage account and configuring ‘Application Insights’, but for now I’ve left those all as the defaults.
 
-[![create a function app pane](functionApp.png)](https://jesspomfret.com/wp-content/uploads/2021/03/functionApp.png)
+![Create a function app pane](functionApp.png)
 
 Once the ‘Function App’ is created we are ready to create our function.  On the left hand pane choose ‘Functions’ and then ‘Add’. This will open a pane for you to choose how to develop the function, either in the portal or on your local machine in VSCode, for example, and the template to base your function off of.
 
-[![Create an Azure Function](CreateFunction-1.png)](https://jesspomfret.com/wp-content/uploads/2021/03/CreateFunction-1.png)
+![Create an Azure Function](CreateFunction.png)
 
 One of the simplest options is to choose ‘Timer Trigger’, which as expected will execute the function code based on a schedule. The schedule is set using a cron expression. For it to run once an hour at the top of the hour we’ll use the following:
 
-0 0 \* \* \* \*
+```cmd
+0 0 * * * *
+```
 
 ![cron schedule popup](cronSchedule.png)
 
@@ -42,7 +46,8 @@ We have three files within our function:
 
 The code for the function is below and makes use of the `Update-AzTag` cmdlet to add the ‘dateCreated’ tag. In this example, since I’m using PowerShell, I can easily format the date to be exactly how I want it to be displayed. If you read part 2 in this series, that was a downfall of using Azure Policy, I only had one datetime format option. The `Update-AzTag` also has a `-Merge` parameter which ensures any tags already on the resource aren’t overwritten by this function.
 
-\# Input bindings are passed in via param block.
+```PowerShell
+# Input bindings are passed in via param block.
 param($Timer)
 
 # Select the subscription
@@ -53,6 +58,7 @@ $res =  Get-AzResource -ResourceGroupName functionTest | Where { $\_.tags.keys -
 $res.Foreach{
     Update-AzTag -ResourceId $psitem.ResourceId -Tag @{'dateCreated' = (Get-Date -Format "yyyy-MM-dd")} -Operation Merge
 }
+```
 
 That’s all it is to create our function – however, it doesn’t currently have the authorisation to view or update resources.
 
@@ -66,7 +72,7 @@ Configuring the system-assigned identity is pretty straightforward. On our funct
 
 Clicking on ‘Azure role assignments’ will open a pane where you can assign whatever permissions your function will need to run. This can be scoped at the subscription or resource group level. For this example my function is just tagging anything within the ‘functionTest’ resource group so I can set the permissions to that scope.  I have chosen the ‘contributor’ role as that gives us enough permissions to view and tag resources.
 
-[![Setting up a system assigned managed identity for our function](ManagedIdentity.png)](https://jesspomfret.com/wp-content/uploads/2021/03/ManagedIdentity.png)
+![Setting up a system assigned managed identity for our function](ManagedIdentity.png)
 
 ## Step 3 - Test our function
 
@@ -74,13 +80,13 @@ We have created our function and set up the managed identity to enable the funct
 
 In the console you can see exactly what the function does and any output you’ve configured – in this example you can see a storage account was tagged.
 
-[![](TestFunction-1.png)](https://jesspomfret.com/wp-content/uploads/2021/03/TestFunction-1.png)
+![Viewing the function code in the portal](TestFunction.png)
 
 We can also test this function by creating an untagged resource in the ‘functionTest’ resource group and waiting for the timer to be triggered.
 
 However we test our function we can see the tag is now on our storage account and we no longer have to rely on a human to remember the tag when they create resources.
 
-[![Showing a storage account has been tagged with our specified date format](storageAccountFunctionTagged.png)](https://jesspomfret.com/wp-content/uploads/2021/03/storageAccountFunctionTagged.png)
+![Showing a storage account has been tagged with our specified date format](storageAccountFunctionTagged.png)
 
 ## Summary
 
