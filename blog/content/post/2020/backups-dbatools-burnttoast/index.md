@@ -1,5 +1,7 @@
 ---
 title: "Backups with dbatools & BurntToast"
+description: "Example of using BurntToast to notify when a backup is complete."
+slug: "backups-dbatools-burnttoast"
 date: "2020-02-25"
 categories:
   - "dbatools"
@@ -8,7 +10,7 @@ tags:
   - "burnttoast"
   - "dbatools"
   - "powershell"
-coverImage: "toast-toaster-food-white-bread-preview.jpg"
+image: "cover.jpg"
 ---
 
 I have just a quick tip for you today using the [BurntToast](https://github.com/Windos/BurntToast) module to notify us when a backup is complete. As DBAs there is always plenty to do, so we don’t want to have to sit and watch a long running script to catch the moment when it finishes.  Usually what happens to me is I kick off the script, move on to something else and then totally forget about it, perhaps until someone asks if it’s done yet. Oops. Well this tip will help avoid that.
@@ -21,7 +23,8 @@ The following script will take a copy-only backup of the AdventureWorks2019 data
 
 The second section below that will run directly after the backup completes will use the results in $backup to notify us using BurntToast:
 
-\## Take a copy only backup, using splatting for readability
+```PowerShell
+## Take a copy only backup, using splatting for readability
 $backupSplat = @{
     SqlInstance = "mssql2"
     Database    = "AdventureWorks2019"
@@ -35,6 +38,7 @@ toastSplat = @{
     AppLogo  = "C:\\temp\\dbatools.png"
 }
 New-BurntToastNotification @toastSplat
+```
 
 That’s it, 2 commands to take a backup and notify us on completion.  I’ve also used the `-AppLogo` parameter to add the [dbatools logo](https://github.com/sqlcollaborative/dbatools/blob/development/bin/dbatools.png). You can see that this backup only took 1 second to complete (hopefully I didn’t get sidetracked in that time) but if the backup takes a few minutes or longer this is a useful tip to let you know when it’s finished.
 
