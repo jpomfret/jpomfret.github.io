@@ -1,5 +1,7 @@
 ---
 title: "Creating my first SQL Managed Instance"
+description: ""
+slug: "creating-my-first-sql-managed-instance"
 date: "2019-11-04"
 categories:
   - "azure"
@@ -9,7 +11,7 @@ tags:
   - "cloud"
   - "managed-instance"
   - "mi"
-coverImage: "cloud-header.jpg"
+image: "cloud-header.jpg"
 ---
 
 I’ve been thinking about the cloud a lot lately, and I feel it’s an area that I would benefit from learning more about. I’ve attended a couple of presentations on SQL Managed Instances and have read enough to be dangerous (or accidentally spend a lot of money, one of my biggest fears when working in the cloud). However, I always find I learn best and really get to understanding a topic by building something.
@@ -24,7 +26,7 @@ You can read more about the specifics of “Azure SQL Database managed instance�
 
 Step one is to head to the portal ([https://portal.azure.com](https://portal.azure.com/)) and get logged in. From there you can search ‘SQL’ and then select ‘SQL managed instances’.
 
-![](SQLMI_Create.jpg)
+![Finding SQL Managed Instances in the portal](SQLMI_Create.jpg)
 
 On the next pane you’ll see any existing managed instances you have setup. I have none at this point so I’ll select the ‘+Add’ button on the toolbar to start creating one (One thing to note in this blog post, Azure changes often and quickly so these screenshots and steps might not be exact by the time you get to reading this).
 
@@ -32,13 +34,13 @@ On the next pane you’ll see any existing managed instances you have setup. I h
 
 The creation wizard takes you through several tabs. The first ‘Basics’ is where you’ll create a resource group (to group like resources and easily manage them), name your server, size your server, and setup the administrator account (cut off in the below screenshot).  Your server name can’t contain reserved words, and also can only contain lowercase letters, numbers and a hyphen.
 
-![Basics for SQL MI setup](create1-1024x434.jpg)
+![Basics for SQL MI setup](create.jpg)
 
 To size your managed instance you’ll need to choose between the two tier options. Business critical has faster disks (local SSD) for high I/O workloads and built in high availability with Always On. For today we’re going to stick with a general purpose instance.
 
 An interesting note here is that I chose the smallest managed instance I could, and if I selected the same in different regions the price estimation was slightly different.
 
-![](sizing.jpg)
+![Sizing the managed instance](sizing.jpg)
 
 ### Networking
 
@@ -52,7 +54,7 @@ The third and final settings tab allows you to configure your instance collation
 
 The final tab reviews your settings to ensure they are all valid and allows you to create your managed instance. Depending on whether this also requires changes to the underlying cluster that your managed instance will be deployed on top of, this operation could take a while. Since this is my first managed instance I don’t have an existing cluster so Azure warns me this could take up to 6 hours to complete.
 
-![](hourstocomplete.jpg)
+![It might take a while to create...](hourstocomplete.jpg)
 
 ## Until Next Time
 
