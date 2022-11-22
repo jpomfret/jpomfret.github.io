@@ -1,6 +1,6 @@
 ---
 title: "Buy the Book!"
-date: 2022-03-06
+date: 2022-05-01
 slug: "book"
 menu:
     main:
