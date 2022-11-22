@@ -13,3 +13,8 @@
 ## todo
 
 - comments - github? disqus?
+
+SVG icons
+https://heroicons.dev/?query=book
+
+Copy an icon - save as an svg!

@@ -5,5 +5,6 @@ Things to fix
 
 
 Export final stats for Wordpress views
-Add dbatools mol book link
 comments?
+
+- This ok? bottom of blog posts? LICENSED UNDER CC BY-NC-SA 4.0
