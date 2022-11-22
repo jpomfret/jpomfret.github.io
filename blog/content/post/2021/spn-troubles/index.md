@@ -9,7 +9,7 @@ tags:
   - "kerberos"
   - "powershell"
   - "spn"
-coverImage: "alina-grubnyak-ZiQkhI7417A-unsplash.jpg"
+image: "alina-grubnyak-ZiQkhI7417A-unsplash.jpg"
 ---
 
 I was working in my lab environment this weekend, playing with some SQL Servers that I had built with PowerShell DSC a while ago.  I had installed SQL Server with mostly defaults, including not changing the engine and agent service accounts.  For the blog post I thought I was going to write next, I wanted to change these to be active directory accounts – it did not go smoothly, and I figured this might be useful to document for future Jess, or anyone else who might stumble across this problem.

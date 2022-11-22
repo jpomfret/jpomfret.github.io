@@ -6,7 +6,7 @@ categories:
 tags:
   - "powershell"
   - "psreadline"
-coverImage: "andrew-neel-1-29wyvvLJA-unsplash.jpg"
+image: "andrew-neel-1-29wyvvLJA-unsplash.jpg"
 ---
 
 I was listening to a [podcast last week about PowerShell](http://runasradio.com/Shows/Show/760), when one of the hosts mentioned having to ‘up arrow’ back through your history to find a command you wanted to rerun.  This made me realise that I should write this quick post on using [PSReadLine](https://github.com/PowerShell/PSReadLine)’s interactive search function.  This tip is a serious time saver and I rely on it heavily.

@@ -9,7 +9,7 @@ tags:
   - "azure-sql-database"
   - "dbachecks"
   - "powershell"
-coverImage: "scott-webb-3LsocYqXWpM-unsplash.jpg"
+image: "scott-webb-3LsocYqXWpM-unsplash.jpg"
 ---
 
 Last week I gave a presentation at [Data South West](https://www.meetup.com/SQL-South-West/) on dbachecks and dbatools. One of the questions I got was whether you could run dbachecks against Azure SQL Databases, to which I had no idea. I always try to be prepared for potential questions that might come up, but I had only been thinking about on-premises environments and hadn’t even considered the cloud.  The benefit is this gives me a great topic for a blog post.

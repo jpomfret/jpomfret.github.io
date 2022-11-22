@@ -10,7 +10,7 @@ tags:
   - "dbatools"
   - "permissions"
   - "powershell"
-coverImage: "edvard-alexander-rolvaag-E75ZuAIpCzo-unsplash.jpg"
+image: "edvard-alexander-rolvaag-E75ZuAIpCzo-unsplash.jpg"
 ---
 
 When granting permissions to SQL Server resources we have a few options. One option is to grant permissions to Active Directory groups instead of individual users.  This has several benefits, for example, improved security over using SQL logins, and the ability to create a separation of duties when controlling database access.

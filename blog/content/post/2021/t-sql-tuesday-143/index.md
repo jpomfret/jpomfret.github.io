@@ -7,7 +7,7 @@ categories:
 tags:
   - "powershell"
   - "t-sql-tuesday"
-coverImage: "tekton-EcE9dFfXwwE-unsplash.jpg"
+image: "tekton-EcE9dFfXwwE-unsplash.jpg"
 ---
 
 [![T-SQL Tuesday Logo](tsqltues.png)](https://johnmccormack.it/2021/10/t-sql-tuesday-143-short-code-examples/)

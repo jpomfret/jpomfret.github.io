@@ -1,6 +1,6 @@
 ---
 title: "Creating my first SQL Managed Instance"
-description: ""
+description: "Walking through creating my first SQL Managed Instanec in the Azure Portal."
 slug: "creating-my-first-sql-managed-instance"
 date: "2019-11-04"
 categories:

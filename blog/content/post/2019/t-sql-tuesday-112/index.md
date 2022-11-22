@@ -7,7 +7,7 @@ categories:
 tags:
   - "presenting"
   - "tsql2sday"
-coverImage: "abundance-bazaar-biscuits-375904-e1552343553342.jpg"
+image: "abundance-bazaar-biscuits-375904-e1552343553342.jpg"
 ---
 
 [![](tsqltues-300x300.png)](https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/)

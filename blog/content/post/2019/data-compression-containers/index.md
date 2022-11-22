@@ -1,5 +1,7 @@
 ---
 title: "Data Compression Demos in Containers"
+description: ""
+slug: "data-compression-containers"
 date: "2019-01-23"
 categories:
   - "data-compression"
@@ -48,7 +50,7 @@ ENTRYPOINT /var/opt/sqlserver/attach-db.sh & /opt/mssql/bin/sqlservr
 
 The attach-db.sh script uses sqlcmd to execute three `CREATE DATABASE` commands to finish the setup of my environment and I end up with a folder structure as shown below. You don’t have to put the database files in a separate folder, I only did that for neatness.
 
-![](fileSetup.jpg)
+![My folder structure](fileSetup.jpg)
 
 Everything is setup so I’m ready to build my image. I’ll navigate to the DataCompression folder from my PowerShell console and run the `docker build` command:
 
@@ -59,7 +61,7 @@ docker build -t datacompression .
 
 To check out my new image I’ll use `docker images`:
 
-![](dockerimages.jpg)
+![Viewing docker images in the console](dockerimages.jpg)
 
 ## Running my demo container
 

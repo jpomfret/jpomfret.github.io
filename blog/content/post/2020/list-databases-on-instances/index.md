@@ -1,14 +1,14 @@
 ---
 title: "Get a list of databases from named SQL Instances"
 date: "2020-08-18"
-categories: 
+categories:
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "dbatools"
   - "named-instance"
   - "powershell"
-coverImage: "taylor-vick-M5tzZtFCOfs-unsplash.jpg"
+image: "taylor-vick-M5tzZtFCOfs-unsplash.jpg"
 ---
 
 Have you ever had someone send you the name of a SQL Server and database to do some work, but when you try to connect to the server you can’t? Then,come to find out, there are four named instances on the box and you don’t know which one hosts the database? No? Just me?

@@ -8,7 +8,7 @@ tags:
   - "t-sql-tuesday"
   - "tsql"
   - "tsql2sday"
-coverImage: "waldemar-brandt-sXCxht5Ivu4-unsplash.jpg"
+image: "waldemar-brandt-sXCxht5Ivu4-unsplash.jpg"
 ---
 
 [![T-SQL Tuesday Logo](tsqltues.png)](https://www.brentozar.com/archive/2021/03/tsql2sday-136-invitation-blog-about-your-favorite-data-type-or-least-favorite/)

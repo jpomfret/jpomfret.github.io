@@ -7,7 +7,7 @@ tags:
   - "crossfit"
   - "tsql2sday"
   - "tsqltuesday"
-coverImage: "victor-freitas-Yuv-iwByVRQ-unsplash.jpg"
+image: "victor-freitas-Yuv-iwByVRQ-unsplash.jpg"
 ---
 
 [![T-SQL Tuesday Logo](tsqltues.png)](https://tjaybelt.blogspot.com/2021/08/t-sql-tuesday-141-worklife-balance.html)

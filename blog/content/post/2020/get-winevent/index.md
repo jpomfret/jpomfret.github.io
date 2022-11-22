@@ -7,7 +7,7 @@ tags:
   - "event-log"
   - "get-winevent"
   - "powershell"
-coverImage: "zulfa-nazer-W9jfKmGYb1Q-unsplash.jpg"
+image: "zulfa-nazer-W9jfKmGYb1Q-unsplash.jpg"
 ---
 
 Recently I was tasked with troubleshooting an incident on a SQL Server at a certain point in the past, the issue being a high CPU alert.  It’s hard (without monitoring solutions set up) to go back in time and determine what the issue is.  However, one thing we can check is the windows event log to see if there was anything happening on the server at that time.

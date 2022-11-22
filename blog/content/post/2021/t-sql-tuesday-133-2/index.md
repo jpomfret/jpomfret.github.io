@@ -6,7 +6,7 @@ categories:
   - "t-sql-tuesday"
 tags:
   - "t-sql-tuesday"
-coverImage: "20181031_062105-scaled.jpg"
+image: "20181031_062105-scaled.jpg"
 ---
 
 [![T-SQL Tuesday Logo](tsqltues.png)](https://jimbabwe.co.za/2021/01/04/tsqltuesday-134-invitation/)

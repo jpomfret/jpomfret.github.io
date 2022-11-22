@@ -7,7 +7,7 @@ categories:
 tags:
   - "dbatools"
   - "truncate"
-coverImage: "james-baltz-SdcnfqXisV4-unsplash-1-scaled.jpg"
+image: "james-baltz-SdcnfqXisV4-unsplash-1-scaled.jpg"
 ---
 
 **TLDR**; [This code](https://github.com/jpomfret/demos/blob/master/BlogExamples/05_TruncateAllTables.ps1) will script out foreign keys and views (including object level permissions), drop the objects, truncate all the tables, and recreate the objects.

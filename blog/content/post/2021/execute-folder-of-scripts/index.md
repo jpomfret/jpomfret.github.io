@@ -1,14 +1,14 @@
 ---
 title: "Quickly Execute a Folder of SQL Scripts against a SQL Server"
 date: "2021-03-01"
-categories: 
+categories:
   - "dbatools"
   - "powershell"
-tags: 
+tags:
   - "dbatools"
   - "powershell"
   - "sql-server"
-coverImage: "elena-joland-CxmHBlY4awI-unsplash.jpg"
+image: "elena-joland-CxmHBlY4awI-unsplash.jpg"
 ---
 
 Another week and another useful dbatools snippet for you today.  Last week at work I was given a folder of 1,500 scripts – each containing a create table statement. Can you imagine having to open each file in Management Studio to be able to execute it? Thank goodness we have PowerShell and [dbatools](https://dbatools.io/) on our side.
@@ -22,10 +22,10 @@ Second, I’m using the foreach method which takes each script file returned fro
 $SqlInstance = 'mssql1'
 $destinationDatabase = 'AdventureWorks2021'
 $folderPath = '.\\output\\AdventureWorks2017'
- 
+
 # Create a connection to the server that we will reuse - can use SqlCredential for alternative creds
 $sqlInst = Connect-DbaInstance -SqlInstance $SqlInstance
- 
+
 (Get-ChildItem $folderPath).Foreach{
     Invoke-DbaQuery -SqlInstance $sqlInst -Database $destinationDatabase -File $psitem.FullName
 }

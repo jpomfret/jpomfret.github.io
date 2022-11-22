@@ -10,7 +10,7 @@ tags:
   - "debugging"
   - "powershell"
   - "vscode"
-coverImage: "alex-perez-M7RAc0-NL84-unsplash-1.jpg"
+image: "alex-perez-M7RAc0-NL84-unsplash-1.jpg"
 ---
 
 I was browsing twitter the other day when a tweet about dbatools caught my eye (I use [TweetDeck](https://tweetdeck.twitter.com/) and so have a column for tweets that contain [@PSdbatools](http://twitter.com/psdbatools)).

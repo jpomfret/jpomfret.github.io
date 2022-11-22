@@ -8,7 +8,7 @@ categories:
   - "presenting"
 tags:
   - "goals"
-coverImage: "cover.jpg"
+image: "cover.jpg"
 ---
 
 Well 2020 was certainly an interesting year. I’m pretty sure none of us could have predicted how the world would look now and it won’t be regarded as the best year ever. However, there were definitely still some bright points I’d like to make note of before setting some targets for 2021.

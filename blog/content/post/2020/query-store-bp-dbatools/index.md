@@ -8,7 +8,7 @@ tags:
   - "dbatools"
   - "open-source"
   - "query-store"
-coverImage: "simon-berger-twukN12EN7c-unsplash.jpg"
+image: "simon-berger-twukN12EN7c-unsplash.jpg"
 ---
 
 It’s no secret that I love dbatools and dbachecks. I am certain that I run a dbatools command at least once a day. It has fundamentally changed how I work as a dba, and it makes my life so much easier.  I mention this when I’m presenting on these topics, but today I want to highlight what I consider the special sauce of open-source software.

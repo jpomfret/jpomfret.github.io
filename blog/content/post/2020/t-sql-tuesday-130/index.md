@@ -9,7 +9,7 @@ tags:
   - "dbachecks"
   - "tsql2sday"
   - "tsqltuesday"
-coverImage: "dashboard-1.jpg"
+image: "dashboard-1.jpg"
 ---
 
 [![T-SQL Tuesday Logo](tsqltues.png)](https://sqlzelda.wordpress.com/2020/09/01/t-sql-tuesday-130-automate-your-stress-away/)

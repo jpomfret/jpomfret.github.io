@@ -8,7 +8,7 @@ tags:
   - "life-hacks"
   - "powershell"
   - "vscode"
-coverImage: "VsCode.jpg"
+image: "VsCode.jpg"
 ---
 
 I wrote previously about how I loved little life hacks and shortcuts for my [February T-SQL Tuesday prompt](https://jesspomfret.com/t-sql-tuesday-123-summary). If you read that you’ll know I use VSCode a lot and really love all the shortcuts available in that program. This is just a quick tip that I’m so glad I found, read – took the time to work out.

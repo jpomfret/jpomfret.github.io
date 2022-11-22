@@ -1,13 +1,13 @@
 ---
 title: "Using PSDefaultParameterValues for connecting to SQL Server in containers"
 date: "2020-05-27"
-categories: 
+categories:
   - "powershell"
-tags: 
+tags:
   - "containers"
   - "dbatools"
   - "powershell"
-coverImage: "lucas-van-oort-fBZOVyF-96w-unsplash.jpg"
+image: "lucas-van-oort-fBZOVyF-96w-unsplash.jpg"
 ---
 
 I’ve written previously about using containers for demos on my laptop, specifically for my [data compression talk](https://jesspomfret.com/data-compression-containers/).  Since I switched those demos over I haven’t looked back- if it’s possible to run my demos off of containers I always choose that option.
@@ -43,11 +43,11 @@ $PSDefaultParameterValues\['\*:Verbose'\] = $True
 
 In the above examples I’m using a wildcard (\*) on the left side to specify that this parameter is for all functions. You can also focus in PSDefaultParameterValues by specifying one certain function name that the parameter value will apply to:
 
-$PSDefaultParameterValues\['Get-DbaDbTable:Verbose'\] = $True 
+$PSDefaultParameterValues\['Get-DbaDbTable:Verbose'\] = $True
 
 You can also specify just the dbatools commands by taking advantage of their naming conventions and using:
 
-$PSDefaultParameterValues\['\*-Dba\*:Verbose'\] = $True 
+$PSDefaultParameterValues\['\*-Dba\*:Verbose'\] = $True
 
 ## PSDefaultParameterValues for connecting to containers
 

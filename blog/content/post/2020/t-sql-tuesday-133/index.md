@@ -7,7 +7,7 @@ categories:
 tags:
   - "presenting"
   - "t-sql-tuesday"
-coverImage: "pexels-photo-459301.jpeg"
+image: "pexels-photo-459301.jpeg"
 ---
 
 [![T-SQL Tuesday Logo](tsqltues.png)](https://lisagb.info/archives/77)

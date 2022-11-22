@@ -8,7 +8,7 @@ tags:
   - "copy-dbadatabase"
   - "dbatools"
   - "powershell"
-coverImage: "fabio-oyXis2kALVg-unsplash.jpg"
+image: "fabio-oyXis2kALVg-unsplash.jpg"
 ---
 
 Have you ever wanted to quickly backup/restore a database to the same instance to do some side by side testing? Perhaps to make some index changes or code changes, without actually changing the live copy of the database?  Ideally you’d already have another environment for this sort of work, but even then sometimes it’s handy to have a quick option.

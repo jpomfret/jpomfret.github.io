@@ -6,7 +6,7 @@ categories:
 tags:
   - "t-sql-tuesday"
   - "tsql2sday"
-coverImage: "georg-bommeli-ybtUqjybcjE-unsplash.jpg"
+image: "georg-bommeli-ybtUqjybcjE-unsplash.jpg"
 ---
 
 [![T-SQL Tuesday Logo](tsqltues.png)](https://sqlworldwide.com/t-sql-tuesday-132-how-are-you-coping-with-pandemic/)
