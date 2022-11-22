@@ -1,11 +1,13 @@
 ---
 title: "Data Compression Internals"
+description: "Digging into data compression internals, we're looking at what happens to the data at the page level when you use different levels of compression."
+slug: "data-compression-internals"
 date: "2019-02-19"
 categories:
   - "data-compression"
 tags:
   - "data-compression"
-coverImage: "compressionInfo_Page.jpg"
+image: "compressionInfo_Page.jpg"
 ---
 
 Last year I gave my first user group presentation on data compression and since then I’ve also given this talk at both SQL Saturday Columbus 2018 and SQL Saturday Cleveland 2019. One of my favourite demos from the presentation is taking a look under the covers to see what SQL Server does with compressed data at the page level. This blog post is going to walk through this demo.  If you’d like to follow along you can pull down my docker image and have your own environment up and running in no time. As long as you already have docker running on your machine you can use the following to get setup and the full demo script is available on [GitHub](https://github.com/jpomfret/demos/blob/master/DataCompression/01_Page_Internals.sql).
@@ -46,7 +48,7 @@ Once we have our table created we need to use a couple of undocumented, but wide
 DBCC IND ('CompressTest', 'employee', 1);
 ```
 
-![](DBCC_IND.jpg)
+![DBCC IND output for the employee table](DBCC_IND.jpg)
 
 The `employee` table has two types of pages shown here. The `PageType` of 1 is our data page and the one we are interested in today. Once we have our `PageFID (1)` and `PagePID (376)`, we’ll take these values and use them as parameters for `DBCC PAGE`.
 
@@ -66,11 +68,11 @@ There is a lot of information returned. Before you get overwhelmed, we are only 
 
 From the output below we’ll note the following: the `pminlin` (the size of the fixed length data fields) is 512, the `m_slotCnt` (the number of records on the page) is 3, and finally the `m_freeCnt` (the number of free bytes on the page) is 6545.
 
-![](DBCC_PAGE_NONE.jpg)
+![Page header with no compression](DBCC_PAGE_NONE.jpg)
 
 Since we used option 3 for `DBCC PAGE` we can also scroll down and see the data on our pages. The first record is below and is currently 515 bytes, and you can see on the right there is a lot of unused space.
 
-![](DBCC_PAGE_RECORD_NONEjpg.jpg)
+![Page record with no compression](DBCC_PAGE_RECORD_NONEjpg.jpg)
 
 ## Compression Level: Row
 
@@ -87,7 +89,7 @@ When compression is applied the pages are rewritten to disk, we need to use `DBC
 DBCC IND ('CompressTest', 'employee', 1);
 ```
 
-![](DBCC_IND_ROW.jpg)
+![DBCC IND results for employee table](DBCC_IND_ROW.jpg)
 
 We then use these values for `DBCC PAGE`. The trace flag we set earlier is good for the session, therefore if we’re in the same query window we don’t need to rerun that command.
 
@@ -95,13 +97,13 @@ We then use these values for `DBCC PAGE`. The trace flag we set earlier is good 
 DBCC PAGE('CompressTest',1,384,3)
 ```
 
-![](DBCC_PAGE_ROW.jpg)
+![Page header with row compression](DBCC_PAGE_ROW.jpg)
 
 Now that our table is ROW compressed you can see the `pminlength` is only 5, this is reduced from 512 when our table wasn’t compressed. You can also note `m_slotCnt` is still 3, which is expected, and the amount of free space on the page `m_freeCnt` has increased to 7971.
 
 If we again scroll down to inspect our first row we can see it is now only 35 bytes and the highlighted area on the right clearly shows that the unused space within our row has been removed.
 
-![](DBCC_PAGE_RECORD_ROW.jpg)
+![Page record with row compression](DBCC_PAGE_RECORD_ROW.jpg)
 
 ## Compression Level: Page
 
@@ -122,7 +124,7 @@ Running `DBCC IND` again will get us our newly written page:
 DBCC IND ('CompressTest', 'employee', 1);
 ```
 
-![](DBCC_IND_PAGE.jpg)
+![DBCC IND results for employee table](DBCC_IND_PAGE.jpg)
 
 We’ll examine it with `DBCC PAGE`:
 
@@ -130,7 +132,7 @@ We’ll examine it with `DBCC PAGE`:
 DBCC PAGE('CompressTest',1,376,3)
 ```
 
-![](DBCC_PAGE_PAGE.jpg)
+![Page header with page compression](DBCC_PAGE_PAGE.jpg)
 
 The interesting thing here is that nothing has changed, but if I check the DMVs the `employee` table shows as `PAGE` compressed.
 
@@ -138,28 +140,28 @@ The interesting thing here is that nothing has changed, but if I check the DMVs 
 Use CompressTest
 
 SELECT
-	schema_name(obj.SCHEMA_ID) as SchemaName,
-	obj.name as TableName,
-	ind.name as IndexName,
-	ind.type_desc as IndexType,
-	pas.row_count as NumberOfRows,
-	pas.used_page_count as UsedPageCount,
-	(pas.used_page_count \* 8)/1024 as SizeUsedMB,
-	par.data_compression_desc as DataCompression,
-	(pas.reserved_page_count \* 8)/1024 as SizeReservedMB
+    schema_name(obj.SCHEMA_ID) as SchemaName,
+    obj.name as TableName,
+    ind.name as IndexName,
+    ind.type_desc as IndexType,
+    pas.row_count as NumberOfRows,
+    pas.used_page_count as UsedPageCount,
+    (pas.used_page_count \* 8)/1024 as SizeUsedMB,
+    par.data_compression_desc as DataCompression,
+    (pas.reserved_page_count \* 8)/1024 as SizeReservedMB
 FROM sys.objects obj
 INNER JOIN sys.indexes ind
-	ON obj.object_id = ind.object_id
+    ON obj.object_id = ind.object_id
 INNER JOIN sys.partitions par
-	ON par.index_id = ind.index_id
-	AND par.object_id = obj.object_id
+    ON par.index_id = ind.index_id
+    AND par.object_id = obj.object_id
 INNER JOIN sys.dm_db_partition_stats pas
-	ON pas.partition_id = par.partition_id
+    ON pas.partition_id = par.partition_id
 WHERE obj.schema_id <> 4
 ORDER BY SizeUsedMB desc
 ```
 
-![](dmvs.jpg)
+![DMV results for the employee tables](dmvs.jpg)
 
 SQL Server outsmarted us a little here. I have only inserted three rows into the employee table and we know after looking at the `DBCC PAGE` output that there is plenty of free space on this page.  SQL Server will only apply PAGE compression if it needs to as there is a higher CPU cost to use prefix and dictionary compression. If page compression isn’t going to save any pages the engine leaves the table with just `ROW` compression applied.
 
@@ -178,7 +180,7 @@ Now when I run `DBCC IND` I can see the employee table uses four pages, two of t
 DBCC IND ('CompressTest', 'employee', 1);
 ```
 
-![](DBCC_IND_FINAL.jpg)
+![DBCC IND results for employee](DBCC_IND_FINAL.jpg)
 
 Finally, we’ll look at `DBCC PAGE` to see page compression in action:
 
@@ -186,15 +188,15 @@ Finally, we’ll look at `DBCC PAGE` to see page compression in action:
 DBCC PAGE('CompressTest',1,376,3)
 ```
 
-![](DBCC_PAGE_FINAL.jpg)
+![Page header with page compression](DBCC_PAGE_FINAL.jpg)
 
 You can now see there are 102 rows on our page (`m_slotCnt`) and our fixed length data types are still 5 (`pminlen`). Directly after the page header is the compression information section. You can see on the right that repeating data values have been pulled out and stored here.  There are two possible `CI Header Flags` and they are both set here. `CI_HAS_ANCHOR_RECORD` shows that prefix compression has been used and `CI_HAS_DICTIONARY` shows that dictionary compression has been used.
 
-![](compressionInfo_Page-1.jpg)
+![Page record with page compression, highlighting compression information.](compressionInfo_Page.jpg)
 
 If I scroll down a little further, I’ll come to the first row. The record is now only 24 bytes and you can see that a lot of the data has been replaced. The values `Alex`, `Young` and `Akron` all now reside in the compression information and this record just contains pointers.
 
-![](DBCC_PAGE_RECORD_PAGE.jpg)
+![Page record with page compression, showing the data as pointers.](DBCC_PAGE_RECORD_PAGE.jpg)
 
 ## Summary
 
