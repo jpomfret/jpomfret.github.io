@@ -1,5 +1,7 @@
 ---
 title: "dbatools with Bert"
+description: "Joining Bert on his YouTube show to talk all about dbatools and give him some tips."
+slug: "dbatools-with-bert"
 date: "2019-02-05"
 categories:
   - "dbatools"
@@ -7,12 +9,11 @@ categories:
 tags:
   - "dbatools"
   - "powershell"
-draft: true
 ---
 
 This weekend, while I was having a great time at SQL Saturday Cleveland, I ran into my friend Bert ([b](https://bertwagner.com/)|[t](https://twitter.com/bertwagner)). He had some dbatools questions, which I was happy to help him with.  Now that dbatools has over 500 commands, it is both awesome and terrifying.  Bert wanted to know how to automate his database backups and then check he was using the correct recovery model.
 
-<!-- TODO youtube video timeout? {{< youtube id="9Zk3R7_Pr-U" title="Automating Database Maintenance with Jess Pomfret and dbatools" >}} -->
+{{< youtube id="9Zk3R7_Pr-U" title="Automating Database Maintenance with Jess Pomfret and dbatools" >}}
 
 ## Backup your databases
 
@@ -24,7 +25,7 @@ First, we backed up all the databases on his instance:
 Backup-DbaDatabase -SqlInstance localhost\sql2017
 ```
 
-![](Backup-DbaDatabase-2.gif)
+![dbatools backing up all the databases on a instance](Backup-DbaDatabase-2.gif)
 
 We then looked at specifying a specific database to backup:
 
@@ -32,30 +33,34 @@ We then looked at specifying a specific database to backup:
 Backup-DbaDatabase -SqlInstance localhost\sql2017 -Database ApplicationDatabase
 ```
 
-![](Backup-DbaDatabase_Database-1.gif)
+![dbatools backing up a single database](Backup-DbaDatabase_Database-1.gif)
 
 This command will backup to the default backup location for your instance. If you want to override that you can use the `BackupDirectory` parameter:
 
 ```PowerShell
-Backup-DbaDatabase `
--SqlInstance localhost `
--Database ApplicationDatabase `
--BackupDirectory C:\backups\
+$backup = @{
+  SqlInstance     = 'localhost'
+  Database        = 'ApplicationDatabase'
+  BackupDirectory = 'C:\backups\'
+}
+Backup-DbaDatabase @backup
 ```
 
-![](Backup-DbaDatabase_BackupDir.gif)
+![Specify a different path to backup to](Backup-DbaDatabase_BackupDir.gif)
 
 The final options we looked at were two switches: `CompressBackup,`which will make use of backup compression, and `CopyOnly,` which will leave your LSN chain intact by taking a copy only backup.
 
 ```PowerShell
-Backup-DbaDatabase `
--SqlInstance localhost `
--Database ApplicationDatabase `
--CompressBackup `
--CopyOnly
+$backup = @{
+  SqlInstance     = 'localhost'
+  Database        = 'ApplicationDatabase'
+  CompressBackup  = $true
+  CopyOnly        = $true
+}
+Backup-DbaDatabase @backup
 ```
 
-![](Backup-DbaDatabase_Switches.gif)
+![Using switches - Compress & CopyOnly](Backup-DbaDatabase_Switches.gif)
 
 Once we had Bert’s databases all backed up and safe he realized he also needed to make sure the database recovery model was set correctly.
 
@@ -64,17 +69,19 @@ Once we had Bert’s databases all backed up and safe he realized he also needed
 Bert wanted to make sure he was using the Full recovery model for his databases. We went about finding any that were in Simple with the following:
 
 ```PowerShell
-Get-DbaDbRecoveryModel -SqlInstance localhost -RecoveryModel Simple﻿
+Get-DbaDbRecoveryModel -SqlInstance localhost -RecoveryModel Simple
 ```
 
-![](Get-DbaDbRecoveryModel.gif)
+![Get a list of database recovery models](Get-DbaDbRecoveryModel.gif)
 
 We also talked about running this command against multiple instances, either by using a central management server or from a text file:
 
 ```PowerShell
-Get-DbaDbRecoveryModel `
--SqlInstance $(Get-Content C:\servers.txt) `
--RecoveryModel Simple﻿
+$model = @{
+  SqlInstance   = $(Get-Content C:\servers.txt)
+  RecoveryModel = 'Simple'
+}
+Get-DbaDbRecoveryModel @model
 ```
 
 We found some databases in the simple recovery model that we wanted to change. This can easily be accomplished by piping the output of our get command into the set command:
@@ -84,7 +91,7 @@ Get-DbaDbRecoveryModel -SqlInstance localhost -RecoveryModel Simple |
 Set-DbaDbRecoveryModel -RecoveryMode Full
 ```
 
-![](Get-DbaDbRecoveryModel_Set.gif)
+![Change the recovery model](Get-DbaDbRecoveryModel_Set.gif)
 
 ## Search dbatools Commands
 
@@ -93,10 +100,10 @@ The final tip I had for Bert was how to use `Find-DbaCommand` to help him find t
 A lot of the commands have tags, which is a good way to find anything relating to compression. For example:
 
 ```PowerShell
-Find-DbaCommand -Tag Compression﻿
+Find-DbaCommand -Tag Compression
 ```
 
-![](Find-DbaCommand_Compression.gif)
+![Finding compression commands](Find-DbaCommand_Compression.gif)
 
 You can also just specify keywords and the command will search for any reference of these within the inline command based help for all the commands.
 
@@ -104,7 +111,7 @@ You can also just specify keywords and the command will search for any reference
 Find-DbaCommand triggers
 ```
 
-![](Find-DbaCommand_Trigger-1.gif)
+![Finding commands that relate to triggers](Find-DbaCommand_Trigger-1.gif)
 
 ## Summary
 
