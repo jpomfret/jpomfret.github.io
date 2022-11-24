@@ -1,5 +1,7 @@
 ---
 title: "Keeping the demo gods at bay with Pester"
+description: "Making sure all my demos are ready for a presentation with pester tests."
+slug: "demo-gods-pester"
 date: "2020-03-10"
 categories:
   - "pester"
@@ -26,6 +28,7 @@ Last Wednesday I presented my ‘Life hacks: dbatools Edition’ session for the
 
 First things first, I test that I can import the dbatools module. I make sure I’m getting the version and the number of commands I expect. dbatools puts out new versions all the time, so I usually update this in the weeks leading up to my presentation as I’m practicing.
 
+```PowerShell
 Describe "Module is good to go" {
     Context "dbatools imports" {
         $null = Import-Module dbatools
@@ -41,9 +44,11 @@ Describe "Module is good to go" {
         }
     }
 }
+```
 
 My demo setup involves two containers running on my laptop. Because of that, I’m using the sa credential to connect and I’m setting some PSDefaultParameterValues so I don’t have to include the `$credential` in every function call. I can test all that is setup correctly like so.
 
+```PowerShell
 Describe "Credentials exist" {
     Context "Credential exists" {
         It "Credential is not null" {
@@ -58,16 +63,18 @@ Describe "Credentials exist" {
     Context "PSDefaultParameterValues are set" {
         $params = $PSDefaultParameterValues
         It "PSDefaultParameterValues contains expected values" {
-            $params.Keys -contains '\*:SqlCredential' | Should Be True
-            $params.Keys -contains '\*:SourceSqlCredential' | Should Be True
-            $params.Keys -contains '\*:DestinationCredential' | Should Be True
-            $params.Keys -contains '\*:DestinationSqlCredential' | Should Be True
+            $params.Keys -contains '*:SqlCredential' | Should Be True
+            $params.Keys -contains '*:SourceSqlCredential' | Should Be True
+            $params.Keys -contains '*:DestinationCredential' | Should Be True
+            $params.Keys -contains '*:DestinationSqlCredential' | Should Be True
         }
     }
 }
+```
 
 I then have a couple of simple checks to make sure I can connect to both my instances.
 
+```PowerShell
 Describe "Two instances are available" {
     Context "Two instances are up" {
         $mssql1 = Connect-DbaInstance -SqlInstance mssql1
@@ -82,9 +89,11 @@ Describe "Two instances are available" {
         }
     }
 }
+```
 
 I then make sure that my databases are set up as expected. I am using two databases on my mssql1 SQL Server instance, AdventureWorks2017 and DatabaseAdmin. I make sure each of those exist, are online, and that the compatibility level is set correctly. I also check that the indexes on the Employee table are set up as I expect since I use those in my demos.
 
+```PowerShell
 Describe "mssql1 databases are good" {
     Context "AdventureWorks2017 is good" {
         $db = Get-DbaDatabase -SqlInstance mssql1
@@ -122,9 +131,11 @@ Describe "mssql1 databases are good" {
         }
     }
 }
+```
 
 One of my demos shows the backup history for AdventureWorks, so I test that with Pester before I start to make sure there is history to show. Nothing worse than getting up to show a wonderful set of dbatools functions and nothing being returned because I haven’t actually taken any backups!
 
+```PowerShell
 Describe "Backups worked" {
     Context "AdventureWorks was backed up" {
         $instanceSplat = @{
@@ -135,21 +146,25 @@ Describe "Backups worked" {
         }
     }
 }
+```
 
 While I was writing my demos I came across issues where my PowerShell environment was set to x86 so I added a test for that to make sure it doesn’t happen again.
 
+```PowerShell
 Describe "Proc architecture is x64" {
     Context "Proc arch is good" {
-        It "env:processor\_architecture should be AMD64" {
-            $env:PROCESSOR\_ARCHITECTURE | Should Be "AMD64"
+        It "env:processor_architecture should be AMD64" {
+            $env:PROCESSOR_ARCHITECTURE | Should Be "AMD64"
         }
     }
 }
+```
 
 Finally, I check to see what’s running on my computer. Zoomit, everyone’s favourite screen zoom tool should be running, and we should make sure that Slack and Teams are not.
 
+```PowerShell
 Describe "Check what's running" {
-    $processes = Get-Process zoomit\*, teams, slack -ErrorAction SilentlyContinue
+    $processes = Get-Process zoomit*, teams, slack -ErrorAction SilentlyContinue
     Context "ZoomIt is running" {
         It "ZoomIt64 is running" {
             ($processes | Where-Object ProcessName -eq 'Zoomit64') | Should Not BeNullOrEmpty
@@ -162,6 +177,7 @@ Describe "Check what's running" {
         }
     }
 }
+```
 
 Now there are obviously ways that the demo gods can still strike, but using Pester to test your demos is a great way to try and tilt the odds in your favour.
 
@@ -169,67 +185,69 @@ You can view all the code, including the tests, for this presentation on my [Git
 
 Here's what the output looks like:
 
-Executing all tests in '.\\Tests\\demo.tests.ps1'
+```Text
+Executing all tests in '.\Tests\demo.tests.ps1'
 
-Executing script .\\Tests\\demo.tests.ps1
+Executing script .\Tests\demo.tests.ps1
 
   Describing Module is good to go
 
     Context dbatools imports
-      \[+\] Module was imported 1.59s
-      \[+\] Module version is 1.0.99 287ms
-      \[+\] Module should import 587 commands 162ms
+      [+] Module was imported 1.59s
+      [+] Module version is 1.0.99 287ms
+      [+] Module should import 587 commands 162ms
 
   Describing Credentials exist
 
     Context Credential exists
-      \[+\] Credential is not null 263ms
+      [+] Credential is not null 263ms
 
     Context username is sa
-      \[+\] Username is sa 83ms
+      [+] Username is sa 83ms
 
     Context PSDefaultParameterValues are set
-      \[+\] PSDefaultParameterValues contains expected values 80ms
+      [+] PSDefaultParameterValues contains expected values 80ms
 
   Describing Two instances are available
 
     Context Two instances are up
-      \[+\] mssql1 is available 592ms
-      \[+\] mssql2 is available 26ms
+      [+] mssql1 is available 592ms
+      [+] mssql2 is available 26ms
 
   Describing mssql1 databases are good
 
     Context AdventureWorks2017 is good
-      \[+\] AdventureWorks2017 is available 863ms
-      \[+\] AdventureWorks status is normal 32ms
-      \[+\] AdventureWorks Compat is 140 46ms
+      [+] AdventureWorks2017 is available 863ms
+      [+] AdventureWorks status is normal 32ms
+      [+] AdventureWorks Compat is 140 46ms
 
     Context Indexes are fixed on HumanResources.Employee (bug)
-      \[+\] There are now just two indexes 1.53s
-      \[+\] There should be no unique indexes 49ms
+      [+] There are now just two indexes 1.53s
+      [+] There should be no unique indexes 49ms
 
     Context DatabaseAdmin is good
-      \[+\] DatabaseAdmin is available 256ms
-      \[+\] DatabaseAdmin status is normal 15ms
-      \[+\] DatabaseAdmin Compat is 140 17ms
+      [+] DatabaseAdmin is available 256ms
+      [+] DatabaseAdmin status is normal 15ms
+      [+] DatabaseAdmin Compat is 140 17ms
 
   Describing Backups worked
 
     Context AdventureWorks was backed up
-      \[+\] AdventureWorks has backup history 627ms
+      [+] AdventureWorks has backup history 627ms
 
   Describing Proc architecture is x64
 
     Context Proc arch is good
-      \[+\] env:processor\_architecture should be AMD64 125ms
+      [+] env:processor_architecture should be AMD64 125ms
 
   Describing Check what's running
 
     Context ZoomIt is running
-      \[+\] ZoomIt64 is running 150ms
-      \[+\] Slack is not running 43ms
-      \[+\] Teams is not running 17ms
+      [+] ZoomIt64 is running 150ms
+      [+] Slack is not running 43ms
+      [+] Teams is not running 17ms
 Tests completed in 6.86s
 Tests Passed: 21, Failed: 0, Skipped: 0, Pending: 0, Inconclusive: 0
+```
 
 Good news, all passed and I'm ready to give my demos!
