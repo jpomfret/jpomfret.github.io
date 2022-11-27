@@ -1,5 +1,7 @@
 ---
 title: "Disable all Triggers on a Database"
+description: "PowerShell snippet to disable all triggers on a database."
+slug: "disable-all-triggers"
 date: "2019-08-19"
 categories:
   - "powershell"
@@ -26,10 +28,10 @@ Then we get to the actual work. Using the `$svr` object we can loop through all 
 ```PowerShell
 $database = ‘AdventureWorks2017’
 $svr = Connect-DbaInstance -SqlInstance server1
-$foreach ($tbl in $svr.databases\[$database\].Tables)
+$foreach ($tbl in $svr.databases[$database].Tables)
 {
     foreach ($tr in $($tbl.Triggers | Where-Object Isenabled)) {
-        $triggers += $tr | Select-Object @{l='SchemaName';e={$tbl.Schema}}, @{l='TableName';e={$tbl.name}}, @{l='TriggerName';e={$\_.name}}
+        $triggers += $tr | Select-Object @{l='SchemaName';e={$tbl.Schema}}, @{l='TableName';e={$tbl.name}}, @{l='TriggerName';e={$_.name}}
         $tr.isenabled = $FALSE
         $tr.alter()
     }
@@ -40,7 +42,7 @@ When you are ready to enable the triggers again you can use the following code. 
 
 ```PowerShell
 foreach($tr in $triggers) {
-    $trigger = $svr.Databases\[$database\].Tables\[$tr.TableName,$tr.SchemaName\].Triggers\[$tr.TriggerName\]
+    $trigger = $svr.Databases[$database].Tables[$tr.TableName,$tr.SchemaName].Triggers[$tr.TriggerName]
     $trigger.IsEnabled = $true
     $trigger.alter()
 }

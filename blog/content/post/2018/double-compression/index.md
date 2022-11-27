@@ -11,9 +11,6 @@ tags:
   - "dbatools"
 ---
 
-<!--
-TODO: table missing
--->
 
 I recently gave my [first usergroup presentation in Cleveland](http://jesspomfret.com/first-user-group-presentation-i-survived/), closely followed by my first SQL Saturday presentation in Columbus. My chosen topic was row store data compression and I had a few great questions that I plan on answering with blog posts. First up...
 
@@ -29,7 +26,14 @@ Now I'm not sure how to write a blog post without mentioning [dbatools](http://d
 
 The script I used to run through this experiment is available for you to test out on my [github](https://github.com/jpomfret/demos/blob/master/BlogExamples/01_DataCompressionPlusBackupCompression.ps1) and the results are below:
 
-\[table id=1 /\]
+Data Compression | Backup Compression| Backup Size (MB) |
+-----------------|-------------------|------------------|
+None             | No                | 612              |
+None             | Yes               | 130              |
+Row              | No                | 400              |
+Row              | Yes               | 120              |
+Page             | No                | 300              |
+Page             | Yes               | 122              |
 
 We can clearly see that using backup compression gives us a huge space savings.  On our database where none of the objects are compressed we get a 78% reduction in the size of the backup file. When all our objects are row compressed we get a 70% savings and even when all our objects are page compressed we still get a 60% reduction in size when we apply backup compression.
 
