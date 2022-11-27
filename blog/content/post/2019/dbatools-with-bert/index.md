@@ -26,7 +26,7 @@ First, we backed up all the databases on his instance:
 Backup-DbaDatabase -SqlInstance localhost\sql2017
 ```
 
-![dbatools backing up all the databases on a instance](Backup-DbaDatabase-2.gif)
+<!-- ![dbatools backing up all the databases on a instance](Backup-DbaDatabase-2.gif) -->
 
 We then looked at specifying a specific database to backup:
 
@@ -34,7 +34,7 @@ We then looked at specifying a specific database to backup:
 Backup-DbaDatabase -SqlInstance localhost\sql2017 -Database ApplicationDatabase
 ```
 
-![dbatools backing up a single database](Backup-DbaDatabase_Database-1.gif)
+<!-- ![dbatools backing up a single database](Backup-DbaDatabase_Database-1.gif) -->
 
 This command will backup to the default backup location for your instance. If you want to override that you can use the `BackupDirectory` parameter:
 
@@ -47,7 +47,7 @@ $backup = @{
 Backup-DbaDatabase @backup
 ```
 
-![Specify a different path to backup to](Backup-DbaDatabase_BackupDir.gif)
+<!-- ![Specify a different path to backup to](Backup-DbaDatabase_BackupDir.gif) -->
 
 The final options we looked at were two switches: `CompressBackup,`which will make use of backup compression, and `CopyOnly,` which will leave your LSN chain intact by taking a copy only backup.
 
@@ -61,7 +61,7 @@ $backup = @{
 Backup-DbaDatabase @backup
 ```
 
-![Using switches - Compress & CopyOnly](Backup-DbaDatabase_Switches.gif)
+<!-- ![Using switches - Compress & CopyOnly](Backup-DbaDatabase_Switches.gif) -->
 
 Once we had Bert’s databases all backed up and safe he realized he also needed to make sure the database recovery model was set correctly.
 
@@ -73,7 +73,7 @@ Bert wanted to make sure he was using the Full recovery model for his databases.
 Get-DbaDbRecoveryModel -SqlInstance localhost -RecoveryModel Simple
 ```
 
-![Get a list of database recovery models](Get-DbaDbRecoveryModel.gif)
+<!-- ![Get a list of database recovery models](Get-DbaDbRecoveryModel.gif) -->
 
 We also talked about running this command against multiple instances, either by using a central management server or from a text file:
 
@@ -92,7 +92,7 @@ Get-DbaDbRecoveryModel -SqlInstance localhost -RecoveryModel Simple |
 Set-DbaDbRecoveryModel -RecoveryMode Full
 ```
 
-![Change the recovery model](Get-DbaDbRecoveryModel_Set.gif)
+<!-- ![Change the recovery model](Get-DbaDbRecoveryModel_Set.gif) -->
 
 ## Search dbatools Commands
 
@@ -104,7 +104,7 @@ A lot of the commands have tags, which is a good way to find anything relating t
 Find-DbaCommand -Tag Compression
 ```
 
-![Finding compression commands](Find-DbaCommand_Compression.gif)
+<!-- ![Finding compression commands](Find-DbaCommand_Compression.gif) -->
 
 You can also just specify keywords and the command will search for any reference of these within the inline command based help for all the commands.
 
@@ -112,7 +112,7 @@ You can also just specify keywords and the command will search for any reference
 Find-DbaCommand triggers
 ```
 
-![Finding commands that relate to triggers](Find-DbaCommand_Trigger-1.gif)
+<!-- ![Finding commands that relate to triggers](Find-DbaCommand_Trigger-1.gif) -->
 
 ## Summary
 
