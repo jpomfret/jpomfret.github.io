@@ -1,5 +1,7 @@
 ---
 title: "Desired State Configuration: Resources"
+description: "Resources are the building blocks of our configurations, lets look at what they're all about."
+slug: "dsc-resources"
 date: "2019-04-08"
 categories:
   - "dsc"
@@ -21,7 +23,7 @@ To find existing resources we have a few options. We could navigate to the [Powe
 Find-Module -Tag DSC
 ```
 
-![](Find-Modules.jpg)
+![Find DSC resources on the PowerShell gallery](Find-Modules.jpg)
 
 Our second option using PowerShell is to use `Find-DscResource`. This cmdlet finds specific resources that are contained in modules. Running a count against that right now (4/1/2019) would return 1,413 resources that are available to configure our environment. Using the `-Filter` parameter you can search for a keyword throughout the names, descriptions and tags of all these resources.
 
@@ -29,7 +31,7 @@ Our second option using PowerShell is to use `Find-DscResource`. This cmdlet fin
 
 If you find a DSC Resource you want to use in your configurations, for example to install SQL Server we will want to use SqlSetup from the SqlServerDsc module, you can install the module as you would a regular PowerShell module. For example, using `Install-Module`.
 
-![](Install-Module.jpg)
+![Install modules to use the DSC resources](Install-Module.jpg)
 
 Once the module is installed you can use these resources in your configurations. One thing to remember is the resources need to be available on both your authoring station and your target node.
 
