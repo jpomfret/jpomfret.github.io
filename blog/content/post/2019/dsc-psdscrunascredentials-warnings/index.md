@@ -1,5 +1,7 @@
 ---
 title: "Desired State Configuration: A few warnings when using PSDscRunAsCredentials"
+description: "A few things to keep in mind when you're working with PSDscRunAsCredentials"
+slug: "dsc-psdscrunascredentials-warnings"
 date: "2019-09-04"
 categories:
   - "dsc"
@@ -45,7 +47,7 @@ When you use credentials in your configurations there are a couple of gotchas- w
 
 Although it feels like you are handling the credential securely, when you run the code above you will get an error explaining that storing passwords in plain text is a bad idea.
 
-[![Converting and storing encrypted passwords as plain text is not recommended.](01_PlainTextPasswords.jpg)]
+![Converting and storing encrypted passwords as plain text is not recommended.](01_PlainTextPasswords.jpg)
 
 When you run your configuration, `DtcServiceRunning` in my example, a MOF file is generated and with our current setup the passwords will be stored in plain text (you can read more about generating [MOF files here](https://jesspomfret.com/dsc-mof-files/)).
 
@@ -66,7 +68,7 @@ DtcServiceRunning -Output .\\Output\\ -ConfigurationData $configData
 
 Once we run this we’ll see our MOF file has been successfully generated.
 
-![](02_moffile.jpg)
+![Our MOF file has been created](02_moffile.jpg)
 
 ### Warning 2: Changing the password used in a MOF file
 
@@ -76,9 +78,9 @@ You can run a couple of commands to check your current configuration that compar
 
 If the password you used for the `PsDscRunAsCredentials` property has changed since the MOF file was enacted you’ll get the following errors when you try and run `Get-DscConfiguration` or `Test-DscConfiguration`.
 
-[![The user name or password is incorrect.](04_testFailed.jpg)](https://jesspomfret.com/wp-content/uploads/2019/09/04_testFailed.jpg)
+![The user name or password is incorrect.](04_testFailed.jpg)
 
-[![The user name or password is incorrect.](05_getfailed.jpg)](https://jesspomfret.com/wp-content/uploads/2019/09/05_getfailed.jpg)
+![The user name or password is incorrect.](05_getfailed.jpg)
 
 ```text
 The user name or password is incorrect.
@@ -86,10 +88,10 @@ The user name or password is incorrect.
 
 To fix this you must rerun your configuration, which will in turn generate a new MOF file that contains the new password. Once this MOF file has been generated you’ll push it out to your target node.
 
-![Start-DscConfiguration](05_startDscConfiguration.jpg)
+![Start-DscConfiguration to push the configuration out to the node](05_startDscConfiguration.jpg)
 
 Now that the MOF file contains the new password you are able to check in on your current configuration again.
 
-![Test-DscConfiguration](06_test.jpg)
+![Test-DscConfiguration to check on the current configuration.](06_test.jpg)
 
 This wasn’t something I thought about before I used `PsDscRunAsCredential` on all the resources in my configuration.  A while later I went to check on my target nodes and realized I couldn’t without pushing out a new MOF file. After some discussion in the DSC Slack channel around this, the recommended approach is to only use `PsDscRunAsCredential` if necessary, and to be aware of the requirement to generate a new MOF file once you change the password.
