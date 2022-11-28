@@ -1,5 +1,7 @@
 ---
 title: "Desired State Configuration: Local Configuration Manager"
+description: "How to check on the current settings of the Local Configuration Manager, and then set change some of those settings."
+slug: "dsc-lcm"
 date: "2019-03-25"
 categories:
   - "dsc"
@@ -20,7 +22,14 @@ The LCM on each target node has many settings that can be configured using a met
 
 As mentioned we are going to look at a subset of LCM settings. A full list is available at books online “[Configuring the Local Configuration Manager](https://docs.microsoft.com/en-us/powershell/dsc/managing-nodes/metaconfig)”.
 
-\[table id=6 /\]
+Setting | Definition|
+--------|-----------|
+ActionAfterReboot | What should happen after a reboot. ContinueConfiguration or StopConfiguration.|
+CertificateID | Thumbprint of the certificate used to encrypt the MOF file. If this isn’t used passwords are stored in | plain text in the MOF.
+ConfigurationMode | What the LCM does with the configuration document. This setting can be used to automatically keep your | node in the desired state. ApplyOnly, ApplyAndMonitor or ApplyAndAutoCorrect.
+ConfigurationModeFrequencyMins | How often should the LCM check configurations and apply them. If the ConfigurationMode is | ApplyOnly this is ignored.
+RebootNodeIfNeeded | If during the configuration a reboot is required should the node automatically reboot.|
+RefreshMode | Does the LCM passively wait for configurations to be pushed to it (push), or actively check in with the pull | server for new configurations (pull).
 
 ## Configure the LCM
 
@@ -30,7 +39,7 @@ We are going to change a couple of the LCM settings by writing a meta configurat
 Get-DscLocalConfigurationManager -CimSession dscsvr2
 ```
 
-![](get_before.jpg)
+![View the LCM Settings](get_before.jpg)
 
 We are going to change two settings in this example. First, I’m going to change the ConfigurationModeFrequencyMins to 20 minutes, instead of the default of 15.  Secondly, I will change the RebootNodeIfNeeded to true. This means if I push out a configuration that requires a reboot my node will automatically reboot.
 
@@ -55,7 +64,7 @@ I’ll then execute the `LCMConfig` configuration to generate a meta MOF file. Y
 LCMConfig -Output .\output\
 ```
 
-![](CreateMetaMof.jpg)
+![Create a meta MOF file](CreateMetaMof.jpg)
 
 We will then enact this configuration using `Set-DscLocalConfigurationManager`:
 
@@ -63,7 +72,7 @@ We will then enact this configuration using `Set-DscLocalConfigurationManager`:
 Set-DscLocalConfigurationManager -Path .\output\ -ComputerName dscsvr2 -Verbose
 ```
 
-![](set-DscLcm.jpg)
+![Configure the LCM](set-DscLcm.jpg)
 
 Once this is complete we can check our settings using the following:
 
@@ -72,7 +81,7 @@ Get-DscLocalConfigurationManager -CimSession dscsvr2  |
 Select-Object ConfigurationModeFrequencyMins, RebootNodeIfNeeded
 ```
 
-![](get_after.jpg)
+![Check the LCM settings](get_after.jpg)
 
 Now our LCM is in our defined desired state and we are ready to push out a configuration to set the desired state of our server.
 

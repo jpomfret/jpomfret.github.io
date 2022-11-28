@@ -1,5 +1,7 @@
 ---
 title: "Desired State Configuration: MOF Files"
+description: "What happens once we're written our configurartion. MOF files happen!"
+slug: "dsc-mof-files"
 date: "2019-03-18"
 categories:
   - "dsc"
@@ -38,9 +40,7 @@ When I run this script I see the output in the screenshot below, a MOF file has 
 
 The LCM will be covered in more detail in a later post, but for now know that it can be configured to be in either ‘Push’ mode or ‘Pull’ mode.  Pull mode is more complicated to set up but perhaps more appropriate for managing a large number of servers.  For now, we will look at the ‘Push’ mode where we will deliver the MOF manually to the target node for the LCM to enact.
 
-![](CreateSqlFoldersMOF.jpg)
-
-Executing configuration to create a MOF file for target node.
+![Executing configuration to create a MOF file for target node](CreateSqlFoldersMOF.jpg)
 
 ## Publish a MOF File
 
@@ -50,7 +50,7 @@ To get the MOF from my authoring station out to the target node I have a couple 
 Start-DscConfiguration -Path .\output\ -ComputerName dscsvr2 -Wait -Verbose
 ```
 
-[![](startDscConfiguration.png)](https://jesspomfret.com/wp-content/uploads/2019/03/startDscConfiguration.png)
+![Push out the MOF and enact the configuration](startDscConfiguration.png)
 
 If we want to push out the configuration but not immediately enact it we can use `Publish-DscConfiguration`. I again used the `-Verbose` switch to return output:
 
@@ -58,7 +58,7 @@ If we want to push out the configuration but not immediately enact it we can use
 Publish-DscConfiguration -Path .\output\ -ComputerName dscsvr2 -Verbose
 ```
 
-[![](publishDscConfiguration.png)](https://jesspomfret.com/wp-content/uploads/2019/03/publishDscConfiguration.png)
+![Just push out the MOF with Publish-DscConfiguration](publishDscConfiguration.png)
 
 You can see this in this screenshot it says ‘Configuration document successfully saved to pending state’, letting us know this is now ready for the LCM to enact. We can confirm our `PendingConfiguration` by running the following:
 
@@ -66,11 +66,11 @@ You can see this in this screenshot it says ‘Configuration document successful
 Get-DscLocalConfigurationManager -CimSession dscsvr2 | Select LCMState
 ```
 
-[![](getDscConfiguration.png)](https://jesspomfret.com/wp-content/uploads/2019/03/getDscConfiguration.png)
+![Get the LCM state](getDscConfiguration.png)
 
 To enact the pending configuration we would again use `Start-DscConfiguration`, only this time instead of specifying a path we’d add the `-UseExisting` switch.
 
-[![](startDscConfiguration_useexisting.png)](https://jesspomfret.com/wp-content/uploads/2019/03/startDscConfiguration_useexisting.png)
+![Enact the pending configuration](startDscConfiguration_useexisting.png)
 
 It is important to note that if the LCM settings are currently set to the defaults this configuration will be automatically applied when the next consistency check runs within 15 mins.
 
