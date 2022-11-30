@@ -1,5 +1,7 @@
 ---
 title: "Getting OS and SQL Version information with dbatools"
+description: "One of my favourite posts - use dbatools and ImportExcel to get an overview of what versions you have in your estate."
+slug: "getting-versions"
 date: "2019-05-30"
 categories:
   - "dbatools"
@@ -16,7 +18,9 @@ With these dates on the horizon it’s a good time to look at our estate and mak
 
 First things first, I need an object that contains our servers.  At my work we use a central management server to keep track of servers, but you could just as easily pull server names in from a text file, or a database.
 
+```PowerShell
 $servers = Get-DbaCmsRegServer -SqlInstance CmsServerName
+```
 
 Let’s first look at what operating systems we are running. The dbatools function we need for this is `Get-DbaOperatingSystem`. I’ll use the name property of my `$servers` object to get the OS information for all my servers and save it to a variable.
 
@@ -36,16 +40,18 @@ Select-Object Name, Count, @{l='Servers';e={$\_.Group.ComputerName -Replace '.do
 
 I have used the -Replace option in my `Select-Object` to remove the domain name from the output and instead only return the server name.
 
-[![](os-2.jpg)](https://jesspomfret.com/wp-content/uploads/2019/05/os-2.jpg)
+![Using Group-Object to count number of OS Version installations](os-2.jpg)
 
 We can do the same with `Get-DbaProductKey` to get the SQL version information.
 
+```PowerShell
 $sql = Get-DbaProductKey -ComputerName $servers.name
 $sql | Group-Object Version |
 Sort-Object Name  |
 Select Name, Count, @{l='Servers';e={$\_.Group.SqlInstance -join ','}}
+```
 
-[![](sql.jpg)](https://jesspomfret.com/wp-content/uploads/2019/05/sql.jpg)
+![Using Group-Object to count number of SQL Version installations](sql.jpg)
 
 With just 5 lines of code we can review our entire estate and make sure we know what we have nearing the end of support. This is pretty useful information, and also a good thing to export into a pretty spreadsheet and share with your team or management. Enter [ImportExcel](https://github.com/dfinke/ImportExcel).
 
@@ -55,12 +61,22 @@ The full code is below. We’ve already done the work of gathering our data so i
 
 I’ve separated out the properties I want to select and will therefore end up in my spreadsheet. I’ve also used [splatting](https://dbatools.io/splat/) to make the call to `Export-Excel` easier to read.
 
-<script src="https://gist.github.com/jpomfret/3e3449146f0d72fba9654ac09472cc0f.js"></script>
+{{< gist jpomfret 3e3449146f0d72fba9654ac09472cc0f >}}
 
 The important part of this script is the parameters used for the `Export-Excel` call so I’ll go through them here:
 
-\[table id=7 /\]
+Parameter Name    | Value | Comments
+---------------   |--|--|
+Path              | $excelFile           | The path to export the resulting Excel file to.
+WorksheetName     | ‘OSVersions’         | The name for the worksheet that will contain the data. If the excel file already exists but the worksheet name does not this will be added to that document.
+AutoSize          | $True                | Adjusts the width of the columns in your worksheet to the right size for your data.
+TableName         | ‘OSVersions’         | Makes your result set into a table within your worksheet and names it.
+IncludePivotTable | $True                | Adds a second worksheet with a pivot table of your data.
+PivotRows         | 'OSVersions'         | The property of your data that will provide the rows for your pivot table.
+PivotData         | @{OSVersion='Count'} | Fields to use in the body of your pivot table (in this example we are doing a simple count of the data).
+IncludePivotChart | $True                | Add the chart with our pivot table.
+ChartType         | ‘ColumnClustered’    | Define the kind of chart you want to display.
 
-![](ExcelOutput-1024x669.jpg)
+![Our final output - a beautiful excel pivot chart](ExcelOutput.jpg)
 
 There you have it, a simple script to get the current OS and SQL versions you are running with a good looking Excel sheet as the output. Hope you don’t find too many instances out there nearing the end of support.
