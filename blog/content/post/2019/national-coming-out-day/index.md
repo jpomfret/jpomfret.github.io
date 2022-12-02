@@ -1,5 +1,7 @@
 ---
 title: "National Coming Out Day"
+description: "A post about why National Coming Out Day matters."
+blog: "national-coming-out-day"
 date: "2019-10-11"
 categories:
   - "personal"
@@ -7,12 +9,13 @@ tags:
   - "diversity"
   - "lgbt"
   - "personal"
+image: alexander-grey-MIb2S5z8VJo-unsplash.jpg
 ---
 
 Today, October 11th is National Coming Out Day in the United States. This (2019) will be the 31st anniversary of its founding by Robert Eichberg and Jean O'Leary. The idea was to raise awareness and support for the LGBT community. [If you know someone who identifies as LGBT you are more likely to support equal rights](https://www.hrc.org/resources/national-coming-out-day).
 
 > Most people think they don't know anyone gay or lesbian, and in fact, everybody does. It is imperative that we come out and let people know who we are and disabuse them of their fears and stereotypes.
-> – Robert Eichberg, in 1993[\[3\]](https://www.nytimes.com/1995/08/15/obituaries/robert-eichberg-50-gay-rights-leader.html)_
+> – Robert Eichberg, in 1993[[3]](https://www.nytimes.com/1995/08/15/obituaries/robert-eichberg-50-gay-rights-leader.html)
 
 When I first heard about National Coming Out Day I was in college and I didn’t really get it. Why did we need a day to celebrate coming out? Can’t people just do it when they’re ready, or not? Shout out to the [#tsql2sday](http://workingwithdevs.com/tsql2sday-119-changing-your-mind/) prompt from this month, which was about changing your opinion on something - I’ve changed my mind on this too.
 

@@ -1,5 +1,7 @@
 ---
 title: "Execution of Multiple Triggers on one Table"
+description: "A test to see what happens when there are multiple triggers on a table."
+slug: "multiple-triggers"
 date: "2019-05-08"
 categories:
   - "triggers"
