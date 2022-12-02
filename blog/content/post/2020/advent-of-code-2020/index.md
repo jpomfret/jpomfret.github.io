@@ -23,14 +23,14 @@ My goal was to gain more stars than last year, which I succeeded at. I only got 
 A lot of the puzzles involve iterating over an object and manipulating it. I depended on a lot of loops for this. My day 1, part 1 solution is below.  You can see I nested two loops to iterate over the array and calculate the total. Without the named loops this worked – it just didn’t stop when it found the correct answer and I got duplicates.  By naming the outer loop with `:expenses` you can then break all the way out of that loop with `break expenses`.  Pretty useful!
 
 ```PowerShell
-$expenses = Get-Content .\\Day01\\Input.txt
+$expenses = Get-Content .\Day01\Input.txt
 
 # Part 1 - 514579
 :expenses
 foreach ($e in $expenses) {
     foreach ($f in $expenses) {
-        if (\[int\]$e + \[int\]$f -eq 2020) {
-            ("Part 1 answer: {0}" -f (\[int\]$e \* \[int\]$f))
+        if ([int]$e + [int]$f -eq 2020) {
+            ("Part 1 answer: {0}" -f ([int]$e \* [int]$f))
             break expenses
         }
     }
@@ -74,4 +74,4 @@ That’s ok though. Although it’s definitely a gap in knowledge when it comes 
 
 Saying that, I am interested in learning more about these topics. I love a puzzle and the Advent of Code is a great way to finish the year with some challenges and learning.
 
-If you're interested in my efforts, all of my code is on [Github](https://github.com/jpomfret/AdventOfCode2020).
+If you're interested in my efforts, all of my code is on [Github](https://github.com/jpomfret/AdventOfCode).

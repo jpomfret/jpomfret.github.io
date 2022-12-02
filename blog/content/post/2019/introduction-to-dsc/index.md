@@ -1,5 +1,7 @@
 ---
 title: "Introduction to Desired State Configuration"
+description: "A guide to get you started with DSC."
+slug: "introduction-to-dsc"
 date: "2019-02-26"
 categories:
   - "dsc"
@@ -42,11 +44,24 @@ Resources are one of the central building blocks in DSC. Each resource contains 
 
 There are currently 22 resources available within the built in PSDesiredStateConfiguration module. The table below contains the descriptions of a few, for a full list you can review the [Microsoft docs](https://docs.microsoft.com/en-us/powershell/dsc/reference/resources/windows/builtinresource).
 
-\[table id=2 /\]
+Resource        | Short Description
+----------------|--------------------
+File            | Resource to manage files and folders
+Group           | Resource to manage local groups
+Registry        | Resource to manage registry keys and values
+Service         | Resource to manage Windows services
+Windows Feature | Resource to manage Windows features
 
 On top of these built in resources are hundreds more that have been developed by Microsoft, or by the community. They come packaged just like modules and most can be installed directly from the [PowerShell Gallery](https://www.powershellgallery.com/packages?q=DSC)), some examples are:
 
-\[table id=5 /\]
+DSC Module        | Short Description
+------------------| -------------------
+CertificateDsc    | Certificate administration on a Windows Server
+NetworkingDsc     | Manage server networking, IP addresses, Firewall Rules
+OctopusDsc        | Install and deploy Octopus tentacles
+SharePointDsc     | Deploy and manage a SharePoint farm
+SqlServerDsc      | Deploy and configure SQL Server
+VMware.vSphereDSC | Manage vCenter and ESXi settings
 
 As you can see DSC can be used to configure a wide variety of components. We can collect resources from several modules and then combine them into one configuration document to describe our desired state.
 
