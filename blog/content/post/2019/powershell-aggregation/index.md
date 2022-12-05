@@ -1,5 +1,7 @@
 ---
 title: "Aggregating Data with PowerShell"
+description: "Using Group-Object to aggregate data with PowerShell."
+slug: "powershell-aggregation"
 date: "2019-07-26"
 categories:
   - "dbatools"
@@ -27,7 +29,7 @@ Select-Object Database, TypeDescription, Size |
 Group-Object TypeDescription
 ```
 
-![](Group.jpg)
+![Group the data with PowerShell's Group-Object](Group.jpg)
 
 Now that the data is grouped you can aggregate the size property for the files, which is within the `Group`.  We’ll add an expression to the final `Select-Object` which uses the `Measure-Object` to sum the sizes.
 
@@ -38,7 +40,7 @@ Group-Object TypeDescription |
 Select-Object Name, @{l='Size';e={($_.Group.Size.MegaByte | Measure-Object -Sum).Sum}}
 ```
 
-![](Final.jpg)
+![Adding Select-Object so we can get at the properties](Final.jpg)
 
 Another interesting note here is that since dbatools returns the Size as a special type, `Sqlcollaborative.Dbatools.Utility.Size`, you can specify that you want it to be returned in MBs.  If you have very small databases you might want to change that so you don’t lose accuracy with any rounding.
 

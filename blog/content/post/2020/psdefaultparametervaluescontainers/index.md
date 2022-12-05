@@ -1,5 +1,7 @@
 ---
 title: "Using PSDefaultParameterValues for connecting to SQL Server in containers"
+description: "Simplify connecting to containers with SQL logins by using PSDefaultParameterValues"
+slug: "psdefaultparametervaluescontainers"
 date: "2020-05-27"
 categories:
   - "powershell"
@@ -26,48 +28,64 @@ PSDefaultParameterValues does exactly what the name suggests- it lets you specif
 
 ### Option 1 – Add `-Verbose` to individual commands
 
+```PowerShell
 Get-DbaDbBackupHistory -SqlInstance mssql1 -Verbose
 Repair-DbaDbOrphanUser -SqlInstance mssql1 -Verbose
+```
 
 ### Option 2 – Set PSDefaultParameterValues
 
-$PSDefaultParameterValues = @{ '\*:Verbose' = $True }
+```PowerShell
+$PSDefaultParameterValues = @{ '*:Verbose' = $True }
 Get-DbaDbBackupHistory -SqlInstance mssql1
 Repair-DbaDbOrphanUser -SqlInstance mssql1
+```
 
 One thing to note when specifying PSDefaultParameterValues as I have above: this will overwrite any parameters you already have saved to PSDefaultParameterValues, so be careful. Another way to set `-Verbose` to true would be to use the following notation:
 
-$PSDefaultParameterValues\['\*:Verbose'\] = $True
+```PowerShell
+$PSDefaultParameterValues['*:Verbose'] = $True
+```
 
 ## Getting more specific
 
-In the above examples I’m using a wildcard (\*) on the left side to specify that this parameter is for all functions. You can also focus in PSDefaultParameterValues by specifying one certain function name that the parameter value will apply to:
+In the above examples I’m using a wildcard (*) on the left side to specify that this parameter is for all functions. You can also focus in PSDefaultParameterValues by specifying one certain function name that the parameter value will apply to:
 
-$PSDefaultParameterValues\['Get-DbaDbTable:Verbose'\] = $True
+```PowerShell
+$PSDefaultParameterValues['Get-DbaDbTable:Verbose'] = $True
+```
 
 You can also specify just the dbatools commands by taking advantage of their naming conventions and using:
 
-$PSDefaultParameterValues\['\*-Dba\*:Verbose'\] = $True
+```PowerShell
+$PSDefaultParameterValues['*-Dba*:Verbose'] = $True
+```
 
 ## PSDefaultParameterValues for connecting to containers
 
 As I mentioned, my use case was to avoid having to specify a credential for every function that connected to my SQL Server running in a container. To use this for dbatools I need to specify a few parameter names. Most dbatools functions take the credential for the `-SqlCredential` parameter, but for the copy commands there is both `-SourceSqlCredential` and `-DestinationCredential` that need to be specified.
 
-First, I create a `PSCredential` that contains my username and password (note: this is for a demo environment and is insecure as the password is in plain text. If you are using this for other scenarios you’ll want to protect this credential). 
+First, I create a `PSCredential` that contains my username and password (note: this is for a demo environment and is insecure as the password is in plain text. If you are using this for other scenarios you’ll want to protect this credential) 
 
+```PowerShell
 $securePassword = ('Password1234!' | ConvertTo-SecureString -asPlainText -Force)
 $credential = New-Object System.Management.Automation.PSCredential('sa', $securePassword)
+```
 
 Once I have the credential I can specify all the parameters that should use that credential by default:
 
-$PSDefaultParameterValues = @{"\*:SqlCredential"=$credential
-                              "\*:DestinationCredential"=$credential
-                              "\*:DestinationSqlCredential"=$credential
-                              "\*:SourceSqlCredential"=$credential}
+```PowerShell
+$PSDefaultParameterValues = @{"*:SqlCredential"=$credential
+                              "*:DestinationCredential"=$credential
+                              "*:DestinationSqlCredential"=$credential
+                              "*:SourceSqlCredential"=$credential}
+```
 
 Now whenever I call a function within this session, the specified parameters will use my credential. Therefore I can run the following and it’ll automatically use my saved sa login credential.
 
+```PowerShell
 Get-DbaDatabase -SqlInstance mssql1
+```
 
 ## PSDefaultParameterValues in your profile
 
@@ -79,7 +97,9 @@ One thing to note is that this might be overkill. In my situation this is my dem
 
 Even if you have set PSDefaultParameterValues in your profile you can still override that default value on any command just by specifying a new value. For example, running the following will pop up the credential request window for you to enter new credentials.
 
+```PowerShell
 Get-DbaDatabase -SqlInstance mssql1 -SqlCredential (Get-Credential)
+```
 
 ## Summary
 

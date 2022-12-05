@@ -1,5 +1,7 @@
 ---
 title: "PowerShell Comment Based Help: Examples with Multiple Lines of Code"
+description: "A tip for properly formatting multiple lines of code in your comment based help examples."
+slug: "powershell-cbh"
 date: "2019-05-16"
 categories:
   - "powershell"
@@ -32,7 +34,7 @@ Get-Cat -NumberOfCats $cats
 Store the number of cats in a variable and then get that number of cats.
 ```
 
-![](example_first.jpg)
+![View examples from the comment based help](example_first.jpg)
 
 You can see above the first example looks good, however in the second example the first two lines should both have a prompt to show they are code. I spent a little while Googling this without much avail. I then figured, somewhere within [dbatools](http://dbatools.io) there must be an example with two lines of code. Sure enough I found my answer, and it’s pretty straightforward. You just add the prompt to the code yourself and then when the example is displayed it is formatted properly.
 
@@ -51,8 +53,8 @@ PS C:\>Get-Cat -NumberOfCats $cats
 Store the number of cats in a variable and then get that number of cats.
 ```
 
-![](example_second.jpg)
+![Displaying multiple lines of code in an example.](example_second.jpg)
 
 I know you’re all dying to see the result of my `Get-Cat` function so here you go. If you need to add this to your PowerShell profile etc. so you can quickly brighten any day, the code is on my [github](https://github.com/jpomfret/demos/blob/master/BlogExamples/02_CommentBasedHelp_Examples.ps1).
 
-![](cats.jpg)
+![Result of my get cat function](cats.jpg)
