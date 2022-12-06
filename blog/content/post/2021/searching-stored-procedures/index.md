@@ -1,5 +1,7 @@
 ---
 title: "Searching Stored Procedures for a pattern made easy with dbatools"
+description: "Using dbatools to find patterns within your database code."
+slug: "searching-stored-procedures"
 date: "2021-05-25"
 categories:
   - "dbatools"
@@ -13,12 +15,14 @@ image: "matthew-ansley-8SjeH5pZbjw-unsplash.jpg"
 
 Well folks, after starting the year off on a strong foot it’s been a while since I’ve published any blog posts. Hope you didn’t miss me too much, but I’m back now and I’ve got a useful dbatools snippet for you today.  Last week at the day job I had a situation where I needed to find all stored procedures that referenced a certain string, across any database on a specific server.  This is a pretty trivial task in SSMS when you’re just talking about one database. For example, if we’re looking for any reference to ‘Person’ perhaps we could run this T-SQL within the context of the database:
 
+```sql
 select o.name, sc.text, o.type
 from sys.objects o
 inner join sys.syscomments sc
-	on sc.id = o.object\_id
+	on sc.id = o.object_id
 where text like '%Person%'
 and o.type = 'P' -- filtered for just stored procedures
+```
 
 You can see I’ve found one procedure in my TestDb that references the ‘Person’ table, so it has been returned.
 
@@ -32,15 +36,19 @@ The natural next step here when we’re thinking about handling multiple databas
 
 When we’re looking for the command we need within dbatools to fulfil our needs I cannot recommend `Find-DbaCommand` highly enough.  This command will search all other commands for the pattern you pass in.  Today we know we want to find references in stored procedures so let’s see if there is a command that will help.
 
-Find-DbaCommand \*stored\*proc\*
+```PowerShell
+Find-DbaCommand *stored*proc*
+```
 
-![Find-DbaCommand helping us to find what we need](findCommand-1024x368.jpg)
+![Find-DbaCommand helping us to find what we need](findCommand.jpg)
 
 Looks like `Get-DbaDbStoredProcedure` is what we need here.  Since this is our first time using this particular command I always have a quick look through the help content. I highly recommend running `Get-Help Get-DbaDbStoredProcedure -ShowWindow`, this will open a separate window from your console and allow you to keep that open to refer back to if needed.  The last section of the help gives us several examples on how to use this command- let’s run a simple one against a test database to see what we get. I’m also going to pipe the output to `Select-Object` so I can just sample the first 2 results.
 
+```PowerShell
 Get-DbaDbStoredProcedure -SqlInstance 'localhost,2500' -Database testDb | Select-Object -First 2
+```
 
-![Get-DbaDbStoredProcedure results](twoProcs-1024x539.jpg)
+![Get-DbaDbStoredProcedure results](twoProcs.jpg)
 
 This is handy, but this output doesn’t look like it’s going to help answer the question and find references of a string within the stored procedure code. There’s more than meets the eyes though.
 
@@ -48,7 +56,9 @@ This is handy, but this output doesn’t look like it’s going to help answer t
 
 dbatools deals mostly with SQL Server Management Objects (SMO), which means that what you see in the output for commands is not always all there is available.  SMO is a hierarchy of objects which can be easily traversed from the output of the commands.  You can tell that we’re dealing with SMO instead of standard PowerShell objects by using `Get-Member` and looking at the TypeName.
 
+```PowerShell
 Get-DbaDbStoredProcedure -SqlInstance 'localhost,2500' -Database testDb | Get-Member
+```
 
 ![using Get-Member to see what's available](getMember.jpg)
 
@@ -58,19 +68,23 @@ Get-DbaDbStoredProcedure -SqlInstance 'localhost,2500' -Database testDb | Get-Me
 
 Now that we know the `Get-DbaDbStoredProcedure` command is going to return SMO StoredProcedure objects we can look at some of the properties not returned by default.  We already saw one option for this- using `Get-Member` will list all the properties available to us.  Another option is to select all the properties for the first result.
 
-Get-DbaDbStoredProcedure -SqlInstance 'localhost,2500' -Database testDb | Select-Object -First 1 \*
+```PowerShell
+Get-DbaDbStoredProcedure -SqlInstance 'localhost,2500' -Database testDb | Select-Object -First 1 *
+```
 
-![Select all the properties from Get-DbaDbStoredProcedure](SelectAll-1024x315.png)
+![Select all the properties from Get-DbaDbStoredProcedure](SelectAll.png)
 
 In the output you can see there are a lot of properties available that weren’t returned by default, this includes `TextBody` which is what we need to search for our reference string.  All we need to do now is pipe the output of the command through to `Where-Object` to find what we need:
 
-Get-DbaDbStoredProcedure -SqlInstance 'localhost,2500' -ExcludeSystemSp | Where-Object TextBody -like '\*Person\*'
+```PowerShell
+Get-DbaDbStoredProcedure -SqlInstance 'localhost,2500' -ExcludeSystemSp | Where-Object TextBody -like '*Person*'
+```
 
 You’ll notice two more changes to the code above. I dropped the `Database` parameter, opening the search up to the whole server. I also added `ExcludeSystemSp`, which means I’m only interested in user defined stored procedures. It is important to note if you have a lot of stored procedures this command could take a little while to run.
 
-![search the TextBody for key words](SearchAllSPs-1024x237.jpg)
+![search the TextBody for key words](SearchAllSPs.jpg)
 
-PowerShell also supports other [comparison operators](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.1) by default, including \`match\` which can be used to find regex patterns within your procedures.  This opens up a lot more possibilities when looking for more complicated patterns within your database.
+PowerShell also supports other [comparison operators](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.1) by default, including `match` which can be used to find regex patterns within your procedures.  This opens up a lot more possibilities when looking for more complicated patterns within your database.
 
 ## So many more options…
 
