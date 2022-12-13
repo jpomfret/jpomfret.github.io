@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting SPN Troubles - Cannot generate SSPI context"
-description: ""
+description: "Working through some issues with duplicate SPNs - using dbatools and setspn"
 slug: "spn-troubles"
 date: "2021-02-16"
 categories:
