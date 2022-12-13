@@ -1,5 +1,7 @@
 ---
 title: "Troubleshooting SPN Troubles - Cannot generate SSPI context"
+description: ""
+slug: "spn-troubles"
 date: "2021-02-16"
 categories:
   - "dbatools"
@@ -18,6 +20,7 @@ I was working in my lab environment this weekend, playing with some SQL Servers 
 
 First off, I created two new Active Directory users that I’ll use for my service accounts. The below code will create a prompt for each account for the password to be entered.
 
+```PowerShell
 $engSvcAccount = 'svc-dscsvr1-eng2'
 $agSvcAccount  = 'svc-dscsvr1-ag2'
 
@@ -32,43 +35,53 @@ New-AdUser @EngSvcAccount
 
 $AgentSvcAccount = @{
     Name                 = $agSvcAccount
-    UserPrincipalName 	 = $agSvcAccount
-    AccountPassword  	 = (Get-Credential -Credential EnterPassword).Password
+    UserPrincipalName    = $agSvcAccount
+    AccountPassword      = (Get-Credential -Credential EnterPassword).Password
     PasswordNeverExpires = $true
     Enabled              = $true
 }
 New-AdUser @AgentSvcAccount
+```
 
 We can view the current SQL services with `Get-DbaService`. This is useful to see what account they are currently running under, as well as the service names.
 
+```PowerShell
 Get-DbaService -ComputerName dscsvr1 | Format-Table
+```
 
-[![](GetDbaService.jpg)](https://jesspomfret.com/wp-content/uploads/2021/02/GetDbaService.jpg)
+![View the current SQL Services](GetDbaService.jpg)
 
 There is also a command for updating service accounts in dbatools. I will note, sometimes I have issues with the command being able to update the accounts and I’m not sure why. It worked perfectly in this scenario though running the following.
 
 This again creates a prompt to enter the service account password, before setting the service 'StartName'.
 
-Update-DbaServiceAccount -ComputerName dscsvr1 -ServiceName MSSQLSERVER -ServiceCredential (Get-Credential -Credential "Pomfret\\$engSvcAccount" )
-Update-DbaServiceAccount -ComputerName dscsvr1 -ServiceName SQLSERVERAGENT -ServiceCredential (Get-Credential -Credential "Pomfret\\$agSvcAccount" )
+```PowerShell
+Update-DbaServiceAccount -ComputerName dscsvr1 -ServiceName MSSQLSERVER -ServiceCredential (Get-Credential -Credential "Pomfret\$engSvcAccount" )
+Update-DbaServiceAccount -ComputerName dscsvr1 -ServiceName SQLSERVERAGENT -ServiceCredential (Get-Credential -Credential "Pomfret\$agSvcAccount" )
+```
 
-[![](UpdateDbaServiceAccount.png)](https://jesspomfret.com/wp-content/uploads/2021/02/UpdateDbaServiceAccount.png)
+![Update the service account](UpdateDbaServiceAccount.png)
 
 If I rerun `Get-DbaService` I can see all looks good. `StartName` shows my new accounts and the services for both engine and agent are running.
 
 Get-DbaService -ComputerName dscsvr1 | Format-Table
 
-[![](GetDbaService_post.jpg)](https://jesspomfret.com/wp-content/uploads/2021/02/GetDbaService_post.jpg)
+![View the SQL Services after the change](GetDbaService_post.jpg)
 
 ## The Issue
 
 At this point I was still planning on writing a blog post on a totally different topic. I ran the following to determine what databases I already had on dscsvr1:
 
+```PowerShell
 Get-DbaDatabase -SqlInstance dscsvr1 -ExcludeSystem | Format-Table
+```
 
 But instead of getting a quick answer to my question, I just got the following error:
 
-_WARNING: \[15:19:49\]\[Get-DbaDatabase\] Error occurred while establishing connection to dscsvr1 | The target principal name is incorrect. Cannot generate SSPI context._
+```text
+WARNING: [15:19:49][Get-DbaDatabase] Error occurred while establishing connection to dscsvr1 |
+The target principal name is incorrect. Cannot generate SSPI context.
+```
 
 I checked a few things as I started troubleshooting:
 
@@ -83,9 +96,11 @@ What I do know is that due to permissions, the SPNs needed were not able to be r
 
 `Test-DbaSpn` works out exactly what SPNs are needed for our SQL instances and determines if they are in place.
 
+```PowerShell
 Test-DbaSpn -ComputerName dscsvr1 | Format-Table
+```
 
-[![](Test-DbaSpn.jpg)](https://jesspomfret.com/wp-content/uploads/2021/02/Test-DbaSpn.jpg)
+![Use Test-DbaSpn to check which SPNs are needed](Test-DbaSpn.jpg)
 
 This shows we should have two SPNs set for the default instance (MSSQLSERVER) on DscSvr1.  The ‘IsSet’ column shows they aren’t set – and this is why we can’t connect to our instance remotely.
 
@@ -93,9 +108,11 @@ This shows we should have two SPNs set for the default instance (MSSQLSERVER) on
 
 The fix for this issue seems simple- register the required SPNs.  dbatools again tries to make this as easy as possible for us. We can take the output from `Test-DbaSpn` and pipe it straight into `Set-DbaSpn` and dbatools will take care of the rest – won’t it?
 
+```PowerShell
 Test-DbaSpn -ComputerName dscsvr1 | Set-DbaSpn
+```
 
-[![](FailedToSetSPN.jpg)](https://jesspomfret.com/wp-content/uploads/2021/02/FailedToSetSPN.jpg)
+![Errors occuring while trying to set SPNs](FailedToSetSPN.jpg)
 
 As you can see from the warning message, dbatools wasn’t able to set our required SPNs either. It complains about 'A constraint violation occurred'.
 
@@ -105,37 +122,47 @@ We now need to use the `setspn` command line tool that is built into Windows and
 
 First we’ll try and register the required SPNs manually. For this we’ll use the -a parameter on `setspn`, the format being:
 
+```PowerShell
 setspn -a <<SPN>> <<ServiceAccount>>
+```
 
 So we’ll run the following, getting the SPN from the ‘RequiredSPN’ column of the `Test-DbaSpn` output. You’ll notice there are two required SPNs, one without a port specified and one with 1433 – we’ll want to fix both.
 
-setspn -a MSSQLSvc/DscSvr1.pomfret.com Pomfret\\svc-dscsvr1-eng2
+```PowerShell
+setspn -a MSSQLSvc/DscSvr1.pomfret.com Pomfret\svc-dscsvr1-eng2
+```
 
-[![](duplicateSpn.jpg)](https://jesspomfret.com/wp-content/uploads/2021/02/duplicateSpn.jpg)
+![setspn is throwing an error about duplicate SPNs](duplicateSpn.jpg)
 
 You can see in the output, the problem is highlighted – ‘Duplicate SPN found’.  The useful part of this output is on the second line.  I’ve highlighted the current owner of the SPN – we need this to be able to resolve the problem.  Not surprising, it is the computer account since I was previously running SQL Server as the default `NT SERVICE\MSSQLSERVER` account.
 
 Now we know what the duplicate is we can remove it, again using setspn, but this time with the -d parameter. The format is:
 
+```PowerShell
 setspn -d <<SPN>> <<ServiceAccount>>
+```
 
 We’ll run the following two commands to clear up both old SPNs:
 
+```PowerShell
 setspn -d MSSQLSvc/DscSvr1.pomfret.com DSCSVR1
 setspn -d MSSQLSvc/DscSvr1.pomfret.com:1433 DSCSVR1
+```
 
-[![](DeleteSPN.jpg)](https://jesspomfret.com/wp-content/uploads/2021/02/DeleteSPN.jpg)
+![Remove the SPNs with setspn](DeleteSPN.jpg)
 
 Finally we can add the required SPNs. We can either use dbatools with the code we tried earlier or `setspn`.
 
-setspn -a MSSQLSvc/DscSvr1.pomfret.com Pomfret\\svc-dscsvr1-eng2
-setspn -a MSSQLSvc/DscSvr1.pomfret.com:1433 Pomfret\\svc-dscsvr1-eng2
+```PowerShell
+setspn -a MSSQLSvc/DscSvr1.pomfret.com Pomfret\svc-dscsvr1-eng2
+setspn -a MSSQLSvc/DscSvr1.pomfret.com:1433 Pomfret\svc-dscsvr1-eng2
+```
 
-[![](addSpn.jpg)](https://jesspomfret.com/wp-content/uploads/2021/02/addSpn.jpg)
+![Adding the SPNs with setspn](addSpn.jpg)
 
 You can see the output now states ‘Updated object’ which means we were successful. If we try and view the databases again now we should see the output we were expecting.
 
-[![](Get-DbaDatabase.jpg)](https://jesspomfret.com/wp-content/uploads/2021/02/Get-DbaDatabase.jpg)
+![Now we're able to connect to our instance and view our databases](Get-DbaDatabase.jpg)
 
 ## Summary
 
