@@ -16,6 +16,18 @@ TODO:
  - T-SQL image float left
 -->
 
+![Test Image](/tsqltues-300x300.png)
+
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://sqlblog.org/2018/02/06/t-sql-tuesday-99"
+         class="float-left"
+         alt="JTuesday"
+         width="300px"
+         height="300px"
+>}}
+
+
 [![MJTuesday](tsqltues-300x300.png)](http://t-sql.dk/?p=1947)Thanks to [Jens Vestergaard](http://t-sql.dk/) for hosting T-SQL Tuesday #101.  When I saw the topic for this month’s T-SQL Tuesday, I knew instantly which tool I would write about. Although there are many great tools out there that make my job as a DBA easier (and I’m excited to read the summary for this month to see what everyone else leans on), there is one that has fundamentally changed far more than just my work day. First of all I love PowerShell; the ability to make my daily tasks both repeatable and automated is something that has always appealed to me. Then I found [dbatools](http://dbatools.io), which combines everything I love about PowerShell into an ever-evolving open source module.
 
 Once you [install the module](https://dbatools.io/install) you can run the following to list all the available commands in your toolbox. It’s a good idea to keep your copy of the module updated and check this often as people are always adding new commands.
