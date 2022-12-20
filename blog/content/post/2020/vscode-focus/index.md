@@ -31,11 +31,11 @@ So by adding the following to your `settings.json` file you can override that be
 
 The original solution to this dilemma is to use the keyboard shortcut to return focus to the script pane. Using Ctrl+1 will return you to the first editor group (unless you are using ZoomIt!).
 
-![Use Ctrl+1 to get to editor from console](onepanev2.gif)
+![Use Ctrl+1 to get to editor from console](https://media.giphy.com/media/Uo5J2VhLfUjE9TTSX6/giphy.gif)
 
 If you have more than one editor group open you can use CTRL+2 to get to the second group, or CTRL+3 to get to the third group.
 
-![ctrl+2 to get back to pane 2](twoPanev2.gif)
+![ctrl+2 to get back to pane 2](https://media.giphy.com/media/Aus3UyjJVUYzKihlZ5/giphy.gif)
 
 Also, as with most shortcuts in VSCode, you can also customise the key bindings, by opening the command palette (F1) and choosing ‘Open Keyboard Shortcuts’ either in the GUI or JSON format.
 
