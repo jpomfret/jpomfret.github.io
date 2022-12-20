@@ -31,13 +31,13 @@ Now, I’m personally a huge proponent of using keyboard shortcuts to get things
 
 This is something I love for formatting queries, among other things. I know you can use T-SQL to generate some queries from the metadata but if you have a list of tables you want to truncate, for example, you can easily accomplish this. Select the start of each line by using Ctrl + Alt + down direction key, add the `TRUNCATE TABLE` text and then press end to get to the end of each line, no matter the length, to add the semicolon.
 
-![Using Multiline select in VSCode](multilineselect.gif)
+![Using Multiline select in VSCode](https://media.giphy.com/media/adZdbCnMHbvc6TMjVi/giphy.gif)
 
 The other use I have for this hack is to generate names and descriptions of Active Directory groups for tickets to have them created.  At my previous job we created read and admin groups for databases that users could then request access to. Multiline select made this really easy to generate the required information.
 
 You can use multiline select at the beginning of the row. Start by selecting the first word and copying it (Ctrl+C), then you can type to format your group name. For example, I put `SqlDb-` before the database name and then `-Read` afterwards.  Pressing enter at the end of the group name will create a second line for all three groups where you can add the description. Notice I can now use paste (Ctrl+V) to add the database name that we copied from each line.
 
-![A more complicated example of multiline select](multilineselect2.gif)
+![A more complicated example of multiline select](https://media.giphy.com/media/6VIFc47iqYEVI4br5J/giphy.gif)
 
 This ability to change multiple lines at once is really powerful and once you get the hang of what you can do with it you’ll find so many opportunities.
 
@@ -47,7 +47,7 @@ A similar hack to my first, VS Code also lets you change multiple occurrences of
 
 Carrying on from my previous example, now that we have formatted the group names and description. I can select the word ‘Read’ and replace all with ‘Admin’. Just like that I have all I need to get the group request off to the help desk for creation.
 
-![Changing all occurances of a word in VSCode](ChangeAllOccurances.gif)
+![Changing all occurances of a word in VSCode](https://media.giphy.com/media/S1w7CIkPRkOkN02mq4/giphy.gif)
 
 ## Command Palette -  F1 or Ctrl+Shift+P
 
