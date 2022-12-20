@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #143: Short code examples"
+description: "A quick code snippet to help find members of the local admin group."
+slug: "t-sql-tuesday-143"
 date: "2021-10-13"
 categories:
   - "powershell"
@@ -10,7 +12,14 @@ tags:
 image: "tekton-EcE9dFfXwwE-unsplash.jpg"
 ---
 
-[![T-SQL Tuesday Logo](tsqltues.png)](https://johnmccormack.it/2021/10/t-sql-tuesday-143-short-code-examples/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://johnmccormack.it/2021/10/t-sql-tuesday-143-short-code-examples/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 Well folks, it’s Wednesday here in the UK, which means I’m a day late to get my blog post in for T-SQL Tuesday. However, if I was in Hawaii it would be still Tuesday so let's go for it...
 
@@ -24,9 +33,11 @@ This morning I was working on pulling together some information which included w
 
 The following PowerShell snippet uses the `net localgroup` command line tool to retrieve the results and parse them so we just get the account names.  The final line includes the `-ComputerName` parameter so you can easily run it against remote machines.
 
+```PowerShell
 Invoke-Command -ScriptBlock { net localgroup administrators |
-    Where-Object { $\_ -AND $\_ -notmatch "command completed successfully" } |
+    Where-Object { $_ -AND $_ -notmatch "command completed successfully" } |
     Select -skip 4
 } -ComputerName mssql1
+```
 
 Hope this comes in handy, and sorry again John for sneaking in late.

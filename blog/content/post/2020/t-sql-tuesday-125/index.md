@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday – #125: Unit Testing Databases"
+description: "Is it a valuable effort? We walk through some examples using tSQLt"
+slug: "t-sql-tuesday-125"
 date: "2020-04-14"
 categories:
   - "t-sql-tuesday"
@@ -10,7 +12,14 @@ tags:
   - "tsqltuesday"
 ---
 
-[![](tsqltues.png)](https://hybriddbablog.com/2020/04/07/t-sql-tuesday-125-unit-testing-databases-we-need-to-do-this/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://hybriddbablog.com/2020/04/07/t-sql-tuesday-125-unit-testing-databases-we-need-to-do-this/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 It’s T-SQL Tuesday time again! March felt really long for a lot of us as we got used to our new way of life, so I’m excited we made it to April’s prompt.
 
@@ -34,32 +43,38 @@ There are a couple of requirements, including CLR integration must be enabled an
 
 After I ran the tSQLt.class.sql script I got the following in the messages tab of SSMS. We’re ready to go:
 
+```SQL
 Installed at 2020-04-07 15:45:03.200
 
 +-----------------------------------------+
-|                                     	|
-| Thank you for using tSQLt.          	|
-|                          	            |
-| tSQLt Version: 1.0.5873.27393       	|
-|                                     	|
+|                                         |
+| Thank you for using tSQLt.              |
+|                                         |
+| tSQLt Version: 1.0.5873.27393           |
+|                                         |
 +-----------------------------------------+
 
 Completion time: 2020-04-11T14:25:21.6912488+01:00
+```
 
 ## Test a simple function
 
 To start with I made a really simple function to make sure I understood the tSQLt syntax and could get my first test written successfully.  It takes two numbers and returns the sum.
 
+```SQL
 CREATE OR ALTER FUNCTION dbo.AddTwoNumbers (@int1 int, @int2 int)
 RETURNS INT AS
 BEGIN
    	RETURN @int1 + @int2
 END
+```
 
 In tSQLt we’ll use a test class to group similar tests together, which will enable us to run a suite of tests in one go. Since this is for TSQLTuesday I’ll create a test class named testTSQLTuesday.
 
+```SQL
 EXEC tSQLt.NewTestClass 'testTSQLTuesday';
 GO
+```
 
 This is basically just a schema for our tests to live in. I’m now ready to create my first test. The documentation for tSQLt has some good examples to get us started, and I followed the ‘AssertEquals’ example from their [tutorial](https://tsqlt.org/user-guide/tsqlt-tutorial/).
 
@@ -67,8 +82,9 @@ When we run our tSQLt tests the stored procedure name will be the name of the te
 
 From the little I do know about test-driven development, I understand we should write the test to initially fail. That’ll confirm that I haven’t set it up in a way that will provide false positives. In the below test I’m saying that I expect the sum of 1 and 2 calculated by my function to be 4, obviously untrue.
 
-\-- create the test to fail
-CREATE OR ALTER PROCEDURE testTSQLTuesday.\[test the addTwoNumbers function works\]
+```SQL
+-- create the test to fail
+CREATE OR ALTER PROCEDURE testTSQLTuesday.[test the addTwoNumbers function works]
 AS
 BEGIN
 	DECLARE @actual INT;
@@ -83,16 +99,20 @@ BEGIN
 END;
 
 GO
+```
 
 You can see this is a pretty simple test to set up. I declared two numbers that I’ll pass to the function and then fill in what I expect the result to be (still the wrong answer at this point).
 
 To run the test I’ll use the tSQLt.Run stored procedure, passing in my test class name.
 
+```SQL
 EXEC tSQLt.Run 'testTSQLTuesday';
+```
 
 Reviewing the messages pane in SSMS I can see my test has failed, as expected, and it let’s you know it expected 4 but got 3.
 
- \[testTSQLTuesday\].\[test the addTwoNumbers function works\] failed: (Failure) Expected: <4> but was: <3>
+```SQL
+ [testTSQLTuesday].[test the addTwoNumbers function works] failed: (Failure) Expected: <4> but was: <3>
 
 +----------------------+
 |Test Execution Summary|
@@ -100,55 +120,59 @@ Reviewing the messages pane in SSMS I can see my test has failed, as expected, a
 
 |No|Test Case Name                                           |Dur(ms)|Result |
 +--+---------------------------------------------------------+-------+-------+
-|1 |\[testTSQLTuesday\].\[test the addTwoNumbers function works\]| 	13|Failure|
+|1 |[testTSQLTuesday].[test the addTwoNumbers function works]|     13|Failure|
 -----------------------------------------------------------------------------
 Msg 50000, Level 16, State 10, Line 43
 Test Case Summary: 1 test case(s) executed, 0 succeeded, 1 failed, 0 errored.
 -----------------------------------------------------------------------------
 
 Completion time: 2020-04-11T14:37:18.8297577+01:00
+```
 
 Now I’ll fix the test so if the function is working as expected the test should pass.
 
-\-- create the test
-CREATE OR ALTER PROCEDURE testTSQLTuesday.\[test the addTwoNumbers function works\]
+```SQL
+-- create the test
+CREATE OR ALTER PROCEDURE testTSQLTuesday.[test the addTwoNumbers function works]
 AS
 BEGIN
-	DECLARE @actual INT;
-	DECLARE @testInt1 INT = 1;
-	DECLARE @testInt2 INT = 2;
+    DECLARE @actual INT;
+    DECLARE @testInt1 INT = 1;
+    DECLARE @testInt2 INT = 2;
 
-	SELECT @actual = dbo.AddTwoNumbers(@testInt1, @testInt2);
+    SELECT @actual = dbo.AddTwoNumbers(@testInt1, @testInt2);
 
-	DECLARE @expected INT = (@testInt1 + @testInt2);
-	EXEC tSQLt.AssertEquals @expected, @actual;
-
+    DECLARE @expected INT = (@testInt1 + @testInt2);
+    EXEC tSQLt.AssertEquals @expected, @actual;
 END;
 
 GO
-
+```
 Good news, our first tSQLt test has passed.
 
+```SQL
 +----------------------+
 |Test Execution Summary|
 +----------------------+
 
 |No|Test Case Name                                           |Dur(ms)|Result |
 +--+---------------------------------------------------------+-------+-------+
-|1 |\[testTSQLTuesday\].\[test the addTwoNumbers function works\]|  	3|Success|
+|1 |[testTSQLTuesday].[test the addTwoNumbers function works]|      3|Success|
 -----------------------------------------------------------------------------
 Test Case Summary: 1 test case(s) executed, 1 succeeded, 0 failed, 0 errored.
 -----------------------------------------------------------------------------
 
 Completion time: 2020-04-11T16:33:56.6201835+01:00
+```
 
 ## Test a stored procedure that changes data
 
 One thing I thought that was really cool with tSQLt is that it executes the tests in a transaction, and then rolls it back after testing to ensure things are left the way they were before we started testing.  To show this I’ve created a simple stored procedure that allows us to update an email address in the Person.EmailAddress table from AdventureWorks2017.
 
+```SQL
 CREATE PROCEDURE Person.UpdateEmailAddress
-   	@NewEmailAddress varchar(100),
-   	@BusinessEntityID int
+    @NewEmailAddress varchar(100),
+    @BusinessEntityID int
 AS
 
 UPDATE Person.EmailAddress
@@ -156,53 +180,62 @@ SET EmailAddress = @NewEmailAddress
 where BusinessEntityID = @BusinessEntityID
 
 GO
+```
 
 Then I wrote a test, similar to the first example, which compares the actual value that is in the Person.EmailAddress table after running the procedure with what I would expect to be in there.
 
-CREATE OR ALTER PROCEDURE testTSQLTuesday.\[test the UpdateEmailAddress procedure\]
+```SQL
+CREATE OR ALTER PROCEDURE testTSQLTuesday.[test the UpdateEmailAddress procedure]
 AS
 BEGIN
-	DECLARE @actual varchar(100);
-	DECLARE @newEmail varchar(100) = 'test@test.com';
-	DECLARE @businessEntityID INT = 2;
+    DECLARE @actual varchar(100);
+    DECLARE @newEmail varchar(100) = 'test@test.com';
+    DECLARE @businessEntityID INT = 2;
 
-   	EXEC person.UpdateEmailAddress @newEmail, @businessEntityId
+    EXEC person.UpdateEmailAddress @newEmail, @businessEntityId
 
-	SELECT @actual = EmailAddress
-   	FROM Person.EmailAddress
-   	WHERE BusinessEntityID = @businessEntityID
+    SELECT @actual = EmailAddress
+    FROM Person.EmailAddress
+    WHERE BusinessEntityID = @businessEntityID
 
-	DECLARE @expected varchar(100) = @newEmail
-	EXEC tSQLt.AssertEquals @expected, @actual;
+    DECLARE @expected varchar(100) = @newEmail
+    EXEC tSQLt.AssertEquals @expected, @actual;
 
 END;
 GO
+```
 
 I added this to the same test class so we’ll execute both tests with the same call to tSQLt.Run.
 
+```SQL
 EXEC tSQLt.Run 'testTSQLTuesday';
+```
 
 The results now show I have two tests that passed.
 
+```SQL
 +----------------------+
 |Test Execution Summary|
 +----------------------+
 
 |No|Test Case Name                                           |Dur(ms)|Result |
 +--+---------------------------------------------------------+-------+-------+
-|1 |\[testTSQLTuesday\].\[test the addTwoNumbers function works\]|  	6|Success|
-|2 |\[testTSQLTuesday\].\[test the UpdateEmailAddress procedure\]|  	7|Success|
+|1 |[testTSQLTuesday].[test the addTwoNumbers function works]|      6|Success|
+|2 |[testTSQLTuesday].[test the UpdateEmailAddress procedure]|      7|Success|
 -----------------------------------------------------------------------------
 Test Case Summary: 2 test case(s) executed, 2 succeeded, 0 failed, 0 errored.
 -----------------------------------------------------------------------------
 
 Completion time: 2020-04-11T17:17:36.4799073+01:00
+```
 
 To run this test we had to actually call the stored procedure that changes data in our tables. As I mentioned though, this all happened within a transaction that was never committed. We can confirm our data was unchanged by checking the table.
 
+```SQL
 SELECT EmailAddress
 FROM Person.EmailAddress
 WHERE BusinessEntityID = 2;
+```
 
 ![select statement showing email unchanged](tsql125Tests.jpg)
 

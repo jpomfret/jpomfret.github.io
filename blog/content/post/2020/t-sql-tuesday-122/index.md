@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #122 – Imposter Syndrome"
+description: "How I work through imposted syndrome in the build up to a presentation"
+slug: "t-sql-tuesday-122"
 date: "2020-01-14"
 categories:
   - "personal"
@@ -8,7 +10,14 @@ tags:
   - "tsql2sday"
 ---
 
-[![](tsqltues.png)](https://jonshaulis.com/index.php/2020/01/07/t-sql-tuesday-122-imposter-syndrome/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://jonshaulis.com/index.php/2020/01/07/t-sql-tuesday-122-imposter-syndrome/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 What a great topic for the start of the year as we’re all thinking about goal setting and personal improvement. Thanks to Jon Shaulis ([b](https://jonshaulis.com/)|[t](https://twitter.com/JonShaulis)) for hosting this first monthly blog party of the decade.
 

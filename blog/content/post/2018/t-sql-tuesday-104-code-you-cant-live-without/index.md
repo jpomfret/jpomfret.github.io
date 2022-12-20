@@ -14,11 +14,14 @@ tags:
   - "t-sql-tuesday"
 ---
 
-<!--
-TODO: T-SQL image float left
--->
-
-{{< figure src="tsqltues-300x300.png" link="https://bertwagner.com/2018/07/03/code-youd-hate-to-live-without-t-sql-tuesday-104-invitation/" float="left" >}}
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://bertwagner.com/2018/07/03/code-youd-hate-to-live-without-t-sql-tuesday-104-invitation/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 As soon as I saw Bert Wagner ([t](https://twitter.com/bertwagner)|[b](https://bertwagner.com/)) post his T-SQL Tuesday topic last week I knew this was going to be a great one. I’m really looking forward to reading about everyone’s favourite code snippets so thanks Bert for hosting and choosing a fantastic subject!
 
@@ -57,7 +60,7 @@ ORDER BY SizeUsedMB desc
 Now this T-SQL is great for a quick look at one database, but what if I want to run this script against every database in my environment? Well I popped over to PowerShell, fired up [dbatools](http://dbatools.io/) and ran the following:
 
 ```PowerShell
-get-command -Module dbatools -Name \*compression\*
+get-command -Module dbatools -Name *compression\*
 ```
 
 Bad news, there was no Get-DbaDbCompression, there were commands for compressing objects (Set-DbaDbCompression) and for getting suggested compression setting based on the [Tiger Teams best practices](https://blogs.msdn.microsoft.com/blogdoezequiel/2011/01/03/the-sql-swiss-army-knife-6-evaluating-compression-gains/) (Test-DbaDbCompression), but nothing to just return the current compression status of the objects.
@@ -71,7 +74,7 @@ Get-DbaDbCompression -SqlInstance serverName -Database databaseName
 Or go crazy and run it against a bunch of servers.
 
 ```PowerShell
-$servers = Get-DbaRegisteredServer -SqlInstance cmsServer | select -expand ServerName
+$servers = Get-DbaRegisteredServer -SqlInstance cmsServer | Select-Object -expand ServerName
 $compression = Get-DbaDbCompression -SqlInstance $servers
 $compression | Out-GridView
 ```

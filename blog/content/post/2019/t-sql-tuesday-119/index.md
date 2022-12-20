@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #119 - Changing your mind"
+description: "Changing my mind on whether I can be a speaker..."
+slug: "t-sql-tuesday-119"
 date: "2019-10-08"
 categories:
   - "presenting"
@@ -10,7 +12,14 @@ tags:
   - "tsqltuesday"
 ---
 
-[![](tsqltues-300x300.png)](http://workingwithdevs.com/tsql2sday-119-changing-your-mind/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="http://workingwithdevs.com/tsql2sday-119-changing-your-mind/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 It’s time for our monthly T-SQL Tuesday blog party again and we have another interesting prompt to write about. Thanks goes to Alex Yates ([b](http://workingwithdevs.com/)|[t](https://twitter.com/_AlexYates_)) for hosting this month.
 

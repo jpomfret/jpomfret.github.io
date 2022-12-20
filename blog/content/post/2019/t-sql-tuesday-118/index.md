@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #118 – Your fantasy SQL feature"
+description: "A couple of ideas for SQL features I'd like to see."
+slug: "t-sql-tuesday-118"
 date: "2019-09-10"
 categories:
   - "t-sql-tuesday"
@@ -7,7 +9,14 @@ tags:
   - "tsqltuesday"
 ---
 
-[![](tsqltues-300x300.png)](https://www.kevinrchant.com/2019/09/03/t-sql-tuesday-118-your-fantasy-sql-feature/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://www.kevinrchant.com/2019/09/03/t-sql-tuesday-118-your-fantasy-sql-feature/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 This month our T-SQL Tuesday host, Kevin Chant ([b](https://www.kevinrchant.com)|[t](https://twitter.com/kevchant)), has challenged us to propose a new fantasy feature for SQL Server. Firstly, thanks to Kevin for hosting this month’s blog party.
 
@@ -68,9 +77,9 @@ A severity 20 alert, such as the one below contains the client IP address. It wo
 Error: 17836, Severity: 20, State: 17.
 Length specified in network packet payload did not match number of bytes read;
 the connection has been closed. Please contact the vendor of the client library.
-\[CLIENT: xx.xx.xx.xx\]
+[CLIENT: xx.xx.xx.xx]
 ```
 
-![](tsql117.jpg)
+![Severity 20 alert properties pane from SSMS](tsql117.jpg)
 
 Thanks for reading my fantasy features. I’m looking forward to reading all the other new ideas out there.

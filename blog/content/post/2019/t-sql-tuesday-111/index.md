@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #111 - What is Your \"Why\"?"
+description: "My why seems to usually be related to being a challenge."
+slug: "t-sql-tuesday-111"
 date: "2019-02-12"
 categories:
   - "t-sql-tuesday"
@@ -8,7 +10,14 @@ tags:
   - "tsql2sday"
 ---
 
-[![](tsqltues-300x300.png)](https://andyleonard.blog/2019/02/t-sql-tuesday-111-what-is-your-why/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="ps://andyleonard.blog/2019/02/t-sql-tuesday-111-what-is-your-why/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 It’s T-SQL Tuesday again and thanks goes this week to our host Andy Leonard ([b](https://andyleonard.blog)|[t](https://twitter.com/AndyLeonard)). Andy has picked a great topic on why we do the things we do. With our hectic lives it’s good sometimes to sit down and have a think about something like this.  I’ve split my ‘what I do’ up into three buckets that, although are separate, have a lot of common ‘whys’.
 

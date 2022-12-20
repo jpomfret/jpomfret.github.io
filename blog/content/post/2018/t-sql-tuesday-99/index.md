@@ -1,18 +1,16 @@
 ---
 title: "T-SQL Tuesday #99 - Door #1"
 slug: "t-sql-tuesday-99"
+description: "My first ever blog post - and it's a bit of an introduction to me."
 date: "2018-02-13"
 categories:
   - "personal"
   - "t-sql-tuesday"
 tags:
   - "football"
+  - "t-sql-tuesday"
+  - "tsql2sday"
 ---
-
-<!--
-TODO:
- - photo gallery
--->
 
 {{<
   figure src="tsqltues-300x300.png"
@@ -33,4 +31,6 @@ I then played for Chippenham Town Ladies for many seasons while I was in Seconda
 
 I have since moved employers but still reside in Northeast Ohio as a SQL Server DBA.  My days of playing football are behind me, but I now spend more time than I probably should watching the English Premier League and worrying about my [fantasy (proper) football](https://fantasy.premierleague.com/a/team/991342) team. I also enjoy watching US sports, hiking, Crossfiting and travelling with my partner, Kelcie.
 
-\[gallery type="rectangular" link="none" size="medium" columns="2" ids="52,53,54"\]
+![Made the newspaper, meeting a Swindow Town player](ChipGirlsNewspaper.jpg)
+![The only girl on my Primary School team](KingsLodgeSchool.jpg)
+![Holding a Trophy when playing for the Akron Zips](AkronZips.jpg)

@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #110 - \"Automate All the Things\""
+description: "Taking a step towards automating SQL Server builds with PowerShell DSC"
+slug: "t-sql-tuesday-110"
 date: "2019-01-08"
 categories:
   - "dsc"
@@ -11,7 +13,14 @@ tags:
   - "powershell"
 ---
 
-[![](tsqltues.png)](https://garrybargsley.com/t-sql-tuesday-110-automate-all-the-things/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://garrybargsley.com/t-sql-tuesday-110-automate-all-the-things/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 Automation is something that interests me greatly, and I think if you have read even one of my previous posts you’ll know that my favorite tool for this kind of work is PowerShell.  This is the perfect topic to kick off T-SQL Tuesday for 2019 so thanks goes to Garry Bargsley for hosting this month.
 
@@ -35,11 +44,11 @@ Since we are using the push mode we need to make sure any modules we use to writ
 
 We’re now ready to write our first configuration, although we are still writing PowerShell the syntax is a little different.  One of my favorite things about PowerShell is using the command based help to discover how to execute new cmdlets and functions, DSC is no different here. We can use `Get-DscResource` to list all the resources we have available.
 
-![](GetDscResource.jpg)
+![List available resources](GetDscResource.jpg)
 
 Since we are going to use the WindowsFeature resource we can find out how to use that by passing in the `-Syntax` parameter to `Get-DscResource`.
 
-![](WindowsFeatureSyntax.jpg)
+![Use the syntax parameter to check how to use the resource](WindowsFeatureSyntax.jpg)
 
 The only required parameter for the WindowsFeature resource is Name so we’ll include that.  I also like to include the ‘Ensure’ parameter, it defaults to ‘Present’ but I feel it makes it clearer to specifically define that.  I also want to set ‘IncludeAllSubFeature’ to true so those get installed also. 
 
@@ -77,7 +86,7 @@ Once we have our MOF file the final step is to enact our configuration against o
 Start-DscConfiguration -Path .\Output\ -Wait -Verbose
 ```
 
-[![](startDscConfiguration1-1.jpg)](https://jesspomfret.com/wp-content/uploads/2019/01/startDscConfiguration1-1.jpg)
+![Start-DscConfiguration to make it so](startDscConfiguration1-1.jpg)
 
 Once this runs successfully you can confirm the features are installed using `Get-WindowsFeature`.
 
@@ -86,7 +95,7 @@ Get-WindowsFeature -ComputerName dscsvr2 `
 -Name @('RSAT-AD-PowerShell','NET-Framework-Features')
 ```
 
-![](GetWindowsFeature.jpg)
+![Confirm that the windows features have been installed](GetWindowsFeature.jpg)
 
 ## Using Composite Resources
 

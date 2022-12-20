@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #112 - Dipping into your Cookie Jar"
+description: "Things I'm proud of that I can look back on when times are rough."
+slug: "t-sql-tuesday-112"
 date: "2019-03-12"
 categories:
   - "presenting"
@@ -10,7 +12,14 @@ tags:
 image: "abundance-bazaar-biscuits-375904-e1552343553342.jpg"
 ---
 
-[![](tsqltues-300x300.png)](https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 It’s T-SQL Tuesday time again and our host this week, Shane O'Neill ([b](https://nocolumnname.blog/)|[t](https://twitter.com/SOZDBA)), has challenged us to a humble brag. This really is a challenge for most of us as we do awesome things quietly, so thanks to Shane for forcing us to share some ‘cookies’.  This is also the second time in a couple of weeks that [David Goggins’ book](https://www.amazon.com/Cant-Hurt-Me-Master-Your-ebook/dp/B07H453KGH) has been mentioned, which means I need to move it up on my to-read list.
 

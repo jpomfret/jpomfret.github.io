@@ -1,15 +1,24 @@
 ---
 title: "T-SQL Tuesday #134 - Give me a break"
+description: "A reminder of the best holiday I've ever had"
+slug: "t-sql-tuesday-134"
 date: "2021-01-12"
 categories:
   - "personal"
   - "t-sql-tuesday"
 tags:
   - "t-sql-tuesday"
-image: "20181031_062105-scaled.jpg"
+image: "20181031_062105.jpg"
 ---
 
-[![T-SQL Tuesday Logo](tsqltues.png)](https://jimbabwe.co.za/2021/01/04/tsqltuesday-134-invitation/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://jimbabwe.co.za/2021/01/04/tsqltuesday-134-invitation/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 It’s the first T-SQL Tuesday of 2021, and James Mcgillivray ([b](https://jimbabwe.co.za/)|[t](https://twitter.com/JamesMcG_MSBI)) is our host for January’s edition of this monthly blog party.  This month’s topic is around how we escape with vacation/holiday plans.  They gave us a few options on what to blog about and I’m going to take you on a virtual trip to Hawaii.
 
@@ -21,13 +30,13 @@ The best holiday I’ve ever had would have to be my honeymoon to Hawaii in 2018
 
 ![Jess & Kelcie in Wedding outfits](FB_IMG_1540745531257.jpg)
 
-We got married on Saturday 27th of October 2018 in Ohio, not far from where we were living.  We were lucky to be surrounded by friends and family from both sides of the Atlantic, and apart from the constant rain all day, we had an amazing time. 
+We got married on Saturday 27th of October 2018 in Ohio, not far from where we were living.  We were lucky to be surrounded by friends and family from both sides of the Atlantic, and apart from the constant rain all day, we had an amazing time.
 
 The following Monday we boarded a plane for Maui, Hawaii. It’s actually a longer flight time from Ohio to Maui than it is from Ohio to England.  Until we started planning this trip I had no idea how far off the coast of the continental USA it actually is.
 
 One of the benefits of this long flight time, jet lag had us waking up really early the first few days. We brewed some coffee in the room and took it down to the beach.  We were treated to the most amazing sunrises. The longer we stood there the more impressive the colours.
 
-![Hawaii sunrise from the beach on Maui](20181031_062105-scaled.jpg)
+![Hawaii sunrise from the beach on Maui](20181031_062105.jpg)
 
 We’d planned our honeymoon using a travel agent,  so we pre-booked several excursions for our time away. The first being a sunset sail, which didn’t disappoint, since the sunsets were almost as beautiful as the sunrises.
 
@@ -57,7 +66,7 @@ We were also lucky to see some Hawaiian Monk Seals. I love seals, so it was amaz
 
 Our third excursion was an ATV trip through a historic sugar plantation. This was great- we got filthy and had a lot of fun touring around beautiful scenery that’s featured in many movies, including Jurassic Park, although we saw no dinosaurs.
 
-![Muddy, driving an ATV](IMG-20181105-WA0081-769x1024.jpg)
+![Muddy, driving an ATV](IMG-20181105-WA0081.jpg)
 
 ### Summary
 

@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #141: Work/Life balance"
+description: "Managing work/life balance - something I'm not great at, but I have some tips."
+slug: "t-sql-tuesday-141"
 date: "2021-08-10"
 categories:
   - "t-sql-tuesday"
@@ -10,7 +12,14 @@ tags:
 image: "victor-freitas-Yuv-iwByVRQ-unsplash.jpg"
 ---
 
-[![T-SQL Tuesday Logo](tsqltues.png)](https://tjaybelt.blogspot.com/2021/08/t-sql-tuesday-141-worklife-balance.html)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://tjaybelt.blogspot.com/2021/08/t-sql-tuesday-141-worklife-balance.html/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 It’s T-SQL Tuesday time and I’ve finally managed to put some words into a blog post again.  It’s been a few months since I’ve posted anything on my blog, things have been busy, and my motivation has been a little lacking.  However, this topic has inspired me to try and pull something together. Thanks to TJay([b](https://tjaybelt.blogspot.com/)|[t](https://twitter.com/tjaybelt)) for hosting this month and for choosing a great topic.
 

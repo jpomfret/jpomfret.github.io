@@ -7,12 +7,16 @@ categories:
   - "t-sql-tuesday"
 ---
 
-<!--
-TODO:
- - T-SQL image float left
--->
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://scribnasium.com/2018/05/giving-back-t-sql-tuesday-102-invite/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
-[![TSqlTues](tsqltues-300x300.png)](https://scribnasium.com/2018/05/giving-back-t-sql-tuesday-102-invite/)First of all thanks to Riley Major ([b](https://scribnasium.com)|[t](https://twitter.com/RileyMajor)) for hosting this months T-SQL Tuesday.  This is a great topic for me as I have mentioned before my goal this year is to work on getting my blog going and starting to give back to this amazing community. I am always impressed by the content people produce and share, whether it be blog posts, presentations or just snippets on Twitter and I have learnt so much in my career so far from these sources.  Honestly I often feel like I don't have anything worth sharing and that what I know is obvious and everyone would know it.  Then I think back to that first Ohio North SQL Server User Group presentation I went to where Allen White ([b](http://dataperfpro.com/blog/)|[t](https://twitter.com/SQLRunr)) gave his now famous introduction, everyone has something to teach, so here goes.
+First of all thanks to Riley Major ([b](https://scribnasium.com)|[t](https://twitter.com/RileyMajor)) for hosting this months T-SQL Tuesday.  This is a great topic for me as I have mentioned before my goal this year is to work on getting my blog going and starting to give back to this amazing community. I am always impressed by the content people produce and share, whether it be blog posts, presentations or just snippets on Twitter and I have learnt so much in my career so far from these sources.  Honestly I often feel like I don't have anything worth sharing and that what I know is obvious and everyone would know it.  Then I think back to that first Ohio North SQL Server User Group presentation I went to where Allen White ([b](http://dataperfpro.com/blog/)|[t](https://twitter.com/SQLRunr)) gave his now famous introduction, everyone has something to teach, so here goes.
 
 I am all about goals and since we're already almost six months into 2018 I'm going to set some goals down on paper that will force me out of my comfort zone. I have been working towards these haphazardly so far, so I hope that writing these out will hold me accountable.
 

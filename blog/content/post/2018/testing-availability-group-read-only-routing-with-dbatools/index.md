@@ -28,22 +28,32 @@ The other part I needed to set up was [read-only routing](https://docs.microsoft
 Although this seems to be setup correctly so that connections that specify their application intent of read only will be routed to the secondary node I wanted to prove it. I used the [Connect-DbaInstance](https://dbatools.io/functions/connect-dbainstance/) function from dbatools to connect to the listener name with the -ApplicationIntent property set to 'ReadOnly'.
 
 ```PowerShell
-$svr = Connect-DbaInstance -SqlInstance AGListenerName `
--Database DatabaseInAG `
--ApplicationIntent ReadOnly
-
+$connectSplat = @{
+  SqlInstance       = 'AGListenerName'
+  Database          = 'DatabaseInAG'
+  ApplicationIntent = 'ReadOnly'
+}
+$svr = Connect-DbaInstance @connectSplat
 $svr.Query('Select @@ServerName as ServerName')
+```
 
+```Text
 ServerName
 ------------
 *******01B
+```
 
 You can see it routed correctly to 01B which is currently the secondary node.  If I don't specify the ApplicationIntent property on the connection it'll be routed to the primary.
 
-$svr = Connect-DbaInstance -SqlInstance AGListenerName -Database DatabaseInAG
-
+```PowerShell
+$connectSplat = @{
+  SqlInstance       = 'AGListenerName'
+  Database          = 'DatabaseInAG'
+}
 $svr.Query('Select @@ServerName as ServerName')
+```
 
+```Text
 ServerName
 ------------
 *******01A

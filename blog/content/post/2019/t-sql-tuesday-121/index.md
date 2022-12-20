@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #121 - Gifts received for this year"
+description: "A time to reflect on some of the immaterial gifts from 2019"
+slug: "t-sql-tuesday-121"
 date: "2019-12-10"
 categories:
   - "personal"
@@ -11,7 +13,14 @@ tags:
   - "tsqltuesday"
 ---
 
-[![](tsqltues-300x300)](https://curiousaboutdata.com/2019/12/03/tsql-tuesday-121-gifts-received-for-this-year/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://curiousaboutdata.com/2019/12/03/tsql-tuesday-121-gifts-received-for-this-year/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 > This is a time for material gift giving, for many of us. It might also be a time to consider the many gifts we have received through the year, and perhaps use this opportunity to appreciate people or situations that we were blessed with.
 
@@ -45,8 +54,7 @@ I’m originally from Chippenham in the South West of England (about 1.5 hours f
 
 I’m so excited to move back to England, to be closer to my family, and explore the UK and Europe with my wife. With the excitement comes absolute chaos as we prepare to move the 3,500 miles across the Atlantic. We’re currently working through selling our home, cars, things and packing up our lives in the US. We are very lucky to have the most supportive family on both sides of the pond as well as so many amazing friends that, although are sad to see us move, are being amazing at helping us realize (I guess it’s realise now!) this dream.
 
-![](IMG-20191207-WA0002.jpg)
-Literally carrying me into 2020!
+![My Wife literally carrying me into 2020!](IMG-20191207-WA0002.jpg)
 
 The final shoutout is to my wife, who to be fair has the rougher deal here. I am moving towards my family, with a job lined up that I’m excited about. She is stepping into a world of unknown, leaving her family and her dream job in the US for an adventure in England. You wouldn’t know this though, she’s the one keeping us organized and on track while I write blog posts to avoid packing ?. Her support and sense of adventure is the gift I’m most thankful for, as I know I couldn’t have accomplished half the things I did this year without her in my corner.
 

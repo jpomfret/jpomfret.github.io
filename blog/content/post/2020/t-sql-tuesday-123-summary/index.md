@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #123: Summary of Life Hacks"
+description: "A summary of all the great life hack posts that were responses to my prompt"
+slug: "t-sql-tuesday-123-summary"
 date: "2020-02-18"
 categories:
   - "t-sql-tuesday"
@@ -9,7 +11,13 @@ tags:
   - "tsqltuesday"
 ---
 
-![](tsqltues.png)
+{{<
+  figure src="/tsqltues-300x300.png"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 There was an amazing response to my [TSQL2sday prompt for February](https://jesspomfret.com/t-sql-tuesday-123/) 2020 where I encouraged folks to share their life hacks. So firstly, thanks to everyone who participated.
 
@@ -19,7 +27,7 @@ There are several hacks shared that I plan on integrating into my life, and I ho
 
 If I missed any posts please let me know!
 
-## **SQL Server Management Studio**
+## SQL Server Management Studio
 
 - [Chris](https://allthezerosmatter.com/2020/02/11/t-sql-tuesday-123-life-hacks-to-make-your-day-easier-custom-shortcuts-in-ssms-ads/), a first time TSQL2sday poster (welcome!), talks about adding shortcuts to run common queries, for example selecting the top 100 rows, or getting the number of rows in a table.
 - [Jason](https://jasonbrimhall.info/2020/02/12/top-3-database-life-hacks/) has three life hacks for us, my favourite being the scroll bar map in SSMS. I use that a lot in VSCode, and had no idea you could do that in SSMS as well.
@@ -39,7 +47,7 @@ If I missed any posts please let me know!
 - [Cathrine](https://www.cathrinewilhelmsen.net/2020/02/11/keyboard-shortcuts-moving-text-lines-moving-windows/) has some great keyboard shortcuts to make us more productive, showing us how to move both lines of text and windows around.
 - [Martin](https://msurasky.wixsite.com/sqlcorner/post/t-sql-tuesday-life-hacks-to-make-your-day-easier) levels up from using keyboard shortcuts to keyWORD shortcuts, including some to insert useful code snippets into SSMS for tasks he completes often.
 
-## **Organisation/Time management**
+## Organisation/Time management
 
 - [Andy](https://flxsql.com/t-sql-tuesday-123-lifehacks-to-make-your-day-easier/) has several great life hacks which he mentions are also habits at this point. He includes using cloud storage to sync up your documents and VSCode extensions across computers.
 - [Aaron](https://sqlblog.org/2020/02/11/t-sql-tuesday-123-life-hacks) has a ton of little life hacks built into his daily schedule while he works from home. My favourites are a scheduled hour of ‘disengagement’ time to focus on non-collaborative work and his travel pack of gear.

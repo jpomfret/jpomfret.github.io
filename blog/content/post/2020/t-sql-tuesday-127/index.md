@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #127 – Non SQL Tips & Tricks"
+description: "A few tips and tricks for managing tabs when you're a tab hoarder..."
+slug: "t-sql-tuesday-127"
 date: "2020-06-09"
 categories:
   - "t-sql-tuesday"
@@ -9,7 +11,14 @@ tags:
   - "tsqltuesday"
 ---
 
-[![T-SQL Tuesday Logo](tsqltues.png)](https://sqlstudies.com/2020/06/02/tsql-tuesday-127-invite-non-sql-tips-and-tricks/)
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://sqlstudies.com/2020/06/02/tsql-tuesday-127-invite-non-sql-tips-and-tricks/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
 I feel like I say this every month, but it’s already time for another edition of T-SQL Tuesday. This months blog party is hosted by Kenneth Fisher ([B](https://sqlstudies.com/)|[T](https://twitter.com/sqlstudent144)) and he’s looking for tips & tricks, but nothing DBMS related.  As you might already know, I love shortcuts and tips & tricks – so I was really excited to see this prompt. First, because I easily found a few I wanted to share, but secondly, I can’t wait to read about everyone else’s tips & tricks.
 
@@ -19,11 +28,11 @@ I had a hard time narrowing this down to just one shortcut, so I’ve picked thr
 
 Whether it’s chrome or SSMS, I cannot help myself when it comes to opening new tabs. It’s not uncommon for me to have so many chrome tabs open that you can only see the logos.
 
-![chrome browser tabs](tabsShort.png)
+![Chrome browser tabs](tabsShort.png)
 
 I even got called out by my good friend Andrew ([B](https://awickham.com/)|[T](https://twitter.com/awickham)) this last week:
 
-https://twitter.com/awickham/status/1267503576571674624
+{{< tweet user="awickham" id="1267503576571674624" >}}
 
 My tips & tricks are focused around managing tabs, and they work in all browsers (at least all that I have on my laptop. Chrome, Edge, IE11).
 

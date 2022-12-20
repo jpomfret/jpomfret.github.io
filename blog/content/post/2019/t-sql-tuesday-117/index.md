@@ -1,5 +1,7 @@
 ---
 title: "T-SQL Tuesday #117 – When Have You Used MOT Tables?"
+description: "Spoiler alert: I haven't, but we look at a few of the restrictions that have been removed."
+slug: "t-sql-tuesday-117"
 date: "2019-08-13"
 categories:
   - "t-sql-tuesday"
@@ -9,9 +11,16 @@ tags:
   - "tsqltuesday"
 ---
 
-This month’s T-SQL Tuesday is all about [Memory Optimized Tables](https://docs.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/overview-and-usage-scenarios?view=sql-server-2017) (MOT), a topic I will admit I know almost nothing about. When they first came out in 2014 I was excited about the new technology and the options that would bring, however I never found a good reason to implement them.
+{{<
+  figure src="/tsqltues-300x300.png"
+         link="https://docs.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/overview-and-usage-scenarios?view=sql-server-2017/"
+         class="float-left"
+         alt="T-SQL Tuesday Logo"
+         width="300px"
+         height="300px"
+>}}
 
-[![](tsqltues-300x300.png)](https://docs.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/overview-and-usage-scenarios?view=sql-server-2017)
+This month’s T-SQL Tuesday is all about [Memory Optimized Tables](https://docs.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/overview-and-usage-scenarios?view=sql-server-2017) (MOT), a topic I will admit I know almost nothing about. When they first came out in 2014 I was excited about the new technology and the options that would bring, however I never found a good reason to implement them.
 
 Thanks to Steve Jones ([b](https://voiceofthedba.com)|[t](https://twitter.com/way0utwest)) for hosting this month’s edition and after reading about MOT this week I’m looking forward to learning how people are using them.
 
