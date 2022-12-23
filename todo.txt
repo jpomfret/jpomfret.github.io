@@ -1,10 +1,9 @@
-Things to fix
-- t-sql tues logos
-- tables (\[table id=6 /\])
-- photo gallery on t-sql 99
-
-
-Export final stats for Wordpress views
-comments?
-
 - This ok? bottom of blog posts? LICENSED UNDER CC BY-NC-SA 4.0
+
+tests for
+- description
+- slug
+- tags
+
+https://jpomfret.github.io/psreadline-search-history/
+ - gif flashing?
