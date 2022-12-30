@@ -105,6 +105,8 @@ Set-DbatoolsConfig -FullName sql.connection.trustcert -Value $true -PassThru | R
 Set-DbatoolsConfig -FullName sql.connection.encrypt -Value optional -PassThru | Register-DbatoolsConfig
 ```
 
+> Note: The `-PassThru` parameter on `Set-DbatoolsConfig` is vital for these settings to be persisted as without that parameter nothing is passed down the pipeline from the Set command.
+
 ### View the configuration settings
 
 You can also view all the configurations or specific ones with the following `Get-DbatoolsConfig` commands.
