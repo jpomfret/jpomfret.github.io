@@ -5,5 +5,127 @@
         "Pittfurg",
         "SSMS",
         "Stellato"
-    ]
+    ],
+    "frontMatter.content.autoUpdateDate": true,
+    "frontMatter.taxonomy.contentTypes": [
+        {
+            "name": "default",
+            "pageBundle": false,
+            "fields": [
+                {
+                    "title": "Title",
+                    "name": "title",
+                    "type": "string"
+                },
+                {
+                    "title": "Description",
+                    "name": "description",
+                    "type": "string"
+                },
+                {
+                    "title": "Publishing date",
+                    "name": "date",
+                    "type": "datetime",
+                    "default": "{{now}}",
+                    "isPublishDate": true
+                },
+                {
+                    "title": "Content preview",
+                    "name": "preview",
+                    "type": "image"
+                },
+                {
+                    "title": "Is in draft",
+                    "name": "draft",
+                    "type": "boolean"
+                },
+                {
+                    "title": "Tags",
+                    "name": "tags",
+                    "type": "tags"
+                },
+                {
+                    "title": "Categories",
+                    "name": "categories",
+                    "type": "categories"
+                },
+                {
+                    "title": "slug",
+                    "name": "slug",
+                    "type": "datetime"
+                },
+                {
+                    "title": "image",
+                    "name": "image",
+                    "type": "datetime"
+                },
+                {
+                    "title": "type",
+                    "name": "type",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "post",
+            "pageBundle": true,
+            "fields": [
+                {
+                    "title": "title",
+                    "name": "title",
+                    "type": "datetime"
+                },
+                {
+                    "title": "slug",
+                    "name": "slug",
+                    "type": "datetime"
+                },
+                {
+                    "title": "description",
+                    "name": "description",
+                    "type": "string"
+                },
+                {
+                    "title": "date",
+                    "name": "date",
+                    "type": "datetime"
+                },
+                {
+                    "title": "draft",
+                    "name": "draft",
+                    "type": "datetime"
+                },
+                {
+                    "title": "categories",
+                    "name": "categories",
+                    "type": "block",
+                    "fields": [
+                        {
+                            "title": "0",
+                            "name": "0",
+                            "type": "datetime"
+                        }
+                    ]
+                },
+                {
+                    "title": "tags",
+                    "name": "tags",
+                    "type": "datetime"
+                },
+                {
+                    "title": "image",
+                    "name": "image",
+                    "type": "datetime"
+                },
+                {
+                    "name": "type",
+                    "type": "string",
+                    "default": "post",
+                    "hidden": true
+                }
+            ]
+        }
+    ],
+    "[markdown]": {
+    }
 }

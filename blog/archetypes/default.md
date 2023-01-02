@@ -1,11 +1,14 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
-description: ""
-slug: {{ .Name }}
+slug: "{{ .Name }}"
+description: "ENTER YOUR DESCRIPTION"
 date: {{ .Date }}
 categories:
 tags:
 image:
 draft: true
+categories:
+tags:
+image:
 ---
 

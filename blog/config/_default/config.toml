@@ -1,5 +1,5 @@
 # Change baseurl before deploy
-baseurl = "https://jpomfret.github.io"
+baseurl = "https://jesspomfret.com"
 languageCode = "en-gb"
 paginate = 5
 title = "Jess Pomfret"
@@ -16,3 +16,5 @@ hasCJKLanguage = false
 #disqusShortname = "hugo-theme-stack"
 
 googleAnalytics = "G-YL15E7BXXF"
+
+favicon = "img/favicon.ico"
