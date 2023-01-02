@@ -36,7 +36,7 @@ In order to build our lab we will need to store the ISOs needed for installation
 
 ![ISOs folder - where we will store the ISOs](images/isos.jpg)
 
-You can test whether AutomatedLab can see the operating system ISOs by using the `Get-AvailableOperatingSystems` command. You can see below it has found my ISO folder and therefore lists the available operating systems that I can use. You’ll notice that the Windows Server 2019 ISO allows me to install two editions, Standard or Datacenter, as well as choosing between installing the core version or the more traditional desktop experience.
+You can test whether AutomatedLab can see the operating system ISOs by using the `Get-LabAvailableOperatingSystem` command. You can see below it has found my ISO folder and therefore lists the available operating systems that I can use. You’ll notice that the Windows Server 2019 ISO allows me to install two editions, Standard or Datacenter, as well as choosing between installing the core version or the more traditional desktop experience.
 
 It is important to ensure you have the appropriate licensing in place for the OS you install. You can use evaluation editions or enter product keys at a later time.
 
