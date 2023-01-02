@@ -17,7 +17,7 @@ https://heroicons.dev/?query=book
 
 Copy an icon - save as an svg!
 
-hugo server --poll=700ms
+hugo server --poll=700ms -D
 
 ## Make a new post
 
