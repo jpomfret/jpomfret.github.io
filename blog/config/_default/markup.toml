@@ -19,13 +19,3 @@ lineNoStart = 1
 lineNos = true
 lineNumbersInTable = true
 tabWidth = 4
-
-
-## TODO: Socials aren't showing? links page?
-[[social]]
-identifier = "github"
-name = "GitHub"
-url = "https://github.com/jpomfret"
-
-[social.params]
-icon = "brand-github"

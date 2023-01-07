@@ -14,6 +14,8 @@
 
 SVG icons
 https://heroicons.dev/?query=book
+https://tablericons.com/
+
 
 Copy an icon - save as an svg!
 

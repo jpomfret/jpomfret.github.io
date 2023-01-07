@@ -3,6 +3,8 @@ mainSections = ["post"]
 # Output page's full content in RSS.
 rssFullContent = true
 
+favicon = "img/favicon.ico"
+
 [footer]
 since = 2018
 customText = ""
@@ -18,7 +20,9 @@ subtitle = "Database Engineer with a Passion for Automation"
 [sidebar.avatar]
 enabled = true
 local = true
-src = "img/avatar.png"
+src = "/img/avatar.png"
+
+
 
 [article]
 math = false

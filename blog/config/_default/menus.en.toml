@@ -1,0 +1,35 @@
+## github
+[[social]]
+identifier = "github"
+    name = "GitHub"
+    url = "https://github.com/jpomfret"
+
+[social.params]
+icon = "brand-github"
+
+## mastodon
+[[social]]
+identifier = "mastodon"
+    name = "mastodon"
+    url = "https://tech.lgbt/@Jpomfret"
+
+[social.params]
+icon = "m"
+
+# insta
+[[social]]
+identifier = "instagram"
+    name = "instagram"
+    url = "https://www.instagram.com/jpomfret/"
+
+[social.params]
+icon = "instagram"
+
+# sessionize
+[[social]]
+identifier = "sessionize"
+    name = "sessionize"
+    url = "https://sessionize.com/jpomfret/"
+
+[social.params]
+icon = "sesh"
