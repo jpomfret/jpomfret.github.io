@@ -22,8 +22,6 @@ enabled = true
 local = true
 src = "/img/avatar.png"
 
-
-
 [article]
 math = false
 readingTime = true
@@ -57,10 +55,6 @@ limit = 10
 
 [[widgets.page]]
 type = "toc"
-
-[opengraph.twitter]
-site = "jpomfret"
-card = "summary_large_image"
 
 [defaultImage.opengraph]
 enabled = false
