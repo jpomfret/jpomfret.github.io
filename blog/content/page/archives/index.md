@@ -8,5 +8,4 @@ menu:
         weight: 2
         params:
             icon: archives
-            limit: 10
 ---

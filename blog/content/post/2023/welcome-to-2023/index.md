@@ -11,7 +11,6 @@ categories:
 tags:
   - presenting
 image: "moritz-knoringer-rrw0MtEqQoU-unsplash.jpg"
-type: default
 ---
 
 Well 2022 has flown by, there were some definite lows but also some great highs. A lot of travel, a return to in-person conferences and a redesigned blog! I was pretty disappointed with the absolute lack of blogging last year - I only managed 2 posts in the entire year, not at all what I was aiming for. However, I did manage some other good community work that I'll highlight here before setting a few 2023 goals.
