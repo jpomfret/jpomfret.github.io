@@ -64,7 +64,9 @@ Update-DbaServiceAccount -ComputerName dscsvr1 -ServiceName SQLSERVERAGENT -Serv
 
 If I rerun `Get-DbaService` I can see all looks good. `StartName` shows my new accounts and the services for both engine and agent are running.
 
+```PowerShell
 Get-DbaService -ComputerName dscsvr1 | Format-Table
+```
 
 ![View the SQL Services after the change](GetDbaService_post.jpg)
 
