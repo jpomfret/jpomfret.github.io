@@ -1,11 +1,11 @@
 ---
-title: "Ag Error Local Node"
+title: "Availability Group Error - Local Node is not part of quorum"
 slug: "ag-error-local-node"
 description: "How to resolve 'The local node is not part of quorum and is therefore unable to process this operation' errors when your WSFC is setup and looks good."
 date: 2023-02-12T12:46:59Z
-categories:
-tags:
-image:
+categories: PowerShell, AvailabilityGroup, FailoverCluster
+tags: PowerShell, AvailabilityGroup, FailoverCluster
+image: justin-smith-eHK0PGncD3k-unsplash.jpg
 draft: true
 ---
 
@@ -15,11 +15,11 @@ To be honest, if you follow the 'How to setup and Availability Group' guides pro
 
 We are using [Automated Lab](https://automatedlab.org/en/latest/) to build out an environment in Azure - this module is really clever, and I've been impressed with how easy it is to build out a pretty complicated environment.
 
-However, we have 4 servers that are destined to be a SQL Server Availability Group. The problem was I managed to install SQL Server, and configure the instances for Availability groups - before installing and configuring the Windows Server Failover Cluster (WSFC).
+However, we have 4 servers that are destined to be a SQL Server Availability Group. The problem was I managed to install SQL Server and configure the instances for Availability groups - before installing and configuring the Windows Server Failover Cluster (WSFC).
 
-No problem, Automated Lab has many pre-defined roles built in and one of those is `FailoverNode` - add this to two or more of your lab machine definitions and AutomatedLab will work it's magic and create a WSFC for you.
+No problem, Automated Lab has many pre-defined roles built in and one of those is `FailoverNode` - add this to two or more of your lab machine definitions and AutomatedLab will work its magic and create a WSFC for you.
 
-After a rerun of the AutomatedLab installation we had a four node cluster - ready to create an availability group. Here's where the problem appeared, when trying to create a new AG on one of the SQL Servers, I got the following error:
+After a rerun of the AutomatedLab installation, we had a four-node cluster - ready to create an availability group. Here's where the problem appeared, when trying to create a new AG on one of the SQL Servers, I got the following error:
 
 ![Availability group error for local node](agerror.png)
 
@@ -32,9 +32,9 @@ The local node is not part of quorum and is therefore unable to process this ope
 For more information on recovering from quorum loss, refer to SQL Server Books Online.
 ```
 
-My first step of troubleshooting was to ensure my cluster was actually configured properly and had quorum set. It did - so I should be good to go.
+My first step of troubleshooting was to ensure my cluster was configured properly and had quorum set. It did - so I should be good to go.
 
-The problem was I had enabled Availability Groups, either in the SQL Server Configuration Manager, or via PowerShell before the WSFC was configured.
+The problem was I had enabled Availability Groups, either in the SQL Server Configuration Manager or via PowerShell before the WSFC was configured.
 
 Turns out it's an easy fix - turn it off and back on again, or in this case, disable and reenable the availability group setting.
 
