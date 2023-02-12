@@ -7,8 +7,5 @@ categories:
 tags:
 image:
 draft: true
-categories:
-tags:
-image:
 ---
 
