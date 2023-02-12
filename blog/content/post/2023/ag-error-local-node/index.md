@@ -6,7 +6,6 @@ date: 2023-02-12T12:46:59Z
 categories: PowerShell, AvailabilityGroup, FailoverCluster
 tags: PowerShell, AvailabilityGroup, FailoverCluster
 image: justin-smith-eHK0PGncD3k-unsplash.jpg
-draft: true
 ---
 
 While building out some labs for the training day Rob Sewell and I are giving at [SQLBits 2023](http://sqlbits.io/jessandbeardday) I came across a fun error that I thought I'd document how to fix with PowerShell, in case it comes up for others.
