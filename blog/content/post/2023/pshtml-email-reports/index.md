@@ -6,7 +6,6 @@ date: 2023-02-03T09:16:38Z
 categories:
 tags:
 image:
-draft: true
 ---
 
 I've been meaning to write a blog about the [PSHTML](https://github.com/Stephanevg/PSHTML#summary) module for a long time as I've used it many times to make great-looking HTML email reports. This is a great little PowerShell module that creates a domain specific language (DSL) within PowerShell that allows you to easily craft HTML directly from your PowerShell scripts.
