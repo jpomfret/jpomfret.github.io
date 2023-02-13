@@ -47,7 +47,7 @@ The problem was I had enabled Availability Groups, either in the SQL Server Conf
 
 Turns out it's an easy fix - turn it off and back on again, or in this case, disable and reenable the availability group setting.
 
-You can easily do that in PowerShell with [dbatools](https://dbatools.io/) across all your nodes:
+You can easily do that in PowerShell with [dbatools](https://dbatools.io/) across all your nodes. It's worth noting that the `-Force` parameter will restart your SQL Services, as that's required for the change to take effect.
 
 ```PowerShell
 $sqlagnodes = 'sqlnode1','sqlnode2','sqlnode3','sqlnode4'
