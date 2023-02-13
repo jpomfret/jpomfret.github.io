@@ -29,6 +29,7 @@ After a rerun of the AutomatedLab installation, we had a four-node cluster - rea
 {{<
   figure src="agerror.png"
          alt="Availability group error for local node"
+         caption="Availability group error for local node"
 >}}
 
 ```text
