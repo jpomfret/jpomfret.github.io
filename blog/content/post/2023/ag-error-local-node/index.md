@@ -3,8 +3,14 @@ title: "Availability Group Error - Local Node is not part of quorum"
 slug: "ag-error-local-node"
 description: "How to resolve 'The local node is not part of quorum and is therefore unable to process this operation' errors when your WSFC is setup and looks good."
 date: 2023-02-12T12:46:59Z
-categories: PowerShell, AvailabilityGroup, FailoverCluster
-tags: PowerShell, AvailabilityGroup, FailoverCluster
+categories:
+    - PowerShell
+    - AvailabilityGroup
+    - FailoverCluster
+tags:
+    - PowerShell
+    - AvailabilityGroup
+    - FailoverCluster
 image: justin-smith-eHK0PGncD3k-unsplash.jpg
 ---
 
