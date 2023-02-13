@@ -26,7 +26,10 @@ No problem, Automated Lab has many pre-defined roles built in and one of those i
 
 After a rerun of the AutomatedLab installation, we had a four-node cluster - ready to create an availability group. Here's where the problem appeared, when trying to create a new AG on one of the SQL Servers, I got the following error:
 
-![Availability group error for local node](agerror.png)
+{{<
+  figure src="agerror.png"
+         alt="Availability group error for local node"
+>}}
 
 ```text
 The local node is not part of quorum and is therefore unable to process this operation. This may be due to one of the following reasons:
