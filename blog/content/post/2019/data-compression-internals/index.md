@@ -200,4 +200,4 @@ If I scroll down a little further, I’ll come to the first row. The record is n
 
 ## Summary
 
-It’s easy to just apply compression to your databases and see massive space savings. This post hopes to shed a little light on what happens to your pages when using row and page compression. I recently gave this talk to the DBA Fundamentals virtual chapter so if you’d like to see the rest the recording is available on [YouTube](http://﻿https://www.youtube.com/watch?v=F02NqGP2Gyg).
+It’s easy to just apply compression to your databases and see massive space savings. This post hopes to shed a little light on what happens to your pages when using row and page compression. I recently gave this talk to the DBA Fundamentals virtual chapter so if you’d like to see the rest the recording is available on [YouTube](https://www.youtube.com/watch?v=F02NqGP2Gyg).
