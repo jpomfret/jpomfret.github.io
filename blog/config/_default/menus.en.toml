@@ -7,14 +7,14 @@ identifier = "github"
 [social.params]
 icon = "brand-github"
 
-## mastodon
+## bluesky
 [[social]]
-identifier = "mastodon"
-    name = "mastodon"
-    url = "https://tech.lgbt/@Jpomfret"
+identifier = "bluesky"
+    name = "bluesky"
+    url = "https://bsky.app/profile/jpomfret.bsky.social"
 
 [social.params]
-icon = "m"
+icon = "bluesky"
 
 # insta
 [[social]]
