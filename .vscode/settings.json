@@ -127,5 +127,6 @@
         }
     ],
     "[markdown]": {
-    }
+    },
+    "cSpell.enabled": true
 }
