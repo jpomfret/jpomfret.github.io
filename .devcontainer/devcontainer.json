@@ -50,7 +50,6 @@
 				"Gruntfuggly.todo-tree",
 				"DavidAnson.vscode-markdownlint",
 				"yzhang.markdown-all-in-one",
-				"eliostruyf.vscode-front-matter",
 				"znck.grammarly"
 			]
 		}
