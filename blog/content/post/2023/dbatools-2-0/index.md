@@ -71,14 +71,18 @@ At C:\GitHub\dbatools\internal\functions\flowcontrol\Stop-Function.ps1:257 char:
     + FullyQualifiedErrorId : dbatools_Connect-DbaInstance
 ```
 
-![PowerShell console showing error connecting to mssql1](cantconnect.png)
+{{<
+  figure src="cantconnect.png"
+         alt="PowerShell console showing error connecting to mssql1"
+         caption="PowerShell console showing error connecting to mssql1"
+>}}
 
 Using `Set-DbatoolsConfig` we can change these connection properties to trust the SQL Server certificate and set encryption to optional - this will allow us to connect to any SQL Server - whether it's configured with connection encryption or not.
 
 ```PowerShell
 # Set the configurations to old defaults
 Set-DbatoolsConfig -FullName sql.connection.trustcert -Value $true
-Set-DbatoolsConfig -FullName sql.connection.encrypt -Value optional
+Set-DbatoolsConfig -FullName sql.connection.encrypt -Value $false
 ```
 
 Now when we retest the connection it'll work perfectly again.
@@ -93,7 +97,11 @@ ComputerName Name   Product              Version   HostPlatform IsAzure IsCluste
 mssql1       mssql1 Microsoft SQL Server 15.0.4261 Linux        False   False       sqladmin
 ```
 
-![After changing the settings we're able to connect again.](Connected.png)
+{{<
+  figure src="Connected.png"
+         alt="After changing the settings we're able to connect again"
+         caption="After changing the settings we're able to connect again"
+>}}
 
 ### Persisting settings
 
