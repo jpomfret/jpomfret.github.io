@@ -48,8 +48,6 @@ The following image shows the results when run on my local environment, a docker
 {{<
   figure src="results.png"
          alt="results from my local environment, a docker container"
-         class="float-left"
-
 >}}
 
 Hope you find this post useful!
