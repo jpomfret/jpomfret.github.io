@@ -22,7 +22,7 @@ hugo server --poll=700ms -D
 
 ## Make a new post
 
-hugo new post/YYYY/name-of-post/index.md
+hugo new post/2024/name-of-post/index.md
 
 {{<
   figure src="tsqltues-300x300.png"
