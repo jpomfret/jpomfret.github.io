@@ -10,7 +10,7 @@ tags:
     - T-SQL
     - UsefulQueries
 image: joel-jasmin-forestbird-Kfy_FwhfPlc-unsplash.jpg
-draft: true
+draft: false
 ---
 
 This week I needed a query to find any databases where the transaction log is bigger than the total size of the data files. This is a red flag, and can happen for a few reasons that would need further investigation. However, this post is just to share the query, partly for you, and partly for future Jess.
