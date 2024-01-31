@@ -110,7 +110,7 @@ Currently, these settings are only applicable for the session so once we close t
 ```PowerShell
 # Set the configurations to old defaults
 Set-DbatoolsConfig -FullName sql.connection.trustcert -Value $true -PassThru | Register-DbatoolsConfig
-Set-DbatoolsConfig -FullName sql.connection.encrypt -Value optional -PassThru | Register-DbatoolsConfig
+Set-DbatoolsConfig -FullName sql.connection.encrypt -Value $false -PassThru | Register-DbatoolsConfig
 ```
 
 > Note: The `-PassThru` parameter on `Set-DbatoolsConfig` is vital for these settings to be persisted as without that parameter nothing is passed down the pipeline from the Set command.
