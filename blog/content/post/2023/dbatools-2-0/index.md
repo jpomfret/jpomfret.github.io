@@ -77,7 +77,7 @@ At C:\GitHub\dbatools\internal\functions\flowcontrol\Stop-Function.ps1:257 char:
          caption="PowerShell console showing error connecting to mssql1"
 >}}
 
-Using `Set-DbatoolsConfig` we can change these connection properties to trust the SQL Server certificate and set encryption to optional - this will allow us to connect to any SQL Server - whether it's configured with connection encryption or not.
+Using `Set-DbatoolsConfig` we can change these connection properties to trust the SQL Server certificate and set encryption to false - this will allow us to connect to any SQL Server - whether it's configured with connection encryption or not.
 
 ```PowerShell
 # Set the configurations to old defaults
