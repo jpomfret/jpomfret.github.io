@@ -2,7 +2,7 @@
 title: "Dependabot GitHub Actions"
 slug: "dependabot-github-actions"
 description: "Using GitHub's dependabot to keep our GitHub Actions up-to-date with the latest releases."
-date: 2024-01-28T08:01:58Z
+date: 2024-02-06T08:01:58Z
 categories:
     - GitHub
     - GitHubActions
@@ -12,7 +12,7 @@ tags:
     - GitHubActions
     - Security
 image: githubProfile.png
-draft: true
+draft: false
 ---
 
 [GitHub actions](https://github.com/features/actions) allow us to automate so many tasks relating to our GitHub Repositories - this could be anything from full CI\CD pipelines that build, test and publish code, to smaller tasks like adding a `triage` label to any new issues that need a first review. As you start to look more at GitHub Actions you'll realise the possibilities are endless. You can even call REST endpoints, so that could be an Azure Function - and well, with Azure Functions the sky is the limit on what you can build.
