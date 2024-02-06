@@ -33,7 +33,7 @@ Actions, as you'd expect with any developed software have versions, and you spec
 
 The first thing we need to do is enable Dependabot.
 
-We can do that by visiting the Dependabot page within our repository's security settings. You can access the dependabot page from the `Security` tab on your repository or navigating to the equivalent of this link *https://github.com/<<GitHubOrg\User>>/<<Repo>>/security/dependabot*. When you get here if dependabot isn't enabled you'll see the following page, and you'll want to follow the link to `this repository's settings`.
+We can do that by visiting the Dependabot page within our repository's security settings. You can access the dependabot page from the `Security` tab on your repository or navigating to the equivalent of this link `https://github.com/<<GitHubOrg\User>>/<<Repo>>/security/dependabot`. When you get here if dependabot isn't enabled you'll see the following page, and you'll want to follow the link to `this repository's settings`.
 
 {{<
   figure src="dependabotSettings.png"
@@ -41,7 +41,7 @@ We can do that by visiting the Dependabot page within our repository's security 
   caption="The Dependabot setting page within your repo"
 >}}
 
-There are three layers, or pieces to this puzzle that we need to enable for our final solution today - and they are all on the `Code security and analysis` page of your repository settings, the link is: *https://github.com/<<GitHubOrg\User>>/<<Repo>>/settings/security_analysis*.
+There are three layers, or pieces to this puzzle that we need to enable for our final solution today - and they are all on the `Code security and analysis` page of your repository settings, the link is: `https://github.com/<<GitHubOrg\User>>/<<Repo>>/settings/security_analysis`.
 
 1. Dependency graph - this is enabled for all public repositories by default, but if you're working on a private repo you'll need to enable this first.
 2. Dependabot alerts - this enables dependabot to notify you when there are dependencies within your dependency graph that need to be updated.
