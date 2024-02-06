@@ -76,7 +76,7 @@ Commit this change, and get it into the main branch, probably by Pull Request if
 
 ### Fix those out-of-date dependencies
 
-Well this is the really easy part - if dependabot finds any GitHub Actions where newer version are available it'll open a PR to bump the version.
+Well this is the really easy part - if dependabot finds any GitHub Actions where newer versions are available it'll open a PR to bump the version.
 
 {{<
   figure src="dependabotPR.png"
