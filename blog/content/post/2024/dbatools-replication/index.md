@@ -2,7 +2,7 @@
 title: "dbatools - introducing replication support"
 slug: "dbatools-replication"
 description: "As of v2.1.1 dbatools now includes support for replication - this is the first in a series of blog posts to cover these new commands"
-date: 2023-11-29T13:53:59Z
+date: 2024-02-14T09:00:00Z
 categories:
     - dbatools
     - replication
@@ -17,7 +17,7 @@ As many of the [dbatools contributors](https://github.com/dataplat/dbatools/grap
 
 > When will dbatools support replication?
 
-Replication, everyone loves to hate it, but it's been our most requested feature as far as adding commands to dbatools. For ages we've said 'sounds great' and 'we would love that', but we when we started looking into it the energy soon fizzled away, due to it's dependency on [RMO - Replication Management Objects](https://learn.microsoft.com/en-us/sql/relational-databases/replication/concepts/replication-management-objects-concepts?view=sql-server-ver16), as opposed to [SMO - SQL Server Management Objects](https://learn.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide), things weren't as easy as we had hoped.
+Replication, everyone loves to hate it, but it's been our most requested feature as far as adding commands to dbatools. For ages we've said 'sounds great' and 'we would love that', but we when we started looking into it the energy soon fizzled away, due to it's dependency on [RMO - Replication Management Objects](https://learn.microsoft.com/en-us/sql/relational-databases/replication/concepts/replication-management-objects-concepts?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655), as opposed to [SMO - SQL Server Management Objects](https://learn.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide?wt.mc_id=AZ-MVP-5003655), things weren't as easy as we had hoped.
 
 ## It finally happened!
 
