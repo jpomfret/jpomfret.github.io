@@ -17,7 +17,7 @@ As many of the [dbatools contributors](https://github.com/dataplat/dbatools/grap
 
 > When will dbatools support replication?
 
-Replication, everyone loves to hate it, but it's been our most requested feature as far as adding commands to dbatools. For ages we've said 'sounds great' and 'we would love that', but we when we started looking into it the energy soon fizzled away, due to it's dependency on [RMO - Replication Management Objects](https://learn.microsoft.com/en-us/sql/relational-databases/replication/concepts/replication-management-objects-concepts?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655), as opposed to [SMO - SQL Server Management Objects](https://learn.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide?wt.mc_id=AZ-MVP-5003655), things weren't as easy as we had hoped.
+Replication, everyone loves to hate it, but it's been our most requested feature as far as adding commands to dbatools. For ages we've said 'sounds great' and 'we would love that', but when we started looking into it the energy soon fizzled away, due to it's dependency on [RMO - Replication Management Objects](https://learn.microsoft.com/en-us/sql/relational-databases/replication/concepts/replication-management-objects-concepts?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655), as opposed to [SMO - SQL Server Management Objects](https://learn.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide?wt.mc_id=AZ-MVP-5003655), things weren't as easy as we had hoped.
 
 ## It finally happened!
 
@@ -70,7 +70,7 @@ This is an exciting time, but this is just the introductory post for a series on
 
 You can also view any posts I've written on Replication by heading to the [Replication Category](/categories/replication/) page of this blog.
 
-## But I want to hear a presentation on the topic!
+## "But I want to hear a presentation on the topic!"
 
 Well great news here, I'll be presenting [Managing replication with dbatools](https://sqlbits.com/attend/the-agenda/friday/#Managing_replication_with_dbatools) at [SQLBits 2024](https://sqlbits.com/) on Friday 22nd March in Farnborough, I'll link to the recording if\when it becomes available.
 
