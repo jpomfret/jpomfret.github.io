@@ -2,7 +2,7 @@
 title: "dbatools - introducing replication support"
 slug: "dbatools-replication"
 description: "As of v2.1.1 dbatools now includes support for replication - this is the first in a series of blog posts to cover these new commands"
-date: 2024-02-14T09:00:00Z
+date: 2024-02-22T08:00:00Z
 categories:
     - dbatools
     - replication
@@ -10,7 +10,7 @@ tags:
     - dbatools
     - replication
 image: dbatoolsRepl.png
-draft: true
+draft: false
 ---
 
 As many of the [dbatools contributors](https://github.com/dataplat/dbatools/graphs/contributors) wander around the community, writing blogs and presenting at events we're often asked the same question.
@@ -62,8 +62,20 @@ These all have comment based help within the commands that you can read within y
 
 ## Tell me more
 
-This is an exciting time, but this is just the introductory post for a series on this topic, keep your eyes out for the following:
+This is an exciting time, but this is just the introductory post for a series on this topic, keep your eyes out for the following which should be released in the coming weeks in the lead up to SQLBits 2024:
 
 - dbatools Replication: The Get commands
 - dbatools Replication: Setup replication with dbatools
 - dbatools Replication: Tear down replication with dbatools
+
+You can also view any posts I've written on Replication by heading to the [Replication Category](/categories/replication/) page of this blog.
+
+## But I want to hear a presentation on the topic!
+
+Well great news here, I'll be presenting [Managing replication with dbatools](https://sqlbits.com/attend/the-agenda/friday/#Managing_replication_with_dbatools) at [SQLBits 2024](https://sqlbits.com/) on Friday 22nd March in Farnborough, I'll link to the recording if\when it becomes available.
+
+{{<
+  figure src="sqlbits.png"
+         alt="I'm Speaking at SQLBits"
+         link="https://sqlbits.com/attend/the-agenda/friday/#Managing_replication_with_dbatools"
+>}}
