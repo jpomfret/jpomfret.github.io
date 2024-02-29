@@ -64,7 +64,8 @@ These all have comment based help within the commands that you can read within y
 
 This is an exciting time, but this is just the introductory post for a series on this topic, keep your eyes out for the following which should be released in the coming weeks in the lead up to SQLBits 2024:
 
-- dbatools Replication: The Get commands
+- dbatools - introducing replication support - this post!
+- [dbatools Replication: The Get commands](/dbatools-repl-get)
 - dbatools Replication: Setup replication with dbatools
 - dbatools Replication: Tear down replication with dbatools
 
