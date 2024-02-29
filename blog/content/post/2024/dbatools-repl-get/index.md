@@ -13,17 +13,21 @@ image: replmonitor.png
 draft: false
 ---
 
-Welcome to the second post in this series on dbatools replication support. This post will show off all the `Get-` commands that are available within dbatools for replication. When you're using PowerShell, and especially if you're new to PowerShell, exploring the `Get-` commands for a certain module, or area are a great way to get started. As it says in the name, these commands get information about something, they aren't going to change anything, which means they are pretty safe to run in your environment. Of course, I'm always going to say, you should still run these in your test environment first to make sure you understand what they are doing, and how they behave in your specific environment.
+Welcome to the second post in this series on [dbatools](https://dbatools.io/) replication support.
 
-As we were building in support for replications to dbatools, we started by building these `Get-` commands, this gave us a good way of exploring the [Replication Management Objects (RMO)](https://learn.microsoft.com/en-us/sql/relational-databases/replication/concepts/replication-management-objects-concepts?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) and understanding how they worked. We also wanted to make sure that we could get all the information we needed to be able to build the other commands that would be needed to manage replication.
+This post will show off all the `Get-` commands that are available within dbatools for replication. When you're using PowerShell, and especially if you're new to PowerShell, exploring the `Get-` commands for a certain module, or area is a great way to get started. As it says in the name, these commands get information about something, they aren't going to change anything, which means they are pretty safe to run in your environment. Of course, I'm always going to say, you should still run these in your test environment first to make sure you understand what they are doing, and how they behave in your specific environment.
+
+As we were building in support for replications to dbatools, we started by building these `Get-` commands. This gave us a good way of exploring the [Replication Management Objects (RMO)](https://learn.microsoft.com/en-us/sql/relational-databases/replication/concepts/replication-management-objects-concepts?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) and understanding how they worked. We also wanted to make sure that we could get all the information we needed to be able to build the other commands that would be used to manage replication.
 
 I'm going to split this post up into three sections - the first will look at the server level commands, the second will look at publications and subscriptions, and then finally we'll look more closely at articles. If you're not familiar with how replication works within SQL Server I'd recommend reviewing the [Microsoft docs](https://learn.microsoft.com/en-us/sql/relational-databases/replication/sql-server-replication?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) to familiarise yourself with the basic topologies and the terminology for the pieces and parts involved.
 
+These posts are more about how to use dbatools to manage replication, rather than how replication works.
+
 ## Server level commands
 
-In order for replication to be setup there needs to be a publisher and a distributor. I will show how to set these up with dbatools in the next post, but for now we can use the `Get-` commands to see what is already setup in our environment.
+In order for replication to be setup there needs to be a SQL instance that is a publisher and one that is a distributor. These can be the same SQL instance, or separate ones. I will show how to set these up with dbatools in the next post, but for now we can use the `Get-` commands to see what is already setup in our environment.
 
-If we run the following we can get an overview of the target server, and see if it's setup as a distributor or a publisher.
+If we run the following we can get an overview of the target server, and see if it's setup as a distributor or a publisher, or perhaps both.
 
 ```PowerShell
 Get-DbaReplServer -SqlInstance sql1
@@ -41,13 +45,17 @@ DistributionServer   : SQL1
 DistributionDatabase : distribution
 ```
 
-One of the great things about PowerShell is that the date returned from the commands are objects, not just strings. The results from the `Get-DbaReplServer` command, for example, are of type `Microsoft.SqlServer.Replication.ReplicationServer`, there are a lot more properties available on this command, but we try to return the most pertinent information by default. If you want to explore all the properties you can either run `Get-DbaReplServer -SqlInstance sql1 | Format-List *`, which is basically a `SELECT *` statement. Or you can run `Get-DbaReplServer -SqlInstance sql1 | Get-Member` and you'll get a list of all the properties and methods available which can be really useful.
+One of the great things about PowerShell is that the output returned from the commands are objects, not just strings. The results from the `Get-DbaReplServer` command, for example, are of type `Microsoft.SqlServer.Replication.ReplicationServer`. There are a lot more properties available on this command, but we try to return the most pertinent information by default.
 
-I mention this because the next command also returns the same object, just we choose different properties to return. `Get-DbaReplDistributor` is focused on things we care about when we're looking at a distributor - so you can see by running this command against our `sql1` instance we get different properties returned.
+If you want to explore all the properties you can either run `Get-DbaReplServer -SqlInstance sql1 | Format-List *`, which is basically a `SELECT *` statement. Or you can run `Get-DbaReplServer -SqlInstance sql1 | Get-Member` and you'll get a list of all the properties and methods available which can be really useful.
+
+I mention this because the next command also returns the same type of object, just we choose different properties to return by default. `Get-DbaReplDistributor` is focused on things we care about when we're looking at a distributor - so you can see by running this command against our `sql1` instance we get different properties returned.
 
 ```PowerShell
 Get-DbaReplDistributor -SqlInstance sql1
 ```
+
+You can still see that `IsPublisher` and `IsDistributor` are returned, but now we also see properties like `HasRemotePublisher` and `DistributorAvailable`.
 
 ```text
 ComputerName         : sql1
@@ -88,13 +96,13 @@ For more information and examples for each of these commands, check out the dbat
 
 ## Publications and Subscriptions
 
-The next piece of this replication puzzle is our publications and subscriptions. Publications are what we will replicate, they live on the publisher and contain articles which are the objects. We can view all the publications on our instance by running the following command.
+The next piece of this replication puzzle is our publications and subscriptions. Publications live on the publisher and contain articles which are the objects to replicate (think tables, views, stored procedures). We can view all the publications on our instance by running the following command.
 
 ```PowerShell
 Get-DbaReplPublication -SqlInstance sql1
 ```
 
-The output shows us we have three publications set up on `sql1`, if you review the type of each you'll see there is one transactional, one snapshot and one merge publication - these are the three types we have available to use. Again the output is an object, and if you look at the `Articles` and `Subscriptions` properties you can see that these are also objects, if you were to dig into those you could see all the article properties or all subscription properties. Really cool stuff if you ask me!
+The output shows us we have three publications set up on `sql1`. If you review the type of each you'll see there is one transactional, one snapshot and one merge publication - these are the three types we have available to use. Again the output is an object, and if you look at the `Articles` and `Subscriptions` properties you can see that these are also objects, if you were to dig into those you could see all the article properties or all subscription properties. Really cool stuff if you ask me!
 
 ```text
 ComputerName  : sql1
@@ -135,7 +143,7 @@ One thing to note on this command is the target `SqlInstance` we'll use to pass 
 Get-DbaReplSubscription -SqlInstance sql1
 ```
 
-The results of this command confirm what I was just explaining, we have three subscriptions, one for each of our publications. You can see that each publication is replicating to the same instance, `sql2`, but each has a different target database.
+The results of this command confirm what I was just explaining, we have three subscriptions, one for each of our publications. You can see that each publication is replicating to the same destination instance, `sql2`, but each has a different target database.
 
 ```text
 ComputerName       : sql1
@@ -224,7 +232,7 @@ Now as you already know from the previous discussion about output in this post, 
 Let's use another parameter available on `Get-DbaReplArticle` to filter by the `Name` of the article, and then pipe that output to `Select-Object` where we can select the properties we are interested in. Here you'll see I've added a property called `FilterClause` which shows if the article is making use of horizontal filtering.
 
 ```PowerShell
-Get-DbaReplArticle -SqlInstance sql2 -Name customer |
+Get-DbaReplArticle -SqlInstance sql1 -Name customer |
 Select-Object SqlInstance, DatabaseName, PublicationName, Name, SourceObjectOwner, SourceObjectName, FilterClause
 ```
 
@@ -263,6 +271,10 @@ This is part of a series of posts covering how to use the dbatools replication c
 - dbatools Replication: Tear down replication with dbatools
 
 You can also view any posts I've written on Replication by heading to the [Replication Category](/categories/replication/) page of this blog.
+
+## Presentation at SQLBits
+
+Also don't forget I'm presenting 'managing replication with dbatools' at SQLBits 2024 in just a few weeks!
 
 {{<
   figure src="sqlbits.png"
