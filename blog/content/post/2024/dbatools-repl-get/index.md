@@ -1,7 +1,7 @@
 ---
-title: "dbatools replication - the get commands"
+title: "dbatools replication - the Get- commands"
 slug: "dbatools-repl-get"
-description: "This post will show off all the `Get-` commands that are available within dbatools for replication."
+description: "This post will show off all the Get- commands that are available within dbatools for replication."
 date: 2024-02-28T10:00:00Z
 categories:
     - dbatools
@@ -19,7 +19,7 @@ This post will show off all the `Get-` commands that are available within dbatoo
 
 As we were building in support for replications to dbatools, we started by building these `Get-` commands. This gave us a good way of exploring the [Replication Management Objects (RMO)](https://learn.microsoft.com/en-us/sql/relational-databases/replication/concepts/replication-management-objects-concepts?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) and understanding how they worked. We also wanted to make sure that we could get all the information we needed to be able to build the other commands that would be used to manage replication.
 
-I'm going to split this post up into three sections - the first will look at the server level commands, the second will look at publications and subscriptions, and then finally we'll look more closely at articles. If you're not familiar with how replication works within SQL Server I'd recommend reviewing the [Microsoft docs](https://learn.microsoft.com/en-us/sql/relational-databases/replication/sql-server-replication?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) to familiarise yourself with the basic topologies and the terminology for the pieces and parts involved.
+I'm going to split this post up into three sections - the first will look at the server level commands, the second will look at publications and subscriptions, and then, finally, we'll look more closely at articles. If you're not familiar with how replication works within SQL Server I'd recommend reviewing the [Microsoft docs](https://learn.microsoft.com/en-us/sql/relational-databases/replication/sql-server-replication?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) to familiarise yourself with the basic topologies and the terminology for the pieces and parts involved.
 
 These posts are more about how to use dbatools to manage replication, rather than how replication works.
 
@@ -47,9 +47,9 @@ DistributionDatabase : distribution
 
 One of the great things about PowerShell is that the output returned from the commands are objects, not just strings. The results from the `Get-DbaReplServer` command, for example, are of type `Microsoft.SqlServer.Replication.ReplicationServer`. There are a lot more properties available on this command, but we try to return the most pertinent information by default.
 
-If you want to explore all the properties you can either run `Get-DbaReplServer -SqlInstance sql1 | Format-List *`, which is basically a `SELECT *` statement. Or you can run `Get-DbaReplServer -SqlInstance sql1 | Get-Member` and you'll get a list of all the properties and methods available which can be really useful.
+If you want to explore all the properties you can either run `Get-DbaReplServer -SqlInstance sql1 | Format-List *`, which is basically like running a `SELECT *` statement in T-SQL. Or you can run `Get-DbaReplServer -SqlInstance sql1 | Get-Member` and you'll get a list of all the properties and methods available which can be really useful.
 
-I mention this because the next command also returns the same type of object, just we choose different properties to return by default. `Get-DbaReplDistributor` is focused on things we care about when we're looking at a distributor - so you can see by running this command against our `sql1` instance we get different properties returned.
+I mention this because the next command also returns the same type of object, we just choose, by default, different properties to return. `Get-DbaReplDistributor` is focused on things we care about when we're looking at a distributor - so you can see by running this command against our `sql1` instance we get different properties returned.
 
 ```PowerShell
 Get-DbaReplDistributor -SqlInstance sql1
@@ -133,7 +133,7 @@ Articles      : {product}
 Subscriptions : {sql2:AdventureWorksLT2022Merge}
 ```
 
-Again, you'll notice we're just returning some of the properties, that we think you're most likely going to want to know about - if you need more information it's likely there just pipe to `Get-Member` or `Format-List *` to see all the available information.
+Again, you'll notice we're just returning some of the properties, that we think you're most likely going to want to know about - if you need more information it's likely there, just pipe to `Get-Member` or `Format-List *` to see all the available information.
 
 The second `Get-` command we'll look at here is the `Get-DbaReplSubscription` command, and you should be able to guess by now what that might return.
 
@@ -190,7 +190,7 @@ Finally lets take a look at `Get-DbaReplArticle` this will return information ab
 Get-DbaReplArticle -SqlInstance sql1
 ```
 
-If we run it against `sql` you can see that within my test environment I have three articles, one in each publication.
+If we run it against `sql1` you can see that within my test environment I have three articles, one in each publication.
 
 ```text
 ComputerName      : sql1
@@ -227,7 +227,7 @@ SourceObjectOwner : SalesLT
 SourceObjectName  : Product
 ```
 
-Now as you already know from the previous discussion about output in this post, the output returned is objects not just text. In this case one of these articles has a secret.
+Now as you already know from the previous discussion about output in this post, the output returned is objects not just text. In this case, one of these articles has a secret.
 
 Let's use another parameter available on `Get-DbaReplArticle` to filter by the `Name` of the article, and then pipe that output to `Select-Object` where we can select the properties we are interested in. Here you'll see I've added a property called `FilterClause` which shows if the article is making use of horizontal filtering.
 
