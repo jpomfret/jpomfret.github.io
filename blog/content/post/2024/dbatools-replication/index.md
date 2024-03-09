@@ -66,7 +66,7 @@ This is an exciting time, but this is just the introductory post for a series on
 
 - dbatools - introducing replication support - this post!
 - [dbatools Replication: The Get commands](/dbatools-repl-get)
-- dbatools Replication: Setup replication with dbatools
+- [dbatools Replication: Setup replication with dbatools](/dbatools-repl-setup)
 - dbatools Replication: Tear down replication with dbatools
 
 You can also view any posts I've written on Replication by heading to the [Replication Category](/categories/replication/) page of this blog.
@@ -76,7 +76,7 @@ You can also view any posts I've written on Replication by heading to the [Repli
 Well great news here, I'll be presenting [Managing replication with dbatools](https://sqlbits.com/attend/the-agenda/friday/#Managing_replication_with_dbatools) at [SQLBits 2024](https://sqlbits.com/) on Friday 22nd March in Farnborough, I'll link to the recording if\when it becomes available.
 
 {{<
-  figure src="sqlbits.png"
+  figure src="/sqlbits.png"
          alt="I'm Speaking at SQLBits"
          link="https://sqlbits.com/attend/the-agenda/friday/#Managing_replication_with_dbatools"
 >}}
