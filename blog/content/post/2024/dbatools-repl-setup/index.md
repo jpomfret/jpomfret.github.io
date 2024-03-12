@@ -10,7 +10,7 @@ tags:
     - dbatools
     - replication
 image: gabor-szucs-b4b-5FodP3I-unsplash.jpg
-draft: true
+draft: false
 ---
 
 Welcome to another post in my [dbatools](https://dbatools.io) [replication](/categories/replication/) series, where I'm working on showing off how dbatools can make managing replication easier. If you haven't seen the first two posts you can review them at the links below:
