@@ -13,7 +13,7 @@ image:
 draft: true
 ---
 
-If you've been following along in this dbatools replication series, thanks for joining us on this ride! I'm not going to commit to this being the final post in the series, but this is the one where we destroy everything. If you need to tear down replication - this is the post for you.
+If you've been following along in this [dbatools](https://dbatools.io) [replication](/categories/replication/) series, thanks for joining us on this ride! I'm not going to commit to this being the final post in the series, but this is the one where we destroy everything. If you need to tear down replication - this is the post for you.
 
 As I mentioned this is part of a series, so if you want to review the other posts I've written before this one you can see them here:
 
@@ -25,13 +25,15 @@ In fact if you want to follow along with this post, I'd at least recommend the p
 
 ---
 
-In the [Setup Replication](/dbatools-repl-setup) post we started with enabling the server components needed for replication and then we created a publication, added articles and then added a subscription - in that order. To remove replication we will reverse that order, removing the dependencies we created in reverse. First we must remove subscriptions.
+In the [Setup Replication](/dbatools-repl-setup) post we started with enabling the server components needed for replication and then we created a publication, added articles and then finally added a subscription - in that order. To remove replication we will reverse that order, removing the dependencies we created in reverse. 
+
+First we must remove subscriptions.
 
 ## Remove Subscription
 
-In replication, subscribers are where the data is replicated too, let's remove the subscription we added in the last post from the `testPub` publication on `sql1` to `sql2`. I can accomplish this with the `Remove-DbaReplSubscription` command.
+In replication, subscribers are where the data is replicated too. Let's remove the subscription we added in the last post from the `testPub` publication on `sql1` to `sql2`. I can accomplish this with the `Remove-DbaReplSubscription` command.
 
-Just a reminder, when we're dealing with subscriptions we will still target the publisher as the `-SqlInstance` parameter. This is because SQL Server stores the information on the publisher, so for us to find the subscriptions we need to go there first.
+>Just a reminder, when we're dealing with subscriptions we will still target the publisher as the `-SqlInstance` parameter. This is because SQL Server stores the information on the publisher, so for us to find the subscriptions we need to go there first.
 
 ```PowerShell
 $sub = @{
@@ -57,7 +59,7 @@ Note there is no output from this command executing successfully, since we remov
 
 ## Remove Article
 
-It isn't required to remove articles from a publication before you delete a publication, however, to keep this in order I'll show you how to remove an article from a publication next. The command for this is `Remove-DbaReplArticle` and you will specify the publisher instance again, `sql` in this case. With the parameters below I'm removing a particular article `SalesLT.Customer` from the `testpub` publication. 
+It isn't required to remove articles from a publication before you delete a publication. However, to keep this in order I'll show you how to remove an article from a publication next. The command for this is `Remove-DbaReplArticle` and you will specify the publisher instance again, `sql1` in this case. With the parameters below I'm removing a particular article `SalesLT.Customer` from the `testpub` publication. 
 
 ```PowerShell
 $article = @{
@@ -71,7 +73,7 @@ $article = @{
 Remove-DbaReplArticle @article
 ```
 
-You'll notice I've added an extra parameter to this command, `-WhatIf`, this is also available on all destructive dbatools commands, and it will just output what it would do if you didn't have `-WhatId` set to `$true`. In this case:
+You'll notice I've added an extra parameter to this command, `-WhatIf`, this is also available on all destructive dbatools commands. This means that the command will just output what it would do if you didn't have `-WhatIf` set to `$true`. In this case:
 
 ```text
 What if: Performing the operation "Removing the article SalesLT.Customer from the testPub publication on [sql1]" on target "customer".
@@ -95,9 +97,11 @@ Status       : Removed
 IsRemoved    : True
 ```
 
-This is good if I want to remove one article, but what if I wanted to remove all articles, from all publications, on the publisher instance. PowerShell has a concept called 'Piping' [#TODO: ADD LINK], where the output from one command is passed through the 'pipe' (`|`) symbol onto the next command. The output will then be acted upon by the next command you specify.
+This is good if I want to remove one article, but there isn't really much benefit to using PowerShell over just finding that publication in SSMS and removing a single article. However, if I wanted to remove all articles, from all publications on the publisher instance (or maybe from multiple instances) - this would be a pain in SSMS (unless you generate some T-SQL code), but in PowerShell - all we need is a single line.
 
-If I run the following, `Get-DbaReplArticle` will retrieve all the articles for publications on `sql1` and then they will be removed. However, I've again added `-WhatIf` so we can see what would happen. 
+In PowerShell we have a concept called 'Piping' [#TODO: ADD LINK], where the output from one command is passed through the 'pipe' (`|`) symbol onto the next command. The output will then be acted upon by the next command you specify.
+
+If I run the following, `Get-DbaReplArticle` will retrieve all the articles for publications on `sql1` and then they will be passed along the pipeline to `Remove-DbaReplArticle` to be removed. However, I've again added `-WhatIf` so we can see what would happen. 
 
 ```PowerShell
 Get-DbaReplArticle -SqlInstance sql1 | Remove-DbaReplArticle -WhatIf
@@ -110,10 +114,10 @@ What if: Performing the operation "Removing the article SalesLT.Address from the
 What if: Performing the operation "Removing the article SalesLT.Product from the mergey publication on [sql1]" on target "product".
 ```
 
-Now, I'm sure I want to remove all these articles so if I replace `-WhatIf` with `-Confirm`, I won't be asked if I'm sure - this skips the confirmation prompt.
+Now, I'm sure I want to remove all these articles so if I remove `-WhatIf` and instead replace it with `-Confirm`, I won't be asked if I'm sure - this skips the confirmation prompt.
 
 ```PowerShell
-Get-DbaReplArticle -SqlInstance sql1 | Remove-DbaReplArticle -Confirm
+Get-DbaReplArticle -SqlInstance sql1 | Remove-DbaReplArticle -Confirm:$false
 ```
 
 The output below shows that two articles were removed.
@@ -151,6 +155,10 @@ $pub = @{
 Remove-DbaReplPublication @pub
 ```
 
+Again since I didn't specify `-Confirm:$false` I will have to confirm I'm sure, and then the publication will be removed.
+
+In the text output below, you'll notice there are actually two confirmation prompts from running this command. First to remove the publication, and second to remove the SQL Agent job that is associated with this publication.
+
 ```text
 Confirm
 Are you sure you want to perform this action?
@@ -172,12 +180,17 @@ Status       : Removed
 IsRemoved    : True
 ```
 
+## Disable Publishing
 
-## disable publishing
+At this point all the publications, articles and subscriptions have been cleared up, but the `sql1` instance is still enabled for publishing, and is setup as a distributor. Let's put things back to how they were by disabling these components.
+
+First, I'll disable publishing on `sql1` with the following command.
 
 ```PowerShell
-Disable-DbaReplPublishing -SqlInstance sql1 -force
+Disable-DbaReplPublishing -SqlInstance sql1
 ```
+
+Again, our friendly confirmation prompt, but then you might also notice a warning. The warning states that there are databases still enabled for replication, this is a bug at the moment that needs further investigation (#TODO: issue open? add link). The good news is that although we get this message the command does successfully disable publishing. 
 
 ```text
 Confirm
@@ -188,18 +201,19 @@ WARNING: [15:33:35][Disable-DbaReplPublishing] Unable to disable replication pub
 Changed database context to 'distribution'.
 ```
 
-## disable distribution
+Once this is complete we can move onto the final step.
+
+## Disable Distribution
+
+Again, one more line of PowerShell to disable distribution for `sql1`, this also cleans up the `distribution` database (or whatever special name you gave it when you set it up). This time I will specify `-Confirm:$false` to skip the confirmation prompt.
 
 ```PowerShell
-Disable-DbaReplDistributor -SqlInstance sql1
+Disable-DbaReplDistributor -SqlInstance sql1 -Confirm:$false
 ```
 
-```text
-Confirm
-Are you sure you want to perform this action?
-Performing the operation "Disabling and removing distribution on sql1" on target "sql1".
-[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"): y
+The output of this command is the same as what `Get-DbaReplServer` would return at this point. It shows that `IsDistributor` and `IsPublisher` are both set to 'False' and our `sql1` instance is back to how it looked before we started to build out replication in the last post.
 
+```text
 ComputerName         : sql1
 InstanceName         : MSSQLSERVER
 SqlInstance          : sql1
@@ -209,16 +223,23 @@ DistributionServer   : SQL1
 DistributionDatabase :
 ```
 
-```PowerShell
-Get-DbaReplServer -SqlInstance sql1
-```
+## Series
 
-```
-ComputerName         : sql1
-InstanceName         : MSSQLSERVER
-SqlInstance          : sql1
-IsDistributor        : False
-IsPublisher          : False
-DistributionServer   :
-DistributionDatabase :
-```
+This is part of a series of posts covering how to use the dbatools replication commands, other posts in the series:
+
+- [dbatools - introducing replication support](/dbatools-replication)
+- [dbatools Replication: The Get commands](/dbatools-repl-get)
+- [dbatools Replication: Setup replication with dbatools](/dbatools-repl-setup)
+- dbatools Replication: Tear down replication with dbatools - this post!
+
+You can also view any posts I've written on Replication by heading to the [Replication Category](/categories/replication/) page of this blog.
+
+## Presentation at SQLBits
+
+Also don't forget I'm presenting 'managing replication with dbatools' at SQLBits 2024 this week!
+
+{{<
+  figure src="/sqlbits.png"
+         alt="I'm Speaking at SQLBits"
+         link="https://sqlbits.com/attend/the-agenda/friday/#Managing_replication_with_dbatools"
+>}}
