@@ -9,7 +9,7 @@ categories:
 tags:
     - dbatools
     - replication
-image:
+image: chris-j-davis-PT_9ux0j-x4-unsplash.png
 draft: true
 ---
 
@@ -234,12 +234,4 @@ This is part of a series of posts covering how to use the dbatools replication c
 
 You can also view any posts I've written on Replication by heading to the [Replication Category](/categories/replication/) page of this blog.
 
-## Presentation at SQLBits
-
-Also don't forget I'm presenting 'managing replication with dbatools' at SQLBits 2024 this week!
-
-{{<
-  figure src="/sqlbits.png"
-         alt="I'm Speaking at SQLBits"
-         link="https://sqlbits.com/attend/the-agenda/friday/#Managing_replication_with_dbatools"
->}}
+Header Photo by [Chris J. Davis](https://unsplash.com/@chrisjdavis?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/a-close-up-of-a-computer-keyboard-on-a-desk-PT_9ux0j-x4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
