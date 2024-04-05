@@ -10,17 +10,18 @@ tags:
     - dbatools
     - replication
 image: gabor-szucs-b4b-5FodP3I-unsplash.jpg
-draft: true
+draft: false
 ---
 
-Welcome to another post in my [dbatools](https://dbatools.io) replication series, where I'm working on showing off how dbatools can make managing replication easier. If you haven't seen the first two posts you can review them at the links below:
+Welcome to another post in my [dbatools](https://dbatools.io) [replication](/categories/replication/) series, where I'm working on showing off how dbatools can make managing replication easier. If you haven't seen the first two posts you can review them at the links below:
 
 - [dbatools - introducing replication support](/dbatools-replication)
 - [dbatools Replication: The Get commands](/dbatools-repl-get)
 
 ---
 
-This post is focusing on how to setup replication with dbatools. We support all three flavours of replication - [snapshot](https://learn.microsoft.com/sql/relational-databases/replication/snapshot-replication?view=sql-server-ver16&WT.mc_id=AZ-MVP-5003655), [transactional](https://learn.microsoft.com/en-us/sql/relational-databases/replication/transactional/transactional-replication?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) and even [merge replication](https://learn.microsoft.com/sql/relational-databases/replication/merge/merge-replication?view=sql-server-ver16&WT.mc_id=AZ-MVP-5003655)! 
+This post is focusing on how to setup replication with dbatools. We support all three flavours - [snapshot](https://learn.microsoft.com/sql/relational-databases/replication/snapshot-replication?view=sql-server-ver16&WT.mc_id=AZ-MVP-5003655), [transactional](https://learn.microsoft.com/en-us/sql/relational-databases/replication/transactional/transactional-replication?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) and even [merge replication](https://learn.microsoft.com/sql/relational-databases/replication/merge/merge-replication?view=sql-server-ver16&WT.mc_id=AZ-MVP-5003655)! 
+
 
 In this article I'll be creating a transactional publication, but the steps for setup are very similar no matter which flavour you're implementing.
 
@@ -32,7 +33,7 @@ Alright, step 1!
 
 Replication requires a server that is configured as a distributor, and a server that is configured as a publisher. 
 
-Good news, these pieces of the puzzle can both be configured on the same server which is what I'll demonstrate in my test environment. In environments where replication has a high throughput and\or requires peak performance you can configure a separate server for distribution to move some of the load off of the publisher.
+Good news, these pieces of the puzzle can both be configured on the same server which is what I'll demonstrate in my test environment. In environments where replication has a high throughput and/or requires peak performance you can configure a separate server for distribution to move some of the load off of the publisher.
 
 ### Setup Distributor
 
@@ -71,7 +72,7 @@ Replication is all about publications, and the articles within those publication
 Enable-DbaReplPublishing -SqlInstance sql1
 ```
 
-The results look very similar to what was returned by `Enable-DbaReplDistributor`, however you can now see the `DistributionDatabase` is populated, and `IsPublisher` has changed to true.
+The results look very similar to what was returned by `Enable-DbaReplDistributor`, however, you can now see the `DistributionDatabase` is populated, and `IsPublisher` has changed to true.
 
 ```text
 ComputerName         : sql1
@@ -94,9 +95,9 @@ For the two commands we've just used you can see the dbatools help documentation
 
 ## Create Publications
 
-As I mentioned the steps are very similar for whatever flavour of replication you want to create, in this post I'll create a transactional replication publication - this is (in my opinion) the most common type that is used in the real world. Transactional replication allows us to replicate changes from one database to another for certain objects in near real time.
+As I mentioned the steps are very similar for whatever flavour of replication you want to create, in this post, I'll create a transactional replication publication - this is (in my opinion) the most common type that is used in the real world. Transactional replication allows us to replicate changes from one database to another for certain objects in near real-time.
 
-The really cool thing here is that this is object level, unlike other technologies like Availability Groups, we can replicate just one table, or even just certain rows from one table based on a filter.
+The really cool thing here is that this is object level, unlike other technologies like Availability Groups, we can replicate just one table, or just certain columns from certain tables, or even just certain rows from one table based on a filter.
 
 Ok, I'll use `New-DbaReplPublication` to specify the basic parameters needed to create a publication. In the code snippet below you can see this publication will be created on the `sql1` instance, for the `AdventureWorksLT2022` database, it'll be named `testPub` and it'll be of type `transactional` as I mentioned before.
 
@@ -179,9 +180,9 @@ More information on this command is available in the dbatools help documentation
 
 - [Add-DbaReplArticle](https://dbatools.io/Add-DbaReplArticle)
 
-Alright, the final piece of this puzzle is to add a subscription.
-
 ## Add a Subscription
+
+Alright, the final piece of this puzzle is to add a subscription.
 
 Now that I've created a publication and added an article, I need to configure where this should be replicated too, which is the subscriber. In my demo environment I'm going to replicate to the `sql2` instance, but you could replicate to another database on the same `sql1` instance.
 
@@ -256,7 +257,7 @@ Now these commands aren't specifically related to replication, but all dbatools 
 
 ## Testing time
 
-With transactional replication, the magic is that rows are replicated (in near real time) as they change on the publisher. Let's prove the replication we've configured is working as expected by inserting a row into the `SalesLT.Customer` table on the `sql1` instance.
+With transactional replication, the magic is that rows are replicated (in near real-time) as they change on the publisher. Let's prove the replication we've configured is working as expected by inserting a row into the `SalesLT.Customer` table on the `sql1` instance.
 
 First step, let's review the data we have on the publisher, `sql1`, remember that I added a horizontal filter to the article so I only really care about the data in this table that matches the filter. I'll run the following T-SQL to see what we have to start with.
 
@@ -282,6 +283,16 @@ Let's insert a new row with the following T-SQL.
 INSERT INTO SalesLT.Customer (NameStyle,Title,FirstName,LastName,PasswordHash,PasswordSalt,rowguid)
 VALUES ('0','Mr.','Bill','Gates','ElzTpSNbUW1Ut+L5cWlfR7MF6nBZia8WpmGaQPjLOJA=','nm7D5e4=','949E9AC8-F8F6-4F7F-8888-87187AC56919')
 ```
+
+> We could also do this using PowerShell and dbatools with the following call to `Invoke-DbaQuery`.
+> ```PowerShell
+>$insertParams = @{
+>    SqlInstance = 'sql1'
+>    Database    = 'AdventureWorksLT2022'
+>    Query       = "INSERT INTO SalesLT.Customer (NameStyle,Title,FirstName,LastName,PasswordHash,PasswordSalt,rowguid) VALUES ('0','Mr.','Bill','Gates','ElzTpSNbUW1Ut+L5cWlfR7MF6nBZia8WpmGaQPjLOJA=','nm7D5e4=','949E9AC8-F8F6-4F7F-8888-87187AC56919')"
+>}
+>Invoke-DbaQuery @insertParams
+> ```
 
 You can see the results below, 1 row affected on the publisher.
 
@@ -330,4 +341,4 @@ Also don't forget I'm presenting 'managing replication with dbatools' at SQLBits
 >}}
 
 Header Photo by [Gabor Szucs](https://unsplash.com/@gabcsika?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/body-of-water-surrounded-with-trees-under-white-skies-b4b-5FodP3I?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
-  
+
