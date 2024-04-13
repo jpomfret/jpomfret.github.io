@@ -20,8 +20,7 @@ Welcome to another post in my [dbatools](https://dbatools.io) [replication](/cat
 
 ---
 
-This post is focusing on how to setup replication with dbatools. We support all three flavours - [snapshot](https://learn.microsoft.com/sql/relational-databases/replication/snapshot-replication?view=sql-server-ver16&WT.mc_id=AZ-MVP-5003655), [transactional](https://learn.microsoft.com/en-us/sql/relational-databases/replication/transactional/transactional-replication?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) and even [merge replication](https://learn.microsoft.com/sql/relational-databases/replication/merge/merge-replication?view=sql-server-ver16&WT.mc_id=AZ-MVP-5003655)! 
-
+This post is focusing on how to setup replication with dbatools. We support all three flavours - [snapshot](https://learn.microsoft.com/sql/relational-databases/replication/snapshot-replication?view=sql-server-ver16&WT.mc_id=AZ-MVP-5003655), [transactional](https://learn.microsoft.com/en-us/sql/relational-databases/replication/transactional/transactional-replication?view=sql-server-ver16?wt.mc_id=AZ-MVP-5003655) and even [merge replication](https://learn.microsoft.com/sql/relational-databases/replication/merge/merge-replication?view=sql-server-ver16&WT.mc_id=AZ-MVP-5003655)!
 
 In this article I'll be creating a transactional publication, but the steps for setup are very similar no matter which flavour you're implementing.
 
@@ -29,9 +28,9 @@ I'll walk through and demonstrate all the steps to setup replication in this art
 
 ## Setup Distributor and Publisher
 
-Alright, step 1! 
+Alright, step 1!
 
-Replication requires a server that is configured as a distributor, and a server that is configured as a publisher. 
+Replication requires a server that is configured as a distributor, and a server that is configured as a publisher.
 
 Good news, these pieces of the puzzle can both be configured on the same server which is what I'll demonstrate in my test environment. In environments where replication has a high throughput and/or requires peak performance you can configure a separate server for distribution to move some of the load off of the publisher.
 
@@ -47,7 +46,7 @@ You can see the following output is returned, note that the `DistributionDatabas
 
 There is an optional parameter `-DistributionDatabase` if you want to specify a certain name for the database that is created on the distributor, but if you don't specify, the database will be called `distribution` which is the default. Same as if you were to create it through SSMS.
 
-```
+```text
 ComputerName         : sql1
 InstanceName         : MSSQLSERVER
 SqlInstance          : sql1
@@ -223,6 +222,7 @@ Replication relies on executables that live outside of the SQL Server Engine, bu
 Get-DbaAgentJob -SqlInstance sql1 -Category repl-snapshot | 
 Start-DbaAgentJob
 ```
+
 The output of this command shows it found the `SQL1-AdventureWorksLT2022-testPub-1` job and started it.
 
 ```text
@@ -254,7 +254,6 @@ Now these commands aren't specifically related to replication, but all dbatools 
 - [Get-DbaAgentJob](https://dbatools.io/Get-DbaAgentJob)
 - [Start-DbaAgentJob](https://dbatools.io/Start-DbaAgentJob)
 
-
 ## Testing time
 
 With transactional replication, the magic is that rows are replicated (in near real-time) as they change on the publisher. Let's prove the replication we've configured is working as expected by inserting a row into the `SalesLT.Customer` table on the `sql1` instance.
@@ -285,6 +284,7 @@ VALUES ('0','Mr.','Bill','Gates','ElzTpSNbUW1Ut+L5cWlfR7MF6nBZia8WpmGaQPjLOJA=',
 ```
 
 > We could also do this using PowerShell and dbatools with the following call to `Invoke-DbaQuery`.
+>
 > ```PowerShell
 >$insertParams = @{
 >    SqlInstance = 'sql1'
@@ -331,4 +331,3 @@ This is part of a series of posts covering how to use the dbatools replication c
 You can also view any posts I've written on Replication by heading to the [Replication Category](/categories/replication/) page of this blog.
 
 Header Photo by [Gabor Szucs](https://unsplash.com/@gabcsika?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/body-of-water-surrounded-with-trees-under-white-skies-b4b-5FodP3I?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
-

@@ -25,7 +25,7 @@ In fact if you want to follow along with this post, I'd at least recommend the p
 
 ---
 
-In the [Setup Replication](/dbatools-repl-setup) post we started with enabling the server components needed for replication and then we created a publication, added articles and then finally added a subscription - in that order. To remove replication we will reverse that order, removing the dependencies we created in reverse. 
+In the [Setup Replication](/dbatools-repl-setup) post we started with enabling the server components needed for replication and then we created a publication, added articles and then finally added a subscription - in that order. To remove replication we will reverse that order, removing the dependencies we created in reverse.
 
 First we will remove the subscriptions.
 
@@ -46,7 +46,7 @@ $sub = @{
 Remove-DbaReplSubscription @sub
 ```
 
-When I run this PowerShell I get a prompt, 'Are you sure?!?'. This command is destructive, and with any dbatools commands that remove items you get a second chance to back out. In this case I am sure, so I will press `Y` to continue and remove the subscription. 
+When I run this PowerShell I get a prompt, 'Are you sure?!?'. This command is destructive, and with any dbatools commands that remove items you get a second chance to back out. In this case I am sure, so I will press `Y` to continue and remove the subscription.
 
 ```text
 Confirm
@@ -97,7 +97,7 @@ Status       : Removed
 IsRemoved    : True
 ```
 
-This is good if I want to remove one article, but there isn't really much benefit to using PowerShell over just finding that publication in SSMS and removing a single article. 
+This is good if I want to remove one article, but there isn't really much benefit to using PowerShell over just finding that publication in SSMS and removing a single article.
 
 However, if I wanted to remove all articles, from all publications on the publisher instance, or maybe even from multiple instances - this would be a pain in SSMS (unless you generate some T-SQL code), but in PowerShell - all we need is a single line.
 
