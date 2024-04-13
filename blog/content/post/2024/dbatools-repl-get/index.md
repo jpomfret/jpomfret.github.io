@@ -271,13 +271,3 @@ This is part of a series of posts covering how to use the dbatools replication c
 - dbatools Replication: Tear down replication with dbatools
 
 You can also view any posts I've written on Replication by heading to the [Replication Category](/categories/replication/) page of this blog.
-
-## Presentation at SQLBits
-
-Also don't forget I'm presenting 'managing replication with dbatools' at SQLBits 2024 in just a few weeks!
-
-{{<
-  figure src="/sqlbits.png"
-         alt="I'm Speaking at SQLBits"
-         link="https://sqlbits.com/attend/the-agenda/friday/#Managing_replication_with_dbatools"
->}}

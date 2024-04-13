@@ -9,7 +9,7 @@ categories:
 tags:
     - dbatools
     - replication
-image: chris-j-davis-PT_9ux0j-x4-unsplash.png
+image: chris-j-davis-PT_9ux0j-x4-unsplash.jpg
 draft: true
 ---
 
@@ -27,7 +27,7 @@ In fact if you want to follow along with this post, I'd at least recommend the p
 
 In the [Setup Replication](/dbatools-repl-setup) post we started with enabling the server components needed for replication and then we created a publication, added articles and then finally added a subscription - in that order. To remove replication we will reverse that order, removing the dependencies we created in reverse. 
 
-First we must remove subscriptions.
+First we will remove the subscriptions.
 
 ## Remove Subscription
 
@@ -55,11 +55,11 @@ Performing the operation "Removing subscription to testPub from sql1.AdventureWo
 [Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"): y
 ```
 
-Note there is no output from this command executing successfully, since we removed the object we were aiming at.  However, no errors, so we can presume we're good here.
+Note there is no output from this command executing successfully, since we removed the object we were aiming at.  However, no errors, so we can presume we're good here. We could also use `Get-DbaReplSubscription` to double check if we wanted to.
 
 ## Remove Article
 
-It isn't required to remove articles from a publication before you delete a publication. However, to keep this in order I'll show you how to remove an article from a publication next. The command for this is `Remove-DbaReplArticle` and you will specify the publisher instance again, `sql1` in this case. With the parameters below I'm removing a particular article `SalesLT.Customer` from the `testpub` publication. 
+It isn't required to remove articles from a publication before you delete a publication. However, to keep this in order I'll show you how to remove an article from a publication next. The command for this is `Remove-DbaReplArticle` and you will specify the publisher instance again, `sql1` in this case. With the parameters below, I'm removing a particular article `SalesLT.Customer` from the `testpub` publication.
 
 ```PowerShell
 $article = @{
@@ -73,13 +73,13 @@ $article = @{
 Remove-DbaReplArticle @article
 ```
 
-You'll notice I've added an extra parameter to this command, `-WhatIf`, this is also available on all destructive dbatools commands. This means that the command will just output what it would do if you didn't have `-WhatIf` set to `$true`. In this case:
+You'll notice I've added an extra parameter to this command, `-WhatIf`, this is also available on all destructive dbatools commands (and other PowerShell commands if they are written to make use of it). This means that the command will just output what it would do if you didn't have `-WhatIf` set to `$true`. In this case:
 
 ```text
 What if: Performing the operation "Removing the article SalesLT.Customer from the testPub publication on [sql1]" on target "customer".
 ```
 
-If I now remove `-WhatIf` and rerun the command I'll get another prompt to confrirm I'm sure, and then if I am, the article will be removed and the output below will show it was removed.
+If I now remove `-WhatIf` and rerun the command I'll get another prompt to confirm I'm sure, and then if I am, the article will be removed and this time the output below will show it was removed.
 
 ```Text
 Confirm
@@ -97,11 +97,13 @@ Status       : Removed
 IsRemoved    : True
 ```
 
-This is good if I want to remove one article, but there isn't really much benefit to using PowerShell over just finding that publication in SSMS and removing a single article. However, if I wanted to remove all articles, from all publications on the publisher instance (or maybe from multiple instances) - this would be a pain in SSMS (unless you generate some T-SQL code), but in PowerShell - all we need is a single line.
+This is good if I want to remove one article, but there isn't really much benefit to using PowerShell over just finding that publication in SSMS and removing a single article. 
 
-In PowerShell we have a concept called 'Piping' [#TODO: ADD LINK], where the output from one command is passed through the 'pipe' (`|`) symbol onto the next command. The output will then be acted upon by the next command you specify.
+However, if I wanted to remove all articles, from all publications on the publisher instance, or maybe even from multiple instances - this would be a pain in SSMS (unless you generate some T-SQL code), but in PowerShell - all we need is a single line.
 
-If I run the following, `Get-DbaReplArticle` will retrieve all the articles for publications on `sql1` and then they will be passed along the pipeline to `Remove-DbaReplArticle` to be removed. However, I've again added `-WhatIf` so we can see what would happen. 
+In PowerShell we have a concept called [Piping](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines?view=powershell-7.4), where the output from one command is passed through the 'pipe' (`|`) symbol onto the next command. The output will then be acted upon by the next command you specify.
+
+If I run the following code. First, `Get-DbaReplArticle` will retrieve all the articles for publications on `sql1` and then they will be passed along the pipeline to `Remove-DbaReplArticle` to be removed. However, I've again added `-WhatIf` so we can preview what would happen.
 
 ```PowerShell
 Get-DbaReplArticle -SqlInstance sql1 | Remove-DbaReplArticle -WhatIf
@@ -190,7 +192,7 @@ First, I'll disable publishing on `sql1` with the following command.
 Disable-DbaReplPublishing -SqlInstance sql1
 ```
 
-Again, our friendly confirmation prompt, but then you might also notice a warning. The warning states that there are databases still enabled for replication, this is a bug at the moment that needs further investigation (#TODO: issue open? add link). The good news is that although we get this message the command does successfully disable publishing. 
+Again, our friendly confirmation prompt, but then you might also notice a warning. The warning states that there are databases still enabled for replication, this is a bug within RMO, the library dbatools uses, and needs further investigation to resolve. The good news is that although we get this message the command does successfully disable publishing.
 
 ```text
 Confirm
