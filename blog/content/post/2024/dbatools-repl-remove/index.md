@@ -46,7 +46,7 @@ $sub = @{
 Remove-DbaReplSubscription @sub
 ```
 
-When I run this PowerShell I get a prompt, 'Are you sure?!?'. This command is destructive, and with any dbatools commands that remove items you get a second chance to back out. In this case I am sure, so I will press `Y` to continue and remove the subscription.
+When I run this PowerShell I get a prompt, 'Are you sure?!?'. This command is destructive, and with any dbatools commands that remove items you get a second chance to back out. In this case, I am sure, so I will press `Y` to continue and remove the subscription. I can skip this confirmation, for example when running in an automated fashion, I'll come back to this a little later.
 
 ```text
 Confirm
