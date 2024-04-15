@@ -10,7 +10,7 @@ tags:
     - dbatools
     - replication
 image: chris-j-davis-PT_9ux0j-x4-unsplash.jpg
-draft: true
+draft: false
 ---
 
 If you've been following along in this [dbatools](https://dbatools.io) [replication](/categories/replication/) series, thanks for joining us on this ride! I'm not going to commit to this being the final post in the series, but this is the one where we destroy everything. If you need to tear down replication - this is the post for you.
