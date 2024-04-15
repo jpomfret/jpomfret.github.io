@@ -1,5 +1,5 @@
 ---
-title: "dbatools replication - tear down replication"
+title: "dbatools Replication - Tear Down Replication"
 slug: "dbatools-repl-remove"
 description: "Remove all the pieces and parts of replication with dbatools."
 date: 2024-03-14T10:31:31Z
