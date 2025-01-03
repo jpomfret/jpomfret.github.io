@@ -21,6 +21,7 @@ I have video courses available on LinkedIn Learning on a variety of topics from 
   figure src="LinkedInLearning.jpg"
          alt="LinkedIn Learning still"
          width="500px"
+         link="https://www.linkedin.com/learning/instructors/jess-pomfret"
 >}}
 
 If you enjoy the courses, please let me know!

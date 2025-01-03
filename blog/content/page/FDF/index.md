@@ -16,6 +16,7 @@ A journey to find friends in the data community with me & Ben - follow the journ
          alt="Finding Data Friends Logo"
          width="300px"
          class="float-left"
+         link="http://findingdatafriends.com/"
 >}}
 
 Ben approached me last year with this idea for a podcast and we've been overwhelmed with the support from the community for this project so far!
