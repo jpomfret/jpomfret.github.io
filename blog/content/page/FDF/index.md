@@ -9,8 +9,6 @@ menu:
             icon: microphone
 ---
 
-## Finding Data Friends
-
 A journey to find friends in the data community with me & Ben - follow the journey on YouTube.
 
 {{<
