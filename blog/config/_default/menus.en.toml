@@ -33,3 +33,12 @@ identifier = "sessionize"
 
 [social.params]
 icon = "sesh"
+
+# linkedin
+[[social]]
+identifier = "linkedin"
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/jpomfret/"
+
+[social.params]
+icon = "linkedin"
