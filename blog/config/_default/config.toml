@@ -1,8 +1,11 @@
 # Change baseurl before deploy
 baseurl = "https://jesspomfret.com"
 languageCode = "en-gb"
-paginate = 5
+#paginate = 7
 title = "Jess Pomfret"
+
+[pagination]
+pagerSize = 5
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk, ar
