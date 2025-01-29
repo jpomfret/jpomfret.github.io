@@ -47,7 +47,7 @@ There are two containers available, both use the same admin login to connect, bo
 
 ## Alright, here is the magic
 
-1. Run the container. In my example we wanted to install Ola's maintenance solution, that is already on the `sqlinstance` image, so we chose `sqlinstance`. The only part you might want to change is the port on your local computer.
+1. Run the container. In my example we wanted to install Ola's maintenance solution, that is already on the `sqlinstance` image, so we chose `sqlinstance2`. The only part you might want to change is the port on your local computer.
 
 ```powershell
 docker run -p 2600:1433  --volume shared:/shared:z --name mssql2 --hostname mssql2 --network localnet -d dbatools/sqlinstance2
