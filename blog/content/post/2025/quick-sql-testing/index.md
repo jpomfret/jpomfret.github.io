@@ -94,12 +94,34 @@ Install-DbaMaintenanceSolution @params
 
 ## But I want to connect in SSMS\ADS
 
-You
+Good news! You can connect to this local container using any of your favourite tools.  You'll need to use SQL Authentication, and use the credentials shared above. The server name will be `localhost:2600` where `2600` is the port you chose in the `docker run` command.
 
+{{<
+  figure src="olainstalled.png"
+  alt="Connected to the SQL Server container in SSMS."
+  caption="Ola maintenance solution shown through SSMS Object Explorer!"
+>}}
+
+## Two more tips
+
+You can also setup client aliases to make connecting to the container even easier. I always run my containers on ports `2500` and `2600` so I set up client aliases, so I don't have to use `localhost:2600`, instead I can use a friendly name.
+
+Make sure you run this in an elevated console window, but after executing this you can now use `mssql2` as the name to connect to your SQL Server instance.
+
+```PowerShell
+$splat = @{
+  ComputerName  = 'localhost,7845'
+  ServerName    = 'localhost,7845'
+  Alias         = 'mssql2'
+}
+New-DbaClientAlias @splat
+```
+
+The second tip I've already blogged about, but it makes authenticating with containers easier. Read about using [PSDefaultParameterValues for connecting to SQL Server containers](/psdefaultparametervaluescontainers/).
 
 ## Caveats
 
+There are a couple of caveats to be aware of. Firstly, these containers are linux based, which means you can only test things that work on SQL Server running on Linux.  There are fewer things on this list than you'd probably
+
 - Linux
 - Perf testing
-
-
