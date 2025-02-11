@@ -14,7 +14,7 @@ tags:
     - docker
     - containers
 image: venti-views-1cqIcrWFQBI-unsplash.jpg
-draft: true
+draft: false
 ---
 
 Today, my colleague wanted to quickly test out some [dbatools](http://dbatools.io/github) commands to [install the Ola Hallengren maintenance solution](https://docs.dbatools.io/Install-DbaMaintenanceSolution.html). They had a local instance of SQL installed, but it already had the maintenance jobs running, so it wasn't a fresh, out of the box instance.
@@ -129,4 +129,4 @@ Also, if you are trying to test anything performance related, remember these are
 
 During the writing of this blog post, I found this post on LinkedIn, by [Drew Skwiers-Koballa](https://www.linkedin.com/in/drew-skwiers-koballa/), he's made a docker extension to allow you to quickly spin up an instance. Now these won't get you all the dbatools extras, but will get you an instance in no time at all.
 
-<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7280296192859631616" height="1092" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+Check that post out on [LinkdedIn](https://www.linkedin.com/posts/drew-skwiers-koballa_sqlserver-azuresql-docker-activity-7280296194449256448-NiMl?utm_source=share&utm_medium=member_desktop)!
