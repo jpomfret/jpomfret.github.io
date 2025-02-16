@@ -50,7 +50,7 @@ There are two containers available, both use the same admin login to connect, bo
 1. Run the container. In my example we wanted to install Ola's maintenance solution, that is already on the `sqlinstance` image, so we chose `sqlinstance2`. The only part you might want to change is the port on your local computer.
 
 ```powershell
-docker run -p 2600:1433  --volume shared:/shared:z --name mssql2 --hostname mssql2 --network localnet -d dbatools/sqlinstance2
+docker run -p 2600:1433  --volume shared:/shared:z --name mssql2 --hostname mssql2 -d dbatools/sqlinstance2
 ```
 
 > This docker run command is mapping port 1433 within the container, to port 2600 on my local computer. SQL Server listens on port 1433 by default, so what this means is that from my machine I will now connect to SQL on port 2600. You can choose any port, that isn't in use.
@@ -74,6 +74,10 @@ Your console should look similar to this, you can see an object is returned show
   alt="PowerShell console showing the code above, with an object outputted."
   caption="We are connected to our SQL Instance"
 >}}
+
+If you get an error like the one below you need to verify the encryption settings for your session. You can read more about that [here, as it was a change with dbatools 2.0](/dbatools-2-0/#a-breaking-change). The easiest option is to add the `-TrustServerCertificate` parameter to the call of `Connect-DbaInstance`, since this is a local container this is low risk, however make sure you understand why this is needed for production servers.
+
+> Error connecting to [localhost,2600]: The certificate chain was issued by an authority that is not trusted.
 
 3. Get testing! You can now run any of the dbatools commands* (see Caveats below) against your instance, and test out how the parameters work, and ensure the results you're getting are what you wanted.
 
