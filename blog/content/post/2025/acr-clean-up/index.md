@@ -1,21 +1,102 @@
 ---
-title: "Acr Clean Up"
-slug: "acr-clean-up"
-description: "ENTER YOUR DESCRIPTION"
-date: 2024-12-04T17:04:34Z
+title: "Azure Spring Clean 2025 - Clean up your Azure Containers Registry"
+slug: "acr-clean"
+description: "Azure Container Registries can easily become cluttered with many versions of images. Did you know that each ACR sku comes with a certain amount of storage, and when you go over that, you'll pay overage charges. Let's look at how to check your current storage usage, keep your registry nice and tidy with an ACR clean-up task, and monitor the storage levels so you'll never pay extra again!"
+date: 2025-02-22T10:00:00Z
+#date: 2025-03-06T09:00:0Z
 categories:
+    - acr
+    - azure
 tags:
-image:
-draft: true
+    - acr
+    - azure
+image: raymond-rasmusson-7EhAf2dBthg-unsplash.jpg
+draft: false
 ---
+
+This article is part of the [Azure Spring Clean](https://www.azurespringclean.com/) series, which focuses on promoting well managed Azure tenants. I love cloud technologies, but it is incredible easy to spin something up without best practices or guardrails - that then goes on to create unnecessary cloud spend. When I saw the call for papers for this series, I knew I had the perfect post for it.
+
+Keeping your Azure Container Registries clean and tidy.
+
+## What is an Azure Container Registry?
+
+So first, what is an Azure Container Registry (ACR), and what's it used for.  In simple terms it's a place in Azure for you to store container images and other artifacts. It comes with some neat features like geo-replication and integrated Entra authentication so it's enterprise ready, and it can be easily integrated into your pipelines and build processes.
+
+At the time of writing there are three tiers of ACR you can choose from: Basic, Standard and Premium. As you can imagine, each one has a different price point, and resource limits. For this blog post we're talking about storage, and for our three tiers, these are the current storage allowances:
+
+| Tier     | Included Storage | Max storage |
+|----------|------------------|-------------|
+| Basic    | 10GB             | 40 TB       |
+| Standard | 100GB            | 40 TB       |
+| Premium  | 500GB            | 40 TB       |
+
+A full list can be found in the Docs - [Service tier features & limits](https://learn.microsoft.com/en-gb/azure/container-registry/container-registry-skus#service-tier-features-and-limits).
+
+So what do you think happens between the included storage and max storage amounts?... You guessed it - you pay extra for it.
+
+Let's look at how we can see what the current storage usage is, and how we can keep it under control.
+
+## Show current storage usage
+
+Alright, first, let's see what we're using. There are a few ways to see this, you can see it in the [Azure portal](https://portal.azure.com/), as shown below. Here you can see I'm using 17.8GB - but there is no indication from here how much included storage I have. I would need to check the overview pane, note it's a standard tier and then refer to the document above to know I'm within the limit.
+
+![Metrics pane in the Azure portal showing average storage usage](storageMetricPortal.png)
+
+We can also do this with the Azure cli, running the following:
+
+```PowerShell
+az acr show-usage -n acrName
+```
+
+Will get us a response in JSON... we can see the first item, name `size` has both a `limit` and `currentValue` property.
+
+```json
+{
+  "value": [
+    {
+      "currentValue": 19116221660,
+      "limit": 107374182400,
+      "name": "Size",
+      "unit": "Bytes"
+    },
+    {
+      "currentValue": 0,
+      "limit": 10,
+      "name": "Webhooks",
+      "unit": "Count"
+    },
+    {
+      "currentValue": 0,
+      "limit": 500,
+      "name": "ScopeMaps",
+      "unit": "Count"
+    },
+    {
+      "currentValue": 0,
+      "limit": 500,
+      "name": "Tokens",
+      "unit": "Count"
+    }
+  ]
+}
+```
+
+But this still isn't very easy to read, so since I'm a PowerShell fan, lets's convert the JSON to a PowerShell object and then select the properties we care about in GB.
+```PowerShell
+(az acr show-usage -n DmmPortalAcr | ConvertFrom-Json).Value  | Where-Object name -eq size | select @{l='CurrentSizeGB';e={$_.currentvalue/1GB}}, @{l='LimitGB';e={$_.limit/1GB}}
+```
+
+## Run an on-demand clean-up task
+
+## Schedule the task to run weekly
+
+
 
 potential to save some money here in Azure.
 
 get the space you're using
 
-```PowerShell
-az acr show-usage -n acrName
-```
+
 
 ![Show usage](showUsaage.png)
 
@@ -85,3 +166,7 @@ rerun show usage and see how much you saved
 set this up to run on a schedule
 
 more info: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-auto-purge#preview-the-purge
+
+
+Header image
+Photo by <a href="https://unsplash.com/@raymondrasmusson?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Raymond Rasmusson</a> on <a href="https://unsplash.com/photos/plastic-organizer-with-labels-7EhAf2dBthg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
