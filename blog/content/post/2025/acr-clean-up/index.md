@@ -1,7 +1,7 @@
 ---
 title: "Azure Spring Clean 2025 - Clean up your Azure Containers Registry"
 slug: "acr-clean"
-description: "Azure Container Registries can easily become cluttered with many versions of images. Did you know that each ACR sku comes with a certain amount of storage, and when you go over that, you'll pay overage charges. Let's look at how to check your current storage usage, keep your registry nice and tidy with an ACR clean-up task, and monitor the storage levels so you'll never pay extra again!"
+description: "Azure Container Registries can easily become cluttered with many versions of images. Did you know that each ACR sku comes with a certain amount of storage included, and when you go over that, you'll pay overage charges. Let's look at how to check your current storage, keep your registry nice and tidy with an ACR clean-up task, and monitor the storage levels so you'll never pay extra again!"
 date: 2025-02-22T10:00:00Z
 #date: 2025-03-06T09:00:0Z
 categories:
@@ -81,59 +81,73 @@ Will get us a response in JSON... we can see the first item, name `size` has bot
 }
 ```
 
-But this still isn't very easy to read, so since I'm a PowerShell fan, lets's convert the JSON to a PowerShell object and then select the properties we care about in GB.
+But this still isn't very easy to read, so since I'm a PowerShell fan, lets's convert the JSON to a PowerShell object and then select the properties we care about in GB. That looks much better to me, and I can easily see that I'm using almost 18GB of my allowed 100GB. No overage charges for me!
+
+But, recently I found an ACR out in the wild that was using 2.4TB of storage, way over the limit of 100GB - and every month their Azure bill had a line item charging them for extra storage!
+
 ```PowerShell
-(az acr show-usage -n DmmPortalAcr | ConvertFrom-Json).Value  | Where-Object name -eq size | select @{l='CurrentSizeGB';e={$_.currentvalue/1GB}}, @{l='LimitGB';e={$_.limit/1GB}}
+(az acr show-usage -n acrName | ConvertFrom-Json).Value  |
+Where-Object name -eq 'size' |
+Select-Object @{l='CurrentSizeGB';e={$_.currentValue/1GB}}, @{l='LimitGB';e={$_.limit/1GB}}
 ```
 
-## Run an on-demand clean-up task
+![Current usage shown in GB](currentUsage.png)
 
-## Schedule the task to run weekly
+## What's using all that space!
 
-
-
-potential to save some money here in Azure.
-
-get the space you're using
-
-
-
-![Show usage](showUsaage.png)
-
-2.5TB! and a 100GB limit - so we're paying overage charges for all that...
-
-Wrote a script to see where the space was used:
+I have created a script to see where the space is used, this uses the `az acr manifest list-metadata` cli command to get the metadata and then creates a PowerShell object that you can work with.
 
 [Gist - ACR Clean up](https://gist.github.com/jpomfret/8811a2586609fd35f6c2d04c01f5bdc7)
 
-It shows we had 400GB of manifests... so where's the other 2TB?
+I have found though, that this is missing one category of artifacts that also use space, and I haven't found an accurate way to report on that - untagged manifests. In the example where I found an ACR using 2.4TB, this report only showed 400GB of images. The other 2TB were untagged manifests - now that's a whole other issue, but just be aware they also need some clean up!
 
-Turns out it's untagged manifests - we should purge those
-(caveat if someone is referencing manifest digests instead of tags - but they shouldn't do that... )
+> One caveat if someone is referencing manifest digests instead of tags and you clean up untagged manifests then you could break that process - but, they shouldn't be, really...
 
-using azure cli we can run an az task on demand
-with the --dry-run to see what will be deleted
+## Run an on-demand clean-up task
 
-only delete tags older than 1 year and all untagged manifests
+If you find you're already using more than your included storage amount, you're probably going to want to take action pretty quickly, this is a real way to save money in Azure. Also,  be honest, do you need 100 versions of each image? Probably not. That's a business decision you're going to have to make though, agree on a retention period and how many versions you want to have in the ACR.
+
+We can run an on-demand clean-up of our ACR to get caught up with our agreed retention period, and you have a few options available for configuring that.
+
+Let's start with those untagged manifests, a secret killer for ACR storage space.
+
+We'll use the azure cli again, top run an az task on demand - the task will use `acr purge`. You can read more about the command, and all the parameters in the docs: [Use the purge command](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-auto-purge#use-the-purge-command).
+
+One of my favourite parameters is `--dry-run` this will output what will happen if you executed the purge command, similar to the `-WhatIf` in PowerShell. Let's run the following:
 
 ```PowerShell
-$PURGE_CMD="acr purge --filter 'repositoryName:.*' --untagged --ago 365d --dry-run"
+$PURGE_CMD="acr purge --filter '*.*' --untagged --ago 365d --dry-run"
 az acr run --cmd $PURGE_CMD --registry acrName /dev/null
 ```
 
-can add a time out and do all repositories
+You'll want to change the `--registry` name in the `az acr run` command to your ACR name, the parameters for the purge command are as follows:
 
-```PowerShell
-$PURGE_CMD="acr purge --filter '*:.*' --untagged --ago 365d --dry-run"
-az acr run --cmd $PURGE_CMD --registry acrName --timeout 3600 /dev/null
+- `--filter` - this is using regex to target all images and all tags - you can change the regex to specify certain images, or certain tags. For example `'repositoryName:.*'` would target only tags within the `repositoryName` repository. There are [more examples in the docs](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-auto-purge#use-the-purge-command).
+- `--untagged` - this is going to target just manifests that don't have tags
+- `--ago` - this is how old images should be to be deleted - and is a '[Go-style duration string](https://pkg.go.dev/time)' which means you can use 10d for 10 days, or 2.5h for 2.5 hours ago.
+- `--dry-run` - already mentioned above, but this will just output what would happen if this parameter was excluded - nothing will be deleted while this is set.
+
+So this command will aim to delete all tags older than 1 year and all untagged manifests. This is a good way to target just those untagged manifests - if you have images older than 1 year that you aren't comfortable parting ways with yet, you can increase the `--ago` parameter.
+
+> Note that the date restriction only applies to tags, and not to untagged manifests.
+
+The output will show you a list of what will be deleted for each repository in the ACR. It'll also state at the top if it was a dry run. In my example I don't have anything that matches the filter so nothing to be deleted.
+
+```text
+DRY RUN: The following output shows what WOULD be deleted if the purge command was executed. Nothing is deleted.
+
+Number of tags to be deleted: 0
+Number of manifests to be deleted: 0
 ```
 
-remove the dry-run to delete
+Once you're happy with the results of the dry run, remove that parameter and kick it off. I would recommend if you have a lot to delete adding the `--timeout` parameter, in this case I'm giving the command an hour before it'll time out, or 3600 seconds.
 
 ```PowerShell
 $PURGE_CMD="acr purge --filter '*:.*' --untagged --ago 365d"
 az acr run --cmd $PURGE_CMD --registry acrName --timeout 3600 /dev/null
 ```
+
+As this runs you'll get output in your console showing it working through cleaning up the space, once it's complete rerun the code in the previous section to review your space usage again. It's worth noting the code to get the usage will show the change immediately, whereas the metrics graph in the portal will take time to update.
 
 ```text
 Queued a run with ID: cb6n9
@@ -161,12 +175,50 @@ Number of deleted manifests: 4
 2024/12/04 16:34:26 Step ID: acb_step_0 marked as successful (elapsed time in seconds: 35.737693)
 ```
 
-rerun show usage and see how much you saved
+At this point we're just cleaning up untagged manifests. It's likely that you can agree that you need less than 1 year of tags. I'd recommend pulling that `--ago` parameter down to 30 days maybe, to just keep one month of tagged images.
 
-set this up to run on a schedule
+But, what happens if you don't rebuild the images often? After 30 days you'd get rid of all your images, that's definitely not ideal. Well there is an extra parameter I'd recommend to protect against that. The `--keep` parameter will ensure you never delete all tagged images, and this number will be kept, on top of any that match the date restrictions.
 
-more info: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-auto-purge#preview-the-purge
+I'd recommend something like this as your final clean up script - and what we'll want to schedule in the next step. Remember, test with the `--dry-run` and when you're happy with the combination, remove that parameter and let it go.
 
+```PowerShell
+$PURGE_CMD="acr purge --filter '*:.*' --untagged --ago 30d --keep 5"
+az acr run --cmd $PURGE_CMD --registry acrName --timeout 3600 /dev/null
+```
 
-Header image
-Photo by <a href="https://unsplash.com/@raymondrasmusson?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Raymond Rasmusson</a> on <a href="https://unsplash.com/photos/plastic-organizer-with-labels-7EhAf2dBthg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+## Schedule the task to run weekly
+
+However, we don't want manual tasks to complete. We are automaters!
+
+This is fine for a one-time clean up and a good idea to ensure you're happy with the parameter choices. Once you are I'd recommend scheduling that task to run on a daily, or weekly cadence. This will ensure you're only using the storage you need, and hopefully it's below the included amount which means no overage charges!
+
+We have been using `az acr run` to run the task manually, we'll instead swap to `az acr task create` to set this up as an automated process using [ACR tasks](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-tasks-overview).
+
+```PowerShell
+$PURGE_CMD="acr purge --filter '*:.*' --untagged --ago 30d --keep 5 --dry-run"
+az acr task create --name CleanUpTask --cmd $PURGE_CMD --schedule "0 9 * * Sat" --registry acrName --context /dev/null
+```
+
+Running this command will return JSON of the task object that was created, the schedule parameter is a cron expression, in my example it will run weekly on a Saturday. For more information on scheduling tasks review the docs [About scheduling a task](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-tasks-scheduled#about-scheduling-a-task).
+
+> Pro Tip! AI Copilots are a great way of getting the cron expression you need without having to memorise the syntax!
+
+![ACR Tasks showing our new CleanUpTask](cleanupTask.png)
+
+Once the scheduled time hits the task will be executed and you can see the result in the ACR Tasks - Runs pane, as shown below. Clicking into that task will allow you to see the same output that you've got used to when running manually. You can see exactly how many tags and manifests will be deleted, and even which ones will be deleted.
+
+![ACR Tasks on the Runs tab to show history of task executions](taskRuns.png)
+
+You'll also notice some `(Quick Task)` shown in my screenshot above, these are from us running the purge from the command line. Using `az acr run` creates a quick task to run the purge command that you passed in.
+
+## Monitoring
+
+So we have our container registry all tidied up, and we've got a scheduled task to only keep the tags and manifests we really need. This isn't quite the end of the story though, since we can see the storage used in the metrics pane we can monitor this and alert on it if it gets close to the threshold.
+
+TODO: add alert rule, action group to monitor
+
+## Summary
+
+I hope this has been a useful post to make sure your ACRs are clean and tidy and more importantly, not costing you extra money in overage charges. Thanks again to the organisers of the [Azure Spring Clean](https://www.azurespringclean.com/) for featuring my post - I look forward to reading all the other ways we can ensure a well managed Azure tenant.
+
+Header image by [Raymond Rasmusson](https://unsplash.com/@raymondrasmusson?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)on [Unsplash](https://unsplash.com/photos/plastic-organizer-with-labels-7EhAf2dBthg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
