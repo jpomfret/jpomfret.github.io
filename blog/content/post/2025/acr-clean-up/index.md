@@ -215,7 +215,11 @@ You'll also notice some `(Quick Task)` shown in my screenshot above, these are f
 
 So we have our container registry all tidied up, and we've got a scheduled task to only keep the tags and manifests we really need. This isn't quite the end of the story though, since we can see the storage used in the metrics pane we can monitor this and alert on it if it gets close to the threshold.
 
-TODO: add alert rule, action group to monitor
+If you head to the 'Monitor' page in the Azure portal, and then select 'alerts' you can set up an 'alert rule' - this will be based on the same metric we looked at earlier. Set the scope to your container registry, the condition will be based on the 'storage used' signal, and then you can set your threshold to either dynamic or static. In this case I would choose a static threshold that's just under the included storage amount. For example, the standard tier includes 100GB so I would set the threshold at 90GB.
+
+You can choose how often the check runs, from every minute to every hour. Then on the actions page you can choose what to do when the alerts fires. Either send an email, or you could even have it trigger an Azure Function to automate the fix. I love the idea of this, sounds like that could be a future blog post.
+
+Now you know that if you get close to paying overage charges you'll be alerted and you can take action before that happens.
 
 ## Summary
 
