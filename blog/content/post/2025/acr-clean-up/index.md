@@ -2,7 +2,7 @@
 title: "Azure Spring Clean 2025 - Clean up your Azure Containers Registry"
 slug: "acr-clean"
 description: "Azure Container Registries can easily become cluttered with many versions of images. Did you know that each ACR sku comes with a certain amount of storage included, and when you go over that, you'll pay overage charges. Let's look at how to check your current storage, keep your registry nice and tidy with an ACR clean-up task, and monitor the storage levels so you'll never pay extra again!"
-date: 2025-03-06T10:00:0Z
+date: 2025-03-06T10:00:00Z
 categories:
     - acr
     - azure
