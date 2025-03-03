@@ -237,7 +237,7 @@ You can see on the screenshot below, you get some feedback while you're creating
 
 ![Azure Monitor - creating an alert rule](monitor.png)
 
-You can choose how often the check runs, from every minute to every hour. Then on the actions page you can choose what to do when the alerts fires. Either send an email, or you could even have it trigger an Azure Function to automate the fix. I love the idea of this, sounds like that could be a future blog post.
+You can choose how often the check runs, from every minute to every hour. Then on the actions page you can choose what to do when the alerts fire. Either send an email, or you could even have it trigger an Azure Function to automate the fix. I love the idea of this, sounds like that could be a future blog post.
 
 Now you know that you will be alerted if you get close to paying overage charges, and you can take action before that happens.
 
