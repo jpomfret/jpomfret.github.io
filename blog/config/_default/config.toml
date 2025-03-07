@@ -4,9 +4,6 @@ languageCode = "en-gb"
 #paginate = 7
 title = "Jess Pomfret"
 
-[pagination]
-pagerSize = 5
-
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk, ar
 DefaultContentLanguage = "en"
@@ -19,3 +16,6 @@ hasCJKLanguage = false
 #disqusShortname = "hugo-theme-stack"
 
 googleAnalytics = "G-YL15E7BXXF"
+
+[pagination]
+pagerSize = 5
