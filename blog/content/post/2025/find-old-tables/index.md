@@ -57,3 +57,5 @@ Get-DbaDbTable -SqlInstance mssql1 |
 Where-Object name -like '*_old' |
 Remove-DbaDbTable
 ```
+
+That's it! Just a quick one today, but go and have a look around your environment and see if there are `_old` tables that could be cleaned up.
