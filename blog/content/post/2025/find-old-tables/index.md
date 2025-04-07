@@ -1,15 +1,15 @@
 ---
-title: "Find _old Tables"
+title: "Find `*_old` Tables"
 slug: "find-old-tables"
 description: "Have you ever had to do a little switch-a-roo on a table? Renaming the current one to append _old, so you can create a new one in it's place? Have you ever forgotten to go back and clear those up? Well, if so, this short blog is for you!"
-date: 2025-04-01T12:46:09Z
+date: 2025-04-07T12:46:09Z
 categories:
     - dbatools
     - powershell
 tags:
     - dbatools
     - powershell
-image:
+image: mitchell-luo-QgxbZu69KTg-unsplash.jpg
 draft: true
 ---
 
@@ -59,3 +59,5 @@ Remove-DbaDbTable
 ```
 
 That's it! Just a quick one today, but go and have a look around your environment and see if there are `_old` tables that could be cleaned up.
+
+Header image by [Mitchell Luo](https://unsplash.com/@mitchel3uo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/round-brown-wooden-table-QgxbZu69KTg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
