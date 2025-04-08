@@ -10,7 +10,7 @@ tags:
     - dbatools
     - powershell
 image: mitchell-luo-QgxbZu69KTg-unsplash.jpg
-draft: true
+draft: false
 ---
 
 There are many reasons why you might end up with tables named `something_old` in your database. Perhaps this is part of your decommission strategy, to rename them to make sure they really aren't in use. Or, it could be because you need to make schema changes, you can rename the current table and create a new table with the desired schema.  But, the key to this blog post is when you then forget to come back and clean these tables up. We can easily find them with a [dbatools](https://dbatools.io/) command.
