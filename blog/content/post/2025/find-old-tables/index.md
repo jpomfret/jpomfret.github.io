@@ -60,4 +60,6 @@ Remove-DbaDbTable
 
 That's it! Just a quick one today, but go and have a look around your environment and see if there are `_old` tables that could be cleaned up.
 
+Some homework for you though, how would you find stored procedures that have been renamed `_old`?
+
 Header image by [Mitchell Luo](https://unsplash.com/@mitchel3uo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/round-brown-wooden-table-QgxbZu69KTg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
