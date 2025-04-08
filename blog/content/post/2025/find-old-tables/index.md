@@ -44,7 +44,6 @@ Select-Object SqlInstance, Database, Schema, Name, CreateDate, DateLastModified,
 
 Now we have a good view into the tables that are named `_old`, when they were created, when they were last updated and the row count. This information should give you everything you need to be able to decide whether they can now be cleaned up.
 
-#TODO: Update this screenshot to add last update date
 {{<
     figure src="MoreProps.png"
     alt="Table format showing selected properties of filtered tables"
