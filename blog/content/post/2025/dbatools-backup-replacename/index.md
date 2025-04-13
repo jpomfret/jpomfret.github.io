@@ -56,23 +56,14 @@ Get-Help Backup-DbaDatabase
 This is straight from the docs, and if you want to read it in the online version you can head to [docs.dbatools.io](https://docs.dbatools.io/Backup-DbaDatabase.html).
 
 ```text
- -ReplaceInName [<Switch>]
-        If this switch is set, the following list of strings will be replaced in the FilePath and Path strings:
-            instancename - will be replaced with the instance Name
-            servername - will be replaced with the server name
-            dbname - will be replaced with the database name
-            timestamp - will be replaced with the timestamp (either the default, or the format provided)
-            backuptype - will be replaced with Full, Log or Differential as appropriate
+-ReplaceInName [<Switch>]
+  If this switch is set, the following list of strings will be replaced in the FilePath and   Path strings:
+    instancename - will be replaced with the instance Name
+    servername - will be replaced with the server name
+    dbname - will be replaced with the database name
+    timestamp - will be replaced with the timestamp (either the default, or the format provided)
+    backuptype - will be replaced with Full, Log or Differential as appropriate
 ```
-
-> text
-> -ReplaceInName [<Switch>]
->        If this switch is set, the following list of strings will be replaced in the FilePath and Path strings:
->            instancename - will be replaced with the instance Name
->            servername - will be replaced with the server name
->            dbname - will be replaced with the database name
->            timestamp - will be replaced with the timestamp (either the default, or the format provided)
->            backuptype - will be replaced with Full, Log or Differential as appropriate
 
 So, with this information, we can change the script to look like this. Using the keywords `servername`, `instancename` and `dbname` in the parameter values, and including the `ReplaceInName` switch.
 
