@@ -2,7 +2,7 @@
 title: "dbatools Backup-DbaDatabase -ReplaceInName"
 slug: "dbatools-backup-replacename"
 description: "Recently I was reading the docs for `Backup-DbaDatabase` and found a parameter I didn't realise existed, but is so useful when you want to automate backups, but keep control of the file names."
-date: 2025-04-13T09:30:31Z
+date: 2025-04-18T12:00:00Z
 categories:
  - dbatools
  - backups
