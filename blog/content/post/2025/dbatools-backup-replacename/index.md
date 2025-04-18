@@ -27,7 +27,7 @@ Not a problem with `Backup-DbaDatabase`, I already know we can pass in multiple 
 
 The difference was, there was already a specified naming convention for the backups, and we wanted to match that naming with our new automated script.
 
-If I start with the following script, it will perform a `COPY_ONLY` backup of all databases on the `mssql1` instance, to the specified folder `/shared/release`.
+If I start with the following script, it will perform a `COPY_ONLY` backup of all databases on the `mssql1` instance, to the specified folder `/shared/release/v7`, which in my case I was passing the version folder name through from my Azure DevOps pipeline.
 
 ```PowerShell
 $backupParams = @{
