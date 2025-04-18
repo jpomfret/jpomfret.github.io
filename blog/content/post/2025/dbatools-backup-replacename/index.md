@@ -61,7 +61,7 @@ This is straight from the docs, and if you want to read it in the online version
 
 ```text
 -ReplaceInName [<Switch>]
-  If this switch is set, the following list of strings will be replaced in the FilePath and   Path strings:
+  If this switch is set, the following list of strings will be replaced in the FilePath and Path strings:
     instancename - will be replaced with the instance Name
     servername - will be replaced with the server name
     dbname - will be replaced with the database name
