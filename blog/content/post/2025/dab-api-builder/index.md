@@ -2,11 +2,11 @@
 title: "Dab Api Builder"
 slug: "dab-api-builder"
 description: "Let's test out the Data API Builder (dab) to create API endpoints for a local SQL Server database running in a container."
-date: 2025-08-29T09:14:11Z
+date: 2025-08-30T09:00:00Z
 categories:
 tags:
 image: header.png
-draft: true
+draft: false
 ---
 
 I've been hearing about the [Data API Builder (DAB)](https://learn.microsoft.com/en-us/azure/data-api-builder/) for a while now, but I hadn't found a reason to play with it myself.
