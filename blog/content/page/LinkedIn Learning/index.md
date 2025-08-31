@@ -16,6 +16,7 @@ I have video courses available on LinkedIn Learning on a variety of topics from 
   - [Level Up: Advanced SQL](https://www.linkedin.com/learning/level-up-advanced-sql) - I think the format of this course is really interesting. I set challenges, you solved them, and then I talk through my answer. The neat part is that the course includes a dev container where you can work with the same environment as me - no need to install anything!
   - [Introduction to Transact-SQL](https://www.linkedin.com/learning/introduction-to-transact-sql-22864585) - If you're just starting out with SQL Server then this course will be perfect for learning T-SQL basics.
   - [Data Management Essential Training](https://www.linkedin.com/learning/data-management-essential-training) - This is my newest and longest course, a lot of work went into this essential training. It'll give you the big picture on what data management is, and why we care!
+  - [Guided Lab: Automating Azure Infrastructure Management with PowerShell](https://www.linkedin.com/learning/guided-lab-automating-azure-infrastructure-management-with-powershell/automate-azure-with-powershell-your-guided-lab-kickoff) - My first guided lab on LinkedIn Learning. Follow along and learn how to manage Azure Infrastructure from PowerShell, we'll even talk about Pester testing infrastructure to ensure everything is in the expected state.
 
 {{<
   figure src="LinkedInLearning.jpg"
