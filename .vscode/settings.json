@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "Chrissy",
+        "dacpac",
         "dbachecks",
         "dbatools",
         "jpomfret",
@@ -130,5 +131,8 @@
     ],
     "[markdown]": {
     },
-    "cSpell.enabled": true
+    "cSpell.enabled": true,
+    "cSpell.enabledFileTypes": {
+        "markdown": true
+    }
 }
