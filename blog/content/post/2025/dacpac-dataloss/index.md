@@ -46,9 +46,9 @@ That's kind, and in most cases good practice!
 
 Database DevOps is hard, and the main reason for that is we need to keep our data safe! The dacpac deployment step is configured with `BlockOnPossibleDataLoss` set to true. The deployment found that `6 Rows were detected` in the table, and therefore refused to drop the column.
 
-In some cases, like what I have described here though, we're ok with data loss. I know that that we don't need that column, and I want it to be dropped.
+In some cases though, like what I have described here, we're ok with data loss. I know that we don't need that column, and I want it to be dropped.
 
-So how do you move forward when you do accept the change, and you are ok with the potential loss of data?
+So, how do you move forward when you do accept the change, and you are ok with the potential loss of data?
 
 ## The Solution
 
@@ -95,8 +95,7 @@ Here's what the `workflow_dispatch` trigger looks like in the GitHub UI.
     alt="workflow_dispatch trigger with inputs on a GitHub Action."
 >}}
 
-Further down in my action, within a PowerShell script task I can evaluate this input and determine which publish profile to use. This means that on first attempt the dacpac deployment will not execute if there is potential for data loss as the input won't be set, safety first! But, you have an override, kick off the action after changing the input property and you can carry on without having to manually build and deploy the dacpac.
-
+Further down in my action, within a PowerShell script task I have the code below.
 
 ```PowerShell
 # Select profile based on BlockOnPossibleDataLoss input
@@ -107,6 +106,8 @@ if ("${{ github.event.inputs.BlockOnPossibleDataLoss }}" -eq "false") {
 }
 ```
 
-The other benefit here for this method is that the deployment is still tracked within GitHub. One of the pros of pushing changes through CI\CD pipelines is that you can see exactly what was deployed when. If instead I pulled this repo locally to deploy you'd lose that trail (presuming I had permissions to do that... which if you're deploying changes through GitHub, should you have those permissions - an argument for another day)!
+This code will evaluate the input and determine which publish profile to use. This means that on first attempt the dacpac deployment will not execute if there is potential for data loss as the input won't be set, safety first! But, you have an override, kick off the action after changing the input property and you can carry on without having to manually build and deploy the dacpac.
+
+The other benefit here for this method is that the deployment is still tracked within GitHub. One of the pros of pushing changes through CI\CD pipelines is that you can see exactly what was deployed when. If instead I pulled this repo locally to deploy you'd lose that trail (presuming I had permissions to do that... which if you're deploying changes through GitHub, should you have those permissions? - an argument for another day)!
 
 Header image by [Jens Freudenau](https://unsplash.com/@jenstakesphotos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText]) on [Unsplash](https://unsplash.com/photos/a-group-of-pipes-that-are-connected-to-each-other-Xlg2KbYFUoM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
