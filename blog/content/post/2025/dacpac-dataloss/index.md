@@ -2,7 +2,7 @@
 title: 'CI\CD Pipelines to deploy DACPACs with Potential Data Loss'
 slug: 'dacpac-dataloss'
 description: 'Well this sounds scary, CI\CD pipelines and potential data loss are two phrases we do not want next to each other. But stick with me, in some cases we want to deploy database changes that might cause data loss.'
-date: 2025-10-29T09:45:18Z
+date: 2025-10-29T14:00:00Z
 categories:
   - cicd
   - dacpac
@@ -12,7 +12,7 @@ tags:
   - dacpac
   - devops
 image: jens-freudenau-Xlg2KbYFUoM-unsplash.jpg
-draft: true
+draft: false
 ---
 
 ## The Setup

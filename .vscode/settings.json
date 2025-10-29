@@ -131,8 +131,5 @@
     ],
     "[markdown]": {
     },
-    "cSpell.enabled": true,
-    "cSpell.enabledFileTypes": {
-        "markdown": true
-    }
+    "cSpell.enabled": true
 }
