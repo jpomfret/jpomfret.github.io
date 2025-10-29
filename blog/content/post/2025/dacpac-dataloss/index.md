@@ -59,7 +59,7 @@ As I mentioned there is a configuration called `BlockOnPossibleDataLoss` that is
 So, I created a second publish profile where this value is `false`, which means data loss is allowed. This is an XML file so the property looks like so:
 
 ```xml
-    <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
+<BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
 ```
 
 I left the GitHub Action to still trigger on commits with the regular publish profile, which blocks operations that will cause data loss. Then added a `workflow_trigger` with some inputs.
@@ -109,4 +109,4 @@ if ("${{ github.event.inputs.BlockOnPossibleDataLoss }}" -eq "false") {
 
 The other benefit here for this method is that the deployment is still tracked within GitHub. One of the pros of pushing changes through CI\CD pipelines is that you can see exactly what was deployed when. If instead I pulled this repo locally to deploy you'd lose that trail (presuming I had permissions to do that... which if you're deploying changes through GitHub, should you have those permissions - an argument for another day)!
 
-Header image by [https://unsplash.com/@jenstakesphotos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText](Jens Freudenau) on [Unsplash](https://unsplash.com/photos/a-group-of-pipes-that-are-connected-to-each-other-Xlg2KbYFUoM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
+Header image by [Jens Freudenau](https://unsplash.com/@jenstakesphotos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText]) on [Unsplash](https://unsplash.com/photos/a-group-of-pipes-that-are-connected-to-each-other-Xlg2KbYFUoM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
