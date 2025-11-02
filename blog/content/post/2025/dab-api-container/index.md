@@ -15,7 +15,7 @@ This is great for testing, but now we want to start to productionise this, and t
 
 There are several deployment options available, I recommend you review the Microsoft docs here: [Deployment guidance for Data API builder](https://learn.microsoft.com/en-us/azure/data-api-builder/deployment/).
 
-In this post I'm going to show you how to get it running in an [Azure Container Instance](https://learn.microsoft.com/en-us/azure/container-instances/), this is a cheap and cheerful way of getting this into the cloud. If you need more features like auto-scaling and better monitoring take a look at [Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/) instead, the deployment is very similar to the process in this blog.
+In this post I'm going to show you how to get it running in an [Azure Container Instance](https://learn.microsoft.com/en-us/azure/container-instances/), this is a cheap and cheerful way of getting this into the cloud. If you need more features like auto-scaling and better monitoring take a look at [Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/) instead, the deployment process is very similar to what we'll walk through in this blog.
 
 ## Azure SQL Database
 
@@ -23,7 +23,10 @@ We're going to build on what we created in the first post, and instead of runnin
 
 You'll notice I have specified on the database resource to use my free limit and if I run out, pause, rather than start charging with the `--use-free-limit --free-limit-exhaustion-behavior AutoPause` parameters.
 
-#TODO: explain the external-admin-sid bit?
+One other thing to note is that I'm specifying an admin user and password, which will create a SQL Login, as well as an external admin. In Entra I have created a group called SQLAdmin, and added my account to that group, then I can use this group to become admins to my SQL Server.
+
+You don't have to specify an external Entra admin to create an Azure SQL Server, but for this setup we need to be able to connect with Entra auth later to add permissions for our managed identity. If you don't want to use a group, you can also just use your Entra account.
+
 ```PowerShell
 $location = 'UKSouth'
 $resourceGroup = 'rg-dab-prod-001'
@@ -65,6 +68,17 @@ Once that completes, you'll be able to see your database in the [Azure Portal](h
   link="freeSqlDb.png"
 >}}
 
+We also need to add a networking rule to allow Azure services to connect, this means our container app can access the Azure SQL database.
+
+```PowerShell
+az sql server firewall-rule create `
+  --resource-group $resourceGroup `
+  --server $server `
+  --name AllowAzure `
+  --start-ip-address 0.0.0.0 `
+  --end-ip-address 0.0.0.0
+```
+
 ## DAB Config
 
 Now we have a database in the cloud to connect to we can set up our `dab-config.json`. In the previous post when we were testing locally we connected to a local docker container, with a hardcoded password. This time we will replace our connection string with an environment variable and then we'll configure the container instance to pass that in.
@@ -77,12 +91,11 @@ dab init --database-type "mssql" --connection-string "@env('DATABASE_CONNECTION_
 
 Next we'll add the entities we want to expose from the database, if you want to add all the database tables, you can use [dbatools](http://dbatools.io/) to grab a list of tables and then loop through them running `dab add` for each entity.
 
-TODO: change to azure auth?
-
 ```PowerShell
-$cred = get-Credential databaseadmin
-$conn = Connect-DbaInstance -SqlInstance sqlsvr-dab-prod-001.database.windows.net -SqlCredential $cred
-$tables = get-dbadbtable -sqlinstance $conn -Database sqldb-dab-prod-001
+$securePassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
+$cred = [pscredential]::new($adminUser, $securePassword)
+$conn = Connect-DbaInstance -SqlInstance ('{0}.database.windows.net' -f $server) -SqlCredential $cred
+$tables = get-dbadbtable -SqlInstance $conn -Database $database
 $tables.ForEach{
     dab add ('{0}_{1}' -f $psitem.schema, $psitem.Name) --source ('{0}.{1}' -f $psitem.Schema, $psitem.Name) --permissions "anonymous:*"
 }
@@ -95,8 +108,8 @@ $tables.ForEach{
 > ```PowerShell
 > $ipAddress = (iwr https://icanhazip.com/).content.Trim()
 > az sql server firewall-rule create `
->   --resource-group rg-dab-prod-001 `
->   --server sqlsvr-dab-prod-001 `
+>   --resource-group $resourceGroup `
+>   --server $server `
 >   --name "MyDevMachine" `
 >   --start-ip-address $ipAddress `
 >   --end-ip-address $ipAddress
@@ -156,10 +169,6 @@ $image = 'mcr.microsoft.com/azure-databases/data-api-builder:latest'
 $connectionString = ('Server=tcp:{0}.database.windows.net,1433;Initial Catalog={1};Authentication=Active Directory Default;Encrypt=True;Connection Timeout=30;' -f $server, $database)
 
 
-# tested with this for sql auth:
-$connectionString = "Server=tcp:$server.database.windows.net,1433;Initial Catalog=$database;User ID=$adminUser;Password=$adminPassword;Encrypt=True;Connection Timeout=30;"
-
-
 az container create `
   --resource-group $resourceGroup `
   --name $containerName `
@@ -182,49 +191,25 @@ az container create `
 
 ```
 
-To gt the FQDN (fully qualified domain name) of your container
+I've added the `--assign-identity` which adds a managed identity for the container instance, with this we can provision access to the Azure SQL Database. At this point though, the container is unable to start because it doesn't have access to the database, but we can't add the access until we have the managed identity created.
+
+> Managed Identities are super cool, you can enable them for most of  your Azure resources, and then give those resources access to other Azure resources with no passwords to manage. I highly recommend if you aren't using these already you look into them.
+
+## Database Access
+
+We can use dbatools to create the user and add the permissions. The username for Managed Identities is the name of the Azure resource, so in this case `ci-dab-prod-001`, the name of the container instance.
 
 ```PowerShell
-az container show `
-  --resource-group $resourceGroup `
-  --name $containerName `
-  --query "join('://', ['https', ipAddress.fqdn])" `
-  --output "tsv"
-```
-
-Navigate to that (but with port 5000) and you should see this
-
-![alt text](image.png)
-
-but it might not actually be healthy
-
-review the logs here, container is running, but it couldn't find the config file:
-
-![alt text](image-1.png)
-
-fixed this by adjusting the command-line for the /cfg file share - make sure that's correct
-
-sql server networking - allows azure service to access this server <-- this was the problem
-
-troubleshooting steps (another post idea?)
-
-- use sql auth instead of managed identity
-- test dab-config locally like in the last post
-
-```PowerShell
-# Get the principal ID of the container's managed identity
-$principalId = az container show --resource-group $resourceGroup --name $containerName --query "identity.principalId" -o tsv
-
 Invoke-DbaQuery -SqlInstance $conn -Database $database -Query ("CREATE USER [{0}] FROM EXTERNAL PROVIDER; ALTER ROLE db_datareader ADD MEMBER [{0}]; ALTER ROLE db_datawriter ADD MEMBER [{0}];" -f $containerName)
 ```
 
-But you can't create this with a sql login...
+But you can't create Entra\AD accounts with a sql login...
 
 > WARNING: [09:11:25][Invoke-DbaQuery] [sqlsvr-dab-prod-001.database.windows.net] Failed during execution | Principal 'ci-dab-prod-001' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.
 > Cannot add the principal 'ci-dab-prod-001', because it does not exist or you do not have permission.
 > Cannot add the principal 'ci-dab-prod-001', because it does not exist or you do not have permission.
 
-So we need to use external admin that we created, connect and get the token
+Which is why I added the external Entra admin, we need to connect to Azure using Entra auth, grab a token, and then we can use that with dbatools to execute the query.
 
 ```PowerShell
 Connect-AzAccount # do the auth dance
@@ -233,35 +218,41 @@ $connAD = Connect-DbaInstance -SqlInstance ('{0}.database.windows.net' -f $serve
 Invoke-DbaQuery -SqlInstance $connAd -Database $database -Query ("CREATE USER [{0}] FROM EXTERNAL PROVIDER; ALTER ROLE db_datareader ADD MEMBER [{0}]; ALTER ROLE db_datawriter ADD MEMBER [{0}];" -f $containerName)
 ```
 
+Now the container can auth to the database, let's restart the container instance, and this time it should have everything in place to start in a healthy state.
 
-
-
-
-
-
-You can view your container in the Azure Portal now and check it's status,
-
-Once this is up and running you can navigate to [http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/](http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/) to check the status of your container
-
-> Managed Identities are super cool, you can enable them for your Azure resources, and then give those resources access to other Azure resources with no passwords to manage. I highly recommend if you aren't using these already you look into them.
-
-need to give the container app MI access to the database
-
-```sql
-/****** Object:  User [azqr-func-dev]    Script Date: 19/08/2025 15:05:51 ******/
-CREATE USER [ca-cortexapi-dev] FROM  EXTERNAL PROVIDER  WITH DEFAULT_SCHEMA=[dbo]
-GO
-
-
-ALTER ROLE db_datareader ADD MEMBER [ca-cortexapi-dev];
-ALTER ROLE db_datawriter ADD MEMBER [ca-cortexapi-dev];
+```PowerShell
+az container restart `
+  --resource-group $resourceGroup `
+  --name $containerName
 ```
 
-check the url shows it's healthy - but we need to mount config file
+## Test the API
 
-should get to it now... but no auth!! :o
+To get the FQDN (fully qualified domain name) of your container, you can again use the Az CLI. This will be the endpoint of your API, and by default it'll be listening on port 5000.
+
+```PowerShell
+az container show `
+  --resource-group $resourceGroup `
+  --name $containerName `
+  --query "join('', ['http://', ipAddress.fqdn, ':5000'])" `
+  --output "tsv"
+```
+
+Mine is `http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/`, when you navigate to this you should see that the service is running, and healthy.
+
+{{<
+    figure src="healthy.png"
+    alt="Status page for dab showing the service is running and healthy"
+>}}
+
+The same as when we were running dab locally, we can view the
+
+
+should get to it now... but no auth on the endpoints!! :o
 
 how hard can that be?!?
 
 ## TODO: cli code here\terraform?
 
+
+![things in rg](image-2.png)
