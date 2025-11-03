@@ -50,7 +50,7 @@ so set up auth
     }
 ```
 
-TODO why mode dev?
+TODO why mode dev? gives us swagger and other dev tools
 
 any authenticated user can access - there is a way of doing roles like `DAB.Read` to make it more granular
 
@@ -128,3 +128,19 @@ az ad app permission add \
 ```
 
 TODO: is this needed if we don't use scope?
+
+
+
+need to give the container app MI access to the database
+
+```sql
+/****** Object:  User [azqr-func-dev]    Script Date: 19/08/2025 15:05:51 ******/
+CREATE USER [ca-cortexapi-dev] FROM  EXTERNAL PROVIDER  WITH DEFAULT_SCHEMA=[dbo]
+GO
+
+
+ALTER ROLE db_datareader ADD MEMBER [ca-cortexapi-dev];
+ALTER ROLE db_datawriter ADD MEMBER [ca-cortexapi-dev];
+```
+
+check the url shows it's healthy - but we need to mount config file

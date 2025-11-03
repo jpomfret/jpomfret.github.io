@@ -1,11 +1,17 @@
 ---
-title: "Dab Api Container"
+title: "Running dab in an Azure Container Instance"
 slug: "dab-api-container"
-description: "ENTER YOUR DESCRIPTION"
+description: "In part 2 of my series on dab, we'll run dab in an Azure Container Instance and wire it up to create an API on top of an Azure SQL Database."
 date: 2025-08-21T09:45:18Z
 categories:
+  - dab
+  - api
+  - PowerShell
 tags:
-image:
+  - dab
+  - api
+  - PowerShell
+image: header.png
 draft: true
 ---
 
@@ -86,8 +92,11 @@ Now we have a database in the cloud to connect to we can set up our `dab-config.
 To create the `dab-config.json` you can run the following code, this will create the config with all the defaults for a SQL Server, but it'll set the connection string ready for our environment variable.
 
 ```PowerShell
-dab init --database-type "mssql" --connection-string "@env('DATABASE_CONNECTION_STRING')"
+dab init --database-type "mssql" --connection-string "@env('DATABASE_CONNECTION_STRING')" -mode development
 ```
+
+> **💡 Note: dab mode**
+> I've set this to `development` which enables swagger among other features, review the docs here to determine which mode is right for you [Mode (Host runtime)](https://learn.microsoft.com/en-us/azure/data-api-builder/configuration/runtime#mode-host-runtime)
 
 Next we'll add the entities we want to expose from the database, if you want to add all the database tables, you can use [dbatools](http://dbatools.io/) to grab a list of tables and then loop through them running `dab add` for each entity.
 
@@ -168,7 +177,6 @@ $image = 'mcr.microsoft.com/azure-databases/data-api-builder:latest'
 
 $connectionString = ('Server=tcp:{0}.database.windows.net,1433;Initial Catalog={1};Authentication=Active Directory Default;Encrypt=True;Connection Timeout=30;' -f $server, $database)
 
-
 az container create `
   --resource-group $resourceGroup `
   --name $containerName `
@@ -188,7 +196,6 @@ az container create `
   --azure-file-volume-share-name $fileShareName `
   --command-line "dotnet Azure.DataApiBuilder.Service.dll --ConfigFileName /cfg/dab-config.json" `
   --assign-identity
-
 ```
 
 I've added the `--assign-identity` which adds a managed identity for the container instance, with this we can provision access to the Azure SQL Database. At this point though, the container is unable to start because it doesn't have access to the database, but we can't add the access until we have the managed identity created.
@@ -205,17 +212,31 @@ Invoke-DbaQuery -SqlInstance $conn -Database $database -Query ("CREATE USER [{0}
 
 But you can't create Entra\AD accounts with a sql login...
 
-> WARNING: [09:11:25][Invoke-DbaQuery] [sqlsvr-dab-prod-001.database.windows.net] Failed during execution | Principal 'ci-dab-prod-001' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.
-> Cannot add the principal 'ci-dab-prod-001', because it does not exist or you do not have permission.
-> Cannot add the principal 'ci-dab-prod-001', because it does not exist or you do not have permission.
+```Text
+WARNING: [09:11:25][Invoke-DbaQuery] [sqlsvr-dab-prod-001.database.windows.net] Failed during execution | Principal 'ci-dab-prod-001' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.
+Cannot add the principal 'ci-dab-prod-001', because it does not exist or you do not have permission.
+Cannot add the principal 'ci-dab-prod-001', because it does not exist or you do not have permission.
+```
 
 Which is why I added the external Entra admin, we need to connect to Azure using Entra auth, grab a token, and then we can use that with dbatools to execute the query.
 
 ```PowerShell
-Connect-AzAccount # do the auth dance
+# do the auth dance to get a token
+Connect-AzAccount
 $azureToken = Get-AzAccessToken -ResourceUrl https://database.windows.net
-$connAD = Connect-DbaInstance -SqlInstance ('{0}.database.windows.net' -f $server) -Database $database -AccessToken $azureToken
-Invoke-DbaQuery -SqlInstance $connAd -Database $database -Query ("CREATE USER [{0}] FROM EXTERNAL PROVIDER; ALTER ROLE db_datareader ADD MEMBER [{0}]; ALTER ROLE db_datawriter ADD MEMBER [{0}];" -f $containerName)
+
+# Connect to the Azure SQL Database
+$connectParams = @{
+  SqlInstance = ('{0}.database.windows.net' -f $server)
+  Database = $database
+}
+$connAD = Connect-DbaInstance @connectParams -AccessToken $azureToken
+
+# Build the query
+$query = ("CREATE USER [{0}] FROM EXTERNAL PROVIDER; ALTER ROLE db_datareader ADD MEMBER [{0}]; ALTER ROLE db_datawriter ADD MEMBER [{0}];" -f $containerName)
+
+# Execute the query using the SMO connection
+Invoke-DbaQuery -SqlInstance $connAD -Query $query
 ```
 
 Now the container can auth to the database, let's restart the container instance, and this time it should have everything in place to start in a healthy state.
@@ -245,14 +266,52 @@ Mine is `http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/`, when you navig
     alt="Status page for dab showing the service is running and healthy"
 >}}
 
-The same as when we were running dab locally, we can view the
+The same as when we were running dab locally, we can view the swagger documentation at `http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/swagger`
 
+Then we can hit our API endpoints and interact with the data within our Azure SQL Database. For example, I added an entitrycalled `dbo_BuildVersion` that references the `dbo.BuildVersion` table so I can view the data in the browser at `http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/api/dbo_BuildVersion`.
 
-should get to it now... but no auth on the endpoints!! :o
+{{<
+    figure src="BuildVersion.png"
+    alt="Get request for dbo.BuildVersion table from Azure SQL Database"
+>}}
 
-how hard can that be?!?
+```PowerShell
+$data = Invoke-RestMethod -Uri 'http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/api/dbo_BuildVersion'
+$data.value
+```
 
-## TODO: cli code here\terraform?
+{{<
+    figure src="GetDataPwsh.png"
+    alt="Invoke-RestMethod called from the PowerShell terminal window."
+>}}
 
+## One Problem
 
-![things in rg](image-2.png)
+Anyone spot the problem?
+
+Right now there is zero authentication required to hit my API endpoints. If you review the permissions for each entity we added to the `dab-config.json` file, they are all set to anonymous adn the action is set to '*'. This means, anyone can GET, POST, DELETE, etc. my data from my Azure SQL Database.
+
+```json
+"permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
+        }
+      ]
+```
+
+## Tidy Up
+
+If you've been following along you can tidy up and remove the whole resource group with the following command
+
+```PowerShell
+az group delete --name $resourceGroup
+```
+
+## Up Next
+
+As I mentioned this is part of a series on dab, the next post will cover authentication - and how we can use these dab endpoints with Azure authentication, coming soon!
