@@ -1,0 +1,6 @@
+{{/*
+  Cached override of theme's icon.html partial.
+  This dramatically speeds up builds by caching icon SVG output.
+  The icon name (.) is used as the cache key since icons don't change.
+*/}}
+{{- partialCached "helper/icon-impl" . . -}}
