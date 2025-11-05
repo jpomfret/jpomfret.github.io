@@ -10,6 +10,10 @@ draft: true
 ---
 
 
+also kv integratioon?
+https://learn.microsoft.com/en-us/azure/data-api-builder/concept/config/akv-function
+
+
 One note here, it might not actually be healthy, I found
 
 review the logs here, container is running, but it couldn't find the config file:

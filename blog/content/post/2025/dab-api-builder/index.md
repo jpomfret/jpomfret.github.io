@@ -4,7 +4,13 @@ slug: "dab-api-builder"
 description: "Let's test out the Data API Builder (dab) to create API endpoints for a local SQL Server database running in a container."
 date: 2025-08-30T09:00:00Z
 categories:
+  - dab
+  - api
+  - PowerShell
 tags:
+  - dab
+  - api
+  - PowerShell
 image: header.png
 draft: false
 ---
@@ -131,10 +137,10 @@ Remember the entity we added earlier, for the authors table in the pubs database
     alt="View the Authors API endpoint in the browser"
 >}}
 
-We've written zero code at this point. Just configured a json config file and now we can get, and insert, if we make a `POST` request, data from the SQL Server table. We can also use these API endpoints in PowerShell code, the following will get the data from the Authors table with a `Invoke-WebRequest` call.
+We've written zero code at this point. Just configured a json config file and now we can get, and insert, if we make a `POST` request, data from the SQL Server table. We can also use these API endpoints in PowerShell code, the following will get the data from the Authors table with a `Invoke-RestMethod` call.
 
 ```PowerShell
-$result = Invoke-WebRequest -Uri http://localhost:5000/api/Author -Method Get
+$result = Invoke-RestMethod -Uri http://localhost:5000/api/Author -Method Get
 ($result.Content | ConvertFrom-Json).Value
 ```
 
