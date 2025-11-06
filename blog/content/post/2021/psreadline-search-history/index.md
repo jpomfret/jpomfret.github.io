@@ -23,7 +23,7 @@ The main goal of this module is to enhance the command line experience for users
 
 ![Showing no colour coding after removing PSReadLine](removePSReadLine.jpg)
 
-The screenshot above is using Windows Terminal and PowerShell 7, but the same thing happens using older versions of PowerShell. Shout out to [Chrissy LeMaire](http://twitter.com/cl) for the beautiful [Windows Terminal theme](https://blog.netnerds.net/2020/07/my-windows-terminal-retro-theme/).
+The screenshot above is using Windows Terminal and PowerShell 7, but the same thing happens using older versions of PowerShell. Shout out to Chrissy LeMaire for the beautiful [Windows Terminal theme](https://blog.netnerds.net/2020/07/my-windows-terminal-retro-theme/).
 
 As I mentioned earlier, when you’re running PowerShell in a console it tracks the commands you run, building up a history of all the things you’ve executed.  This is really useful if you want to slightly change the command you just ran, perhaps fixing a typo, or piping the output to another command. The problem comes when you know you ran something recently, and you start ‘up arrowing’ furiously through the history trying to find what you’re looking for.
 

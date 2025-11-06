@@ -23,7 +23,7 @@ image: "tekton-EcE9dFfXwwE-unsplash.jpg"
 
 Well folks, it’s Wednesday here in the UK, which means I’m a day late to get my blog post in for T-SQL Tuesday. However, if I was in Hawaii it would be still Tuesday so let's go for it...
 
-I used a handy short script this morning and I figured it was worth a quick, late entry! Hopefully John Mccormack ([b](https://johnmccormack.it/)|[t](https://twitter.com/actualjohn)), will forgive me for stretching the deadline!
+I used a handy short script this morning and I figured it was worth a quick, late entry! Hopefully John Mccormack ([b](https://johnmccormack.it/)), will forgive me for stretching the deadline!
 
 First of all, shout out to John for hosting the monthly blog party, he has got a great prompt and I’m really excited to see the wrap-up post as I’m sure it’ll be full of great little code snippets.
 

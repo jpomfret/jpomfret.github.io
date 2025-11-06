@@ -27,7 +27,7 @@ image: "neonbrand-60krlMMeWxU-unsplash-scaled.jpg"
          height="300px"
 >}}
 
-It’s time for February’s monthly blog party. This month is hosted by Mikey Bronowski ([b](https://www.bronowski.it/blog)|[t](https://twitter.com/MikeyBronowski)) and he’s asking us to write about our ‘tools of the trade’.  He’s looking for those tools that make our lives easier, ones we couldn’t imagine going without. Thanks for hosting Mikey, can’t wait to read everyone’s contributions and add some tools to my toolbelt.
+It’s time for February’s monthly blog party. This month is hosted by Mikey Bronowski ([b](https://www.bronowski.it/blog)) and he’s asking us to write about our ‘tools of the trade’.  He’s looking for those tools that make our lives easier, ones we couldn’t imagine going without. Thanks for hosting Mikey, can’t wait to read everyone’s contributions and add some tools to my toolbelt.
 
 I’m going to split this into a couple of sections. I’m sure you can all guess what’s up first though…
 
@@ -41,9 +41,9 @@ If I could only choose one tool for my toolbelt it would be PowerShell, which is
 4. [ImportExcel](https://github.com/dfinke/ImportExcel) – This module lets you work with Excel objects, without having Excel installed.  Easily read data from spreadsheets into PowerShell, or export data to create detailed reports with a few lines of code. Our host for this T-SQL Tuesday has written a great series on this module, if you’re looking for inspiration. [importexcel Archives - Mikey Bronowski - Blog](https://www.bronowski.it/blog/tag/importexcel/)
 5. [PSFramework](https://github.com/PowershellFrameworkCollective/psframework) – Finally, I want to highlight PSFramework.  Portions of this module are used within both dbatools and dbachecks.  It provides great options for both setting configuration options that can be then used in your modules as well as for creating great logging. I’ve switched to using Write-PSFMessage instead of Write-Host\Verbose\Output as it provides a lot more flexibility as well as writing to a physical log file.
 
-I also recently wrote about [PowerShell’s interactive search functionality](https://jesspomfret.com/psreadline-search-history/), and after a poll on Twitter was pretty shocked by how few people knew about it.  I recommend checking it out, as it is a really handy built in feature.
+I also recently wrote about [PowerShell’s interactive search functionality](https://jesspomfret.com/psreadline-search-history/), and after a poll was pretty shocked by how few people knew about it.  I recommend checking it out, as it is a really handy built in feature.
 
-![My twitter poll on whether people use interactive search](JessTweet.png)
+![My poll on whether people use interactive search](JessTweet.png)
 
 ## Microsoft Excel
 

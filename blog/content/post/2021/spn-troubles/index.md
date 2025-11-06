@@ -172,4 +172,4 @@ As I mentioned, this was not at all what I was expecting to write about – but 
 
 I was in the end able to resolve the permissions problems for my service accounts by following this great blog post '[SQL Server - Could not register the Service Principal Name](http://www.alexandreviot.net/2014/09/30/sql-server-could-not-register-the-service-principal-name-spn/)'. Once I applied these permissions when I changed service accounts they were able to delete and recreate the required SPNs.
 
-Another great blog post for more reading on SPNs is this post by [Drew Furgiuele](https://www.twitter.com/pittfurg) on how to use the [dbatools SPN commands](https://dbatools.io/schwifty/).
+Another great blog post for more reading on SPNs is this post by [Drew Furgiuele](https://www.x.com/pittfurg) on how to use the [dbatools SPN commands](https://dbatools.io/schwifty/).

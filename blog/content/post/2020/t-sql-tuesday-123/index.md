@@ -19,7 +19,7 @@ tags:
          height="300px"
 >}}
 
-It’s time for the February edition of T-SQL Tuesday. I am really grateful to be able to host this edition and look forward to reading everyone’s contributions. In case you are new to T-SQL Tuesday this is the monthly blog party started by Adam Machanic ([b](http://dataeducation.com/)|[t](https://twitter.com/adammachanic)) and now hosted by Steve Jones ([b](https://voiceofthedba.com/)|[t](https://twitter.com/way0utwest/)). It’s a way of encouraging blog posts from the community and helping to share the knowledge.
+It’s time for the February edition of T-SQL Tuesday. I am really grateful to be able to host this edition and look forward to reading everyone’s contributions. In case you are new to T-SQL Tuesday this is the monthly blog party started by Adam Machanic ([b](http://dataeducation.com/)) and now hosted by Steve Jones ([b](https://voiceofthedba.com/)). It’s a way of encouraging blog posts from the community and helping to share the knowledge.
 
 So here we are, the first Tuesday of February. I personally always find February to be the month where my motivation is a little low. I live in the northern hemisphere so it can be a pretty dreary winter month where it still feels like there is a long way to spring (I will say this January I moved from Ohio back to England and the distinct lack of piles of snow is helping this cause somewhat). This makes my topic even more relevant as we need a little extra help to be productive and get through the month.
 

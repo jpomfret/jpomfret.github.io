@@ -21,11 +21,11 @@ tags:
          height="300px"
 >}}
 
-It’s time for our monthly T-SQL Tuesday blog party again and we have another interesting prompt to write about. Thanks goes to Alex Yates ([b](http://workingwithdevs.com/)|[t](https://twitter.com/_AlexYates_)) for hosting this month.
+It’s time for our monthly T-SQL Tuesday blog party again and we have another interesting prompt to write about. Thanks goes to Alex Yates ([b](http://workingwithdevs.com/)) for hosting this month.
 
 I’ve thought about this a lot over the last few days and really wanted to find a technical topic to write about, but over and over I came back to the same thoughts. This last week I attended two conferences and gave three presentations (one topic twice), and I still can’t believe I’ve given a single technical presentation.
 
-Allen White ([b](http://dataperfpro.com)|[t](https://twitter.com/SQLRunr)) has a famous spiel that he gives before every one of his presentations, encouraging his audience that everyone has something they can teach others. I created my PASS profile in 2011, and that was about the time I first heard Allen present. I remember laughing to myself that I would never be able to do that.  Giving presentations during my college years was something I dreaded, why on earth would I volunteer now to do that.
+Allen White ([b](http://dataperfpro.com)) has a famous spiel that he gives before every one of his presentations, encouraging his audience that everyone has something they can teach others. I created my PASS profile in 2011, and that was about the time I first heard Allen present. I remember laughing to myself that I would never be able to do that.  Giving presentations during my college years was something I dreaded, why on earth would I volunteer now to do that.
 
 Well, fast forward to June 2018, I gave [my first user group presentation](https://jesspomfret.com/first-user-group-presentation-i-survived/). I stepped way out of my comfort zone for that, but since then I have presented 11 additional times.  I’ve presented at a mixture of SQL Saturdays, online virtual groups and conferences, and every time I’ve got extremely nervous beforehand, and experienced an unbelievable high after.
 
