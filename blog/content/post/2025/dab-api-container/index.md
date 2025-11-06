@@ -118,8 +118,8 @@ dab init --database-type "mssql" `
         --host-mode development
 ```
 
-> **💡 Note: host mode**
-> I've set this to `development` which enables swagger among other features, review the docs here to determine which mode is right for you [Mode (Host runtime)](https://learn.microsoft.com/en-us/azure/data-api-builder/configuration/runtime#mode-host-runtime)
+> **💡 Note: host-mode**
+> I've set this to `development` which enables [swagger](https://swagger.io/) among other features, review the docs here to determine which mode is right for you [Mode (Host runtime)](https://learn.microsoft.com/en-us/azure/data-api-builder/configuration/runtime#mode-host-runtime)
 
 Next we'll add the entities we want to expose from the database, if you want to add all the database tables, you can use [dbatools](http://dbatools.io/) to grab a list of tables and then loop through them running `dab add` for each entity.
 
@@ -191,7 +191,7 @@ az storage file upload --account-key $storageKey `
 
 ## Azure Container Instance
 
-Alright, that's the config in place, now we will focus on creating our Azure Container Instance and wiring it up to use the config. When we created the `dab-config.json` file we set the connection string to an environment variable called `DATABASE_CONNECTION_STRING` so we need to populate this with the connection string to the Azure SQL Database that we created earlier.
+With the config in place, now we will focus on creating our Azure Container Instance and wiring it up to use the config. When we created the `dab-config.json` file we set the connection string to an environment variable called `DATABASE_CONNECTION_STRING` so we need to populate this with the connection string to the Azure SQL Database that we created earlier.
 
 ```PowerShell
 $containerName = 'ci-dab-prod-001'
@@ -298,7 +298,7 @@ Mine is `http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/`, when you navig
 
 The same as when we were running dab locally, we can view the swagger documentation at `http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/swagger`
 
-Then we can hit our API endpoints and interact with the data within our Azure SQL Database. For example, I added an entitrycalled `dbo_BuildVersion` that references the `dbo.BuildVersion` table so I can view the data in the browser at `http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/api/dbo_BuildVersion`.
+Then we can hit our API endpoints and interact with the data within our Azure SQL Database. For example, I added an entity called `dbo_BuildVersion` that references the `dbo.BuildVersion` table so I can view the data in the browser at `http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/api/dbo_BuildVersion`.
 
 {{<
     figure src="BuildVersion.png"
@@ -325,7 +325,7 @@ Anyone spot the problem?
 
 Right now there is zero authentication required to hit my API endpoints. If you review the permissions for each entity we added to the `dab-config.json` file, they are all set to anonymous and the action is set to 'read'. This means, anyone can GET my data from my Azure SQL Database.
 
-I did at least only allow read access, so this is great for public data, but not for company data, and not if we want to PUT, PATCH or DELETE using the API.
+When I added the entities to dab, I did at least only allow read access. This is great for public data, but not for company data, and not if we want to PUT, PATCH or DELETE using the API.
 
 ```json
 "permissions": [
