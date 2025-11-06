@@ -1,0 +1,10 @@
+{{/*
+  Implementation partial for icon rendering (called via partialCached).
+  This is the actual logic from the theme.
+*/}}
+{{- $iconFile := resources.GetMatch (printf "icons/%s.svg" .) -}}
+{{- if $iconFile -}}
+    {{- $iconFile.Content | safeHTML -}}
+{{- else -}}
+    {{- errorf "Error: icon '%s.svg' is not found under 'assets/icons' folder" . -}}
+{{- end -}}
