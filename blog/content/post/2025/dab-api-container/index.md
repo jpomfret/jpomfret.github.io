@@ -2,7 +2,7 @@
 title: "Running dab in an Azure Container Instance"
 slug: "dab-api-container"
 description: "In part 2 of my series on dab, we'll run dab in an Azure Container Instance and wire it up to create an API on top of an Azure SQL Database."
-date: 2025-11-05T09:45:00Z
+date: 2025-11-06T11:00:00Z
 categories:
   - dab
   - api
@@ -12,7 +12,7 @@ tags:
   - api
   - PowerShell
 image: header.png
-draft: true
+draft: false
 ---
 
 This is post two in my series about the Data API Builder (dab), the first post, [Data API Builder](/dab-api-builder/), covers what dab is and how to test it locally against SQL Server in running in a container. This was great for testing, but now we want to start to productionise this, and the first step is to get it running somewhere other than my laptop.
@@ -351,3 +351,4 @@ az group delete --name $resourceGroup
 ## Up Next
 
 As I mentioned this is part of a series on dab, and hopefully you can guess what the next post might cover. Authentication - and how we can use these dab endpoints with Azure authentication, coming soon!
+
