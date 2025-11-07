@@ -103,7 +103,7 @@
     function setConsentInputs(consentValue) {
         var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
         elements.forEach(function(el,index) {
-            if(consentValue[index]=="1") el.checked = true;
+            if(consentValue[index] === "1") el.checked = true;
             else el.checked = false;
         });
     }
