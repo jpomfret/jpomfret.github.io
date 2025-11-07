@@ -22,7 +22,7 @@ image: "waldemar-brandt-sXCxht5Ivu4-unsplash.jpg"
          height="300px"
 >}}
 
-Shout out to Brent Ozar ([b](http://brentozar.com/)|[t](https://twitter.com/BrentO)) for hosting this month's TSQL2sday. It’s time again for this monthly blog party and he wants to know all about our favourite or least favourite data types. To start with I was having a hard time thinking of a favourite data type. I know I have favourite words (merge and plethora, in case you’re wondering), but it seems a bit wrong to pick favourites here – I mean lots of them are great in their own right. Then it came to me- my favourite data type is the right one for the job at hand. Feels like I’m skirting the question a little here, but bear with me.
+Shout out to Brent Ozar ([b](http://brentozar.com/)) for hosting this month's TSQL2sday. It’s time again for this monthly blog party and he wants to know all about our favourite or least favourite data types. To start with I was having a hard time thinking of a favourite data type. I know I have favourite words (merge and plethora, in case you’re wondering), but it seems a bit wrong to pick favourites here – I mean lots of them are great in their own right. Then it came to me- my favourite data type is the right one for the job at hand. Feels like I’m skirting the question a little here, but bear with me.
 
 Let’s talk about accuracy and precision, and how much of it you actually need.  The rest of this post is going to focus on datetime datatypes, but these thoughts could easily apply elsewhere (for example tinyint vs int vs bigint).
 

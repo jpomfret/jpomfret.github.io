@@ -13,7 +13,7 @@ tags:
 
 I came across a situation this week where I wanted to add the option of running an existing script,  for a specific server/database combination.  The script currently has no parameters and runs against all servers in the environment from a scheduled task.  I wanted to make sure that behaviour didn’t change. The other requirement was that if I specified Server, Database should be a mandatory parameter and vice versa.
 
-The final solution was to add the two parameters to a parameter set and make them both mandatory.  I also had to add a different DefaultParameterSet (thanks to [Andrew](http://twitter.com/awickham) for this idea), otherwise it defaulted to the defined parameter set, meaning the script always required both Server and Database parameters.
+The final solution was to add the two parameters to a parameter set and make them both mandatory.  I also had to add a different DefaultParameterSet (thanks to Andrew for this idea), otherwise it defaulted to the defined parameter set, meaning the script always required both Server and Database parameters.
 
 ```PowerShell
 [CmdletBinding(DefaultParameterSetName="Normal")]
