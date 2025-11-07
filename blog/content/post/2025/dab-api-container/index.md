@@ -356,7 +356,7 @@ As I mentioned this is part of a series on dab, and hopefully you can guess what
 
 Here are all the links to the dab blog series:
 
-1. Data API Builder
+1. [Data API Builder](/dab-api-builder/)
 2. [Running dab in an Azure Container Instance](/dab-api-container/)
 3. More coming soon...
 

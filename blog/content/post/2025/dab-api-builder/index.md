@@ -169,7 +169,7 @@ Now this is a super cool test for DAB, but I need to productionise this. So in t
 
 Here are all the links to the dab blog series:
 
-1. Data API Builder
+1. [Data API Builder](/dab-api-builder/)
 2. [Running dab in an Azure Container Instance](/dab-api-container/)
 3. More coming soon...
 
