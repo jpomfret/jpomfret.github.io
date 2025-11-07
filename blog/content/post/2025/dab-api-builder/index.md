@@ -4,13 +4,7 @@ slug: "dab-api-builder"
 description: "Let's test out the Data API Builder (dab) to create API endpoints for a local SQL Server database running in a container."
 date: 2025-08-30T09:00:00Z
 categories:
-  - dab
-  - api
-  - PowerShell
 tags:
-  - dab
-  - api
-  - PowerShell
 image: header.png
 draft: false
 ---
@@ -137,10 +131,10 @@ Remember the entity we added earlier, for the authors table in the pubs database
     alt="View the Authors API endpoint in the browser"
 >}}
 
-We've written zero code at this point. Just configured a json config file and now we can get, and insert, if we make a `POST` request, data from the SQL Server table. We can also use these API endpoints in PowerShell code, the following will get the data from the Authors table with a `Invoke-RestMethod` call.
+We've written zero code at this point. Just configured a json config file and now we can get, and insert, if we make a `POST` request, data from the SQL Server table. We can also use these API endpoints in PowerShell code, the following will get the data from the Authors table with a `Invoke-WebRequest` call.
 
 ```PowerShell
-$result = Invoke-RestMethod -Uri http://localhost:5000/api/Author -Method Get
+$result = Invoke-WebRequest -Uri http://localhost:5000/api/Author -Method Get
 ($result.Content | ConvertFrom-Json).Value
 ```
 
@@ -170,3 +164,13 @@ It's also worth mentioning you can create GraphQL API endpoints also with this t
 ## Next Steps
 
 Now this is a super cool test for DAB, but I need to productionise this. So in the rest of this series we'll look at hosting this tool in an Azure Container Instance. Then we'll talk about authentication, and how we can call these API endpoints securely from an Azure Function.
+
+## dab Blog Series
+
+Here are all the links to the dab blog series:
+
+1. [Data API Builder](/dab-api-builder/)
+2. [Running dab in an Azure Container Instance](/dab-api-container/)
+3. More coming soon...
+
+Or you can view all posts about dab using the [dab](/categories/dab/) category.
