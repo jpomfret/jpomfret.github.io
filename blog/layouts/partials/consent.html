@@ -156,6 +156,66 @@
             this.classList.toggle('active');
         }
     });
+
+    // Focus trapping and keyboard navigation
+    var consentOverlay = document.getElementById("consent-overlay");
+    var focusableElements = null;
+    var firstFocusableElement = null;
+    var lastFocusableElement = null;
+
+    function updateFocusableElements() {
+        focusableElements = consentOverlay.querySelectorAll(
+            'button, [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        firstFocusableElement = focusableElements[0];
+        lastFocusableElement = focusableElements[focusableElements.length - 1];
+    }
+
+    function trapFocus(e) {
+        if (e.key === 'Tab' || e.keyCode === 9) {
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstFocusableElement) {
+                    lastFocusableElement.focus();
+                    e.preventDefault();
+                }
+            } else { // Tab
+                if (document.activeElement === lastFocusableElement) {
+                    firstFocusableElement.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    }
+
+    function closeModalOnEscape(e) {
+        if (e.key === 'Escape' || e.keyCode === 27) {
+            consentOverlay.classList.remove('active');
+        }
+    }
+
+    // Observer to handle focus when modal opens/closes
+    var modalObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                if (consentOverlay.classList.contains('active')) {
+                    // Modal opened
+                    updateFocusableElements();
+                    document.addEventListener('keydown', trapFocus);
+                    document.addEventListener('keydown', closeModalOnEscape);
+                    // Focus the first focusable element
+                    if (firstFocusableElement) {
+                        firstFocusableElement.focus();
+                    }
+                } else {
+                    // Modal closed
+                    document.removeEventListener('keydown', trapFocus);
+                    document.removeEventListener('keydown', closeModalOnEscape);
+                }
+            }
+        });
+    });
+
+    modalObserver.observe(consentOverlay, { attributes: true });
 </script>
 
 {{ range $index, $item := .Site.Data.consent.items }}
