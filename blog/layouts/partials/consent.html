@@ -108,7 +108,7 @@
         });
     }
     function setConsentValue() {
-        var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+        const elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
         var consentValue = "";
         elements.forEach(function(el) {
             if(el.checked) consentValue = consentValue + "1";
@@ -117,7 +117,7 @@
         document.getElementById("save-consent").dataset.consentvalue = consentValue;
     }
 
-    var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+    const elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
     elements.forEach(function(el) {
         el.checked = false;
     });
@@ -130,19 +130,19 @@
     } else {
         document.getElementById('consent-notice').style.display = 'block';
     }
-    var elements = document.querySelectorAll('.manage-consent');
+    const elements = document.querySelectorAll('.manage-consent');
     elements.forEach(function(el) {
         el.addEventListener("click",function() {
             document.getElementById('consent-overlay').classList.toggle('active');
         });
     });
-    var elements = document.querySelectorAll('.deny-consent');
+    const elements = document.querySelectorAll('.deny-consent');
     elements.forEach(function(el) {
         el.addEventListener("click",function() {
             denyAllConsentScripts();
         });
     });
-    var elements = document.querySelectorAll('.approve-consent');
+    const elements = document.querySelectorAll('.approve-consent');
     elements.forEach(function(el) {
         el.addEventListener("click",function() {
             acceptAllConsentScripts();
