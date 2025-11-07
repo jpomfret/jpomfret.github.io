@@ -165,7 +165,7 @@ It's also worth mentioning you can create GraphQL API endpoints also with this t
 
 Now this is a super cool test for DAB, but I need to productionise this. So in the rest of this series we'll look at hosting this tool in an Azure Container Instance. Then we'll talk about authentication, and how we can call these API endpoints securely from an Azure Function.
 
-## dab blog series
+## dab Blog Series
 
 Here are all the links to the dab blog series:
 
