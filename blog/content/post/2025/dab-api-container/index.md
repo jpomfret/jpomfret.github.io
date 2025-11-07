@@ -352,7 +352,7 @@ az group delete --name $resourceGroup
 
 As I mentioned this is part of a series on dab, and hopefully you can guess what the next post might cover. Authentication - and how we can use these dab endpoints with Azure authentication, coming soon!
 
-## dab blog series
+## dab Blog Series
 
 Here are all the links to the dab blog series:
 
