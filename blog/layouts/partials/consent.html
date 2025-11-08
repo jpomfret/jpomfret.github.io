@@ -101,7 +101,6 @@
     }
     // Cache the NodeList for consent inputs
     const consentInputs = document.querySelectorAll('#consent-overlay input:not([disabled])');
-
     function setConsentInputs(consentValue) {
         consentInputs.forEach(function(el,index) {
             if(consentValue[index]=="1") el.checked = true;
