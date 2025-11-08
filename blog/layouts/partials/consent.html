@@ -157,10 +157,10 @@
     });
 
     // Focus trapping and keyboard navigation
-    var consentOverlay = document.getElementById("consent-overlay");
-    var focusableElements = null;
-    var firstFocusableElement = null;
-    var lastFocusableElement = null;
+    const consentOverlay = document.getElementById("consent-overlay");
+    let focusableElements = null;
+    let firstFocusableElement = null;
+    let lastFocusableElement = null;
 
     function updateFocusableElements() {
         focusableElements = consentOverlay.querySelectorAll(
@@ -194,7 +194,7 @@
     }
 
     // Observer to handle focus when modal opens/closes
-    var modalObserver = new MutationObserver(function(mutations) {
+    const modalObserver = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             if (mutation.attributeName === 'class') {
                 if (consentOverlay.classList.contains('active')) {
