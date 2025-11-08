@@ -125,7 +125,8 @@
         //console.log(consentValue);
         setConsentInputs(consentValue);
         loadConsentScripts(consentValue);
-    } else {
+    } else if(scripts.length > 0) {
+        // Only show consent notice if there are non-functional scripts to consent to
         document.getElementById('consent-notice').style.display = 'block';
     }
     const elements = document.querySelectorAll('.manage-consent');
