@@ -28,7 +28,7 @@ I now have [5 published courses](/video) in the LinkedIn library, and love seein
     width="200px"
 >}}
 
-Speaking wise I gave sessions in 5 different countries, and online. Including 2 full day sessions with Rob. Not a bad year at all!
+Speaking wise I gave sessions in 5 different countries, and online. Including 2 full day sessions with Rob ([b](https://blog.robsewell.com/)|[l](https://www.linkedin.com/in/robmsewell/)). Not a bad year at all!
 
 I spoke on a variety of SQL Server, PowerShell and automation topics here:
 
@@ -42,7 +42,7 @@ I spoke on a variety of SQL Server, PowerShell and automation topics here:
 
 As well as these sessions I also sat on a couple of interesting panels at Redgate events, one at the Tottenham Hotspur stadium, and one at Mercedes Benz world - both were super fun and insightful days!
 
-## Blog and socials
+## Blog and Socials
 
 I managed to publish 7 posts on my blog this year, including a couple on the Data API builder that got a lot of interest. I still have a lot of draft blog posts and ideas I want to finish and publish, so hopefully they'll be more coming soon in this area.
 
@@ -52,7 +52,7 @@ It's true what they say, often blogging and writing is just as useful for the au
 
 LinkedIn posts, phew - something I could definitely do better with here. Watch this space, I've got some ideas for how to improve here, and create a bit of a united front with my online presence, there will definitely be things to talk about this time next year!
 
-## 2026 plans
+## 2026 Plans
 
 Well it's shaping up to be a great year, I'll turn 40 in June, and me and Kelc have a pretty spectacular trip planned to celebrate in the first half of this year.
 
