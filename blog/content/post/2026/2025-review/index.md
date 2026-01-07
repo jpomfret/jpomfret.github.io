@@ -15,7 +15,9 @@ Well 2025 has come to a close, I felt like it wasn't the most productive year fo
 
 ## LinkedIn Learning
 
-The year started off with my latest LinkedIn Learning course being published in January. '[Data Management Essential Training](https://www.linkedin.com/learning/data-management-essential-training/dive-into-data-management)' is a course that is a bit different from what I usually focus on, more of a broad conceptual discussion, rather than technical deep dives and demos. I put a lot of work into creating the content, and was grateful to be able to travel to the LinkedIn studios in Carpinteria to record the course. What an experience that was, and it was so great to see this course get published and pretty quickly become my most watched course so far!
+The year started off with a new LinkedIn Learning course being published in January. '[Data Management Essential Training](https://www.linkedin.com/learning/data-management-essential-training/dive-into-data-management)' is a course that is a bit different from what I usually focus on, more of a broad conceptual discussion, rather than technical deep dives and demos. I put a lot of work into creating the content, and was grateful to be able to travel to the LinkedIn studios in Carpinteria to record the course. What an experience that was, and it was so great to see this course get published and pretty quickly become my most watched course so far!
+
+Then in August [Automating Azure Infrastructure Management with PowerShell](https://www.linkedin.com/learning/guided-lab-automating-azure-infrastructure-management-with-powershell) was published, a new offering from LinkedIn, a text based course. This is a hands on guide to helping you manage Azure Infrastructure with PowerShell.
 
 I now have [5 published courses](/video) in the LinkedIn library, and love seeing people post when they watch them!
 
