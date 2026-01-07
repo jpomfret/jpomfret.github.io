@@ -7,3 +7,14 @@ figure.float-left {
     margin-left: var(--card-padding);
     margin-right: var(--card-padding);
 }
+
+.float-right {
+    float: right;
+}
+
+figure.float-right {
+    max-width: fit-content;
+    margin-left: var(--card-padding);
+    margin-right: var(--card-padding);
+}
+
