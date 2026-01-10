@@ -23,7 +23,7 @@ image: "dashboard-1.jpg"
          height="300px"
 >}}
 
-Thanks to Elizabeth Nobel ([b](https://sqlzelda.wordpress.com/)|[t](https://twitter.com/SQLZelda)) for hosting this month’s T-SQL Tuesday party and apologies for being as late as possible to the party! I love the topic of automation so felt sure I’d write something and then time slipped away. Luckily Mikey Bronowski ([b](https://www.bronowski.it/blog/)|[t](https://twitter.com/MikeyBronowski)) convinced me that it wasn’t too late to write something on my lunch break today (Wednesday in the UK) as it’s still Tuesday on Baker Island. Interesting fact Baker Island uses UTC-12:00 because since it’s uninhabited the islands time zone is unspecified ([Wikipedia](https://en.wikipedia.org/wiki/Baker_Island)).
+Thanks to Elizabeth Nobel ([b](https://sqlzelda.wordpress.com/)) for hosting this month’s T-SQL Tuesday party and apologies for being as late as possible to the party! I love the topic of automation so felt sure I’d write something and then time slipped away. Luckily Mikey Bronowski ([b](https://www.bronowski.it/blog/)) convinced me that it wasn’t too late to write something on my lunch break today (Wednesday in the UK) as it’s still Tuesday on Baker Island. Interesting fact Baker Island uses UTC-12:00 because since it’s uninhabited the islands time zone is unspecified ([Wikipedia](https://en.wikipedia.org/wiki/Baker_Island)).
 
 ## Automating dbachecks with scheduled task
 

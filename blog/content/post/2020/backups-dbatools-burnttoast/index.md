@@ -15,7 +15,7 @@ image: "cover.jpg"
 
 I have just a quick tip for you today using the [BurntToast](https://github.com/Windos/BurntToast) module to notify us when a backup is complete. As DBAs there is always plenty to do, so we don’t want to have to sit and watch a long running script to catch the moment when it finishes.  Usually what happens to me is I kick off the script, move on to something else and then totally forget about it, perhaps until someone asks if it’s done yet. Oops. Well this tip will help avoid that.
 
-The [BurntToast](https://github.com/Windos/BurntToast) module, created by Josh King ([b](https://toastit.dev/)|[t](https://twitter.com/windosnz)), allows you to easily add Windows toast notifications to your PowerShell scripts. I’m going to show you how to use BurntToast to keep track of a database backup.
+The [BurntToast](https://github.com/Windos/BurntToast) module, created by Josh King ([b](https://toastit.dev/)), allows you to easily add Windows toast notifications to your PowerShell scripts. I’m going to show you how to use BurntToast to keep track of a database backup.
 
 By this time you should know about my love for [dbatools](https://dbatools.io/), so today we’re going to take a look at how to take a [copy-only](https://docs.microsoft.com/en-us/sql/relational-databases/backup-restore/copy-only-backups-sql-server?view=sql-server-ver15) backup.  This is a backup that doesn’t upset the LSN chain of your regular database backups and can be used to just save a specific point in time for perhaps pre-upgrade, or to restore the database somewhere else.
 

@@ -21,7 +21,7 @@ tags:
          height="300px"
 >}}
 
-First off, welcome to my first T-SQL Tuesday which seems like the perfect first blog post to introduce myself and my non-SQL Server life.  Starting this blog and becoming more involved with the SQL Server community (read speaking) is my goal for 2018 so here goes nothing. Thanks to [Aaron Bertrand](http://twitter.com/AaronBertrand) for hosting and picking a great topic.
+First off, welcome to my first T-SQL Tuesday which seems like the perfect first blog post to introduce myself and my non-SQL Server life.  Starting this blog and becoming more involved with the SQL Server community (read speaking) is my goal for 2018 so here goes nothing. Thanks to Aaron Bertrand for hosting and picking a great topic.
 
 I was born in Oxford, England before my family moved to the small market town of [Chippenham, Wiltshire](https://en.wikipedia.org/wiki/chippenham) where I was raised.  Leading to my main passion being proper football. We can argue about why this is the proper football in a later post perhaps (hint: you use your feet to kick a ball, no hands or egg-shaped objects here).
 

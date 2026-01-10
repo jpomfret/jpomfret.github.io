@@ -21,7 +21,7 @@ image: "victor-freitas-Yuv-iwByVRQ-unsplash.jpg"
          height="300px"
 >}}
 
-It’s T-SQL Tuesday time and I’ve finally managed to put some words into a blog post again.  It’s been a few months since I’ve posted anything on my blog, things have been busy, and my motivation has been a little lacking.  However, this topic has inspired me to try and pull something together. Thanks to TJay([b](https://tjaybelt.blogspot.com/)|[t](https://twitter.com/tjaybelt)) for hosting this month and for choosing a great topic.
+It’s T-SQL Tuesday time and I’ve finally managed to put some words into a blog post again.  It’s been a few months since I’ve posted anything on my blog, things have been busy, and my motivation has been a little lacking.  However, this topic has inspired me to try and pull something together. Thanks to TJay([b](https://tjaybelt.blogspot.com/)) for hosting this month and for choosing a great topic.
 
 TJay has asked us to share our personal journey with managing work/life balance.  It’s an interesting prompt, especially at this point in a global pandemic.  The last 18 months have caused a massive shift in my work/life balance, and at this point I’d have to say overall it’s been a positive change.
 
