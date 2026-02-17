@@ -12,7 +12,7 @@ tags:
 draft: $true
 ---
 
-This weekend, while I was having a great time at SQL Saturday Cleveland, I ran into my friend Bert ([b](https://bertwagner.com/)|[t](https://twitter.com/bertwagner)). He had some dbatools questions, which I was happy to help him with.  Now that dbatools has over 500 commands, it is both awesome and terrifying.  Bert wanted to know how to automate his database backups and then check he was using the correct recovery model.
+This weekend, while I was having a great time at SQL Saturday Cleveland, I ran into my friend Bert ([b](https://bertwagner.com/)). He had some dbatools questions, which I was happy to help him with.  Now that dbatools has over 500 commands, it is both awesome and terrifying.  Bert wanted to know how to automate his database backups and then check he was using the correct recovery model.
 
 {{< youtube id="9Zk3R7_Pr-U" title="Automating Database Maintenance with Jess Pomfret and dbatools" >}}
 

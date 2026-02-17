@@ -17,7 +17,7 @@ I wrote previously about how I loved little life hacks and shortcuts for my [Feb
 
 I specifically write a lot of PowerShell in VSCode and so often find myself using F8 to run the selected line in the integrated console. One thing that always drove me a little crazy was that my cursor stayed in the integrated console after execution, rather than returning to the script I was writing.  I hadn’t managed to find the shortcut to return to the editor window I was working in until recently when I decided to figure it out.
 
-Since I started writing this post a couple of weeks ago, I discovered an even better solution thanks to the following tweet from [Simon Sabin](http://twitter.com/simon_sabin). The tweet also links to a [GitHub issue](https://github.com/PowerShell/vscode-powershell/issues/1058) where there is a discussion on why this is the default behaviour.
+Since I started writing this post a couple of weeks ago, I discovered an even better solution thanks to Simon Sabin. This post also links to a [GitHub issue](https://github.com/PowerShell/vscode-powershell/issues/1058) where there is a discussion on why this is the default behaviour.
 
 ![Simon's Tweet about changing the focus](sabinTweet.png)
 

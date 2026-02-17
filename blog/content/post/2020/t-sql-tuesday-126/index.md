@@ -19,7 +19,7 @@ tags:
          height="300px"
 >}}
 
-Well it’s May T-SQL Tuesday time! Honestly I’m not sure if time is crawling or flying by, it seems like forever ago we got writing for the April prompt on unit testing databases.  Thanks to Glenn ([b](https://glennsqlperformance.com/)|[t](https://twitter.com/GlennAlanBerry)) this month for hosting an interesting topic. I’m looking forward to reading all the responses. Also a bigger thanks for publicising [Folding@Home](https://foldingathome.org/) and setting up the [#SQLFamily](https://stats.foldingathome.org/team/236388) team!
+Well it’s May T-SQL Tuesday time! Honestly I’m not sure if time is crawling or flying by, it seems like forever ago we got writing for the April prompt on unit testing databases.  Thanks to Glenn ([b](https://glennsqlperformance.com/)) this month for hosting an interesting topic. I’m looking forward to reading all the responses. Also a bigger thanks for publicising [Folding@Home](https://foldingathome.org/) and setting up the [#SQLFamily](https://stats.foldingathome.org/team/236388) team!
 
 Glenn wants to know what we’re doing in response to COVID-19 and if we’re contributing to the FAH #SQLFamily team, what our experience has been.
 

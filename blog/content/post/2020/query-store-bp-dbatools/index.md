@@ -21,7 +21,7 @@ I would like to just say I’m in no way suggesting that we can skip the learnin
 
 ## Adding Query Store Expertise to dbatools
 
-Last week I was working on configuring Query Store, and knowing that Erin Stellato ([b](https://www.sqlskills.com/blogs/erin/)|[t](https://twitter.com/erinstellato)) is the expert on that I headed over to her blog. I found exactly what I needed. Erin has a bunch of great posts on query store, but this one caught my eye: '[Query Store Best Practices](https://www.sqlskills.com/blogs/erin/query-store-best-practices)'.
+Last week I was working on configuring Query Store, and knowing that Erin Stellato ([b](https://www.sqlskills.com/blogs/erin/)) is the expert on that I headed over to her blog. I found exactly what I needed. Erin has a bunch of great posts on query store, but this one caught my eye: '[Query Store Best Practices](https://www.sqlskills.com/blogs/erin/query-store-best-practices)'.
 
 I read through her suggestions and could easily translate those using dbatools to optimally configure Query Store. First by setting several query store options using `Set-DbaDbQueryStoreOption`:
 

@@ -19,7 +19,7 @@ tags:
          height="300px"
 >}}
 
-It’s T-SQL Tuesday again and thanks goes this week to our host Andy Leonard ([b](https://andyleonard.blog)|[t](https://twitter.com/AndyLeonard)). Andy has picked a great topic on why we do the things we do. With our hectic lives it’s good sometimes to sit down and have a think about something like this.  I’ve split my ‘what I do’ up into three buckets that, although are separate, have a lot of common ‘whys’.
+It’s T-SQL Tuesday again and thanks goes this week to our host Andy Leonard ([b](https://andyleonard.blog)). Andy has picked a great topic on why we do the things we do. With our hectic lives it’s good sometimes to sit down and have a think about something like this.  I’ve split my ‘what I do’ up into three buckets that, although are separate, have a lot of common ‘whys’.
 
 ## Database Administrator
 

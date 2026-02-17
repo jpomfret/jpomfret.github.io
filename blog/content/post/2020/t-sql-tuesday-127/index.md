@@ -20,7 +20,7 @@ tags:
          height="300px"
 >}}
 
-I feel like I say this every month, but it’s already time for another edition of T-SQL Tuesday. This months blog party is hosted by Kenneth Fisher ([B](https://sqlstudies.com/)|[T](https://twitter.com/sqlstudent144)) and he’s looking for tips & tricks, but nothing DBMS related.  As you might already know, I love shortcuts and tips & tricks – so I was really excited to see this prompt. First, because I easily found a few I wanted to share, but secondly, I can’t wait to read about everyone else’s tips & tricks.
+I feel like I say this every month, but it’s already time for another edition of T-SQL Tuesday. This months blog party is hosted by Kenneth Fisher ([B](https://sqlstudies.com/)) and he’s looking for tips & tricks, but nothing DBMS related.  As you might already know, I love shortcuts and tips & tricks – so I was really excited to see this prompt. First, because I easily found a few I wanted to share, but secondly, I can’t wait to read about everyone else’s tips & tricks.
 
 I had a hard time narrowing this down to just one shortcut, so I’ve picked three – but they fit together nicely. First, I have to let you in on a small secret:
 
@@ -30,9 +30,7 @@ Whether it’s chrome or SSMS, I cannot help myself when it comes to opening new
 
 ![Chrome browser tabs](tabsShort.png)
 
-I even got called out by my good friend Andrew ([B](https://awickham.com/)|[T](https://twitter.com/awickham)) this last week:
-
-{{< tweet user="awickham" id="1267503576571674624" >}}
+I even got called out by my good friend Andrew ([B](https://awickham.com/)) this last week about having too many tabs open!
 
 My tips & tricks are focused around managing tabs, and they work in all browsers (at least all that I have on my laptop. Chrome, Edge, IE11).
 

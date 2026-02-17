@@ -20,7 +20,7 @@ image: "georg-bommeli-ybtUqjybcjE-unsplash.jpg"
          height="300px"
 >}}
 
-This month’s blog party is hosted by Taiob Ali ([b](https://sqlworldwide.com/)|[t](https://twitter.com/SqlWorldWide)), and they ask how are we coping with the pandemic. Last week England entered its second national lockdown, which is slated to last until December 2nd, so now more than ever is a good time to reflect on some effective coping strategies.  Thanks Taiob for hosting and I’m looking forward to reading everyone else’s mechanisms.
+This month’s blog party is hosted by Taiob Ali ([b](https://sqlworldwide.com/)), and they ask how are we coping with the pandemic. Last week England entered its second national lockdown, which is slated to last until December 2nd, so now more than ever is a good time to reflect on some effective coping strategies.  Thanks Taiob for hosting and I’m looking forward to reading everyone else’s mechanisms.
 
 In the prompt it was suggested we could break this post down into three buckets: mental health, physical health and professional growth. Three really important areas so I’ll do just that.
 
@@ -50,7 +50,7 @@ My strategy is just to do something. I know that I feel better when I’m active
 
 3. Plank Challenge
 
-    I saw a tweet from Kendra Little last week on her fitness plans for lockdown and she included working on planks every day. I am also terrible at planks so I’m going to jump in on this and join her with a plank a day.
+    I saw a post from Kendra Little last week on her fitness plans for lockdown and she included working on planks every day. I am also terrible at planks so I’m going to jump in on this and join her with a plank a day.
 
   ![Kendra tweet about a plank challenge](KendraTweet.png)
 
@@ -84,4 +84,4 @@ My coping strategy here is to ride this renewed excitement and get some content 
 
 This has turned into quite the ramble, so thanks for reading if you’re still with me! To sum it up, I know I need to stay active – this is really the base for everything else. If I workout I feel better about everything else. It’s as simple as that.
 
-I know that this year has been tough for everyone. I hope some of these strategies will be useful to other people too.  Feel free to reach out to me on Twitter if there is anything I can do to help. We can get through this together.
+I know that this year has been tough for everyone. I hope some of these strategies will be useful to other people too.  Feel free to reach out to me if there is anything I can do to help. We can get through this together.

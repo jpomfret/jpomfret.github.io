@@ -15,8 +15,6 @@ Well tonight marks three weeks since I gave my first user group presentation and
 
 TL;DR I didn’t die, the SQL Server community is fantastic and I have amazing supportive friends.
 
-{{< tweet user="Pittfurg" id="1004125722082934784" >}}
-
 ## Why Present?
 
 The answer to this is twofold. Firstly this year I’ve challenged myself to get more involved in the SQL Server community. For several years now I’ve attended user group meetings, SQL Saturday’s and even made it to the PASS Summit a couple of times, but I’ve never contributed anything. It’s been all take.   Last year I got involved with dbatools and that started my quest to return the favour.  I’m still currently wrestling with the ideas of “who wants to listen to what I have to say” and “do I really have anything to contribute anyway,” but I’m doing my best to keep one foot in front of the other and see what happens.
@@ -31,7 +29,7 @@ The culmination of both the issue at work and working on dbatools commands for c
 
 ## Improvements
 
-Overall I think the presentation went well, I delivered most of what I had planned on saying and my demo’s did a decent job of explaining the process for deciding what to compress and then applying compression through T-SQL, SSMS and PowerShell.  I was lucky to have some great friends in the audience ([Andrew](https://twitter.com/awickham), [Drew](https://twitter.com/Pittfurg) and [Erin](https://twitter.com/erinstellato)) who asked great questions which helped me to drive home certain points.
+Overall I think the presentation went well, I delivered most of what I had planned on saying and my demo’s did a decent job of explaining the process for deciding what to compress and then applying compression through T-SQL, SSMS and PowerShell.  I was lucky to have some great friends in the audience (Andrew, Drew and Erin) who asked great questions which helped me to drive home certain points.
 
 My timing was definitely a bit off. I’d prepared for what I thought would be 45-60 minutes of content and it was a bit shorter than that.  I plan on adding some additional content and delivering slightly slower the next time I give this talk to fix this problem.
 

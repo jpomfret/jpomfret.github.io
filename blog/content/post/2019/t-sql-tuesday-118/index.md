@@ -18,7 +18,7 @@ tags:
          height="300px"
 >}}
 
-This month our T-SQL Tuesday host, Kevin Chant ([b](https://www.kevinrchant.com)|[t](https://twitter.com/kevchant)), has challenged us to propose a new fantasy feature for SQL Server. Firstly, thanks to Kevin for hosting this month’s blog party.
+This month our T-SQL Tuesday host, Kevin Chant ([b](https://www.kevinrchant.com)), has challenged us to propose a new fantasy feature for SQL Server. Firstly, thanks to Kevin for hosting this month’s blog party.
 
 When I first read the invitation I didn’t have any ideas jump straight into my mind. Since then, I’ve come up with two. I’m going to share both since they are for different areas… cheating I know ?.
 
