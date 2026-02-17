@@ -125,7 +125,7 @@ We'll use the Azure cli again, to run an ACR task on demand - the task will use 
 One of my favourite parameters is `--dry-run` this will output what would happen if you executed the purge command, similar to the `-WhatIf` in PowerShell. Let's run the following:
 
 ```PowerShell
-$PURGE_CMD="acr purge --filter '*.*' --untagged --ago 365d --dry-run"
+$PURGE_CMD="acr purge --filter '.*:.*' --untagged --ago 365d --dry-run"
 az acr run --cmd $PURGE_CMD --registry acrName /dev/null
 ```
 
@@ -152,7 +152,7 @@ Number of manifests to be deleted: 0
 Once you're happy with the results of the dry run, remove that parameter and kick it off. I would recommend if you have a lot to delete adding the `--timeout` parameter, in this case I'm giving the command an hour before it'll time out, or 3600 seconds. This will overwrite the default of 600 seconds for an on-demand task.
 
 ```PowerShell
-$PURGE_CMD="acr purge --filter '*.*' --untagged --ago 365d"
+$PURGE_CMD="acr purge --filter '.*:.*' --untagged --ago 365d"
 az acr run --cmd $PURGE_CMD --registry acrName --timeout 3600 /dev/null
 ```
 
@@ -193,7 +193,7 @@ But, what happens if you don't rebuild the images often? After 30 days you'd get
 I'd recommend something like this as your final clean up script - and what we'll want to schedule in the next step. Remember, test with a `--dry-run` and when you're happy with the combination, remove that parameter and let it go.
 
 ```PowerShell
-$PURGE_CMD="acr purge --filter '*:.*' --untagged --ago 30d --keep 5"
+$PURGE_CMD="acr purge --filter '.*:.*' --untagged --ago 30d --keep 5"
 az acr run --cmd $PURGE_CMD --registry acrName --timeout 3600 /dev/null
 ```
 
@@ -206,7 +206,7 @@ This is fine for a one-time clean up and a good idea to ensure you're happy with
 We have been using `az acr run` to run the task manually, we'll instead swap to use `az acr task create` to set this up as an automated process using [ACR tasks](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-tasks-overview).
 
 ```PowerShell
-$PURGE_CMD="acr purge --filter '*:.*' --untagged --ago 30d --keep 5 --dry-run"
+$PURGE_CMD="acr purge --filter '.*:.*' --untagged --ago 30d --keep 5 --dry-run"
 az acr task create --name CleanUpTask --cmd $PURGE_CMD --schedule "0 9 * * Sat" --registry acrName --context /dev/null
 ```
 
@@ -245,3 +245,4 @@ Now you know that you will be alerted if you get close to paying overage charges
 I hope this has been a useful post to make sure your ACRs are clean and tidy and more importantly, not costing you extra money. Thanks again to the organisers of the [Azure Spring Clean](https://www.azurespringclean.com/) for featuring my post - I look forward to reading all the other ways we can ensure a well managed Azure tenant.
 
 Header image by [Raymond Rasmusson](https://unsplash.com/@raymondrasmusson?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/plastic-organizer-with-labels-7EhAf2dBthg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
+
