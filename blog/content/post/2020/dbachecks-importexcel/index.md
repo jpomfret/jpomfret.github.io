@@ -13,7 +13,7 @@ tags:
 image: "pivot.jpg"
 ---
 
-I got a message from a friend on Twitter last night asking ‘Is there an easy way to get dbachecks backup info into an Excel spreadsheet?’.  I sent them a couple of ideas, but figured this is a great use case that many people might be interested in. Pairing infrastructure testing using dbachecks with creating Excel reports with the ImportExcel module is a great addition to your automation tool belt. I also had ImportExcel on my mind this week after watching some great demos from Mikey Bronowski ([b](https://www.bronowski.it/blog/2020/06/powershell-into-excelimportexcel-module-part-1/)|[t](https://twitter.com/mikeybronowski)) at a user group earlier this week.
+I got a message from a friend last night asking ‘Is there an easy way to get dbachecks backup info into an Excel spreadsheet?’.  I sent them a couple of ideas, but figured this is a great use case that many people might be interested in. Pairing infrastructure testing using dbachecks with creating Excel reports with the ImportExcel module is a great addition to your automation tool belt. I also had ImportExcel on my mind this week after watching some great demos from Mikey Bronowski ([b](https://www.bronowski.it/blog/2020/06/powershell-into-excelimportexcel-module-part-1/)) at a user group earlier this week.
 
 ## Run the Checks
 

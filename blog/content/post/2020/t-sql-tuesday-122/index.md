@@ -19,7 +19,7 @@ tags:
          height="300px"
 >}}
 
-What a great topic for the start of the year as we’re all thinking about goal setting and personal improvement. Thanks to Jon Shaulis ([b](https://jonshaulis.com/)|[t](https://twitter.com/JonShaulis)) for hosting this first monthly blog party of the decade.
+What a great topic for the start of the year as we’re all thinking about goal setting and personal improvement. Thanks to Jon Shaulis ([b](https://jonshaulis.com/)) for hosting this first monthly blog party of the decade.
 
 Imposter syndrome is mentioned so often in our community, and it’s really interesting to me the wide number of people, who I consider experts, that say they still feel this sometimes. I’m really excited to read about how other people combat this feeling and hopefully pick up some tips for when it creeps into my head.
 

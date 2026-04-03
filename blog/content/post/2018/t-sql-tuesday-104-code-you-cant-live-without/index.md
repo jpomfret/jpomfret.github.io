@@ -23,7 +23,7 @@ tags:
          height="300px"
 >}}
 
-As soon as I saw Bert Wagner ([t](https://twitter.com/bertwagner)|[b](https://bertwagner.com/)) post his T-SQL Tuesday topic last week I knew this was going to be a great one. I’m really looking forward to reading about everyone’s favourite code snippets so thanks Bert for hosting and choosing a fantastic subject!
+As soon as I saw Bert Wagner ([b](https://bertwagner.com/)) post his T-SQL Tuesday topic last week I knew this was going to be a great one. I’m really looking forward to reading about everyone’s favourite code snippets so thanks Bert for hosting and choosing a fantastic subject!
 
 A lot of the code I can't live without is either downloaded from the community (e.g. [sp_whoisactive](http://whoisactive.com/), [sp_indexinfo](http://karaszi.com/spindexinfo-enhanced-index-information-procedure), [sp_blitz](https://www.brentozar.com/blitz/)), or very specific to my workplace so I'm going to share some code that I've been meaning to blog about.
 

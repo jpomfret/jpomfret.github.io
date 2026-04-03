@@ -20,7 +20,7 @@ image: "20181031_062105.jpg"
          height="300px"
 >}}
 
-It’s the first T-SQL Tuesday of 2021, and James Mcgillivray ([b](https://jimbabwe.co.za/)|[t](https://twitter.com/JamesMcG_MSBI)) is our host for January’s edition of this monthly blog party.  This month’s topic is around how we escape with vacation/holiday plans.  They gave us a few options on what to blog about and I’m going to take you on a virtual trip to Hawaii.
+It’s the first T-SQL Tuesday of 2021, and James Mcgillivray ([b](https://jimbabwe.co.za/)) is our host for January’s edition of this monthly blog party.  This month’s topic is around how we escape with vacation/holiday plans.  They gave us a few options on what to blog about and I’m going to take you on a virtual trip to Hawaii.
 
 ## What is the best vacation/holiday you’ve ever had?
 

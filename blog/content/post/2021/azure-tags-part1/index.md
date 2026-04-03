@@ -19,7 +19,7 @@ One of the vital parts of this learning and experimenting needs to be cleaning u
 
 This brings me to one morning last week. I logged in to the portal and got a pop up that my credit was down to under $5, which is not what I was expecting. I started looking around and wondering what I’d left running – it isn’t always easy to spot though.
 
-Luckily, John Martin ([b](https://jqmartin.info/)|[t](https://twitter.com/jqmtweets)) has instilled in me the importance of adding a tag for creation date on all resources, as it’s not tracked automatically. This means we can easily see what we last deployed and what we might have forgotten about.
+Luckily, John Martin ([b](https://jqmartin.info/)) has instilled in me the importance of adding a tag for creation date on all resources, as it’s not tracked automatically. This means we can easily see what we last deployed and what we might have forgotten about.
 
 In Azure, tags are just key value pairs that can be applied to resources and subscriptions to add metadata. You can use them to organise resources by environment, cost centre, business criticality, and anything else that might be important to your individual situation. There is a limit of 50 tags per resource. If you’re getting close to having 50 tags per resource you might need to rethink your tagging strategy to reduce the complexity.
 

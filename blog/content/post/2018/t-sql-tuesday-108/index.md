@@ -23,7 +23,7 @@ tags:
          height="300px"
 >}}
 
-It’s T-SQL Tuesday time again, I have struggled in the last month or two to get anything up on my blog. Turns out weddings are pretty time consuming ?! Now that I’m happily married and home from an amazing [honeymoon in Hawaii](https://www.instagram.com/jpomfret/) it’s back to work on my blog and professional development.  Which makes this T-SQL Tuesday topic a perfect one to get back to, so thanks to Malathi Mahadeven ([B](https://curiousaboutdata.com)|[T](https://twitter.com/sqlmal)) for hosting this month.
+It’s T-SQL Tuesday time again, I have struggled in the last month or two to get anything up on my blog. Turns out weddings are pretty time consuming ?! Now that I’m happily married and home from an amazing [honeymoon in Hawaii](https://www.instagram.com/jpomfret/) it’s back to work on my blog and professional development.  Which makes this T-SQL Tuesday topic a perfect one to get back to, so thanks to Malathi Mahadeven ([B](https://curiousaboutdata.com)) for hosting this month.
 
 I feel like with last week’s PASS Summit (I didn’t attend this year so just watching from afar) it makes it even harder than usual to pick just one thing to learn.  There are so many things right now that I want to read about or fiddle with.
 
@@ -31,9 +31,7 @@ I’ve decided to pick a main subject, with an auxiliary bonus area attached - k
 
 The side goal is docker/containers/kubernetes (maybe), I’m wondering if I could use these to test my DSC configurations, maybe not to install SQL Server (I have no idea though) but I imagine I could configure SQL Server running in a container.
 
-I saw the tweet below last week from the beard, [Rob Sewell](https://twitter.com/sqldbawithbeard), that quoted [Bob Ward’s](https://twitter.com/bobwardms) thoughts on learning directions.  Feels like this is probably solid advice to justify my side goal.
-
-{{< tweet user="sqldbawithbeard" id="1061032613979267072" >}}
+I saw a post last week from the beard, Rob Sewell, that quoted Bob Ward’s thoughts on learning directions.  Feels like this is probably solid advice to justify my side goal.
 
 ## Learning Plan
 

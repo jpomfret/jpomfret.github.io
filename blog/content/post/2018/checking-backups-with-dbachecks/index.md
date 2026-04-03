@@ -13,7 +13,7 @@ tags:
 
 Folks, there is something fantastic coming from the creators of dbatools!
 
-Chrissy LeMaire ([blog](https://blog.netnerds.net/)|[twitter](https://twitter.com/cl)) and Rob Sewell ([blog](https://sqldbawithabeard.com/)|[twitter](https://twitter.com/sqldbawithbeard)) just announced something big at SQLBits 2018, a new PowerShell module that combines [dbatools](https://dbatools.io/) with [Pester](https://github.com/pester/Pester) to ensure your environment is "as expected". I've been lucky enough to get to know both Chrissy and Rob by contributing to dbatools and when they introduced me to this new module I instantly saw a lot of potential.
+Chrissy LeMaire ([blog](https://blog.netnerds.net/)) and Rob Sewell ([blog](https://sqldbawithabeard.com/)) just announced something big at SQLBits 2018, a new PowerShell module that combines [dbatools](https://dbatools.io/) with [Pester](https://github.com/pester/Pester) to ensure your environment is "as expected". I've been lucky enough to get to know both Chrissy and Rob by contributing to dbatools and when they introduced me to this new module I instantly saw a lot of potential.
 
 I'm going to start off with just a small way to gain some value from dbachecks, ensuring your backups are completing with the frequency you expect.
 

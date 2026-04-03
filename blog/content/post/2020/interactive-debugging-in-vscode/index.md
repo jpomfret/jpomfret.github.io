@@ -15,7 +15,7 @@ tags:
 image: "cover.jpg"
 ---
 
-I was browsing twitter the other day when a tweet about dbatools caught my eye (I use [TweetDeck](https://tweetdeck.twitter.com/) and so have a column for tweets that contain [@PSdbatools](http://twitter.com/psdbatools)).
+I was browsing social media the other day when a tweet about dbatools caught my eye (I use TweetDeck and so have a column for tweets that contain @PSdbatools).
 
 ![Tweet from wayOutwest describing a dbatools error](tweet.png)
 

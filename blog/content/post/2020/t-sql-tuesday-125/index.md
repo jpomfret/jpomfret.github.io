@@ -23,7 +23,7 @@ tags:
 
 It’s T-SQL Tuesday time again! March felt really long for a lot of us as we got used to our new way of life, so I’m excited we made it to April’s prompt.
 
-This month’s topic is asking for a discussion around whether unit testing for databases is valuable. Since getting involved with dbatools and beginning to write more structured PowerShell (meaning modules and DSC resources rather than just an odd script) I have learnt a lot more about testing code. However, I have zero experience with testing databases. So I’m excited for this topic. Thanks for hosting Hamish ([b](https://hybriddbablog.com/)|[t](https://twitter.com/TheHybridDBA)).
+This month’s topic is asking for a discussion around whether unit testing for databases is valuable. Since getting involved with dbatools and beginning to write more structured PowerShell (meaning modules and DSC resources rather than just an odd script) I have learnt a lot more about testing code. However, I have zero experience with testing databases. So I’m excited for this topic. Thanks for hosting Hamish ([b](https://hybriddbablog.com/)).
 
 I recently watched Steve Jones give a session as part of [Redgate Streamed](https://www.red-gate.com/hub/events/redgate-events/redgate-streamed/) on using [tSQLt](https://tsqlt.org/) for database testing. It’s not the first time I’ve heard about this tool and it’s been on my list for way too long as something I want to investigate a little further. I figured this was a good excuse.
 
