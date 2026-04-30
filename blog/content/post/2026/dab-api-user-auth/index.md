@@ -15,10 +15,29 @@ image: header.png
 draft: true
 ---
 
+This is post four in my series about the Data API Builder (DAB), the first post, [Data API Builder](/dab-api-builder/), covers what DAB is and how to test it locally against SQL Server in running in a container. The second post, [Running DAB in an Azure Container Instance](/dab-api-container/), starts to productionise this, moving it into the cloud, but with no auth required to hit the endpoints. Then in the last post, [DAB API - Authenticated API Endpoints](/dab-api-add-auth), we locked down the endpoints, they now require authentication to interact with the data.
 
+In this post we'll walk through how to authenticate with Entra from the Microsoft Azure CLI and then access our API endpoints to get some data.
 
+If you're looking to follow along you need to have the infra we built in the previous two posts, [Running DAB in an Azure Container Instance](/dab-api-container) and [DAB API - Authenticated API Endpoints](/dab-api-add-auth):
 
+- an Azure SQL Database which is the source
+- a Storage Account hosting the `dab-config.json` file
+- an Azure Container App running DAB
+- an Entra App Registration & Enterprise Application
 
+At this point your containerized instance of DAB should be running, and healthy. However, if I call the DAB API endpoint without authentication I get a 401 error.
+
+```PowerShell
+$data = Invoke-RestMethod -Uri 'http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/api/dbo_BuildVersion'
+$data.value
+```
+
+## Entra User Authentication
+
+Let's look at how I can authenticate with my Entra user to get a token and access the DAB endpoints to retrieve data. There are two steps we need to complete before we can successfully request tokens.
+
+- Assigning the user an app role 
 
 
 

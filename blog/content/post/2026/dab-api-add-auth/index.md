@@ -114,7 +114,8 @@ You'll end up with a section of your `dab-config.json` file that looks like this
 
 We also need to update our entities, which create the API endpoints, from anonymous access to only allow authenticated users.
 
-> NOTE! There is a `dab update` command with a `--permissions` parameter that you can use to update the entities in the config. However, I found this appends the permissions and ended with me allowing authenticated or anonymous access to my endpoints - not ideal.
+> NOTE!
+> There is a `dab update` command with a `--permissions` parameter that you can use to update the entities in the config. However, I found this appends the permissions and ended with me allowing authenticated or anonymous access to my endpoints - not ideal.
 
 Since PowerShell is good at manipulating json we can read the config file in and for each entity, change the permission role to `Authenticated`. I'm also adding the `create` action which will allow us to `POST` data, which will insert it into our SQL Database.
 
@@ -130,7 +131,7 @@ Since PowerShell is good at manipulating json we can read the config file in and
           if ($permission.role -eq "anonymous") {
               $permission.role = "Authenticated"
           }
-          
+
           # Add create action to Authenticated role if not already present
           if ($permission.role -eq "Authenticated") {
               $hasCreate = $permission.actions | Where-Object { $_.action -eq "create" }
