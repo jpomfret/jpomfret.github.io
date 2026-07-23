@@ -35,55 +35,22 @@ $data.value
 
 ## Entra User Authentication
 
-Let's look at how I can authenticate with my Entra user to get a token and access the DAB endpoints to retrieve data. There are two steps we need to complete before we can successfully request tokens.
+Let's look at how I can authenticate with my Entra user to get a token and access the DAB endpoints to retrieve data. There is one more setup step to configure this to work properly.
 
-- Assigning the user an app role 
+### Update Entra App registration for Authentication
 
+We do already have an app role configured, but those only get us application tokens — that's the route we'll use in the next post when the function calls the API as itself. But Azure CLI is signing in as me, so Entra issues a user token instead, and user permissions use a different claim: `scp` rather than roles. Therefore we need to expose at least one delegated scope on the API before the CLI has anything valid to ask for.
 
+We also need to pre-authorize the Azure CLI to request tokens for our DAB API. The authentication flow we'll use will require the client to be authorized, and the Azure CLI doesn't provide a consent UI. Since we already know the scope ID we're creating, we can do both in a single PATCH to the Graph API.
 
-Yes! Entra users can authenticate and call the DAB endpoints. You need to:
+This looks complicated but lets break down the body variable, which is the JSON of our Graph API request into three pieces:
 
-Get a token for the DAB API
-Be assigned the app role (or have access via delegated permissions)
-Include the token in the Authorization header
-Here's how to do it with PowerShe
+1. `oauth2PermissionScopes` - adding the user authentication
+2. `preAuthorizedApplications` - preauthorising the Azure CLI
+3. `requestedAccessTokenVersion` is set to 1 because the function uses 1 and we have to choose the same token version
 
-        ```PowerShell
-        # Get your user's object ID
-        $userId = az ad signed-in-user show --query "id" -o tsv
-
-        # Get the service principal and app role ID
-        $apiServicePrincipalId = az ad sp list --filter "appId eq '$app_id'" --query "[0].id" -o tsv
-        $appRoleId = az ad sp list --filter "appId eq '$app_id'" --query "[0].appRoles[?value=='DAB.Access'].id" -o tsv
-
-        # Assign your user to the app role
-        $assignmentBody = @{
-            principalId = $userId
-            resourceId = $apiServicePrincipalId
-            appRoleId = $appRoleId
-        }
-        #TODO: change from being a temp file
-        $tempFile = [System.IO.Path]::GetTempFileName()
-        $assignmentBody | ConvertTo-Json | Set-Content $tempFile -Encoding UTF8
-
-        az rest --method POST `
-        --uri "https://graph.microsoft.com/v1.0/users/$userId/appRoleAssignments" `
-        --headers "Content-Type=application/json" `
-        --body "@$tempFile"
-
-        Remove-Item $tempFile
-        ```
-
-
-## Add a Delegated Permission Scope
-
-TODO - why?
-
-Need this before we authorise Microsoft Azure CLI to get tokens
-
-    ```PowerShell
-
-# Create a delegated permission scope (use different name than app role)
+```PowerShell
+$azureCliAppId = "04b07795-8ddb-461a-bbee-02f9e1bf7b46" # Microsoft Azure CLI
 $existingApp = az ad app show --id $app_id | ConvertFrom-Json
 
 $newScopeId = [guid]::NewGuid().ToString()
@@ -101,70 +68,37 @@ $body = @{
                 userConsentDescription = "Allow the application to access DAB API on your behalf"
             }
         )
+        preAuthorizedApplications = @(
+            @{
+                appId = $azureCliAppId
+                delegatedPermissionIds = @($newScopeId)
+            }
+        )
+        requestedAccessTokenVersion = 1
     }
 }
 
-$tempFile = [System.IO.Path]::GetTempFileName()
-$body | ConvertTo-Json -Depth 10 | Set-Content $tempFile -Encoding UTF8
+# Compress avoids newlines; escape double quotes for the shell
+$bodyJson = ($body | ConvertTo-Json -Depth 10 -Compress) -replace '"', '\"'
 
 az rest --method PATCH `
   --uri "https://graph.microsoft.com/v1.0/applications/$($existingApp.id)" `
   --headers "Content-Type=application/json" `
-  --body "@$tempFile"
-
-Remove-Item $tempFile
-
+  --body "$bodyJson"
 ```
 
-## Authorize the Azure CLI to request tokens
+You can verify this in the portal, within Entra on our Enterprise Application (you might need to search by `$APP_ID` since this was newly created), under `Expose an API` you should see a scope and an authorized client application.
 
- The issue is that Azure CLI is not pre-authorized to request tokens for your DAB API. You need to add Azure CLI as a known/trusted client application. Here's how:
+![alt text](image-9.png)
+
+If you didn't do this step, or something above isn't set correctly you'll get the following error, which is quite helpful in that it tells you the scope (your app id) and the Azure CLI App ID you need to solve the problem.
 
 > Authentication failed
 > invalid_client: AADSTS650057: Invalid resource. The client has requested access to a resource which is not listed in the requested permissions in the client's application registration. Client app ID: 04b07795-8ddb-461a-bbee-02f9e1bf7b46(Microsoft Azure CLI). Resource value from request: api://4834e86a-398b-4992-bd46-f8f827c02560. Resource app ID: 4834e86a-398b-4992-bd46-f8f827c02560. List of valid resources from app registration: . Trace ID: 0d114f90-7a24-40d4-bf84-10d7b2522300 Correlation ID: 211a8fae-9ed4-4d35-a086-f37aba4f6522 Timestamp: 2026-04-08 05:58:45Z. ($error_uri)
 
-    ```PowerShell
-    #$app_id = "691ad7dd-7451-4748-92b1-0da2f288ef0d"
-    $azureCliAppId = "04b07795-8ddb-461a-bbee-02f9e1bf7b46" # Microsoft Azure CLI
-
-    # Get the app details
-    $existingApp = az ad app show --id $app_id | ConvertFrom-Json
-
-    # Get your scope ID (the one we just created)
-    $scopeId = $existingApp.api.oauth2PermissionScopes[0].id
-
-    # Add Azure CLI as a pre-authorized application
-    $preAuthorizedApp = @{
-        appId = $azureCliAppId
-        delegatedPermissionIds = @($scopeId)
-    }
-
-    # Build the API object with existing scopes and new pre-authorization
-    $api = @{
-        oauth2PermissionScopes = $existingApp.api.oauth2PermissionScopes
-        preAuthorizedApplications = @($preAuthorizedApp)
-        requestedAccessTokenVersion = 1
-    }
-
-    # Update the app
-    $tempFile = [System.IO.Path]::GetTempFileName()
-    @{ api = $api } | ConvertTo-Json -Depth 10 | Set-Content $tempFile -Encoding UTF8
-
-    az rest --method PATCH `
-    --uri "https://graph.microsoft.com/v1.0/applications/$($existingApp.id)" `
-    --headers "Content-Type=application/json" `
-    --body "@$tempFile"
-
-    Remove-Item $tempFile
-    ```
-
-`requestedAccessTokenVersion` has to be set to 1 because the function uses 1 and we have to choose the same one
-
-Now on our Enterprise Application (you might need to search by `$APP_ID` in Entra since this is newly created), under `Expose an API` you should see a scope and an authorized client application.
-
-![alt text](image-9.png)
-
 ## Test
+
+Now everything is in place we should be able to login to Azure using the Azure CLI, get a token, and then use that token for our API call to our DAB endpoint. Let's test it out.
 
 ```PowerShell
 az login --tenant $tenantId --scope "api://$app_ID/.default"
