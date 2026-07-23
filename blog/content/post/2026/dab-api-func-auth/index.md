@@ -1,178 +1,20 @@
 ---
-title: "Dab Api Azure Func Auth"
-slug: "dab-api-azure-func-auth"
+title: "DAB API - Azure Function Authentication"
+slug: "dab-api-func-auth"
 description: "ENTER YOUR DESCRIPTION"
 date: 2025-08-21T09:14:40Z
 categories:
+  - DAB
+  - api
+  - PowerShell
 tags:
-image:
+  - DAB
+  - api
+  - PowerShell
+image: header.png
 draft: true
 ---
 
-This is post three in my series about the Data API Builder (dab), the first post, [Data API Builder](/dab-api-builder/), covers what dab is and how to test it locally against SQL Server in running in a container. The second post, [Running dab in an Azure Container Instance](/dab-api-container/), starts to productionise this, moving it into the cloud, but with no auth required to hit the endpoints.
-
-In this post we'll look to fix this, specifically by enabling other Azure services to use these endpoints with authentication. If you're looking to follow along you need to have the infra we built in the previous post:
-
-- an Azure SQL Database which is the source
-- a Storage Account hosting the `dab-config.json` file
-- an Azure Container App running dab
-
-My end goal is to be able to insert data into my Azure SQL Database from PowerShell code that's running in an Azure Function. Let's get straight into it.
-
-## Entra App Registration
-
-If the goal is to create an Azure Function (or another Azure service) that can access the data in the SQL Database via the API endpoints we need to give the Function App a way of authenticating with these endpoints. We'll do this with an App Registation in Entra.
-
-Let's create that app registration.
-
-    ```powershell
-    # Create the App Registration
-    az ad app create --display-name "DAB-API-Access" --sign-in-audience "AzureADMyOrg"
-
-    # Get the App ID (Client ID) - you'll need this
-    $app_id = $(az ad app list --display-name "DAB-API-Access" --query "[0].appId" -o tsv)
-
-    # Add the default user_impersonation scope (this is often sufficient)
-    az ad app update --id $app_id --identifier-uris "api://$APP_ID"
-    #that last line didn't work but added in the portal
-
-    # Create a service principal for your app registration
-    az ad sp create --id $app_id
-    ```
-
-need a service prinipal so we can grant admin consent on the API permissions page
-
-## dab Config File
-
-Update the dab config to azure auth and cors
-
-    ```PowerShell
-    # Set the authentication provider
-    dab configure --runtime.host.authentication.provider EntraID
-
-    # Set the expected audience (Application ID URI)
-    dab configure --runtime.host.authentication.jwt.audience "api://$APP_ID"
-
-    # Set the expected issuer (your tenant)
-    $tenantId = ($(az account show) | ConvertFrom-Json).id
-    dab configure --runtime.host.authentication.jwt.issuer "https://login.microsoftonline.com/$tenantId$/v2.0"
-    ```
-
-    ```
-    # Update DAB config with the correct values from the token
-dab configure --runtime.host.authentication.provider EntraID
-dab configure --runtime.host.authentication.jwt.audience "api://$APP_ID"
-dab configure --runtime.host.authentication.jwt.issuer "https://sts.windows.net/f98042ad-9bbc-499d-adb4-17193696b9a3/"
-```
-
-this is left over json does it match?
-
-    ```json
-        "host": {
-          "cors": {
-            "origins": ["https://azqr-func-jp-dev-e5gxevfjgbhfhmdk.westeurope-01.azurewebsites.net"],
-            "allow-credentials": true
-          },
-          "authentication": {
-            "provider": "AzureAD",
-            "jwt": {
-              "audience": "ffa9ce65-fe37-4958-849c-8747e106577d",
-              "issuer": "https://sts.windows.net/8f5c8fb3-b610-4233-8284-63a7254f4029/"
-            }
-          },
-          "mode": "development"
-        }
-    ```
-
-We also need to update our entities from anonymous access to only allow authenticated users
-
-    ```powershell
-    $adminUser ="databaseadmin"
-    $securePassword = ConvertTo-SecureString "dbatools.IO!" -AsPlainText -Force
-    $cred = [pscredential]::new($adminUser, $securePassword)
-
-    $server = 'sqlsvr-dab-prod-001'
-    $database = 'sqldb-dab-prod-001'
-
-    $conn = Connect-DbaInstance -SqlInstance ('{0}.database.windows.net' -f $server) -SqlCredential $cred
-    $conn.databases[$database].Tables.ForEach{
-        dab update ('{0}_{1}' -f $psitem.schema, $psitem.Name) --permissions "Authenticated:read"
-    }
-    ```
-
-WARNING
-dab update - adds to the entitiy... :
-This will change the entities to require auth? does it? still has the anonomous in there too?
-
-So let's manipulate the json with powershell
-
-    ```powershell
-      # Load the DAB config file
-      $configPath = "C:\Temp\dab\dab-config.json"
-      $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
-
-      # Loop through all entities and update permissions
-      foreach ($entityName in $config.entities.PSObject.Properties.Name) {
-          $entity = $config.entities.$entityName
-          foreach ($permission in $entity.permissions) {
-              if ($permission.role -eq "anonymous") {
-                  $permission.role = "Authenticated"
-              }
-          }
-          
-          # Add create action to Authenticated role for POST operations
-          $authPerm = $entity.permissions | Where-Object { $_.role -eq "Authenticated" }
-          if ($authPerm) {
-              $hasCreate = $authPerm.actions | Where-Object { $_.action -eq "create" }
-              if (-not $hasCreate) {
-                  $authPerm.actions += @{ action = "create" }
-              }
-          }
-      }
-
-      # Convert back to JSON and save
-      $config | ConvertTo-Json -Depth 10 | Set-Content -Path $configPath
-    ```
-
-Should look like this with both read and create permissions:
-
-    ```json
-    "dbo_BuildVersion": {
-          "source": {
-            "object": "dbo.BuildVersion",
-            "type": "table"
-          },
-          "graphql": {
-            "enabled": true,
-            "type": {
-              "singular": "dbo_BuildVersion",
-              "plural": "dbo_BuildVersions"
-            }
-          },
-          "rest": {
-            "enabled": true
-          },
-          "permissions": [
-            {
-              "role": "Authenticated",
-              "actions": [
-                {
-                  "action": "read"
-                },
-                {
-                  "action": "create"
-                }
-              ]
-            }
-          ]
-        },
-    ```
-
-TODO why mode dev? gives us swagger and other dev tools
-
-any authenticated user can access - there is a way of doing roles like `DAB.Read` to make it more granular
-
-this changes the entity from anon access to authenticated
 
 
 1. create function
@@ -290,10 +132,10 @@ Step 1: Add an App Role to the DAB API App Registration
     $newRole = @{
       allowedMemberTypes = @("Application")
       description = "Allow access to DAB API"
-      displayName = "DAB.Read"
+      displayName = "DAB.Access"
       id = $roleId
       isEnabled = $true
-      value = "DAB.Read"
+      value = "DAB.Access"
     }
 
     $existingApp.appRoles += $newRole
@@ -312,7 +154,7 @@ Step 1: Add an App Role to the DAB API App Registration
 
 ## add api permissions
 
-for the DAB-API-Access - DAB.Read role
+for the DAB-API-Access - DAB.Access role
 TODO: do I need to grant admin consent?
 NO 
 Why Not?
@@ -332,8 +174,8 @@ $functionSPId = az ad sp show --id $clientId --query "id" -o tsv
 # Step 1: Get the service principal for the API app registration
 $apiServicePrincipalId = az ad sp list --filter "appId eq '$app_id'" --query "[0].id" -o tsv
 
-# Step 2: Get the App Role ID we just created (DAB.Read)
-$appRoleId = az ad sp show --id $apiServicePrincipalId --query "appRoles[?value=='DAB.Read'].id" -o tsv
+# Step 2: Get the App Role ID we just created (DAB.Access)
+$appRoleId = az ad sp show --id $apiServicePrincipalId --query "appRoles[?value=='DAB.Access'].id" -o tsv
 
 # Step 3: Get the service principal ID of the function app's managed identity
 $functionSPId = az ad sp show --id $clientId --query "id" -o tsv
@@ -374,6 +216,7 @@ output from Step 6: Assign the app role using the file
   "resourceId": "56844302-ec84-45c1-8ac1-3f02a58970e9"
 }
 ```
+
 ![alt text](image-3.png)
 
 
@@ -392,32 +235,34 @@ in entra
 
 ## upload new dab config
 
+TODO: add $storageAccount definition to the top?
 
-    ```PowerShell
-    $storageKey = az storage account keys list `
-      --resource-group $resourceGroup `
-      --account-name $storageAccount `
-      --query "[0].value" `
-      --output tsv
+  ```PowerShell
+  $storageKey = az storage account keys list `
+    --resource-group $resourceGroup `
+    --account-name $storageAccount `
+    --query "[0].value" `
+    --output tsv
 
-    az storage file upload --account-key $storageKey `
-      --account-name $storageAccount `
-      --share-name $fileShareName `
-      --source dab-config.json
-    ```
-
+  az storage file upload --account-key $storageKey `
+    --account-name $storageAccount `
+    --share-name $fileShareName `
+    --source dab-config.json
+  ```
 
 ## restart container
 
-```
+Restart the dab container app so that it picks up our new config file.
+
+```PowerShell
 az container restart `
   --resource-group $resourceGroup `
   --name $containerName
 ```
 
+## testing
 
-
-## testinng
+At this point if 
 
 The function app has two functions- the testHttp function is the standard test template from VSCode when you create a HTTP function. First grab your function key:
 
@@ -478,6 +323,7 @@ $newCustomer = @{
   PasswordHash = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqr="
   PasswordSalt = "TestSalt"
   ModifiedDate = "2026-04-03T00:00:00"
+  rowguid = [guid]::NewGuid().ToString()
 }
 
 Invoke-RestMethod -Uri ('https://func-dab-prod-001.azurewebsites.net/api/dabHttp?code={0}&schema={1}&entity={2}' -f $funcKey, $schema, $entity) `
@@ -517,6 +363,31 @@ Invoke-RestMethod:
 }
 ```
 
+```powershell
+Invoke-RestMethod -Uri ('https://func-dab-prod-001.azurewebsites.net/api/dabHttp?code={0}&schema={1}&entity={2}' -f $funcKey, $schema, $entity) `
+>   -Method Post `
+>   -Body ($newCustomer | ConvertTo-Json) `
+>   -ContentType 'application/json'
+Invoke-RestMethod:
+{
+  "error": "DAB API call failed: Response status code does not indicate success: 400 (Bad Request). | DAB Response: \r\n{\r\n  \u0022error\u0022: {\r\n    \u0022code\u0022: \u0022BadRequest\u0022,\r\n    \u0022message\u0022: \u0022Invalid request body. Missing field in body: rowguid.\u0022,\r\n    \u0022status\u0022: 400\r\n  }\r\n}",
+  "troubleshooting": [],
+  "configuration": {
+    "dabEndpoint": "http://ci-dab-prod-001.uksouth.azurecontainer.io:5000",
+    "clientId": "04392f6f-3770-4fb3-ac5d-5940b014e7c1"
+  },
+  "nextSteps": [],
+  "environment": {
+    "isAzure": true,
+    "websiteInstanceId": "ffed6eb0ac2ed3b4d26f6dd8b5a14d9d055d89c12c95e3a44bd50c99549c8da9",
+    "hasDABEndpoint": true,
+    "hasClientId": true,
+    "msiEndpoint": "http://127.0.0.1:41410/msi/token/"
+  },
+  "timestamp": "2026-04-03T11:04:54Z"
+}
+```
+
 
 The flow should be:
 
@@ -538,22 +409,21 @@ need to give the container app MI access to the database
 
 ## Tidy Up
 
-If you've been following along you can tidy up and remove the whole resource group with the following command
+If you've been following along you can tidy up and remove all the resources. First, delete the Azure resource group:
 
 ```PowerShell
-az group delete --name $resourceGroup
+# Delete all Azure resources (SQL DB, Storage, Container, Function App)
+az group delete --name $resourceGroup --yes --no-wait
 ```
 
-## Up Next
+Then clean up the Entra ID resources (these are not deleted with the resource group):
 
-troubleshooting?
+```PowerShell
+# Delete the app registration (this also removes app roles and assignments)
+az ad app delete --id $app_id
 
-## dab Blog Series
-
-Here are all the links to the dab blog series:
-
-1. [Data API Builder](/dab-api-builder/)
-2. [Running dab in an Azure Container Instance](/dab-api-container/)
-3. More coming soon...
-
-Or you can view all posts about dab using the [dab](/categories/dab/) category.
+# The service principal is automatically deleted when the app registration is deleted
+# But if you need to delete it separately:
+# $apiServicePrincipalId = az ad sp list --filter "appId eq '$app_id'" --query "[0].id" -o tsv
+# az ad sp delete --id $apiServicePrincipalId
+```

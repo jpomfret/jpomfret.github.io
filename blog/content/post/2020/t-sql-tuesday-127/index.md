@@ -32,7 +32,7 @@ Whether it’s chrome or SSMS, I cannot help myself when it comes to opening new
 
 I even got called out by my good friend Andrew ([B](https://awickham.com/)|[T](https://twitter.com/awickham)) this last week:
 
-{{< tweet user="awickham" id="1267503576571674624" >}}
+{{< x user="awickham" id="1267503576571674624" >}}
 
 My tips & tricks are focused around managing tabs, and they work in all browsers (at least all that I have on my laptop. Chrome, Edge, IE11).
 

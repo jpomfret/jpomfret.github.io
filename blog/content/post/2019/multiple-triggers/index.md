@@ -13,7 +13,7 @@ Well it has been a little quiet here recently. I just (or it’s been two weeks 
 
 This is also going to be a quick post. I asked a question on Twitter last week about what happens when you have multiple triggers on a table. I got the answer (Thanks Aaron!), but figured this would be a good thing to demonstrate.
 
-{{< tweet user="AaronBertrand" id="1121436026956861445" >}}
+{{< x user="AaronBertrand" id="1121436026956861445" >}}
 
 I have also been playing with Azure Data Studio and the new notebook feature, so I answered this question with a step-by-step example in a notebook. I also found that you can easily store these notebooks on GitHub so I have uploaded it to my demos repo for you to follow along.
 
