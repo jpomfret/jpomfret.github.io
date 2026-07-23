@@ -1,8 +1,8 @@
 ---
-title: "Azure SQL Database - Run queries against all databases on the Azure SQL Instance"
+title: "Azure SQL Database - Run queries against all databases on an Azure SQL Instance"
 slug: "dbatools-azuresql"
 description: "Have you ever wanted to run a query against all of the Azure SQL Databases on an instance? This is the post for you, of course, using dbatools!"
-date: 2025-10-31T15:34:05Z
+date: 2026-07-23T15:00:00Z
 categories:
 - dbatools
 - azure
@@ -12,10 +12,10 @@ tags:
 - azure
 - powershell
 image:
-draft: true
+draft: false
 ---
 
-In the on-prem world, or when we're working with SQL Servers on VMs, where ever they might live it was pretty easy with dbatools to run a query against all the databases, collect some info and collate it into one record set. This used to work with Azure SQL Instances too - but Azure\cloud auth is hard and recently the `Connect-DbaInstance` command needed to change to make it more reliable.
+In the on-prem world, or when we're working with SQL Servers on VMs, wherever they might live it was pretty easy with dbatools to run a query against all the databases, collect some info and collate it into one record set. This used to work with Azure SQL Instances too - but Azure auth, or cloud auth in general is hard and recently the `Connect-DbaInstance` command needed to change to make it more reliable.
 
 So, this is a quick post to cover how we can still manage this.
 
@@ -23,7 +23,7 @@ And, let's be honest, this is for future Jess when I need to do this again (Hi f
 
 ## Connect to Azure
 
-Now it's probably no surprise that step one is to connect to Azure from your PowerShell session - you can either use the Azure CLI, or Azure PowerShell modules for this, I'll use the CLI below.
+Now it's probably no surprise that step one is to connect to Azure from your PowerShell session and get a token. You can use the Azure CLI, or Azure PowerShell modules for this. I'll use the CLI below.
 
 ```PowerShell
 # Follow the auth dance
@@ -32,32 +32,47 @@ az login
 $azureToken = (az account get-access-token --resource https://database.windows.net | ConvertFrom-Json).accessToken
 ```
 
+Next let's set a variable for the server name, and use `Connect-DbaInstance` to connect. Then we can use these throughout the script.
+
+```PowerShell
+$azureSqlInstance = 'serverName.database.windows.net'
+$inst = connect-DbaInstance -SqlInstance $azureSqlInstance -AccessToken $azureToken
+```
+
+## The old way
+
+You used to be able to use that connection to run queries against any database on the logical instance, but now you get an error.
+
+```PowerShell
+Invoke-DbaQuery -SqlInstance $inst -Database AdventureWorks -Query 'SELECT DB_NAME()'
+```
+
+This surfaces the following warning, by default dbatools doesn't throw terminating errors, if you want that behaviour you can use the `-EnableException` property on most commands.
+
+> WARNING: [07:11:01][Invoke-DbaQuery] Failure | Property NonPooledConnection cannot be changed or read after a connection string has been set.
+
+This is more secure, and is the way that `Connect-DbaInstance` should work in the cloud, but it did break my script!
+
 ## Get a list of databases
 
-Let's use `Get-DbaDatabase` to get a list of databases
+But with PowerShell, and dbatools there is always more than one way of doing things. Instead, we can get a list of Azure SQL Databases that are on the logical instance, and then loop through connecting to that database with the access token and running the query you're interested in.
 
-You have to connect to each database you can't just use one connection item
-
-```PowerShell
-$inst = connect-DbaInstance -SqlInstance 'clouddba-prd.database.windows.net' -AccessToken $azureToken
-Invoke-DbaQuery -SqlInstance $inst -Database dmmportal_stark -Query 'select db_name()'
-```
-
-This fails with
-
-> WARNING: [15:16:43][Invoke-DbaQuery] Failure | Property NonPooledConnection cannot be changed or read after a connection string has been set.
+I'm using the [PSFramework](https://github.com/powershellframeworkcollective/psframework) module for the logging, one of my favourites - if you don't have that available, either get it from PowerShell Gallery, or change to use `Write-Output`.
 
 ```PowerShell
-# connect to master to get databases
-$instName = 'clouddba-prd.database.windows.net'
-$inst = connect-DbaInstance -SqlInstance $instName -AccessToken $azureToken
-$dbs = Get-DbaDatabase -SqlInstance $inst  -ExcludeSystem -ExcludeDatabase master, dmmportal_master_prd
+# Use Get-DbaDatabase to get a list of databases from the connection we established previously.
+$dbs = Get-DbaDatabase -SqlInstance $inst -ExcludeSystem
 
 # go through each database, connect, run query
-$dbs[0].foreach{
+
+$results = $dbs.foreach{
     $d = $_
-    $dbinst = connect-DbaInstance -SqlInstance $instName -AccessToken $azureToken -Database $d.name
-    Invoke-DbaQuery -SqlInstance $dbinst -Query "DROP USER [azqr-func-prd]; CREATE USER [azqr-func-prd] FOR EXTERNAL PROVIDER;EXEC sp_addrolemember N'db_datareader', N'azqr-func-prd';EXEC sp_addrolemember N'db_datawriter', N'azqr-func-prd';"
+    $dbinst = Connect-DbaInstance -SqlInstance $azureSqlInstance -AccessToken $azureToken -Database $d.name
+    Invoke-DbaQuery -SqlInstance $dbinst -Query 'SELECt * FROM dbo.importantTable'
     Write-PSFMessage -Message ('Query Complete: {0}' -f $d.Name) -Level Important
 }
+
+$results
 ```
+
+There we go - we can now answer questions about data within all of our databases. I use this often and so I know I'll be back here looking for this code. I hope this is a useful snippet for you also.
