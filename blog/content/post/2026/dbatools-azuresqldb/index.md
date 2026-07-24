@@ -11,7 +11,7 @@ tags:
 - dbatools
 - azure
 - powershell
-image:
+image: engin-akyurt-gJILnne_HFg-unsplash.jpg
 draft: false
 ---
 
@@ -36,7 +36,12 @@ Next let's set a variable for the server name, and use `Connect-DbaInstance` to 
 
 ```PowerShell
 $azureSqlInstance = 'serverName.database.windows.net'
-$inst = connect-DbaInstance -SqlInstance $azureSqlInstance -AccessToken $azureToken
+
+$connectParams = @{
+    SqlInstance = $azureSqlInstance
+    AccessToken = $azureToken
+}
+$inst = Connect-DbaInstance @connectParams
 ```
 
 ## The old way
@@ -44,7 +49,12 @@ $inst = connect-DbaInstance -SqlInstance $azureSqlInstance -AccessToken $azureTo
 You used to be able to use that connection to run queries against any database on the logical instance, but now you get an error.
 
 ```PowerShell
-Invoke-DbaQuery -SqlInstance $inst -Database AdventureWorks -Query 'SELECT DB_NAME()'
+$queryParams = @{
+    SqlInstance = $inst
+    Database    = 'AdventureWorks'
+    Query       = 'SELECT DB_NAME()'
+}
+Invoke-DbaQuery @queryParams
 ```
 
 This surfaces the following warning, by default dbatools doesn't throw terminating errors, if you want that behaviour you can use the `-EnableException` property on most commands.
@@ -57,19 +67,39 @@ This is more secure, and is the way that `Connect-DbaInstance` should work in th
 
 But with PowerShell, and dbatools there is always more than one way of doing things. Instead, we can get a list of Azure SQL Databases that are on the logical instance, and then loop through connecting to that database with the access token and running the query you're interested in.
 
-I'm using the [PSFramework](https://github.com/powershellframeworkcollective/psframework) module for the logging, one of my favourites - if you don't have that available, either get it from PowerShell Gallery, or change to use `Write-Output`.
+I'm using the [PSFramework](https://github.com/powershellframeworkcollective/psframework) module for the logging, one of my favourites - if you don't have that available, either get it from the PowerShell Gallery, or change to use `Write-Output`.
 
 ```PowerShell
 # Use Get-DbaDatabase to get a list of databases from the connection we established previously.
-$dbs = Get-DbaDatabase -SqlInstance $inst -ExcludeSystem
+$dbParams = @{
+    SqlInstance   = $inst
+    ExcludeSystem = $true
+}
+$dbs = Get-DbaDatabase @dbParams
 
 # go through each database, connect, run query
 
 $results = $dbs.foreach{
     $d = $_
-    $dbinst = Connect-DbaInstance -SqlInstance $azureSqlInstance -AccessToken $azureToken -Database $d.name
-    Invoke-DbaQuery -SqlInstance $dbinst -Query 'SELECt * FROM dbo.importantTable'
-    Write-PSFMessage -Message ('Query Complete: {0}' -f $d.Name) -Level Important
+
+    $dbConnectParams = @{
+        SqlInstance = $azureSqlInstance
+        AccessToken = $azureToken
+        Database    = $d.Name
+    }
+    $dbinst = Connect-DbaInstance @dbConnectParams
+
+    $queryParams = @{
+        SqlInstance = $dbinst
+        Query       = 'SELECT * FROM dbo.importantTable'
+    }
+    Invoke-DbaQuery @queryParams
+
+    $messageParams = @{
+        Message = ('Query Complete: {0}' -f $d.Name)
+        Level   = 'Important'
+    }
+    Write-PSFMessage @messageParams
 }
 
 $results
