@@ -11,7 +11,7 @@ tags:
 - dbatools
 - azure
 - powershell
-image: engin-akyurt-gJILnne_HFg-unsplash.jpg
+image: cover.jpg
 draft: false
 ---
 
