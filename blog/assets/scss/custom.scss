@@ -276,8 +276,14 @@ figure.float-right {
         min-height: 500px;
     }
 
+    /* The hero's background comes from a fixed image, so it can't pick up
+       the lighter --card-background tone every other card uses to separate
+       from the page. On dark, its own navy is nearly identical to the page
+       background, so a thin teal edge + soft glow stand in for that. */
     [data-scheme="dark"] & {
         background-image: url("/img/hero-frame-dark.png");
+        border: 1px solid rgba(79, 170, 179, 0.35);
+        box-shadow: var(--shadow-l2), 0 0 32px rgba(79, 170, 179, 0.18);
     }
 
     /* Filled pills read fine on the pale frame regardless of site theme,
