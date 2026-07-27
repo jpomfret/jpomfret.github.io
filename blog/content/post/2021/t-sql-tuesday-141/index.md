@@ -4,11 +4,10 @@ description: "Managing work/life balance - something I'm not great at, but I hav
 slug: "t-sql-tuesday-141"
 date: "2021-08-10"
 categories:
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "crossfit"
   - "tsql2sday"
-  - "tsqltuesday"
 image: "victor-freitas-Yuv-iwByVRQ-unsplash.jpg"
 ---
 

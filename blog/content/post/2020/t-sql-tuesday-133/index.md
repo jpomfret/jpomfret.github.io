@@ -5,10 +5,10 @@ slug: "t-sql-tuesday-133"
 date: "2020-12-08"
 categories:
   - "presenting"
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "presenting"
-  - "t-sql-tuesday"
+  - "tsql2sday"
 image: "pexels-photo-459301.jpeg"
 ---
 

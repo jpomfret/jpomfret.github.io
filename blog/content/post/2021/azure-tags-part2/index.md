@@ -5,11 +5,11 @@ slug: "azure-tags-part2"
 date: "2021-03-23"
 categories:
   - "azure"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "azure"
   - "policy"
-  - "powershell"
+  - "PowerShell"
   - "tags"
 image: "cover.png"
 ---

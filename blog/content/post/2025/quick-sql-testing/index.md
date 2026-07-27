@@ -5,12 +5,12 @@ description: "If you've ever wished you had a spare SQL Server instance lying ar
 date: 2025-02-11T10:00:00Z
 categories:
     - dbatools
-    - powershell
+    - PowerShell
     - docker
     - containers
 tags:
     - dbatools
-    - powershell
+    - PowerShell
     - docker
     - containers
 image: venti-views-1cqIcrWFQBI-unsplash.jpg

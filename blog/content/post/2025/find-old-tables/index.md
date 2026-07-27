@@ -5,10 +5,10 @@ description: "Have you ever had to do a little switch-a-roo on a table? Renaming
 date: 2025-04-07T12:46:09Z
 categories:
     - dbatools
-    - powershell
+    - PowerShell
 tags:
     - dbatools
-    - powershell
+    - PowerShell
 image: mitchell-luo-QgxbZu69KTg-unsplash.jpg
 draft: false
 ---

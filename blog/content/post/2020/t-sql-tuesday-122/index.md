@@ -5,7 +5,7 @@ slug: "t-sql-tuesday-122"
 date: "2020-01-14"
 categories:
   - "personal"
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "tsql2sday"
 ---

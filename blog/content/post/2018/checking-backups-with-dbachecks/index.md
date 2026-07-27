@@ -5,10 +5,10 @@ slug: "checking-backups-with-dbachecks"
 date: "2018-02-22"
 categories:
   - "dbachecks"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbachecks"
-  - "powershell"
+  - "PowerShell"
 ---
 
 Folks, there is something fantastic coming from the creators of dbatools!

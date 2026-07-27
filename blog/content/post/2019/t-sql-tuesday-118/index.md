@@ -4,9 +4,9 @@ description: "A couple of ideas for SQL features I'd like to see."
 slug: "t-sql-tuesday-118"
 date: "2019-09-10"
 categories:
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
-  - "tsqltuesday"
+  - "tsql2sday"
 ---
 
 {{<

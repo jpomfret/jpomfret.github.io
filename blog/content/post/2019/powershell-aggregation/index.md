@@ -5,11 +5,11 @@ slug: "powershell-aggregation"
 date: "2019-07-26"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "aggregation"
   - "group"
-  - "powershell"
+  - "PowerShell"
   - "sum"
 ---
 

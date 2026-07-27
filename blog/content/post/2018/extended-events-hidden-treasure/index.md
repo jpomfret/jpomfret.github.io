@@ -6,7 +6,7 @@ date: "2018-05-29"
 categories:
   - "xevents"
 tags:
-  - "extended-events"
+  - "extendedEvents"
   - "xevents"
 ---
 

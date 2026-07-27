@@ -4,11 +4,11 @@ description: Log shipping is a SQL Server feature used for disaster-recovery whe
 date: "2022-05-24"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
-  - "log-shipping"
-  - "powershell"
+  - "logShipping"
+  - "PowerShell"
 image: "cover.jpg"
 slug: log-shipping-pre-stage
 ---

@@ -4,11 +4,10 @@ description: "A few tips and tricks for managing tabs when you're a tab hoarder.
 slug: "t-sql-tuesday-127"
 date: "2020-06-09"
 categories:
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "tabs"
   - "tsql2sday"
-  - "tsqltuesday"
 ---
 
 {{<

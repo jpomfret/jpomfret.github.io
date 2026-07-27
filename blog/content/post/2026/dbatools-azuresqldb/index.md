@@ -6,11 +6,11 @@ date: 2026-07-23T15:00:00Z
 categories:
 - dbatools
 - azure
-- powershell
+- PowerShell
 tags:
 - dbatools
 - azure
-- powershell
+- PowerShell
 image: cover.jpg
 draft: false
 ---

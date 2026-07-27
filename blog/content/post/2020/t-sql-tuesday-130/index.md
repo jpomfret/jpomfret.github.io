@@ -5,12 +5,11 @@ slug: "t-sql-tuesday-130"
 date: "2020-09-09"
 categories:
   - "dbachecks"
-  - "powershell"
-  - "t-sql-tuesday"
+  - "PowerShell"
+  - "tsql2sday"
 tags:
   - "dbachecks"
   - "tsql2sday"
-  - "tsqltuesday"
 image: "dashboard-1.jpg"
 ---
 

@@ -5,13 +5,13 @@ slug: "dsc-lcm"
 date: "2019-03-25"
 categories:
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "desired-state-configuration"
+  - "desiredStateConfiguration"
   - "dsc"
   - "lcm"
-  - "local-configuration-manager"
-  - "powershell"
+  - "localConfigurationManager"
+  - "PowerShell"
 ---
 
 Once we have crafted the perfect configuration and shipped it out to our target nodes, it’s time for the magic to happen. The [MOF file that we created](https://jesspomfret.com/dsc-mof-files/) by executing our configuration is translated and enacted by the Local Configuration Manager (LCM) on each target node. The LCM is the engine of DSC and plays a vital role in managing our target nodes.

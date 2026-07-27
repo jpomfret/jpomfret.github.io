@@ -4,10 +4,10 @@ description: "Let's take a look at the question 'What happens if I use data comp
 slug: "double-compression"
 date: "2018-08-20"
 categories:
-  - "data-compression"
+  - "dataCompression"
 tags:
-  - "backup-compression"
-  - "data-compression"
+  - "backupCompression"
+  - "dataCompression"
   - "dbatools"
 ---
 

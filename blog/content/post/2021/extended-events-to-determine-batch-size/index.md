@@ -5,7 +5,7 @@ date: "2021-12-07"
 categories:
   - "xevents"
 tags:
-  - "extended-events"
+  - "extendedEvents"
   - "tsql"
 image: "cover.jpg"
 slug: extended-events-to-determine-batch-size

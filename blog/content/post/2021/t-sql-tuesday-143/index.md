@@ -4,11 +4,11 @@ description: "A quick code snippet to help find members of the local admin group
 slug: "t-sql-tuesday-143"
 date: "2021-10-13"
 categories:
-  - "powershell"
-  - "t-sql-tuesday"
+  - "PowerShell"
+  - "tsql2sday"
 tags:
-  - "powershell"
-  - "t-sql-tuesday"
+  - "PowerShell"
+  - "tsql2sday"
 image: "tekton-EcE9dFfXwwE-unsplash.jpg"
 ---
 

@@ -5,11 +5,11 @@ slug: "introduction-to-dsc"
 date: "2019-02-26"
 categories:
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "desired-state-configuration"
+  - "desiredStateConfiguration"
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 ---
 
 I’m currently working on a pretty interesting project to explore using PowerShell’s Desired State Configuration (DSC) to manage SQL Servers. DSC uses declarative language to define the desired state of your infrastructure.

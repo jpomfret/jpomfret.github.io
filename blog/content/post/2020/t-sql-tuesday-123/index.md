@@ -4,7 +4,7 @@ description: "It's my turn to host the blog party and I'm looking for your life 
 slug: "t-sql-tuesday-123"
 date: "2020-02-04"
 categories:
-  - "t-sql-tuesday"
+  - "tsql2sday"
   - "vscode"
 tags:
   - "tsql2sday"

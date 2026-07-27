@@ -5,11 +5,11 @@ slug: "creating-my-first-sql-managed-instance"
 date: "2019-11-04"
 categories:
   - "azure"
-  - "managed-instance"
+  - "managedInstance"
 tags:
   - "azure"
   - "cloud"
-  - "managed-instance"
+  - "managedInstance"
   - "mi"
 image: "cloud-header.jpg"
 ---

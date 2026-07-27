@@ -5,11 +5,11 @@ slug: "searching-stored-procedures"
 date: "2021-05-25"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
-  - "powershell"
-  - "stored-procedures"
+  - "PowerShell"
+  - "storedProcedures"
 image: "matthew-ansley-8SjeH5pZbjw-unsplash.jpg"
 ---
 

@@ -4,10 +4,10 @@ description: ""
 slug: "data-compression-containers"
 date: "2019-01-23"
 categories:
-  - "data-compression"
+  - "dataCompression"
 tags:
   - "containers"
-  - "data-compression"
+  - "dataCompression"
 ---
 
 One of the things I want to spend more time exploring this year is containers, specifically SQL Server running in containers. While I’ve been preparing to give my data compression talk at SQL Saturday Cleveland, which is only two weeks away, and generally procrastinating from all other responsibilities, I decided I should change my demos from running against a VM on my laptop to running against a containerized instance of SQL Server.

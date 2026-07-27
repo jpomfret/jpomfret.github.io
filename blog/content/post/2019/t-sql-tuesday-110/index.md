@@ -5,12 +5,12 @@ slug: "t-sql-tuesday-110"
 date: "2019-01-08"
 categories:
   - "dsc"
-  - "powershell"
-  - "t-sql-tuesday"
+  - "PowerShell"
+  - "tsql2sday"
 tags:
   - "automation"
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 ---
 
 {{<

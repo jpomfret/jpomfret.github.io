@@ -5,12 +5,12 @@ slug: "interactive-debugging-in-vscode"
 date: "2020-04-07"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
   - "vscode"
 tags:
   - "dbatools"
   - "debugging"
-  - "powershell"
+  - "PowerShell"
   - "vscode"
 image: "cover.jpg"
 ---

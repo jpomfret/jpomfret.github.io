@@ -4,11 +4,11 @@ description: "Using PSParameterSets to make both parameters mandatory if any of 
 slug: "psparametersets-mandatory-sometimes"
 date: "2018-12-14"
 categories:
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "powershell"
+  - "PowerShell"
   - "psparameterset"
-  - "quick-tips"
+  - "quickTips"
 ---
 
 I came across a situation this week where I wanted to add the option of running an existing script,  for a specific server/database combination.  The script currently has no parameters and runs against all servers in the environment from a scheduled task.  I wanted to make sure that behaviour didn’t change. The other requirement was that if I specified Server, Database should be a mandatory parameter and vice versa.

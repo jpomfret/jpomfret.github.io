@@ -5,10 +5,11 @@ slug: "t-sql-tuesday-101"
 date: "2018-04-10"
 categories:
   - "dbatools"
+  - "tsql2sday"
 tags:
   - "dbatools"
-  - "powershell"
-  - "tsqltuesday"
+  - "PowerShell"
+  - "tsql2sday"
 ---
 
 {{<

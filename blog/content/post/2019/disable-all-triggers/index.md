@@ -4,11 +4,11 @@ description: "PowerShell snippet to disable all triggers on a database."
 slug: "disable-all-triggers"
 date: "2019-08-19"
 categories:
-  - "powershell"
+  - "PowerShell"
   - "triggers"
 tags:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
   - "smo"
   - "triggers"
 ---

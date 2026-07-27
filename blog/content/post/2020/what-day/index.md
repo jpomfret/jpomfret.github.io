@@ -4,9 +4,9 @@ description: "A simple PowerShell function to remind us what day we're on, and a
 slug: "what-day"
 date: "2020-04-21"
 categories:
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "powershell"
+  - "PowerShell"
   - "prompt"
 image: "eric-rothermel-FoKO4DpXamQ-unsplash-1.jpg"
 ---

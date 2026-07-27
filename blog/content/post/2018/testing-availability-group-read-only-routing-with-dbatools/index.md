@@ -4,15 +4,15 @@ description: "Using dbatools we can easily prove read-only routing is working fo
 slug: "testing-availability-group-read-only-routing-with-dbatools"
 date: "2018-09-07"
 categories:
-  - "availability-groups"
+  - "availabilityGroups"
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "ags"
-  - "availability-groups"
+  - "availabilityGroups"
   - "dbatools"
-  - "read-only"
-  - "secondary-replica"
+  - "readOnly"
+  - "secondaryReplica"
 ---
 
 I recently set up an Availability Group with the intent of using the secondary as a read only replica for reporting.  We have a few AG's in our environment already but currently none are using this feature.

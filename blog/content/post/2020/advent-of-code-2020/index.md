@@ -4,11 +4,11 @@ descripton: "A few PowerShell tips I learnt while participating in the Advent of
 slug: "advent-of-code-2020"
 date: "2020-12-31"
 categories:
-  - "powershell"
+  - "PowerShell"
 tags:
   - "adventofcode"
   - "aoc"
-  - "powershell"
+  - "PowerShell"
 image: "cover.png"
 ---
 

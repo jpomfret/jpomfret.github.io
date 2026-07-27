@@ -5,11 +5,11 @@ slug: "spn-troubles"
 date: "2021-02-16"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
   - "kerberos"
-  - "powershell"
+  - "PowerShell"
   - "spn"
 image: "alina-grubnyak-ZiQkhI7417A-unsplash.jpg"
 ---

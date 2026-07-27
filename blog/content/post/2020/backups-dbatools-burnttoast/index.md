@@ -5,11 +5,11 @@ slug: "backups-dbatools-burnttoast"
 date: "2020-02-25"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "burnttoast"
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 image: "cover.jpg"
 ---
 

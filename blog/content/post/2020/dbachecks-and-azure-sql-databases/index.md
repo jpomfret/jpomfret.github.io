@@ -6,11 +6,11 @@ date: "2020-12-01"
 categories:
   - "azure"
   - "dbachecks"
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "azure-sql-database"
+  - "azureSqlDatabase"
   - "dbachecks"
-  - "powershell"
+  - "PowerShell"
 image: "cover.jpg"
 ---
 

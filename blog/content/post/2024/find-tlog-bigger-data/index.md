@@ -4,10 +4,10 @@ slug: "find-tlog-bigger-data"
 description: "A quick blog to share a useful query to find databases where the transaction log is bigger than the total data file sizes."
 date: 2024-01-23T11:23:51Z
 categories:
-    - T-SQL
+    - tSql
     - UsefulQueries
 tags:
-    - T-SQL
+    - tSql
     - UsefulQueries
 image: joel-jasmin-forestbird-Kfy_FwhfPlc-unsplash.jpg
 draft: false

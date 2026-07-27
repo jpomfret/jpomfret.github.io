@@ -6,11 +6,10 @@ date: "2019-12-10"
 categories:
   - "personal"
   - "presenting"
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "gifts"
   - "tsql2sday"
-  - "tsqltuesday"
 ---
 
 {{<

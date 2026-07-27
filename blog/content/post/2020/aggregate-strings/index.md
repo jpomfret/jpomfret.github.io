@@ -4,7 +4,7 @@ description: "Sharing a really great T-SQL aggregate function that I had no idea
 slug: "aggregate-strings"
 date: "2020-06-23"
 categories:
-  - "t-sql"
+  - "tSql"
 tags:
   - "aggregates"
   - "tsql"

@@ -4,11 +4,11 @@ description: "Using AutomatedLab to quickly spin up some SQL Server VMs for test
 slug: "automatedlab-sql-server"
 date: "2020-03-03"
 categories:
-  - "automated-lab"
-  - "powershell"
+  - "automatedLab"
+  - "PowerShell"
 tags:
   - "automatedlab"
-  - "powershell"
+  - "PowerShell"
 ---
 
 I’ve recently found myself in a few situations where I’ve needed a certain lab setup to test something.  Most scenarios these days I find myself firing up some docker containers to run demos or tests against. However, there are a few circumstances where you may need a little more than that, perhaps to test something Windows OS related (my container setup is using Linux) or just to replicate a production environment more closely than you can with containers.  In these situations I turn to PowerShell.

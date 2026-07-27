@@ -5,11 +5,11 @@ slug: "query-store-bp-dbatools"
 date: "2020-11-24"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
-  - "open-source"
-  - "query-store"
+  - "openSource"
+  - "queryStore"
 image: "simon-berger-twukN12EN7c-unsplash.jpg"
 ---
 

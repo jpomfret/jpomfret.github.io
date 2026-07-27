@@ -4,11 +4,11 @@ description: "Some tips on moving around panes in VSCode"
 slug: "vscode-focus"
 date: "2020-05-06"
 categories:
-  - "powershell"
+  - "PowerShell"
   - "vscode"
 tags:
-  - "life-hacks"
-  - "powershell"
+  - "lifeHacks"
+  - "PowerShell"
   - "vscode"
 image: "VsCode.jpg"
 ---

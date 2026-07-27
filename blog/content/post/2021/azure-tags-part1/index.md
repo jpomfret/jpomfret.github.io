@@ -5,10 +5,10 @@ slug: "azure-tags-part1"
 date: "2021-03-16"
 categories:
   - "azure"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "azure"
-  - "powershell"
+  - "PowerShell"
   - "tags"
 image: "cover.jpg"
 ---

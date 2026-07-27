@@ -5,11 +5,10 @@ slug: "t-sql-tuesday-119"
 date: "2019-10-08"
 categories:
   - "presenting"
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "presenting"
   - "tsql2sday"
-  - "tsqltuesday"
 ---
 
 {{<

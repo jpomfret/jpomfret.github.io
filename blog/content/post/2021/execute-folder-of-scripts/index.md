@@ -5,11 +5,11 @@ slug: "execute-folder-of-scripts"
 date: "2021-03-01"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
-  - "powershell"
-  - "sql-server"
+  - "PowerShell"
+  - "sqlServer"
 image: "cover.jpg"
 ---
 

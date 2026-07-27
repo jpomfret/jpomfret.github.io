@@ -5,12 +5,12 @@ slug: "t-sql-tuesday-108"
 description: "A look at a non SQL Server technology, kind of."
 categories:
   - "dsc"
-  - "powershell"
-  - "t-sql-tuesday"
+  - "PowerShell"
+  - "tsql2sday"
 tags:
   - "dsc"
-  - "powershell"
-  - "sql-server"
+  - "PowerShell"
+  - "sqlServer"
   - "tsql2sday"
 ---
 

@@ -5,10 +5,10 @@ slug: "dbatools-with-bert"
 date: "2019-02-05"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 draft: $true
 ---
 

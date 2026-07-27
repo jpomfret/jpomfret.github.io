@@ -7,14 +7,13 @@ categories:
   - "dbachecks"
   - "dbatools"
   - "pester"
-  - "powershell"
-  - "t-sql-tuesday"
+  - "PowerShell"
+  - "tsql2sday"
 tags:
   - "dbachecks"
   - "dbatools"
   - "excel"
   - "tsql2sday"
-  - "tsqltuesday"
 image: "neonbrand-60krlMMeWxU-unsplash-scaled.jpg"
 ---
 

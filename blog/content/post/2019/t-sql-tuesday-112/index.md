@@ -5,7 +5,7 @@ slug: "t-sql-tuesday-112"
 date: "2019-03-12"
 categories:
   - "presenting"
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "presenting"
   - "tsql2sday"
