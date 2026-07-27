@@ -18,3 +18,455 @@ figure.float-right {
     margin-right: var(--card-padding);
 }
 
+/*
+*   Brand fonts (self-hosted from the Jess Pomfret VI kit)
+*/
+@font-face {
+    font-family: "Etna";
+    src: url("/fonts/etna-free-font.otf") format("opentype");
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garet";
+    src: url("/fonts/Garet-Book.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*
+*   Brand tokens + theme overrides
+*   Palette: #530080 (purple), #10265d (navy), #bdecfe (light blue), #4faab3 (teal)
+*   Full-palette strategy: every hue is a named role, not a scattered accent.
+*/
+:root {
+    --brand-purple: #530080;
+    --brand-purple-deep: #38005a;
+    --brand-navy: #10265d;
+    --brand-lightblue: #bdecfe;
+    --brand-teal: #4faab3;
+    --brand-teal-bright: #7dc4cb;
+    --brand-ink: #06171f;
+
+    --base-font-family: "Garet", var(--sys-font-family), var(--zh-font-family), sans-serif;
+    /* --article-font-family drives the theme's whole .article-content prose block,
+       not just titles, so it stays on the body face (its own default already
+       inherits --base-font-family). Etna is reserved for headings only, via
+       --heading-font-family, applied explicitly below. */
+    --heading-font-family: "Etna", var(--base-font-family);
+
+    --card-border-radius: 14px;
+    --tag-border-radius: 6px;
+
+    /* Light theme: pale water tint ground, purple as the acting accent */
+    --body-background: #eef7fb;
+    --accent-color: var(--brand-purple);
+    --accent-color-darker: var(--brand-purple-deep);
+    --accent-color-text: #ffffff;
+    --body-text-color: #384868;
+
+    --card-background: #ffffff;
+    --card-background-selected: #e1f2fa;
+    --card-text-color-main: #10203f;
+    --card-text-color-secondary: #45507a;
+    --card-text-color-tertiary: #6b7593;
+    --card-separator-color: rgba(16, 38, 93, 0.12);
+
+    --changelog-category-bg: rgba(79, 170, 179, 0.15);
+    --changelog-category-bg-hover: rgba(79, 170, 179, 0.28);
+    --changelog-category-text: #0d4a50;
+
+    &[data-scheme="dark"] {
+        /* Dark theme: brand navy ground, teal as the acting accent (contrast-checked against navy) */
+        --body-background: var(--brand-navy);
+        --accent-color: var(--brand-teal);
+        --accent-color-darker: #3d8890;
+        --accent-color-text: var(--brand-ink);
+        --body-text-color: rgba(189, 236, 254, 0.78);
+
+        --card-background: #17306a;
+        --card-background-selected: rgba(79, 170, 179, 0.18);
+        --card-text-color-main: #eef7fc;
+        --card-text-color-secondary: rgba(238, 247, 252, 0.75);
+        --card-text-color-tertiary: rgba(238, 247, 252, 0.55);
+        --card-separator-color: rgba(238, 247, 252, 0.14);
+
+        --changelog-category-bg: rgba(79, 170, 179, 0.22);
+        --changelog-category-bg-hover: rgba(79, 170, 179, 0.34);
+        --changelog-category-text: var(--brand-lightblue);
+    }
+}
+
+/*
+*   Sidebar mark: give the octopus a constant white plate so the purple
+*   mark reads the same on both the light and navy-dark page background.
+*/
+.sidebar header .site-avatar .site-logo {
+    background-color: #ffffff;
+    padding: 10%;
+    box-sizing: border-box;
+    object-fit: contain;
+}
+
+/*
+*   Etna is the brand's headline face only — apply it sitewide to actual
+*   headings, never to prose (see the --heading-font-family note above).
+*/
+.site-name,
+.section-term,
+.widget-title,
+.article-title {
+    font-family: var(--heading-font-family);
+}
+
+/*
+*   Neutralise the theme's default 5-color rainbow rotation on category/tag
+*   pills sitewide so every page matches the brand's single palette.
+*/
+.article-category a,
+.article-tags a {
+    background-color: var(--brand-teal) !important;
+    color: var(--brand-ink) !important;
+}
+
+/*
+*   Changelog feed (homepage)
+*/
+.changelog {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-separation);
+}
+
+.changelog-tag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--code-font-family);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-color-text);
+    background-color: var(--accent-color);
+    padding: 4px 10px;
+    border-radius: var(--tag-border-radius);
+    white-space: nowrap;
+}
+
+.changelog-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+        display: inline-block;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--changelog-category-text);
+        background-color: var(--changelog-category-bg);
+        padding: 4px 12px;
+        border-radius: var(--tag-border-radius);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: var(--changelog-category-bg-hover);
+        }
+    }
+}
+
+.changelog-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l1);
+    padding: var(--card-padding);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        box-shadow: var(--shadow-l2);
+        transform: translateY(-2px);
+    }
+}
+
+.changelog-entry-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.changelog-entry-title {
+    font-family: var(--heading-font-family);
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0;
+    line-height: 1.3;
+
+    a {
+        color: var(--card-text-color-main);
+
+        &:hover {
+            color: var(--accent-color);
+        }
+    }
+
+    @include respond(xl) {
+        font-size: 2.2rem;
+    }
+}
+
+.changelog-entry-excerpt {
+    margin: 0;
+    color: var(--card-text-color-secondary);
+    font-size: 1.5rem;
+    line-height: 1.6;
+    max-width: 70ch;
+}
+
+.changelog-entry-footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--card-text-color-tertiary);
+    font-size: 1.3rem;
+}
+
+.changelog-reading-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 1.5;
+    }
+}
+
+/*
+*   Hero: the one committed, fully-saturated moment on the page. It always
+*   renders on the purple-to-navy gradient regardless of site theme, so its
+*   text tokens are fixed rather than paired light/dark variants.
+*/
+.changelog-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-navy) 100%);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l2);
+    padding: calc(var(--card-padding) * 1.4);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+
+    &.has-image {
+        @include respond(md) {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            align-items: center;
+            gap: 30px;
+        }
+    }
+
+    .changelog-tag {
+        background-color: var(--brand-teal);
+        color: var(--brand-ink);
+    }
+
+    /* The hero always sits on the purple/navy gradient regardless of site
+       theme, so its category pills need fixed, gradient-safe colors too,
+       not the theme-dependent faint-teal tokens meant for white cards. */
+    .changelog-categories a {
+        background-color: var(--brand-lightblue);
+        color: var(--brand-navy);
+
+        &:hover {
+            background-color: var(--brand-teal);
+            color: var(--brand-ink);
+        }
+    }
+}
+
+/*
+*   Waterline: the brand's own wave artwork sits along the bottom edge of
+*   the gradient, clipped by the hero's rounded corners and faded into the
+*   gradient rather than pasted on as a separate banner. Purely decorative.
+*/
+.changelog-hero-wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    object-position: bottom;
+    opacity: 0.45;
+    mix-blend-mode: soft-light;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 45%);
+    mask-image: linear-gradient(to bottom, transparent, black 45%);
+    pointer-events: none;
+    z-index: 0;
+
+    @include respond(md) {
+        height: 140px;
+    }
+}
+
+.changelog-hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.changelog-hero-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--brand-teal-bright);
+}
+
+.changelog-hero-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.changelog-hero-title {
+    font-family: var(--heading-font-family);
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.2;
+    margin: 0;
+
+    a {
+        color: inherit;
+    }
+
+    @include respond(xl) {
+        font-size: 3.6rem;
+    }
+}
+
+.changelog-hero-excerpt {
+    font-size: 1.7rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 65ch;
+    margin: 0;
+}
+
+.changelog-hero-footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.changelog-hero-image {
+    position: relative;
+    z-index: 1;
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-l1);
+    height: 220px;
+
+    @include respond(md) {
+        height: 100%;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+/*
+*   Cookie consent banner: gates Google Analytics, not decorative. Reuses
+*   the already contrast-checked accent/card tokens rather than new colors.
+*/
+.cookie-consent {
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 420px;
+    margin: 0 auto;
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l3);
+    padding: var(--card-padding);
+
+    @include respond(sm) {
+        left: auto;
+        margin: 0;
+    }
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.cookie-consent-text {
+    margin: 0;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--card-text-color-secondary);
+}
+
+.cookie-consent-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.cookie-consent-decline,
+.cookie-consent-accept {
+    font-family: var(--base-font-family);
+    font-size: 1.4rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--tag-border-radius);
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cookie-consent-decline {
+    background-color: transparent;
+    color: var(--card-text-color-secondary);
+
+    &:hover {
+        color: var(--card-text-color-main);
+    }
+}
+
+.cookie-consent-accept {
+    background-color: var(--accent-color);
+    color: var(--accent-color-text);
+
+    &:hover {
+        background-color: var(--accent-color-darker);
+    }
+}

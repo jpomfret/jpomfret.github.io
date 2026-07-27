@@ -1,0 +1,24 @@
+{{ define "main" }}
+    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+    {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
+    {{ $filtered := ($pages | intersect $notHidden) }}
+    {{ $pag := .Paginate ($filtered) }}
+    {{ $isFirstPage := eq $pag.PageNumber 1 }}
+
+    <section class="changelog">
+        {{ range $index, $element := $pag.Pages }}
+            {{ if and $isFirstPage (eq $index 0) }}
+                {{ partial "article-list/changelog-hero" . }}
+            {{ else }}
+                {{ partial "article-list/changelog-entry" . }}
+            {{ end }}
+        {{ end }}
+    </section>
+
+    {{- partial "pagination.html" . -}}
+    {{- partial "footer/footer" . -}}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}

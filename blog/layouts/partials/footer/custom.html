@@ -1,0 +1,62 @@
+{{- $gaID := .Site.Config.Services.GoogleAnalytics.ID -}}
+{{- if $gaID }}
+<div id="cookie-consent" class="cookie-consent" hidden>
+    <p class="cookie-consent-text">
+        This site uses Google Analytics to see how visitors find and use it.
+        No analytics cookies are set unless you accept.
+    </p>
+    <div class="cookie-consent-actions">
+        <button type="button" class="cookie-consent-decline" id="cookie-consent-decline">Decline</button>
+        <button type="button" class="cookie-consent-accept" id="cookie-consent-accept">Accept</button>
+    </div>
+</div>
+
+<script>
+(function () {
+    var CONSENT_KEY = 'cookieConsent';
+    var GA_ID = {{ $gaID }};
+
+    function loadGoogleAnalytics() {
+        if (window.__gaLoaded) return;
+        window.__gaLoaded = true;
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_ID, { anonymize_ip: true });
+
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(script);
+    }
+
+    var banner = document.getElementById('cookie-consent');
+    var stored = localStorage.getItem(CONSENT_KEY);
+
+    if (stored === 'accepted') {
+        loadGoogleAnalytics();
+    } else if (stored !== 'declined' && banner) {
+        banner.hidden = false;
+    }
+
+    var acceptBtn = document.getElementById('cookie-consent-accept');
+    var declineBtn = document.getElementById('cookie-consent-decline');
+
+    if (acceptBtn) {
+        acceptBtn.addEventListener('click', function () {
+            localStorage.setItem(CONSENT_KEY, 'accepted');
+            loadGoogleAnalytics();
+            if (banner) banner.hidden = true;
+        });
+    }
+    if (declineBtn) {
+        declineBtn.addEventListener('click', function () {
+            localStorage.setItem(CONSENT_KEY, 'declined');
+            if (banner) banner.hidden = true;
+        });
+    }
+})();
+</script>
+{{- end -}}
