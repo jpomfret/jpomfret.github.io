@@ -333,12 +333,18 @@ figure.float-right {
 
 /* Centered and width-capped so title/excerpt length can vary per post
    without reaching into the corners, where the artwork's tentacles curl
-   in from every side. */
+   in from every side. Below md the hero is short relative to its width
+   (min-height:320px vs the desktop 500px), so background-size:cover has
+   to scale the art up more - which brings those corner tentacles further
+   in. 420px of content width reached right into them (the date/category
+   pill row visibly collided with the top-right tentacle); 280px leaves
+   real clearance. md+ has more vertical room, so cover crops far less
+   and the wider 480px column is safe again. */
 .changelog-hero-content {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    max-width: 420px;
+    max-width: 280px;
     width: 100%;
     text-align: center;
     align-items: center;
