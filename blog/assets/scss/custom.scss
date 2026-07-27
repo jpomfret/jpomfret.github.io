@@ -427,3 +427,19 @@ figure.float-right {
         background-color: var(--accent-color-darker);
     }
 }
+
+/*
+*   The theme only reserves a right-sidebar column (and narrows the main
+*   column with it) when a post has enough headings for a real table of
+*   contents. Posts without headings lose that column and the whole
+*   article card stretches to fill the leftover width. This caps the
+*   card at the same width normal (with-sidebar) posts already get, so
+*   short posts read the same regardless of whether they have
+*   subheadings, rather than floating a narrow text column inside an
+*   oversized card.
+*/
+.article-page .main-article {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
