@@ -1,10 +1,5 @@
-{{- $image := partialCached "helper/image" (dict "Context" . "Type" "articleList") .RelPermalink "hero" -}}
-<article class="changelog-hero {{ if $image.exists }}has-image{{ end }}">
-    <img class="changelog-hero-wave" src="/img/wave-divider.png" alt="" loading="lazy" />
-
+<article class="changelog-hero">
     <div class="changelog-hero-content">
-        <span class="changelog-hero-eyebrow">Latest entry</span>
-
         <div class="changelog-hero-meta">
             <time class="changelog-tag" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "2006.01.02" }}</time>
             {{ if .Params.categories }}
@@ -23,29 +18,5 @@
         {{ with .Params.description }}
             <p class="changelog-hero-excerpt">{{ . }}</p>
         {{ end }}
-
-        {{ $showReadingTime := .Params.readingTime | default (.Site.Params.article.readingTime) }}
-        {{ if $showReadingTime }}
-            <div class="changelog-hero-footer">
-                <span class="changelog-reading-time">
-                    {{ partial "helper/icon" "clock" }}
-                    {{ T "article.readingTime" .ReadingTime }}
-                </span>
-            </div>
-        {{ end }}
     </div>
-
-    {{ if $image.exists }}
-        <div class="changelog-hero-image">
-            {{ if $image.resource }}
-                {{- $thumbnail := $image.resource.Fill "600x400" -}}
-                <img src="{{ $thumbnail.RelPermalink }}"
-                    width="{{ $thumbnail.Width }}"
-                    height="{{ $thumbnail.Height }}"
-                    alt="Cover image for {{ .Title }}" />
-            {{ else }}
-                <img src="{{ $image.permalink }}" alt="Cover image for {{ .Title }}" />
-            {{ end }}
-        </div>
-    {{ end }}
 </article>

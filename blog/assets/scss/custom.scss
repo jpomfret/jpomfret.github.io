@@ -251,97 +251,72 @@ figure.float-right {
 }
 
 /*
-*   Hero: the one committed, fully-saturated moment on the page. It always
-*   renders on the purple-to-navy gradient regardless of site theme, so its
-*   text tokens are fixed rather than paired light/dark variants.
+*   Hero: the octopus/wave frame template from the Brand Kit, used as the
+*   hero's actual background rather than a per-post cover-image crop (which
+*   kept exposing baked-in title text from posts' own OG-card images). The
+*   pale "frame" in the middle of the artwork is light in BOTH the light and
+*   dark variants below - only the surrounding wave field changes - so hero
+*   text stays on dark-navy-on-light regardless of site theme.
 */
 .changelog-hero {
     display: flex;
-    flex-direction: column;
-    gap: 24px;
-    background: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-navy) 100%);
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+    background-image: url("/img/hero-frame-light.png");
+    background-size: cover;
+    background-position: center;
     border-radius: var(--card-border-radius);
     box-shadow: var(--shadow-l2);
     padding: calc(var(--card-padding) * 1.4);
-    color: #ffffff;
+    color: var(--brand-navy);
     position: relative;
-    overflow: hidden;
 
-    &.has-image {
-        @include respond(md) {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            align-items: center;
-            gap: 30px;
-        }
+    @include respond(md) {
+        min-height: 500px;
     }
 
-    .changelog-tag {
-        background-color: var(--brand-teal);
-        color: var(--brand-ink);
+    [data-scheme="dark"] & {
+        background-image: url("/img/hero-frame-dark.png");
     }
 
-    /* The hero always sits on the purple/navy gradient regardless of site
-       theme, so its category pills need fixed, gradient-safe colors too,
-       not the theme-dependent faint-teal tokens meant for white cards. */
+    /* Filled pills read fine on the pale frame regardless of site theme,
+       so the tag keeps its normal theme-dependent accent colors. */
+
+    /* The frame's center stays pale in both theme variants, so category
+       pills need one fixed, light-background-safe treatment rather than
+       the dark-theme default (light text), which would vanish here. */
     .changelog-categories a {
-        background-color: var(--brand-lightblue);
+        background-color: rgba(79, 170, 179, 0.2);
         color: var(--brand-navy);
 
         &:hover {
-            background-color: var(--brand-teal);
-            color: var(--brand-ink);
+            background-color: rgba(79, 170, 179, 0.34);
         }
     }
 }
 
-/*
-*   Waterline: the brand's own wave artwork sits along the bottom edge of
-*   the gradient, clipped by the hero's rounded corners and faded into the
-*   gradient rather than pasted on as a separate banner. Purely decorative.
-*/
-.changelog-hero-wave {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    object-position: bottom;
-    opacity: 0.45;
-    mix-blend-mode: soft-light;
-    -webkit-mask-image: linear-gradient(to bottom, transparent, black 45%);
-    mask-image: linear-gradient(to bottom, transparent, black 45%);
-    pointer-events: none;
-    z-index: 0;
-
-    @include respond(md) {
-        height: 140px;
-    }
-}
-
+/* Centered and width-capped so title/excerpt length can vary per post
+   without reaching into the corners, where the artwork's tentacles curl
+   in from every side. */
 .changelog-hero-content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    flex: 1;
-    min-width: 0;
-    position: relative;
-    z-index: 1;
-}
+    gap: 16px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
 
-.changelog-hero-eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--brand-teal-bright);
+    @include respond(md) {
+        max-width: 480px;
+    }
 }
 
 .changelog-hero-meta {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
 }
@@ -365,37 +340,13 @@ figure.float-right {
 .changelog-hero-excerpt {
     font-size: 1.7rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.82);
-    max-width: 65ch;
+    color: rgba(16, 38, 93, 0.75);
+    max-width: 55ch;
     margin: 0;
-}
-
-.changelog-hero-footer {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.82);
-}
-
-.changelog-hero-image {
-    position: relative;
-    z-index: 1;
-    border-radius: var(--card-border-radius);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
-    box-shadow: var(--shadow-l1);
-    height: 220px;
-
-    @include respond(md) {
-        height: 100%;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
 }
 
 /*
