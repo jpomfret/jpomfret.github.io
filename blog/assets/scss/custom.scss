@@ -49,6 +49,7 @@ figure.float-right {
     --brand-lightblue: #bdecfe;
     --brand-teal: #4faab3;
     --brand-teal-bright: #7dc4cb;
+    --brand-sky: #75c0e4;
     --brand-ink: #06171f;
 
     --base-font-family: "Garet", var(--sys-font-family), var(--zh-font-family), sans-serif;
@@ -94,21 +95,29 @@ figure.float-right {
         --card-text-color-tertiary: rgba(238, 247, 252, 0.55);
         --card-separator-color: rgba(238, 247, 252, 0.14);
 
-        --changelog-category-bg: rgba(79, 170, 179, 0.22);
-        --changelog-category-bg-hover: rgba(79, 170, 179, 0.34);
-        --changelog-category-text: var(--brand-lightblue);
+        /* Solid teal-bright, not a translucent teal tint - a rgba(teal) over
+           the dark navy card blends back toward navy and barely reads as a
+           chip at all (contrast-checked at ~1.4:1 against the card). */
+        --changelog-category-bg: var(--brand-teal-bright);
+        --changelog-category-bg-hover: var(--brand-teal);
+        --changelog-category-text: var(--brand-ink);
     }
 }
 
 /*
-*   Sidebar mark: give the octopus a constant white plate so the purple
-*   mark reads the same on both the light and navy-dark page background.
+*   Sidebar mark: give the octopus a plate so the purple mark reads clearly
+*   against the page background. Dark mode swaps to the same sky-blue tone
+*   as the hero frame's panel instead of a stark white cutout.
 */
 .sidebar header .site-avatar .site-logo {
     background-color: #ffffff;
     padding: 10%;
     box-sizing: border-box;
     object-fit: contain;
+
+    [data-scheme="dark"] & {
+        background-color: var(--brand-sky);
+    }
 }
 
 /*
@@ -130,6 +139,13 @@ figure.float-right {
 .article-tags a {
     background-color: var(--brand-teal) !important;
     color: var(--brand-ink) !important;
+}
+
+/* Dark mode: the base teal reads too close to the dark navy card behind it
+   (~4.6:1 and the two hues are close cousins); teal-bright separates cleanly. */
+[data-scheme="dark"] .article-category a,
+[data-scheme="dark"] .article-tags a {
+    background-color: var(--brand-teal-bright) !important;
 }
 
 /*
@@ -276,28 +292,32 @@ figure.float-right {
         min-height: 500px;
     }
 
-    /* The hero's background comes from a fixed image, so it can't pick up
-       the lighter --card-background tone every other card uses to separate
-       from the page. On dark, its own navy is nearly identical to the page
-       background, so a thin teal edge + soft glow stand in for that. */
+    /* A thin light edge to separate the frame from the navy page behind it -
+       the artwork's own dark corners otherwise soften into the background. */
     [data-scheme="dark"] & {
         background-image: url("/img/hero-frame-dark.png");
-        border: 1px solid rgba(79, 170, 179, 0.35);
-        box-shadow: var(--shadow-l2), 0 0 32px rgba(79, 170, 179, 0.18);
+        border: 1px solid rgba(189, 236, 254, 0.4);
+        box-shadow: var(--shadow-l2), 0 0 24px rgba(117, 192, 228, 0.18);
     }
 
-    /* Filled pills read fine on the pale frame regardless of site theme,
-       so the tag keeps its normal theme-dependent accent colors. */
+    /* The frame's center stays pale in both theme variants (white in light,
+       sky-blue in dark), so pills inside the hero get one fixed,
+       pale-background-safe treatment rather than each theme's normal
+       (page-tuned) accent colors, which would vanish or wash out here. */
+    .changelog-tag {
+        background-color: var(--brand-purple);
+        color: #ffffff;
+    }
 
-    /* The frame's center stays pale in both theme variants, so category
-       pills need one fixed, light-background-safe treatment rather than
-       the dark-theme default (light text), which would vanish here. */
+    /* Teal (translucent or solid) is too close in lightness to the sky-blue
+       dark-mode panel to read as a chip (~1:1 contrast blended) - solid navy
+       gives a clean ~7:1 against both panel variants instead. */
     .changelog-categories a {
-        background-color: rgba(79, 170, 179, 0.2);
-        color: var(--brand-navy);
+        background-color: var(--brand-navy);
+        color: var(--brand-lightblue);
 
         &:hover {
-            background-color: rgba(79, 170, 179, 0.34);
+            filter: brightness(1.3);
         }
     }
 }
