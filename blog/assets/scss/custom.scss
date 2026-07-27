@@ -278,20 +278,19 @@ figure.float-right {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 420px;
+    /* The artwork is a fixed 16:9 image and background-size:cover always
+       scales it to exactly fill the box, so the box's own proportions
+       drive how much of the sides get cropped. Content height (title
+       clamped below, plus meta and excerpt) keeps this box close to this
+       min-height rather than growing tall and narrow on mobile, which is
+       what was cropping deep into both sides before. Contain (fitting the
+       whole image with letterboxing) was tried and reverted - it shrinks
+       the pale panel along with the art, so the unshrunk text overflows
+       past its edges instead. */
+    min-height: 320px;
     background-image: url("/img/hero-frame-light.png");
-    /* The artwork is a fixed 16:9 image. On narrow (portrait-ish) mobile
-       widths, forcing "cover" scales it up until it fills the box's height,
-       cropping deep into both sides and losing the frame's rounded shape
-       and tentacles. Below md, fit to width instead ("contain") so nothing
-       is cropped; the fallback color exactly matches the art's own corner
-       tone, so any letterboxed strip above/below reads as more artwork,
-       not a mismatched gap. Cover comes back at md+, where the hero is wide
-       enough relative to its height that the crop is minor. */
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-size: cover;
     background-position: center;
-    background-color: var(--brand-lightblue);
     border-radius: var(--card-border-radius);
     box-shadow: var(--shadow-l2);
     padding: calc(var(--card-padding) * 1.4);
@@ -300,14 +299,12 @@ figure.float-right {
 
     @include respond(md) {
         min-height: 500px;
-        background-size: cover;
     }
 
     /* A thin light edge to separate the frame from the navy page behind it -
        the artwork's own dark corners otherwise soften into the background. */
     [data-scheme="dark"] & {
         background-image: url("/img/hero-frame-dark.png");
-        background-color: var(--brand-navy);
         border: 1px solid rgba(189, 236, 254, 0.4);
         box-shadow: var(--shadow-l2), 0 0 24px rgba(117, 192, 228, 0.18);
     }
@@ -362,12 +359,25 @@ figure.float-right {
 .changelog-hero-title {
     font-family: var(--heading-font-family);
     font-weight: 700;
-    font-size: 3rem;
+    /* Clamped to 3 lines at every size - without this, a long title on a
+       narrow mobile column can wrap to 5-6 lines, growing the hero box far
+       taller and narrower than the artwork's own 16:9 ratio, which is what
+       forced background-size:cover to crop deep into both sides. Bounding
+       the title keeps the box close to min-height regardless of post. */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: 2.2rem;
     line-height: 1.2;
     margin: 0;
 
     a {
         color: inherit;
+    }
+
+    @include respond(md) {
+        font-size: 3rem;
     }
 
     @include respond(xl) {
