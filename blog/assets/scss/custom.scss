@@ -149,6 +149,48 @@ figure.float-right {
 }
 
 /*
+*   Keyboard focus visibility (WCAG 2.4.7). The theme leaves most interactive
+*   elements on the browser default ring - near-black at ~0.8px, which all but
+*   vanishes against the navy ground and the purple hero - and strips the
+*   outline off the search field/button entirely. Give everything one
+*   consistent, high-contrast brand focus ring instead.
+*/
+:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* The search partial sets `outline: 0` on these under :focus at equal
+   specificity; re-assert a visible ring under :focus-visible (custom.scss is
+   imported last, so it wins the cascade at matched specificity). */
+.search-form input:focus-visible,
+.search-form button:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/*
+*   Inline code contrast (WCAG 1.4.3). The theme default renders inline code as
+*   grey (#808080) on light grey (#e0e0e0) - ~3:1, which fails AA - a real
+*   problem on a blog whose prose is full of command names like
+*   `Connect-DbaInstance`. Retint to brand colours that clear 4.5:1 in both
+*   themes. Code *blocks* (pre > code) keep the theme's syntax highlighting.
+*/
+.article-content :not(pre) > code {
+    background-color: rgba(83, 0, 128, 0.08);
+    color: var(--brand-purple-deep);
+
+    /* Dark: a faint ink wash darkens the chip below the navy card so the
+       teal text pops (a teal-tinted background sat too close to the teal
+       text, leaving contrast marginal at ~4.6:1). */
+    [data-scheme="dark"] & {
+        background-color: rgba(6, 23, 31, 0.35);
+        color: var(--brand-teal-bright);
+    }
+}
+
+/*
 *   Changelog feed (homepage)
 */
 .changelog {

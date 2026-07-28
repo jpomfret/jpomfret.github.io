@@ -10,7 +10,7 @@ icon = "brand-github"
 ## bluesky
 [[social]]
 identifier = "bluesky"
-    name = "bluesky"
+    name = "Bluesky"
     url = "https://bsky.app/profile/jpomfret.bsky.social"
 
 [social.params]
@@ -19,7 +19,7 @@ icon = "bluesky"
 # insta
 [[social]]
 identifier = "instagram"
-    name = "instagram"
+    name = "Instagram"
     url = "https://www.instagram.com/jpomfret/"
 
 [social.params]
@@ -28,7 +28,7 @@ icon = "instagram"
 # sessionize
 [[social]]
 identifier = "sessionize"
-    name = "sessionize"
+    name = "Sessionize"
     url = "https://sessionize.com/jpomfret/"
 
 [social.params]
@@ -37,7 +37,7 @@ icon = "sesh"
 # linkedin
 [[social]]
 identifier = "linkedin"
-    name = "linkedin"
+    name = "LinkedIn"
     url = "https://www.linkedin.com/in/jpomfret/"
 
 [social.params]
