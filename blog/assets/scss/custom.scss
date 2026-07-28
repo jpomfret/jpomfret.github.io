@@ -81,8 +81,12 @@ figure.float-right {
     --changelog-category-text: #0d4a50;
 
     &[data-scheme="dark"] {
-        /* Dark theme: brand navy ground, teal as the acting accent (contrast-checked against navy) */
-        --body-background: var(--brand-navy);
+        /* Dark theme: a deep near-black navy ground (keeps the brand hue but drops
+           the lightness so the saturated navy stops reading as a "bold" full-strength
+           field). Deepening the ground also widens the gap to the #17306a cards so
+           they finally read as elevated. --brand-navy stays the mid-navy used for
+           chips/accents; only the page field goes darker. */
+        --body-background: #0b1a3a;
         --accent-color: var(--brand-teal);
         --accent-color-darker: #3d8890;
         --accent-color-text: var(--brand-ink);
