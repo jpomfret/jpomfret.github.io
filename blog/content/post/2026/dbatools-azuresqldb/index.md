@@ -1,5 +1,5 @@
 ---
-title: "Azure SQL Database - Run queries against all databases on an Azure SQL Instance"
+title: "Run queries against all databases on an Azure SQL Instance"
 slug: "dbatools-azuresql"
 description: "Have you ever wanted to run a query against all of the Azure SQL Databases on an instance? This is the post for you, of course, using dbatools!"
 date: 2026-07-23T15:00:00Z
