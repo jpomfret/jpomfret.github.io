@@ -121,6 +121,20 @@ figure.float-right {
 }
 
 /*
+*   Social icon links: the theme sizes these to the 24px icon alone (24x23),
+*   just under the WCAG 2.5.8 target minimum and awkward to tap on mobile.
+*   Grow the hit area to 32x44 (icon stays centered). 5 targets + gaps still
+*   fit the ~215px sidebar column without wrapping.
+*/
+.menu-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    min-height: 44px;
+}
+
+/*
 *   Etna is the brand's headline face only — apply it sitewide to actual
 *   headings, never to prose (see the --heading-font-family note above).
 */
