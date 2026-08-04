@@ -4,9 +4,9 @@ description: "No need to retype commands when you can just look them up with PSR
 slug: "psreadline-search-history"
 date: "2021-02-02"
 categories:
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "powershell"
+  - "PowerShell"
   - "psreadline"
 image: "andrew-neel-1-29wyvvLJA-unsplash.jpg"
 ---

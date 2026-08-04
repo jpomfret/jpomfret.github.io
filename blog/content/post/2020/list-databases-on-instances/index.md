@@ -5,11 +5,11 @@ slug: "list-databases-on-instances"
 date: "2020-08-18"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
-  - "named-instance"
-  - "powershell"
+  - "namedInstance"
+  - "PowerShell"
 image: "taylor-vick-M5tzZtFCOfs-unsplash.jpg"
 ---
 

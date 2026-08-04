@@ -5,7 +5,7 @@ slug: "truncate-all-the-tables"
 date: "2020-06-30"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
   - "truncate"

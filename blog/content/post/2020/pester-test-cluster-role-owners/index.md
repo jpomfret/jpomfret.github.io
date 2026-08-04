@@ -5,11 +5,11 @@ slug: "pester-test-cluster-role-owners"
 date: "2020-09-29"
 categories:
   - "pester"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "clusters"
   - "pester"
-  - "powershell"
+  - "PowerShell"
 image: "aaron-burden-xG8IQMqMITM-unsplash.jpg"
 ---
 

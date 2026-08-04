@@ -4,7 +4,7 @@ description: "My why seems to usually be related to being a challenge."
 slug: "t-sql-tuesday-111"
 date: "2019-02-12"
 categories:
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "presenting"
   - "tsql2sday"

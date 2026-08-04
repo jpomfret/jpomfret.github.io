@@ -4,11 +4,11 @@ description: "Simplify connecting to containers with SQL logins by using PSDefau
 slug: "psdefaultparametervaluescontainers"
 date: "2020-05-27"
 categories:
-  - "powershell"
+  - "PowerShell"
 tags:
   - "containers"
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 image: "lucas-van-oort-fBZOVyF-96w-unsplash.jpg"
 ---
 

@@ -4,12 +4,11 @@ description: "Is it a valuable effort? We walk through some examples using tSQLt
 slug: "t-sql-tuesday-125"
 date: "2020-04-14"
 categories:
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "tests"
   - "tsql2sday"
   - "tsqlt"
-  - "tsqltuesday"
 ---
 
 {{<

@@ -5,11 +5,11 @@ slug: "demo-gods-pester"
 date: "2020-03-10"
 categories:
   - "pester"
-  - "powershell"
+  - "PowerShell"
   - "presenting"
 tags:
   - "pester"
-  - "powershell"
+  - "PowerShell"
   - "tests"
 image: "pesterResults2.jpg"
 ---

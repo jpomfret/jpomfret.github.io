@@ -3,13 +3,13 @@ title: "Collating index usage stats across Availability Group replicas"
 description: "A useful script to collate index usage stats across multiple AG replicas to help ensure you don't drop indexes that are unused on the primary, but vital on the secondary."
 date: "2021-11-16"
 categories:
-  - "availability-groups"
+  - "availabilityGroups"
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "availability-groups"
+  - "availabilityGroups"
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 image: "cover.jpg"
 slug: "index-usage-ag"
 ---

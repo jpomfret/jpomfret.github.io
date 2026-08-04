@@ -4,7 +4,7 @@ description: "A look at how I plan on giving back next year, and some goal setti
 slug: "t-sql-tuesday-102"
 date: "2018-05-09"
 categories:
-  - "t-sql-tuesday"
+  - "tsql2sday"
 ---
 
 {{<

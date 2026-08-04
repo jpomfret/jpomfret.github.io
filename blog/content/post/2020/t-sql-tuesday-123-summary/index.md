@@ -4,11 +4,10 @@ description: "A summary of all the great life hack posts that were responses to 
 slug: "t-sql-tuesday-123-summary"
 date: "2020-02-18"
 categories:
-  - "t-sql-tuesday"
-tags:
-  - "life-hacks"
   - "tsql2sday"
-  - "tsqltuesday"
+tags:
+  - "lifeHacks"
+  - "tsql2sday"
 ---
 
 {{<

@@ -5,11 +5,11 @@ slug: "dsc-psdscrunascredentials-warnings"
 date: "2019-09-04"
 categories:
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "desired-state-configuration"
+  - "desiredStateConfiguration"
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 ---
 
 When you enact a configuration against a target node by default the process runs as the local system account.  For most of your DSC resources this is fine. However, if you need to access something like a file share, active directory or user registry settings, you might start to run into permission issues.  

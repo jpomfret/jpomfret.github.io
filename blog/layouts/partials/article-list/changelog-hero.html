@@ -1,0 +1,22 @@
+<article class="changelog-hero">
+    <div class="changelog-hero-content">
+        <div class="changelog-hero-meta">
+            <time class="changelog-tag" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "2006.01.02" }}</time>
+            {{ if .Params.categories }}
+                <ul class="changelog-categories">
+                    {{ range (.GetTerms "categories") }}
+                        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+                    {{ end }}
+                </ul>
+            {{ end }}
+        </div>
+
+        <h1 class="changelog-hero-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h1>
+
+        {{ with .Params.description }}
+            <p class="changelog-hero-excerpt">{{ . }}</p>
+        {{ end }}
+    </div>
+</article>

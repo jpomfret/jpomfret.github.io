@@ -4,12 +4,12 @@ slug: "foldable-sql-regions"
 description: "Using foldable regions in VSCode or Azure Data Studio to make our T-SQL easier to navigate. "
 date: 2023-06-09T15:14:22Z
 categories:
-    - t-sql
-    - azure-data-studio
+    - tSql
+    - azureDataStudio
     - vscode
 tags:
-    - t-sql
-    - azure-data-studio
+    - tSql
+    - azureDataStudio
     - vscode
 image: jj-ying-WmnsGyaFnCQ-unsplash.jpg
 draft: false

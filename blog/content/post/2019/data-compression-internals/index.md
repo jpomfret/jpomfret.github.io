@@ -4,9 +4,9 @@ description: "Digging into data compression internals, we're looking at what hap
 slug: "data-compression-internals"
 date: "2019-02-19"
 categories:
-  - "data-compression"
+  - "dataCompression"
 tags:
-  - "data-compression"
+  - "dataCompression"
 image: "compressionInfo_Page.jpg"
 ---
 

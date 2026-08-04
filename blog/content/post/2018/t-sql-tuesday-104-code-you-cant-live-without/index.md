@@ -4,14 +4,14 @@ slug: "t-sql-tuesday-104"
 description: "Take a look at my favourite code snippet in this edition of the monthly blog party."
 date: "2018-07-10"
 categories:
-  - "data-compression"
+  - "dataCompression"
   - "dbatools"
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
-  - "data-compression"
+  - "dataCompression"
   - "dbatools"
-  - "powershell"
-  - "t-sql-tuesday"
+  - "PowerShell"
+  - "tsql2sday"
 ---
 
 {{<

@@ -5,7 +5,7 @@ slug: "azure-tags-part3"
 date: "2021-03-31"
 categories:
   - "azure"
-  - "powershell"
+  - "PowerShell"
 image: "cover.jpg"
 ---
 

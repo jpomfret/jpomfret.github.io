@@ -1,0 +1,30 @@
+<article class="changelog-entry">
+    <div class="changelog-entry-meta">
+        <time class="changelog-tag" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "2006.01.02" }}</time>
+        {{ if .Params.categories }}
+            <ul class="changelog-categories">
+                {{ range (.GetTerms "categories") }}
+                    <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+                {{ end }}
+            </ul>
+        {{ end }}
+    </div>
+
+    <h2 class="changelog-entry-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h2>
+
+    {{ with .Params.description }}
+        <p class="changelog-entry-excerpt">{{ . }}</p>
+    {{ end }}
+
+    {{ $showReadingTime := .Params.readingTime | default (.Site.Params.article.readingTime) }}
+    {{ if $showReadingTime }}
+        <div class="changelog-entry-footer">
+            <span class="changelog-reading-time">
+                {{ partial "helper/icon" "clock" }}
+                {{ T "article.readingTime" .ReadingTime }}
+            </span>
+        </div>
+    {{ end }}
+</article>

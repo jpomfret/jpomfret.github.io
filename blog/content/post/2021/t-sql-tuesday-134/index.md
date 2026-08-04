@@ -5,9 +5,9 @@ slug: "t-sql-tuesday-134"
 date: "2021-01-12"
 categories:
   - "personal"
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
-  - "t-sql-tuesday"
+  - "tsql2sday"
 image: "20181031_062105.jpg"
 ---
 

@@ -5,10 +5,9 @@ description: "My first ever blog post - and it's a bit of an introduction to me.
 date: "2018-02-13"
 categories:
   - "personal"
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "football"
-  - "t-sql-tuesday"
   - "tsql2sday"
 ---
 

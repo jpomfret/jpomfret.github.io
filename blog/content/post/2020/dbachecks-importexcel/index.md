@@ -5,11 +5,11 @@ slug: "dbachecks-importexcel"
 date: "2020-08-28"
 categories:
   - "dbachecks"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
   - "importexcel"
-  - "powershell"
+  - "PowerShell"
 image: "pivot.jpg"
 ---
 

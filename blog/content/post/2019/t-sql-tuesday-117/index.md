@@ -4,11 +4,10 @@ description: "Spoiler alert: I haven't, but we look at a few of the restrictions
 slug: "t-sql-tuesday-117"
 date: "2019-08-13"
 categories:
-  - "t-sql-tuesday"
-tags:
-  - "in-memory"
   - "tsql2sday"
-  - "tsqltuesday"
+tags:
+  - "inMemory"
+  - "tsql2sday"
 ---
 
 {{<

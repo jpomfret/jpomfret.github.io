@@ -4,11 +4,11 @@ description: "A tip for properly formatting multiple lines of code in your comme
 slug: "powershell-cbh"
 date: "2019-05-16"
 categories:
-  - "powershell"
+  - "PowerShell"
 tags:
   - "cats"
   - "help"
-  - "powershell"
+  - "PowerShell"
 ---
 
 One of the reasons I love PowerShell is the comment based help. This allows you to easily get documentation for functions directly within your PowerShell session. By using `Get-Help` for a function you can retrieve a description, information on the parameters, and examples of how to use the function.

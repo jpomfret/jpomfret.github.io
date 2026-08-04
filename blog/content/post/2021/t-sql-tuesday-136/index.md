@@ -4,12 +4,11 @@ description: "A discussion on the various date data types and how they are store
 slug: "t-sql-tuesday-136"
 date: "2021-03-09"
 categories:
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
   - "datatypes"
-  - "t-sql-tuesday"
-  - "tsql"
   - "tsql2sday"
+  - "tsql"
 image: "waldemar-brandt-sXCxht5Ivu4-unsplash.jpg"
 ---
 

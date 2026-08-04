@@ -5,11 +5,11 @@ slug: "dsc-troubleshooting"
 date: "2019-07-16"
 categories:
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "desired-state-configuration"
+  - "desiredStateConfiguration"
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 ---
 
 One of the biggest obstacles people face when using DSC is the troubleshooting and reporting pieces. There are options here to integrate with third party tools to create a more polished enterprise solution, but if you’re going with just straight DSC you might feel it is lacking some in this area.

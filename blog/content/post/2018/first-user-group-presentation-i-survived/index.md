@@ -6,7 +6,7 @@ date: "2018-06-27"
 categories:
   - "presenting"
 tags:
-  - "data-compression"
+  - "dataCompression"
   - "dbatools"
   - "presenting"
 ---

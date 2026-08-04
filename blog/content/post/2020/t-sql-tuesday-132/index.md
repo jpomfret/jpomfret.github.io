@@ -4,9 +4,8 @@ description: "Some effective coping strategies for a global pandemic"
 slug: "t-sql-tuesday-132"
 date: "2020-11-10"
 categories:
-  - "t-sql-tuesday"
+  - "tsql2sday"
 tags:
-  - "t-sql-tuesday"
   - "tsql2sday"
 image: "georg-bommeli-ybtUqjybcjE-unsplash.jpg"
 ---

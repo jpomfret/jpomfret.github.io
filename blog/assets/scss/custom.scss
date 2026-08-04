@@ -18,3 +18,520 @@ figure.float-right {
     margin-right: var(--card-padding);
 }
 
+/*
+*   Brand fonts (self-hosted from the Jess Pomfret VI kit)
+*/
+@font-face {
+    font-family: "Etna";
+    src: url("/fonts/etna-free-font.otf") format("opentype");
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garet";
+    src: url("/fonts/Garet-Book.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*
+*   Brand tokens + theme overrides
+*   Palette: #530080 (purple), #10265d (navy), #bdecfe (light blue), #4faab3 (teal)
+*   Full-palette strategy: every hue is a named role, not a scattered accent.
+*/
+:root {
+    --brand-purple: #530080;
+    --brand-purple-deep: #38005a;
+    --brand-navy: #10265d;
+    --brand-lightblue: #bdecfe;
+    --brand-teal: #4faab3;
+    --brand-teal-bright: #7dc4cb;
+    --brand-sky: #75c0e4;
+    --brand-ink: #06171f;
+
+    --base-font-family: "Garet", var(--sys-font-family), var(--zh-font-family), sans-serif;
+    /* --article-font-family drives the theme's whole .article-content prose block,
+       not just titles, so it stays on the body face (its own default already
+       inherits --base-font-family). Etna is reserved for headings only, via
+       --heading-font-family, applied explicitly below. */
+    --heading-font-family: "Etna", var(--base-font-family);
+
+    --card-border-radius: 14px;
+    --tag-border-radius: 6px;
+
+    /* Light theme: pale water tint ground, purple as the acting accent */
+    --body-background: #eef7fb;
+    --accent-color: var(--brand-purple);
+    --accent-color-darker: var(--brand-purple-deep);
+    --accent-color-text: #ffffff;
+    --body-text-color: #384868;
+
+    --card-background: #ffffff;
+    --card-background-selected: #e1f2fa;
+    --card-text-color-main: #10203f;
+    --card-text-color-secondary: #45507a;
+    --card-text-color-tertiary: #6b7593;
+    --card-separator-color: rgba(16, 38, 93, 0.12);
+
+    --changelog-category-bg: rgba(79, 170, 179, 0.15);
+    --changelog-category-bg-hover: rgba(79, 170, 179, 0.28);
+    --changelog-category-text: #0d4a50;
+
+    &[data-scheme="dark"] {
+        /* Dark theme: a deep near-black navy ground (keeps the brand hue but drops
+           the lightness so the saturated navy stops reading as a "bold" full-strength
+           field). Deepening the ground also widens the gap to the #17306a cards so
+           they finally read as elevated. --brand-navy stays the mid-navy used for
+           chips/accents; only the page field goes darker. */
+        --body-background: #0b1a3a;
+        --accent-color: var(--brand-teal);
+        --accent-color-darker: #3d8890;
+        --accent-color-text: var(--brand-ink);
+        --body-text-color: rgba(189, 236, 254, 0.78);
+
+        --card-background: #17306a;
+        --card-background-selected: rgba(79, 170, 179, 0.18);
+        --card-text-color-main: #eef7fc;
+        --card-text-color-secondary: rgba(238, 247, 252, 0.75);
+        --card-text-color-tertiary: rgba(238, 247, 252, 0.55);
+        --card-separator-color: rgba(238, 247, 252, 0.14);
+
+        /* Solid teal-bright, not a translucent teal tint - a rgba(teal) over
+           the dark navy card blends back toward navy and barely reads as a
+           chip at all (contrast-checked at ~1.4:1 against the card). */
+        --changelog-category-bg: var(--brand-teal-bright);
+        --changelog-category-bg-hover: var(--brand-teal);
+        --changelog-category-text: var(--brand-ink);
+    }
+}
+
+/*
+*   Sidebar mark: give the octopus a plate so the purple mark reads clearly
+*   against the page background. Dark mode swaps to the same sky-blue tone
+*   as the hero frame's panel instead of a stark white cutout.
+*/
+.sidebar header .site-avatar .site-logo {
+    background-color: #ffffff;
+    padding: 10%;
+    box-sizing: border-box;
+    object-fit: contain;
+
+    [data-scheme="dark"] & {
+        background-color: var(--brand-sky);
+    }
+}
+
+/*
+*   Social icon links: the theme sizes these to the 24px icon alone (24x23),
+*   just under the WCAG 2.5.8 target minimum and awkward to tap on mobile.
+*   Grow the hit area to 32x44 (icon stays centered). 5 targets + gaps still
+*   fit the ~215px sidebar column without wrapping.
+*/
+.menu-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    min-height: 44px;
+}
+
+/*
+*   Etna is the brand's headline face only — apply it sitewide to actual
+*   headings, never to prose (see the --heading-font-family note above).
+*/
+.site-name,
+.section-term,
+.widget-title,
+.article-title {
+    font-family: var(--heading-font-family);
+}
+
+/*
+*   Neutralise the theme's default 5-color rainbow rotation on category/tag
+*   pills sitewide so every page matches the brand's single palette.
+*/
+.article-category a,
+.article-tags a {
+    background-color: var(--brand-teal) !important;
+    color: var(--brand-ink) !important;
+}
+
+/* Dark mode: the base teal reads too close to the dark navy card behind it
+   (~4.6:1 and the two hues are close cousins); teal-bright separates cleanly. */
+[data-scheme="dark"] .article-category a,
+[data-scheme="dark"] .article-tags a {
+    background-color: var(--brand-teal-bright) !important;
+}
+
+/*
+*   Keyboard focus visibility (WCAG 2.4.7). The theme leaves most interactive
+*   elements on the browser default ring - near-black at ~0.8px, which all but
+*   vanishes against the navy ground and the purple hero - and strips the
+*   outline off the search field/button entirely. Give everything one
+*   consistent, high-contrast brand focus ring instead.
+*/
+:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* The search partial sets `outline: 0` on these under :focus at equal
+   specificity; re-assert a visible ring under :focus-visible (custom.scss is
+   imported last, so it wins the cascade at matched specificity). */
+.search-form input:focus-visible,
+.search-form button:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/*
+*   Inline code contrast (WCAG 1.4.3). The theme default renders inline code as
+*   grey (#808080) on light grey (#e0e0e0) - ~3:1, which fails AA - a real
+*   problem on a blog whose prose is full of command names like
+*   `Connect-DbaInstance`. Retint to brand colours that clear 4.5:1 in both
+*   themes. Code *blocks* (pre > code) keep the theme's syntax highlighting.
+*/
+.article-content :not(pre) > code {
+    background-color: rgba(83, 0, 128, 0.08);
+    color: var(--brand-purple-deep);
+
+    /* Dark: a faint ink wash darkens the chip below the navy card so the
+       teal text pops (a teal-tinted background sat too close to the teal
+       text, leaving contrast marginal at ~4.6:1). */
+    [data-scheme="dark"] & {
+        background-color: rgba(6, 23, 31, 0.35);
+        color: var(--brand-teal-bright);
+    }
+}
+
+/*
+*   Changelog feed (homepage)
+*/
+.changelog {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-separation);
+}
+
+.changelog-tag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--code-font-family);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-color-text);
+    background-color: var(--accent-color);
+    padding: 4px 10px;
+    border-radius: var(--tag-border-radius);
+    white-space: nowrap;
+}
+
+.changelog-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+        display: inline-block;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--changelog-category-text);
+        background-color: var(--changelog-category-bg);
+        padding: 4px 12px;
+        border-radius: var(--tag-border-radius);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: var(--changelog-category-bg-hover);
+        }
+    }
+}
+
+.changelog-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l1);
+    padding: var(--card-padding);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        box-shadow: var(--shadow-l2);
+        transform: translateY(-2px);
+    }
+}
+
+.changelog-entry-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.changelog-entry-title {
+    font-family: var(--heading-font-family);
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0;
+    line-height: 1.3;
+
+    a {
+        color: var(--card-text-color-main);
+
+        &:hover {
+            color: var(--accent-color);
+        }
+    }
+
+    @include respond(xl) {
+        font-size: 2.2rem;
+    }
+}
+
+.changelog-entry-excerpt {
+    margin: 0;
+    color: var(--card-text-color-secondary);
+    font-size: 1.5rem;
+    line-height: 1.6;
+    max-width: 70ch;
+}
+
+.changelog-entry-footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--card-text-color-tertiary);
+    font-size: 1.3rem;
+}
+
+.changelog-reading-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 1.5;
+    }
+}
+
+/*
+*   Hero: the octopus/wave frame template from the Brand Kit, used as the
+*   hero's actual background rather than a per-post cover-image crop (which
+*   kept exposing baked-in title text from posts' own OG-card images). The
+*   pale "frame" in the middle of the artwork is light in BOTH the light and
+*   dark variants below - only the surrounding wave field changes - so hero
+*   text stays on dark-navy-on-light regardless of site theme.
+*/
+.changelog-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* The artwork is a fixed 16:9 image and background-size:cover always
+       scales it to exactly fill the box, so the box's own proportions
+       drive how much of the sides get cropped. Content height (title
+       clamped below, plus meta and excerpt) keeps this box close to this
+       min-height rather than growing tall and narrow on mobile, which is
+       what was cropping deep into both sides before. Contain (fitting the
+       whole image with letterboxing) was tried and reverted - it shrinks
+       the pale panel along with the art, so the unshrunk text overflows
+       past its edges instead. */
+    min-height: 320px;
+    background-image: url("/img/hero-frame-light.png");
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l2);
+    padding: calc(var(--card-padding) * 1.4);
+    color: var(--brand-navy);
+    position: relative;
+
+    @include respond(md) {
+        min-height: 500px;
+    }
+
+    /* A thin light edge to separate the frame from the navy page behind it -
+       the artwork's own dark corners otherwise soften into the background. */
+    [data-scheme="dark"] & {
+        background-image: url("/img/hero-frame-dark.png");
+        border: 1px solid rgba(189, 236, 254, 0.4);
+        box-shadow: var(--shadow-l2), 0 0 24px rgba(117, 192, 228, 0.18);
+    }
+
+    /* The frame's center stays pale in both theme variants (white in light,
+       sky-blue in dark), so pills inside the hero get one fixed,
+       pale-background-safe treatment rather than each theme's normal
+       (page-tuned) accent colors, which would vanish or wash out here. */
+    .changelog-tag {
+        background-color: var(--brand-purple);
+        color: #ffffff;
+    }
+
+    /* Teal (translucent or solid) is too close in lightness to the sky-blue
+       dark-mode panel to read as a chip (~1:1 contrast blended) - solid navy
+       gives a clean ~7:1 against both panel variants instead. */
+    .changelog-categories a {
+        background-color: var(--brand-navy);
+        color: var(--brand-lightblue);
+
+        &:hover {
+            filter: brightness(1.3);
+        }
+    }
+}
+
+/* Centered and width-capped so title/excerpt length can vary per post
+   without reaching into the corners, where the artwork's tentacles curl
+   in from every side. Below md the hero is short relative to its width
+   (min-height:320px vs the desktop 500px), so background-size:cover has
+   to scale the art up more - which brings those corner tentacles further
+   in. 420px of content width reached right into them (the date/category
+   pill row visibly collided with the top-right tentacle); 280px leaves
+   real clearance. md+ has more vertical room, so cover crops far less
+   and the wider 480px column is safe again. */
+.changelog-hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 280px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+
+    @include respond(md) {
+        max-width: 480px;
+    }
+}
+
+.changelog-hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.changelog-hero-title {
+    font-family: var(--heading-font-family);
+    font-weight: 700;
+    /* Clamped to 3 lines at every size - without this, a long title on a
+       narrow mobile column can wrap to 5-6 lines, growing the hero box far
+       taller and narrower than the artwork's own 16:9 ratio, which is what
+       forced background-size:cover to crop deep into both sides. Bounding
+       the title keeps the box close to min-height regardless of post. */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin: 0;
+
+    a {
+        color: inherit;
+    }
+
+    @include respond(md) {
+        font-size: 3rem;
+    }
+
+    @include respond(xl) {
+        font-size: 3.6rem;
+    }
+}
+
+.changelog-hero-excerpt {
+    font-size: 1.7rem;
+    line-height: 1.6;
+    color: rgba(16, 38, 93, 0.75);
+    max-width: 55ch;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+/*
+*   Cookie consent banner: gates Google Analytics, not decorative. Reuses
+*   the already contrast-checked accent/card tokens rather than new colors.
+*/
+.cookie-consent {
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 420px;
+    margin: 0 auto;
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l3);
+    padding: var(--card-padding);
+
+    @include respond(sm) {
+        left: auto;
+        margin: 0;
+    }
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.cookie-consent-text {
+    margin: 0;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--card-text-color-secondary);
+}
+
+.cookie-consent-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.cookie-consent-decline,
+.cookie-consent-accept {
+    font-family: var(--base-font-family);
+    font-size: 1.4rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--tag-border-radius);
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cookie-consent-decline {
+    background-color: transparent;
+    color: var(--card-text-color-secondary);
+
+    &:hover {
+        color: var(--card-text-color-main);
+    }
+}
+
+.cookie-consent-accept {
+    background-color: var(--accent-color);
+    color: var(--accent-color-text);
+
+    &:hover {
+        background-color: var(--accent-color-darker);
+    }
+}

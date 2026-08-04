@@ -5,11 +5,11 @@ slug: "getting-versions"
 date: "2019-05-30"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dbatools"
   - "excel"
-  - "powershell"
+  - "PowerShell"
 ---
 
 There have been a lot of blog posts and talk around upgrading your servers in the past. However, the chatter always seems to intensify when we start getting close to that dreaded ‘end of support’ date for your older Windows and SQL Server versions.  I hope this isn’t the first place you are discovering this, but July 9th 2019 marks the end of support for both SQL Server 2008 and 2008R2, closely followed on January 14th 2020 with the end of support for Windows Server 2008 and 2008R2.

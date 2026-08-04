@@ -4,11 +4,11 @@ description: "Troubleshooting incidents - use PowerShell and Get-WinEvent to hel
 slug: "get-winevent"
 date: "2020-08-04"
 categories:
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "event-log"
-  - "get-winevent"
-  - "powershell"
+  - "eventLog"
+  - "getWinevent"
+  - "PowerShell"
 image: "cover.jpg"
 ---
 

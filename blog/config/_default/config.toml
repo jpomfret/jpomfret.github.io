@@ -4,6 +4,10 @@ languageCode = "en-gb"
 #paginate = 7
 title = "Jess Pomfret"
 
+# Preserve real-world casing on tags/categories (e.g. "dbatools" stays lowercase)
+# instead of Hugo's default auto-titlecasing of taxonomy term pages.
+capitalizeListTitles = false
+
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk, ar
 DefaultContentLanguage = "en"

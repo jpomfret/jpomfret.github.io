@@ -15,4 +15,5 @@ If you have Hugo installed, you can preview locally from the `blog/` folder.
 
 ## License
 
-Content and code in this repository are © Jess Pomfret unless otherwise noted.
+- Code and templates: [MIT](LICENSE).
+- Blog post content (`blog/content/`): CC BY-NC-SA 4.0 unless otherwise noted on the article.

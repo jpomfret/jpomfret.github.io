@@ -5,11 +5,11 @@ slug: "easy-database-copy"
 date: "2021-01-19"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "copy-dbadatabase"
+  - "copyDbadatabase"
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 image: "cover.jpg"
 ---
 

@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-27T00:00:00Z",
+  "title": "Design System: Jess Pomfret — Changelog Blog",
+  "extensions": {
+    "colorMeta": {
+      "brand-purple": {
+        "role": "primary",
+        "displayName": "Octopus Purple",
+        "canonical": "#530080",
+        "tonalRamp": ["#1c002d", "#2c0046", "#38005a", "#530080", "#7a12b3", "#a347d1", "#c98fe6", "#ecdcf6"]
+      },
+      "brand-purple-deep": {
+        "role": "primary-hover",
+        "displayName": "Purple Deep",
+        "canonical": "#38005a",
+        "tonalRamp": ["#12001d", "#1e0030", "#2a0042", "#38005a", "#530080", "#7a12b3", "#a960c9", "#d9b9e8"]
+      },
+      "brand-navy": {
+        "role": "tertiary",
+        "displayName": "Brand Navy",
+        "canonical": "#10265d",
+        "tonalRamp": ["#050a17", "#0a1530", "#0d1e46", "#10265d", "#1c3d8a", "#3159b0", "#7fa0d6", "#cdd9f0"]
+      },
+      "brand-lightblue": {
+        "role": "tertiary",
+        "displayName": "Brand Light-Blue",
+        "canonical": "#bdecfe",
+        "tonalRamp": ["#0d3542", "#155164", "#227d92", "#3aa7bd", "#6fcbe0", "#bdecfe", "#d8f5ff", "#eefbff"]
+      },
+      "brand-teal": {
+        "role": "secondary",
+        "displayName": "Signal Teal",
+        "canonical": "#4faab3",
+        "tonalRamp": ["#0d2a2d", "#164144", "#215d61", "#2f7a80", "#4faab3", "#7dc4cb", "#a9dade", "#d6eef0"]
+      },
+      "brand-teal-bright": {
+        "role": "secondary-emphasis",
+        "displayName": "Teal Bright",
+        "canonical": "#7dc4cb",
+        "tonalRamp": ["#123033", "#1d4b4f", "#2c6e73", "#4faab3", "#7dc4cb", "#a3d8dd", "#c7e9ec", "#e6f6f7"]
+      },
+      "brand-ink": {
+        "role": "neutral-on-accent",
+        "displayName": "Ink",
+        "canonical": "#06171f",
+        "tonalRamp": ["#020609", "#040d12", "#06171f", "#0d2733", "#1c4a5c", "#3a7c92", "#7bb2c4", "#c8e5ee"]
+      },
+      "body-background-light": {
+        "role": "neutral-ground",
+        "displayName": "Water Tint",
+        "canonical": "#eef7fb",
+        "tonalRamp": ["#2a3a42", "#4a6470", "#7d9aa6", "#b3d3dd", "#eef7fb", "#f3faFC", "#f8fcfe", "#fcfeff"]
+      },
+      "card-background-light": {
+        "role": "neutral-surface",
+        "displayName": "Card White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#1a1a1a", "#3d3d3d", "#666666", "#999999", "#cccccc", "#e6e6e6", "#f5f5f5", "#ffffff"]
+      },
+      "card-text-main-light": {
+        "role": "neutral-text",
+        "displayName": "Ink Text",
+        "canonical": "#10203f",
+        "tonalRamp": ["#050a15", "#0a1428", "#10203f", "#1e3768", "#345a9e", "#6488c4", "#9fb6dc", "#d3ddf0"]
+      }
+    },
+    "typographyMeta": {
+      "headline": { "displayName": "Headline (Etna)", "purpose": "Hero entry title only." },
+      "title": { "displayName": "Title (Etna)", "purpose": "Feed entry titles." },
+      "body": { "displayName": "Body (Garet)", "purpose": "Excerpts and long-form copy." },
+      "label": { "displayName": "Label (code font)", "purpose": "Date tags, tabular-numeral timestamps." }
+    },
+    "shadows": [
+      { "name": "shadow-l1", "value": "var(--shadow-l1)", "purpose": "Rest state for entry cards and hero cover image." },
+      { "name": "shadow-l2", "value": "var(--shadow-l2)", "purpose": "Hover state for entry cards; permanent state for the hero." }
+    ],
+    "motion": [
+      { "name": "card-hover", "value": "box-shadow 0.3s ease, transform 0.3s ease", "purpose": "Entry card hover lift + shadow promotion." },
+      { "name": "pill-hover", "value": "background-color 0.3s ease", "purpose": "Category pill hover brightening." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "theme respond(md) mixin — hero switches to two-column grid, wave divider grows to 48px" },
+      { "name": "xl", "value": "theme respond(xl) mixin — headline/title font sizes step up" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Changelog Entry Card",
+      "kind": "card",
+      "refersTo": "changelog-entry-card",
+      "description": "A single feed entry: date tag, category pills, title, excerpt, reading time.",
+      "html": "<article class=\"ds-changelog-entry\"><div class=\"ds-changelog-entry-meta\"><time class=\"ds-changelog-tag\">2026.07.27</time><ul class=\"ds-changelog-categories\"><li><a href=\"#\">dbatools</a></li></ul></div><h2 class=\"ds-changelog-entry-title\"><a href=\"#\">Update Azure SQL Database post with improved content</a></h2><p class=\"ds-changelog-entry-excerpt\">Practical, tested automation content grounded in real dbatools maintainership experience.</p><div class=\"ds-changelog-entry-footer\"><span>4 min read</span></div></article>",
+      "css": ".ds-changelog-entry { display: flex; flex-direction: column; gap: 12px; background-color: #ffffff; border-radius: 14px; box-shadow: 0 1px 3px rgba(16,38,93,0.12); padding: 24px; transition: box-shadow 0.3s ease, transform 0.3s ease; font-family: Garet, sans-serif; } .ds-changelog-entry:hover { box-shadow: 0 6px 16px rgba(16,38,93,0.18); transform: translateY(-2px); } .ds-changelog-entry-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; } .ds-changelog-tag { display: inline-flex; align-items: center; font-variant-numeric: tabular-nums; font-size: 1.3rem; font-weight: 700; color: #ffffff; background-color: #530080; padding: 4px 10px; border-radius: 6px; } .ds-changelog-categories { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; } .ds-changelog-categories a { display: inline-block; font-size: 1.3rem; font-weight: 600; color: #0d4a50; background-color: rgba(79,170,179,0.15); padding: 4px 12px; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; } .ds-changelog-categories a:hover, .ds-changelog-categories a:focus-visible { background-color: rgba(79,170,179,0.28); } .ds-changelog-entry-title { font-family: Etna, sans-serif; font-weight: 700; font-size: 2rem; margin: 0; line-height: 1.3; } .ds-changelog-entry-title a { color: #10203f; text-decoration: none; } .ds-changelog-entry-title a:hover, .ds-changelog-entry-title a:focus-visible { color: #530080; } .ds-changelog-entry-excerpt { margin: 0; color: #45507a; font-size: 1.5rem; line-height: 1.6; max-width: 70ch; } .ds-changelog-entry-footer { display: flex; align-items: center; gap: 15px; color: #6b7593; font-size: 1.3rem; }"
+    },
+    {
+      "name": "Changelog Hero",
+      "kind": "custom",
+      "refersTo": "changelog-hero",
+      "description": "The single always-saturated latest-entry hero, fixed purple-to-navy gradient regardless of theme.",
+      "html": "<article class=\"ds-changelog-hero\"><div class=\"ds-changelog-hero-content\"><span class=\"ds-changelog-hero-eyebrow\">Latest entry</span><div class=\"ds-changelog-hero-meta\"><time class=\"ds-changelog-tag-hero\">2026.07.27</time><ul class=\"ds-changelog-categories-hero\"><li><a href=\"#\">dbatools</a></li></ul></div><h1 class=\"ds-changelog-hero-title\"><a href=\"#\">Fix domain and subtitle on dbatools-azuresqldb cover image</a></h1><p class=\"ds-changelog-hero-excerpt\">Practical, tested automation content on SQL Server, Azure SQL, and dbatools.</p></div></article>",
+      "css": ".ds-changelog-hero { display: flex; flex-direction: column; gap: 24px; background: linear-gradient(135deg, #530080 0%, #10265d 100%); border-radius: 14px; box-shadow: 0 6px 16px rgba(16,38,93,0.18); padding: 34px; color: #ffffff; font-family: Garet, sans-serif; } .ds-changelog-hero-eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 1.3rem; font-weight: 700; color: #7dc4cb; } .ds-changelog-hero-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; } .ds-changelog-tag-hero { display: inline-flex; align-items: center; font-variant-numeric: tabular-nums; font-size: 1.3rem; font-weight: 700; color: #06171f; background-color: #4faab3; padding: 4px 10px; border-radius: 6px; } .ds-changelog-categories-hero { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; } .ds-changelog-categories-hero a { display: inline-block; font-size: 1.3rem; font-weight: 600; color: #10265d; background-color: #bdecfe; padding: 4px 12px; border-radius: 6px; text-decoration: none; } .ds-changelog-categories-hero a:hover, .ds-changelog-categories-hero a:focus-visible { background-color: #4faab3; color: #06171f; } .ds-changelog-hero-title { font-family: Etna, sans-serif; font-weight: 700; font-size: 3rem; line-height: 1.2; margin: 0; } .ds-changelog-hero-title a { color: inherit; text-decoration: none; } .ds-changelog-hero-excerpt { font-size: 1.7rem; line-height: 1.6; color: rgba(255,255,255,0.82); max-width: 65ch; margin: 0; }"
+    },
+    {
+      "name": "Wave Divider",
+      "kind": "custom",
+      "refersTo": "changelog-wave-divider",
+      "description": "Real Brand Kit wave-art image bridging the hero into the ordinary feed.",
+      "html": "<div class=\"ds-wave-divider\" role=\"presentation\"></div>",
+      "css": ".ds-wave-divider { width: 100%; height: 32px; background-image: url('/img/wave-divider.png'); background-repeat: no-repeat; background-size: cover; background-position: center; opacity: 0.9; }"
+    },
+    {
+      "name": "Category Pill",
+      "kind": "chip",
+      "refersTo": "changelog-category-pill",
+      "description": "Standalone tag/category chip used on card feed items (low-opacity teal).",
+      "html": "<a class=\"ds-category-pill\" href=\"#\">dbatools</a>",
+      "css": ".ds-category-pill { display: inline-block; font-size: 1.3rem; font-weight: 600; color: #0d4a50; background-color: rgba(79,170,179,0.15); padding: 4px 12px; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; } .ds-category-pill:hover, .ds-category-pill:focus-visible { background-color: rgba(79,170,179,0.28); }"
+    },
+    {
+      "name": "Sidebar Avatar Badge",
+      "kind": "custom",
+      "refersTo": "sidebar-avatar",
+      "description": "Octopus mark on a constant white plate, readable against both light and dark grounds.",
+      "html": "<div class=\"ds-avatar-badge\"><img src=\"/img/octopus-mark.png\" alt=\"Jess Pomfret octopus mark\" /></div>",
+      "css": ".ds-avatar-badge { background-color: #ffffff; padding: 10%; box-sizing: border-box; border-radius: 50%; } .ds-avatar-badge img { width: 100%; height: 100%; object-fit: contain; display: block; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Shipped Log",
+    "overview": "The site presents Jess's technical work as an ongoing changelog, not a magazine of interchangeable cards. A fixed sidebar carries the purple octopus mark, name, and socials as constant identity; the main pane is a chronological feed that opens on one always-saturated \"latest entry\" hero and settles into dated, tag-pilled entries below it. The world runs on a full four-color palette (purple, navy, light-blue, teal) where every hue is an assigned role rather than a decorative accent, paired with two self-hosted brand fonts: Etna Sans Serif for anything that names a thing (headlines, titles) and Garet for anything that explains it (body copy, excerpts).\n\nThe hero is the system's one deliberately committed, theme-independent moment: it always renders on the purple-to-navy gradient regardless of whether the visitor is in light or dark mode, then hands off through a real wave-art image divider into the ordinary token-driven feed. Everything past the wave is flat, quiet, and legible; the saturation is spent entirely on the hero so it doesn't leak into the rest of the page.",
+    "keyCharacteristics": [
+      "Full-palette role assignment: purple leads in light mode, teal leads in dark mode, navy and light-blue are the two grounds.",
+      "One fixed-gradient hero per page, everything else theme-responsive.",
+      "Etna for names (headlines/titles), Garet for explanations (body/excerpts).",
+      "Dated, tag-pilled entries in place of a generic card grid.",
+      "Real Brand Kit wave artwork as the only divider in the system."
+    ],
+    "rules": [
+      { "name": "The One Saturated Moment Rule", "body": "Only the hero renders on the full purple-to-navy gradient. It is fixed regardless of site theme; every other surface (cards, feed, sidebar) uses the light/dark token pairs and never the raw gradient.", "section": "colors" },
+      { "name": "The Single-Teal Tag Rule", "body": "Every category and tag pill sitewide is teal (#4faab3 background, #06171f text), overriding the theme's default per-term color rotation. One color per taxonomy element, no exceptions.", "section": "colors" },
+      { "name": "The Etna-Names-It Rule", "body": "Etna is reserved for anything that identifies an entry (hero title, entry title). Garet carries everything that describes it (excerpts, footers). Neither font substitutes for the other's role.", "section": "typography" },
+      { "name": "The Hover-Lifts Rule", "body": "Interactive cards (changelog-entry) respond to hover with both a shadow promotion (l1 to l2) and a 2px upward translation together, never one without the other.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do treat the four brand colors (purple, navy, light-blue, teal) as named, assigned roles — never introduce a fifth accent hue into the changelog system.",
+      "Do keep the hero on the fixed purple-to-navy gradient in both themes; it is the system's one deliberately saturated surface.",
+      "Do set every category/tag pill sitewide in teal, overriding the theme's default per-term color rotation.",
+      "Do use Etna for anything that names an entry and Garet for anything that describes it.",
+      "Do preserve real tag/category casing as written (capitalizeListTitles = false) — this is a deliberate site behavior reflecting real-world tool names like \"dbatools\", not a bug to fix.",
+      "Do pair a shadow promotion with a translateY lift on hover for interactive cards; never apply one without the other."
+    ],
+    "donts": [
+      "Don't ban gradients as a device — the world's own hero relies on one; the prohibition that matters is scope (hero only), not gradients themselves.",
+      "Don't add a third card-radius step or a sharp-cornered surface; the system uses exactly two radii (14px card, 6px pill).",
+      "Don't treat the single-post article page, archives page, search page, or the Buy the Book / Finding Data Friends pages as redesigned. They currently inherit the global color and font tokens from custom.scss but their structure and composition have not been reviewed against this system yet.",
+      "Don't record CC BY-NC-SA 4.0 as the project's code license — it is the deliberately-retained content license (article.license.default in params.toml); the separate root LICENSE file covers code under MIT."
+    ]
+  }
+}

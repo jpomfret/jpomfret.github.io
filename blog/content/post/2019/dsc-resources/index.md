@@ -5,10 +5,10 @@ slug: "dsc-resources"
 date: "2019-04-08"
 categories:
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 tags:
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 ---
 
 A critical part of our DSC configuration is made up of resources. These are the building blocks we need to to define our desired state.  There are two kinds of resources that we can use: class based and MOF based (most common). We are going to focus our efforts today on looking at MOF based resources.

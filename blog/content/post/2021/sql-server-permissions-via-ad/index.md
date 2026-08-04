@@ -5,13 +5,13 @@ slug: "sql-server-permissions-via-ad"
 date: "2021-01-26"
 categories:
   - "dbatools"
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "active-directory"
+  - "activeDirectory"
   - "activedirectory"
   - "dbatools"
   - "permissions"
-  - "powershell"
+  - "PowerShell"
 image: "edvard-alexander-rolvaag-E75ZuAIpCzo-unsplash.jpg"
 ---
 

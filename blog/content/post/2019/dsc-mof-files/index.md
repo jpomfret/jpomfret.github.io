@@ -5,11 +5,11 @@ slug: "dsc-mof-files"
 date: "2019-03-18"
 categories:
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 tags:
-  - "desired-state-configuration"
+  - "desiredStateConfiguration"
   - "dsc"
-  - "powershell"
+  - "PowerShell"
 ---
 
 In my [last Desired State Configuration (DSC) post](https://jesspomfret.com/introduction-to-dsc/) a couple of weeks ago I covered some of the concepts involved with DSC, and I also have a [T-SQL Tuesday post](https://jesspomfret.com/t-sql-tuesday-110/) to get you started writing your first configuration. So today we are going to look at the next step in the process: what happens after we’ve written a configuration?
