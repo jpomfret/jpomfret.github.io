@@ -5,6 +5,8 @@ name: Build and Deploy PR Preview
 
 on:
   pull_request:
+    paths:
+      - "blog/**"
 
   workflow_dispatch:
 

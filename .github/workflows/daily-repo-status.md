@@ -16,6 +16,9 @@ permissions:
 
 network: defaults
 
+engine: copilot
+model: claude-sonnet-4.5
+
 tools:
   github:
     # If in a public repo, setting `lockdown: false` allows
