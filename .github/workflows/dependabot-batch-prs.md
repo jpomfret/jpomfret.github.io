@@ -11,9 +11,12 @@ on:
       - .github/workflows/**
   schedule: daily on weekdays
   workflow_dispatch:
+checkout:
+  repository: ${{ github.repository }}
 permissions:
   actions: read
   contents: read
+  issues: read
   pull-requests: read
 strict: true
 network: defaults
@@ -28,6 +31,9 @@ tools:
 safe-outputs:
   staged: true
   allowed-github-references: [repo]
+  github-app:
+    client-id: ${{ vars.GH_AW_APP_CLIENT_ID }}
+    private-key: ${{ secrets.GH_AW_APP_PRIVATE_KEY }}
   add-comment:
     target: "*"
     required-title-prefix: "Bump "
