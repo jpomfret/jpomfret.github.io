@@ -57,8 +57,6 @@
 
 name: "Repo Status"
 on:
-  schedule:
-    - cron: "22 2 * * *"  # Friendly format: daily (scattered)
   workflow_dispatch:
     inputs:
       aw_context:
