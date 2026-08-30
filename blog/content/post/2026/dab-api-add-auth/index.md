@@ -2,7 +2,7 @@
 title: "DAB API - Authenticated API Endpoints"
 slug: "dab-api-auth"
 description: "This post covers configuring our DAB API to only accept authenticated requests for data. It is part of a series of posts on using DAB."
-date: 2026-08-30T17:30:00Z
+date: 2026-08-30T16:30:00Z
 categories:
   - DAB
   - api
