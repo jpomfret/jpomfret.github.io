@@ -1,7 +1,7 @@
 ---
-title: "Running dab in an Azure Container Instance"
+title: "Running DAB in an Azure Container Instance"
 slug: "dab-api-container"
-description: "In part 2 of my series on dab, we'll run dab in an Azure Container Instance and wire it up to create an API on top of an Azure SQL Database."
+description: "In part 2 of my series on DAB, we'll run DAB in an Azure Container Instance and wire it up to create an API on top of an Azure SQL Database."
 date: 2025-11-06T11:00:00Z
 categories:
   - dab
@@ -15,7 +15,7 @@ image: header.png
 draft: false
 ---
 
-This is post two in my series about the Data API Builder (dab), the first post, [Data API Builder](/dab-api-builder/), covers what dab is and how to test it locally against SQL Server in running in a container. This was great for testing, but now we want to start to productionise this, and the first step is to get it running somewhere other than my laptop.
+This is post two in my series about the Data API Builder (DAB), the first post, [Data API Builder](/dab-api-builder/), covers what DAB is and how to test it locally against SQL Server in running in a container. This was great for testing, but now we want to start to productionise this, and the first step is to get it running somewhere other than my laptop.
 
 There are several deployment options available, I recommend you review the Microsoft docs here: [Deployment guidance for Data API builder](https://learn.microsoft.com/en-us/azure/data-api-builder/deployment/).
 
