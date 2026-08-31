@@ -12,7 +12,7 @@ tags:
   - api
   - PowerShell
 image: header.png
-draft: false
+draft: true
 ---
 
 This is post three in my series about the Data API Builder (DAB), the first post, [Data API Builder](/dab-api-builder/), covers what DAB is and how to test it locally against SQL Server in running in a container. The second post, [Running DAB in an Azure Container Instance](/dab-api-container/), starts to productionise this, moving it into the cloud, but with no auth required to hit the endpoints.
