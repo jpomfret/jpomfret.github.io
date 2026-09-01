@@ -2,7 +2,7 @@
 title: "DAB API - User Authentication from Azure CLI"
 slug: "dab-api-user-auth"
 description: "ENTER YOUR DESCRIPTION"
-date: 2025-08-21T09:14:40Z
+date: 2025-09-07T06:00:00Z
 categories:
   - DAB
   - api
@@ -29,8 +29,7 @@ If you're looking to follow along you need to have the infra we built in the pre
 At this point your containerized instance of DAB should be running, and healthy. However, if I call the DAB API endpoint without authentication I get a 401 error.
 
 ```PowerShell
-$data = Invoke-RestMethod -Uri 'http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/api/dbo_BuildVersion'
-$data.value
+Invoke-RestMethod -Uri 'http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/api/dbo_BuildVersion'
 ```
 
 ## Entra User Authentication
@@ -41,13 +40,10 @@ Let's look at how I can authenticate with my Entra user to get a token and acces
 
 We do already have an app role configured, but those only get us application tokens — that's the route we'll use in the next post when the function calls the API as itself. But Azure CLI is signing in as me, so Entra issues a user token instead, and user permissions use a different claim: `scp` rather than roles. Therefore we need to expose at least one delegated scope on the API before the CLI has anything valid to ask for.
 
-We also need to pre-authorize the Azure CLI to request tokens for our DAB API. The authentication flow we'll use will require the client to be authorized, and the Azure CLI doesn't provide a consent UI. Since we already know the scope ID we're creating, we can do both in a single PATCH to the Graph API.
-
 This looks complicated but lets break down the body variable, which is the JSON of our Graph API request into three pieces:
 
 1. `oauth2PermissionScopes` - adding the user authentication
-2. `preAuthorizedApplications` - preauthorising the Azure CLI
-3. `requestedAccessTokenVersion` is set to 1 because the function uses 1 and we have to choose the same token version
+2. `requestedAccessTokenVersion` is set to 1 because the function uses 1 and we have to choose the same token version
 
 ```PowerShell
 $azureCliAppId = "04b07795-8ddb-461a-bbee-02f9e1bf7b46" # Microsoft Azure CLI
@@ -58,19 +54,50 @@ $body = @{
     api = @{
         oauth2PermissionScopes = @(
             @{
-                id = $newScopeId
-                value = "user_impersonation"
-                type = "User"
-                isEnabled = $true
+                id                      = $newScopeId
+                value                   = "user_impersonation"
+                type                    = "User"
+                isEnabled               = $true
                 adminConsentDisplayName = "Access DAB API as user"
                 adminConsentDescription = "Allow the application to access DAB API on behalf of the signed-in user"
-                userConsentDisplayName = "Access DAB API as you"
-                userConsentDescription = "Allow the application to access DAB API on your behalf"
+                userConsentDisplayName  = "Access DAB API as you"
+                userConsentDescription  = "Allow the application to access DAB API on your behalf"
+            }
+        )
+        requestedAccessTokenVersion = 1
+    }
+}
+# Compress avoids newlines; escape double quotes for the shell
+$bodyJson = ($body1 | ConvertTo-Json -Depth 10 -Compress) -replace '"', '\"'
+
+az rest --method PATCH `
+  --uri "https://graph.microsoft.com/v1.0/applications/$($existingApp.id)" `
+  --headers "Content-Type=application/json" `
+  --body "$bodyJson"
+```
+
+We also need to pre-authorize the Azure CLI to request tokens for our DAB API. The authentication flow we'll use will require the client to be authorized, and the Azure CLI doesn't provide a consent UI. In the patch above we created the scopt ID - now we can pre-authorize the Azure CLI.
+
+This patch will replace the whole api object so I will just add the `preAuthorizedApplications` section to our existing JSON and reapply the patch.
+
+```PowerShell
+$body = @{
+    api = @{
+        oauth2PermissionScopes = @(
+            @{
+                id                      = $newScopeId
+                value                   = "user_impersonation"
+                type                    = "User"
+                isEnabled               = $true
+                adminConsentDisplayName = "Access DAB API as user"
+                adminConsentDescription = "Allow the application to access DA-in user"
+                userConsentDisplayName  = "Access DAB API as you"
+                userConsentDescription  = "Allow the application to access DAB API on your behalf"
             }
         )
         preAuthorizedApplications = @(
             @{
-                appId = $azureCliAppId
+                appId                  = $azureCliAppId
                 delegatedPermissionIds = @($newScopeId)
             }
         )
@@ -89,7 +116,7 @@ az rest --method PATCH `
 
 You can verify this in the portal, within Entra on our Enterprise Application (you might need to search by `$APP_ID` since this was newly created), under `Expose an API` you should see a scope and an authorized client application.
 
-![alt text](image-9.png)
+![Enterprise Application showing the scopes and authorised applications](ExposeAPI.png)
 
 If you didn't do this step, or something above isn't set correctly you'll get the following error, which is quite helpful in that it tells you the scope (your app id) and the Azure CLI App ID you need to solve the problem.
 
@@ -121,4 +148,4 @@ $headers = @{ 'Authorization' = "Bearer $token" }
 Invoke-RestMethod -Uri 'http://ci-dab-prod-001.uksouth.azurecontainer.io:5000/api/dbo_BuildVersion' -Headers $headers
 ```
 
-![alt text](image-5.png)
+![Invoke-RestMethod including the Headers is now authenticated so we can see data returned](InvokeWithHeaders.png)
