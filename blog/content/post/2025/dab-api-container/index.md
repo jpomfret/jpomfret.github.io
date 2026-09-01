@@ -358,6 +358,7 @@ Here are all the links to the dab blog series:
 
 1. [Data API Builder](/dab-api-builder/)
 2. [Running dab in an Azure Container Instance](/dab-api-container/)
-3. More coming soon...
+3. [DAB API - Authenticated API Endpoints](/dab-api-container/)
+4. More coming soon...
 
 Or you can view all posts about dab using the [dab](/categories/dab/) category.

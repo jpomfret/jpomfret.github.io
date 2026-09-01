@@ -251,7 +251,8 @@ az ad app delete --id $app_id
 Here are all the links to the DAB blog series:
 
 1. [Data API Builder](/dab-api-builder/)
-2. [Running DAB in an Azure Container Instance](/dab-api-container/)
-3. More coming soon...
+2. [Running dab in an Azure Container Instance](/dab-api-container/)
+3. [DAB API - Authenticated API Endpoints](/dab-api-container/)
+4. More coming soon...
 
 Or you can view all posts about DAB using the [DAB](/categories/dab/) category.
