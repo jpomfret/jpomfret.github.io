@@ -2,7 +2,7 @@
 title: "DAB API - Authenticated API Endpoints"
 slug: "dab-api-auth"
 description: "This post covers configuring our DAB API to only accept authenticated requests for data. It is part of a series of posts on using DAB."
-date: 2026-08-30T16:30:00Z
+date: 2026-09-01T06:00:00Z
 categories:
   - DAB
   - api
@@ -12,7 +12,7 @@ tags:
   - api
   - PowerShell
 image: header.png
-draft: true
+draft: false
 ---
 
 This is post three in my series about the Data API Builder (DAB), the first post, [Data API Builder](/dab-api-builder/), covers what DAB is and how to test it locally against SQL Server in running in a container. The second post, [Running DAB in an Azure Container Instance](/dab-api-container/), starts to productionise this, moving it into the cloud, but with no auth required to hit the endpoints.
@@ -55,7 +55,7 @@ Let's create that App Registration using the Azure CLI. We'll set the identifier
   # Set the identifier URI using the app ID
   az ad app update --id $app_id --identifier-uris "api://$app_id"
 
-  # Create a service principal #TODO: still accurate?
+  # Create a service principal - this is needed when we start to request tokens
   az ad sp create --id $app_id
   ```
 
