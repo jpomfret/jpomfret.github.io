@@ -17,6 +17,7 @@ I have video courses available on LinkedIn Learning on a variety of topics from 
   - [Introduction to Transact-SQL](https://www.linkedin.com/learning/introduction-to-transact-sql-22864585) - If you're just starting out with SQL Server then this course will be perfect for learning T-SQL basics.
   - [Data Management Essential Training](https://www.linkedin.com/learning/data-management-essential-training) - This is my newest and longest course, a lot of work went into this essential training. It'll give you the big picture on what data management is, and why we care!
   - [Guided Lab: Automating Azure Infrastructure Management with PowerShell](https://www.linkedin.com/learning/guided-lab-automating-azure-infrastructure-management-with-powershell/automate-azure-with-powershell-your-guided-lab-kickoff) - My first guided lab on LinkedIn Learning. Follow along and learn how to manage Azure Infrastructure from PowerShell, we'll even talk about Pester testing infrastructure to ensure everything is in the expected state.
+  - [AI for Data Management: Driving Trust, Quality, and Efficiency](https://www.linkedin.com/learning/ai-for-data-management-driving-trust-quality-and-efficiency) - **NEW COURSE** - A follow on from the Data Management Essential Training course, how AI can help you in each of these data management topics.
 
 {{<
   figure src="LinkedInLearning.jpg"
