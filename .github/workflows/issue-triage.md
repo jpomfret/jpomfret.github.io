@@ -21,6 +21,7 @@ network: defaults
 engine: copilot
 
 tools:
+  bash: []
   github:
     lockdown: false
     min-integrity: none
