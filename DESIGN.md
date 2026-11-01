@@ -8,6 +8,8 @@ colors:
   brand-lightblue: "#bdecfe"
   brand-teal: "#4faab3"
   brand-teal-bright: "#7dc4cb"
+  brand-teal-deep: "#0d4a50"
+  brand-sky: "#75c0e4"
   brand-ink: "#06171f"
   body-background-light: "#eef7fb"
   card-background-light: "#ffffff"
@@ -18,14 +20,29 @@ typography:
     fontSize: "3rem"
     fontWeight: 700
     lineHeight: 1.2
+  headline-large:
+    fontFamily: "Etna, var(--base-font-family)"
+    fontSize: "3.6rem"
+    fontWeight: 700
+    lineHeight: 1.2
   title:
     fontFamily: "Etna, var(--base-font-family)"
     fontSize: "2rem"
     fontWeight: 700
     lineHeight: 1.3
+  title-large:
+    fontFamily: "Etna, var(--base-font-family)"
+    fontSize: "2.2rem"
+    fontWeight: 700
+    lineHeight: 1.3
   body:
     fontFamily: "Garet, sans-serif"
     fontSize: "1.5rem"
+    fontWeight: 400
+    lineHeight: 1.6
+  body-large:
+    fontFamily: "Garet, sans-serif"
+    fontSize: "1.7rem"
     fontWeight: 400
     lineHeight: 1.6
   label:
@@ -83,7 +100,7 @@ Four named roles cover the whole system; nothing is an unassigned accent, and th
 - **Octopus Purple** (`#530080`): the light-mode acting accent — link/hover color, dated tag pill background, and the octopus mark's ink in the hero frame artwork. Has a deeper hover/active state, **Purple Deep** (`#38005a`).
 
 ### Secondary
-- **Signal Teal** (`#4faab3`): the dark-mode acting accent (contrast-checked against navy body text), and, regardless of theme, the fixed color of every category/tag pill sitewide (the theme's default per-tag rainbow rotation is overridden to this single teal). A brighter variant, **Teal Bright** (`#7dc4cb`), marks the hero's "Latest entry" eyebrow label.
+- **Signal Teal** (`#4faab3`): the dark-mode acting accent (contrast-checked against navy body text), and, regardless of theme, the fixed color of every category/tag pill sitewide (the theme's default per-tag rainbow rotation is overridden to this single teal). A brighter variant, **Teal Bright** (`#7dc4cb`), marks the hero's "Latest entry" eyebrow label. A deeper variant, **Teal Deep** (`#0d4a50`), is the AA-safe teal for small text and labels on pale grounds — Signal Teal only reaches ~2.7:1 on white, so Teal Deep (9.9:1 on white, 4.9–7.9:1 on the dark sky panel) carries the category-pill text and the About page's hero eyebrow.
 
 ### Tertiary
 - **Brand Navy** (`#10265d`): the dark-mode page ground, and the hero's on-panel title/text and category-pill fill inside the frame card (navy reads dark-on-pale over the frame's pale center in both themes).

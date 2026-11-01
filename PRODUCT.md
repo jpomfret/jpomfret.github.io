@@ -28,14 +28,14 @@ Static site built with Hugo (`hugo-theme-stack` v3 theme as a Go module), conten
 
 - Hugo static site generator; content archive runs 2018–present under `blog/content/post`, plus standalone pages (Buy the Book, Finding Data Friends, archives, search).
 - Social links: GitHub, Bluesky, Instagram, Sessionize, LinkedIn.
-- Disqus comments enabled.
-- Current license is CC BY-NC-SA 4.0, inherited from the theme starter, not deliberately chosen — see Brand Commitments for the pending change.
+- Comments are disabled (`comments.enabled = false`); Disqus is configured as the provider but never loads.
+- Licensing is split: code under MIT (root `LICENSE`), content under CC BY-NC-SA 4.0 (`article.license.default`). This is a deliberate, shipped decision — see `docs/adr/0004-split-code-and-content-licenses.md`.
 
 ## Brand Commitments
 
 - Name stays **Jess Pomfret** — not up for change.
 - A full visual-identity overhaul is authorized and planned, replacing the current default-theme look (🦄 emoji sidebar icon, default avatar). A Brand Kit already exists with a confirmed mark (purple octopus), a purple/navy/light-blue/teal palette, supporting wave/tentacle/bubble graphic elements, and two brand fonts (a sans-serif for headers, a rounder sans for body). Source: `C:\Users\jpomf\OneDrive\Documents\PersonalBrand\Jess Pomfret - VI\Brand Kit.pdf`, with usable assets in the same folder (`Elements/`, `Blog Images/`, `Jess-carousel/`, `LinkedIn header/`, `Master Slides.pptx`). This kit is binding visual authority for the redesign; exact application (layout, component treatment, type scale) is new-work's job, not recorded here.
-- License intent: move from the inherited CC BY-NC-SA 4.0 to **MIT** as part of the rebrand. Exact wording/scope of the license change is still open and should be confirmed before implementing.
+- License (shipped): code is **MIT** (root `LICENSE`), content remains **CC BY-NC-SA 4.0** (`article.license.default`). The split is intentional, not a pending change — see `docs/adr/0004-split-code-and-content-licenses.md`.
 
 ## Evidence on Hand
 

@@ -1,0 +1,3 @@
+# Homepage is a bespoke changelog feed, not the theme's card grid
+
+The homepage (`blog/layouts/index.html`) replaces the theme's default card-grid landing page with a bespoke changelog/release-notes feed: one saturated Hero ("Latest entry") followed by a list of dated, tag-pilled entries. This is the site's creative North Star — "The Shipped Log" — presenting Jess's technical work as an ongoing changelog rather than a magazine of interchangeable cards. It's a real deviation from the theme's shipped homepage, so a future reader would otherwise wonder why the default was thrown away. Note: "changelog entry" is a *presentation* of a Post, not a separate content type (see CONTEXT.md).

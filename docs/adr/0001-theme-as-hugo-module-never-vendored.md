@@ -1,0 +1,3 @@
+# Theme consumed as a Hugo Module, never vendored
+
+The site uses `hugo-theme-stack` as a Hugo Module (a Go dependency declared in `blog/go.mod`) rather than copying the theme's source into the repo. We deliberately do **not** run `hugo mod vendor` and commit the result: it was tried once and reverted because leaving `_vendor/` in place permanently changes Hugo's module resolution for the project. Keeping the theme as an unvendored module means it stays upgradable by version bump, and all customization goes through path-precedence Overrides under `blog/layouts/` and `blog/assets/` instead of forking. Trade-off: you can't read the theme's source locally, so to see an original file before overriding it you fetch it from GitHub at the pinned tag (see CLAUDE.md).

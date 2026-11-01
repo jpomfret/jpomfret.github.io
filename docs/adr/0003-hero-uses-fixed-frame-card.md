@@ -1,0 +1,3 @@
+# Hero uses a fixed Brand-Kit frame card, not a per-post cover crop
+
+The homepage Hero renders on a fixed Brand-Kit octopus/wave frame image (`static/img/hero-frame-{light,dark}.png`), the same regardless of which Post is latest and regardless of light/dark theme. We first tried using the latest Post's own cover image as the Hero background and abandoned it: posts' cover images have title and badge text baked into the artwork, which collided with the Hero's own dynamically-rendered title. The fixed frame has a pale center panel that keeps the Hero title dark-on-pale in both themes. This is the system's one deliberately theme-independent, saturated surface — everything below it is flat and token-driven.

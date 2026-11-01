@@ -1,0 +1,132 @@
+{{ define "body-class" }}about-page{{ end }}
+
+{{ define "main" }}
+{{ $about := .Params.about }}
+<article class="about">
+
+    {{/* ---------- 1. Hero (brand octopus/wave frame) ---------- */}}
+    <header class="about-hero reveal">
+        <div class="about-hero-content">
+            <p class="about-hero-eyebrow">About me</p>
+            <h1 class="about-hero-name">{{ with $about.name }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}</h1>
+            <p class="about-hero-tagline">{{ $about.tagline | safeHTML }}</p>
+            {{ with $about.mvpUrl }}
+            <p class="about-hero-badges">
+                <a class="about-badge" href="{{ . }}" target="_blank" rel="noopener">
+                    <span class="about-badge-dot" aria-hidden="true"></span>Microsoft MVP
+                </a>
+            </p>
+            {{ end }}
+        </div>
+    </header>
+
+    {{/* ---------- 2. Intro prose (written in the page body) ---------- */}}
+    {{ with .Content }}
+    <section class="about-intro reveal">
+        {{ . }}
+    </section>
+    {{ end }}
+
+    {{/* ---------- 3. What I do (cards) ---------- */}}
+    {{ with $about.cards }}
+    <section class="about-section reveal">
+        <h2 class="about-section-title">What I do</h2>
+        <div class="about-cards">
+            {{ range . }}
+            <div class="about-card">
+                <h3 class="about-card-title">{{ .title }}</h3>
+                <p class="about-card-body">{{ .body }}</p>
+                {{ if .link }}
+                <p class="about-card-links">
+                    <a href="{{ .link }}">{{ with .linkText }}{{ . }}{{ else }}Learn more{{ end }} &rarr;</a>
+                    {{ if .link2 }}<a href="{{ .link2 }}">{{ with .link2Text }}{{ . }}{{ else }}Learn more{{ end }} &rarr;</a>{{ end }}
+                </p>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    {{/* ---------- 4. Life outside the terminal (photo story band) ---------- */}}
+    {{ with $about.photos }}
+    <section class="about-section about-photos">
+        <h2 class="about-section-title reveal">Life outside the terminal</h2>
+        {{ range $i, $p := . }}
+            {{ $img := $.Resources.GetMatch $p.src }}
+            {{ if $img }}
+            {{ $small := $img.Resize "900x q82" }}
+            <div class="about-photo-row reveal {{ if eq (mod $i 2) 1 }}is-reversed{{ end }}">
+                <figure class="about-photo-figure">
+                    <img src="{{ $small.RelPermalink }}" width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ $p.alt | default $p.title }}" loading="lazy" />
+                </figure>
+                <div class="about-photo-text">
+                    <h3 class="about-photo-title">{{ $p.title }}</h3>
+                    {{/* Render captions as Markdown so [links](url) work, and
+                         turn any <br> into a Markdown hard break (the site runs
+                         goldmark unsafe=false, so a raw <br> would be stripped). */}}
+                    <div class="about-photo-caption">{{ $p.caption | replaceRE `<br\s*/?>` "  \n" | markdownify }}</div>
+                </div>
+            </div>
+            {{ end }}
+        {{ end }}
+    </section>
+    {{ end }}
+
+    {{/* ---------- 5. Currently (facts strip) ---------- */}}
+    {{ with $about.currently }}
+    <section class="about-section reveal">
+        <h2 class="about-section-title">Currently</h2>
+        <dl class="about-facts">
+            {{ range . }}
+            <div class="about-fact">
+                <dt class="about-fact-label">{{ .label }}</dt>
+                <dd class="about-fact-value">{{ .value }}</dd>
+            </div>
+            {{ end }}
+        </dl>
+    </section>
+    {{ end }}
+
+    {{/* ---------- 6. Closing + links ---------- */}}
+    <section class="about-closing reveal">
+        {{ with $about.closing }}<p class="about-closing-text">{{ . }}</p>{{ end }}
+        {{ with .Site.Menus.social }}
+        <ol class="about-socials menu-social">
+            {{ range . }}
+            <li>
+                <a href="{{ .URL }}" {{ if eq .Params.newTab true }}target="_blank" rel="noopener"{{ end }} aria-label="{{ .Name }}">
+                    {{ with .Params.Icon }}{{ partial "helper/icon" . }}{{ end }}
+                </a>
+            </li>
+            {{ end }}
+        </ol>
+        {{ end }}
+    </section>
+
+    {{ partialCached "footer/footer" . }}
+</article>
+
+{{/* Scroll-reveal: adds .in-view as sections enter the viewport. Respects
+     prefers-reduced-motion (the CSS neutralises the transform there, and this
+     observer only toggles a class, so reduced-motion users see everything
+     immediately with no movement). */}}
+<script>
+(function () {
+    var reveals = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || !reveals.length) {
+        reveals.forEach(function (el) { el.classList.add('in-view'); });
+        return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                io.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    reveals.forEach(function (el) { io.observe(el); });
+})();
+</script>
+{{ end }}
