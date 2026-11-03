@@ -23,7 +23,8 @@
     {{/* ---------- 2. Intro prose (written in the page body) + portrait ---------- */}}
     {{ with .Content }}
     <section class="about-intro reveal">
-        <div class="about-intro-prose">{{ . }}</div>
+        {{/* Figure precedes the prose so the floated portrait (md+) wraps the
+             intro text around it; on mobile it stacks centred above the text. */}}
         {{ with $about.portrait }}
             {{ $portrait := $.Resources.GetMatch .src }}
             {{ if $portrait }}
@@ -33,6 +34,7 @@
             </figure>
             {{ end }}
         {{ end }}
+        <div class="about-intro-prose">{{ . }}</div>
     </section>
     {{ end }}
 

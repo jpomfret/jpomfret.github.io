@@ -708,16 +708,13 @@ figure.float-right {
 
 /* ---------- 2. Intro prose + portrait ---------- */
 .about-intro {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 28px;
-    align-items: start;
-
-    /* Prose left, portrait top-right. The portrait column is intentionally
-       narrow so the reading measure stays comfortable. */
-    @include respond(md) {
-        grid-template-columns: 1fr minmax(240px, 300px);
-        gap: 44px;
+    /* Block flow so the portrait can float and the intro text wraps around it
+       (md+). Clearfix contains the float when the text is shorter than the
+       image, so the next section never rides up beside it. */
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
     }
 }
 
@@ -725,6 +722,11 @@ figure.float-right {
     font-size: 1.7rem;
     line-height: 1.7;
     color: var(--body-text-color);
+    /* Cap the reading measure to the system's ~70ch body width (DESIGN.md).
+       The portrait floats to the full container edge (so it still lines up with
+       the hero/cards on the right); only the text column is held to measure,
+       keeping the lines below the photo readable instead of ~81ch. */
+    max-width: 830px;
 
     p {
         margin: 0 0 1.2em;
@@ -746,12 +748,11 @@ figure.float-right {
 }
 
 .about-intro-portrait {
-    /* On mobile: a tidy centred portrait above the bio. On md+: it sits in the
-       right grid column, top-aligned next to the text. */
-    margin: 0 auto;
+    /* On mobile: a tidy centred portrait above the bio. On md+: float it right
+       so the intro text wraps around it and fills the space below. */
+    margin: 0 auto 24px;
     max-width: 280px;
     width: 100%;
-    order: -1;
 
     img {
         display: block;
@@ -762,9 +763,10 @@ figure.float-right {
     }
 
     @include respond(md) {
-        max-width: none;
-        margin: 0;
-        order: 0;
+        float: right;
+        width: 300px;
+        max-width: 42%;
+        margin: 4px 0 18px 40px;
     }
 }
 
