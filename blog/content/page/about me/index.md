@@ -3,6 +3,13 @@ title: "About Me"
 slug: "about"
 date: 2026-11-01
 layout: about
+# One-line share/SEO description. Without this, the theme auto-fills it from the
+# whole intro (which pulls in literal newlines) — keep it a single clean line.
+description: "Database Engineer, dbatools maintainer, and Microsoft MVP — who I am, what I do, and life outside the terminal."
+# Social-share thumbnail (og:image / twitter:image). The Rome photo is the only
+# landscape shot, so it crops cleanly to a wide share card. Swap for a dedicated
+# 1200x630 card if you make one in your Canva template.
+image: "PXL_20230427_093959842.jpg"
 # Don't copy the raw photo originals (one is ~6.5MB) into the built site — the
 # page only ever uses Hugo's processed/resized variants (.Resize), which are
 # still published because they're referenced. Keeps the deploy lean.
