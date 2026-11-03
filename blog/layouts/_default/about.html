@@ -20,10 +20,19 @@
         </div>
     </header>
 
-    {{/* ---------- 2. Intro prose (written in the page body) ---------- */}}
+    {{/* ---------- 2. Intro prose (written in the page body) + portrait ---------- */}}
     {{ with .Content }}
     <section class="about-intro reveal">
-        {{ . }}
+        <div class="about-intro-prose">{{ . }}</div>
+        {{ with $about.portrait }}
+            {{ $portrait := $.Resources.GetMatch .src }}
+            {{ if $portrait }}
+            {{ $r := $portrait.Resize "680x q82" }}
+            <figure class="about-intro-portrait">
+                <img src="{{ $r.RelPermalink }}" width="{{ $r.Width }}" height="{{ $r.Height }}" alt="{{ .alt | default "Jess Pomfret" }}" loading="lazy" />
+            </figure>
+            {{ end }}
+        {{ end }}
     </section>
     {{ end }}
 

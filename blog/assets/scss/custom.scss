@@ -706,12 +706,25 @@ figure.float-right {
     }
 }
 
-/* ---------- 2. Intro prose ---------- */
+/* ---------- 2. Intro prose + portrait ---------- */
 .about-intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+
+    /* Prose left, portrait top-right. The portrait column is intentionally
+       narrow so the reading measure stays comfortable. */
+    @include respond(md) {
+        grid-template-columns: 1fr minmax(240px, 300px);
+        gap: 44px;
+    }
+}
+
+.about-intro-prose {
     font-size: 1.7rem;
     line-height: 1.7;
     color: var(--body-text-color);
-    max-width: 70ch;
 
     p {
         margin: 0 0 1.2em;
@@ -729,6 +742,29 @@ figure.float-right {
         &:hover {
             color: var(--accent-color-darker);
         }
+    }
+}
+
+.about-intro-portrait {
+    /* On mobile: a tidy centred portrait above the bio. On md+: it sits in the
+       right grid column, top-aligned next to the text. */
+    margin: 0 auto;
+    max-width: 280px;
+    width: 100%;
+    order: -1;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+    }
+
+    @include respond(md) {
+        max-width: none;
+        margin: 0;
+        order: 0;
     }
 }
 

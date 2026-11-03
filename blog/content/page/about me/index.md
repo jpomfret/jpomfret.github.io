@@ -23,6 +23,11 @@ about:
     # Microsoft MVP badge in the hero (links to your MVP profile). Remove this
     # line to hide the badge.
     # mvpUrl: "https://mvp.microsoft.com/en-US/MVP/profile/d54be54a-7042-ea11-a813-000d3a8cc191"
+    # Portrait shown at the top-right, beside the intro text. Remove this
+    # block to hide it.
+    portrait:
+        src: "IMG20260423104839.jpg"
+        alt: "Jess Pomfret speaking on stage at a SQL conference"
 
     # --- What I do (4 cards) ------------------------------------------------
     # Write ~1–2 sentences per card. Titles are fixed; links are already wired.
