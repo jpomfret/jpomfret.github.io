@@ -6,7 +6,7 @@ categories:
   - "xevents"
 tags:
   - "extendedEvents"
-  - "tsql"
+  - "tSql"
 image: "cover.jpg"
 slug: extended-events-to-determine-batch-size
 ---
