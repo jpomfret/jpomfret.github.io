@@ -953,3 +953,100 @@ figure.float-right {
         height: 28px;
     }
 }
+
+/*
+*   Callouts: GitHub-style alerts (> [!TIP], > [!NOTE], ...) rendered by
+*   layouts/_default/_markup/render-blockquote.html. They keep the theme's
+*   blockquote shape (full-bleed, left border) and only swap in a per-type
+*   accent, tint and title row. `.article-content blockquote.callout` beats the
+*   theme's `.article-content blockquote` on specificity, so no !important.
+*   Warning/caution use amber/red on purpose: they need to read as warnings
+*   whatever the brand palette is. Title colours are picked for >= 4.5:1
+*   contrast on their own tint in both themes.
+*/
+.article-content blockquote.callout {
+    --callout-accent: var(--brand-sky);
+    --callout-text: var(--brand-navy);
+    --callout-bg: rgba(117, 192, 228, 0.14);
+
+    border-inline-start-color: var(--callout-accent);
+    background-color: var(--callout-bg);
+
+    &.callout--tip {
+        --callout-accent: var(--brand-teal);
+        --callout-text: var(--brand-teal-deep);
+        --callout-bg: rgba(79, 170, 179, 0.14);
+    }
+
+    &.callout--important {
+        --callout-accent: var(--brand-purple);
+        --callout-text: var(--brand-purple);
+        --callout-bg: rgba(83, 0, 128, 0.07);
+    }
+
+    &.callout--warning {
+        --callout-accent: #e0a526;
+        --callout-text: #7a4f00;
+        --callout-bg: rgba(224, 165, 38, 0.14);
+    }
+
+    &.callout--caution {
+        --callout-accent: #d64550;
+        --callout-text: #9e1f2a;
+        --callout-bg: rgba(214, 69, 80, 0.10);
+    }
+
+    [data-scheme="dark"] & {
+        --callout-accent: var(--brand-sky);
+        --callout-text: #a8dcf3;
+        --callout-bg: rgba(117, 192, 228, 0.12);
+
+        &.callout--tip {
+            --callout-accent: var(--brand-teal-bright);
+            --callout-text: var(--brand-teal-bright);
+            --callout-bg: rgba(79, 170, 179, 0.16);
+        }
+
+        &.callout--important {
+            --callout-accent: #c58be6;
+            --callout-text: #d9b3f0;
+            --callout-bg: rgba(197, 139, 230, 0.13);
+        }
+
+        &.callout--warning {
+            --callout-accent: #f0b84a;
+            --callout-text: #f5cc78;
+            --callout-bg: rgba(240, 184, 74, 0.12);
+        }
+
+        &.callout--caution {
+            --callout-accent: #f07a83;
+            --callout-text: #f7a5ab;
+            --callout-bg: rgba(240, 122, 131, 0.12);
+        }
+    }
+
+    .callout__title {
+        display: flex;
+        align-items: center;
+        gap: 0.45em;
+        margin: 0 0 0.4em;
+        font-family: var(--heading-font-family);
+        font-weight: 700;
+        color: var(--callout-text);
+    }
+
+    .callout__icon {
+        display: inline-flex;
+        flex-shrink: 0;
+
+        svg {
+            width: 1.25em;
+            height: 1.25em;
+        }
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}

@@ -4,11 +4,11 @@ slug: "dab-api-builder"
 description: "Let's test out the Data API Builder (dab) to create API endpoints for a local SQL Server database running in a container."
 date: 2025-08-30T09:00:00Z
 categories:
-  - dab
+  - DAB
   - api
   - PowerShell
 tags:
-  - dab
+  - DAB
   - api
   - PowerShell
 

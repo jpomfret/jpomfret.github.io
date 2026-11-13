@@ -4,11 +4,11 @@ slug: "dab-api-container"
 description: "In part 2 of my series on DAB, we'll run DAB in an Azure Container Instance and wire it up to create an API on top of an Azure SQL Database."
 date: 2025-11-06T11:00:00Z
 categories:
-  - dab
+  - DAB
   - api
   - PowerShell
 tags:
-  - dab
+  - DAB
   - api
   - PowerShell
 image: header.png
