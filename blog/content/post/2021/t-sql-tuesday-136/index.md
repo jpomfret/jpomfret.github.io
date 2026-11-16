@@ -8,7 +8,7 @@ categories:
 tags:
   - "datatypes"
   - "tsql2sday"
-  - "tsql"
+  - "tSql"
 image: "waldemar-brandt-sXCxht5Ivu4-unsplash.jpg"
 ---
 

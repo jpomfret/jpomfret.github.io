@@ -22,9 +22,9 @@ draft: true
 move variables to the top
 
 ```PowerShell
-$resourceGroup = 'rg-dab-prod-001'
+$resourceGroup = 'rg-dab-prod-002'
 $storageAccount = "dabconfigstorage1234"  # Must be globally unique
-$functionAppName = "func-dab-prod-001"
+$functionAppName = "func-dab-prod-002"
 
 
 az functionapp create `

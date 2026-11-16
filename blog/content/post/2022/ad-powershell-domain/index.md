@@ -6,7 +6,7 @@ date: "2022-07-07"
 categories:
   - "PowerShell"
 tags:
-  - "activedirectory"
+  - "activeDirectory"
   - "PowerShell"
 image: "cover.jpg"
 ---

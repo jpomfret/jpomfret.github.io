@@ -1,0 +1,32 @@
+{{- /*
+  Blockquote render hook: GitHub-style alerts become callouts.
+
+    > [!TIP] Optional custom title
+    > Body text.
+
+  Types with their own icon and colour: note, tip, important, warning, caution.
+  Any other [!type] gets the note look. A blockquote without an alert marker
+  renders exactly as before, so the theme's normal blockquote styling still applies.
+*/ -}}
+{{- if eq .Type "alert" -}}
+  {{- $type := lower .AlertType -}}
+  {{- $known := slice "note" "tip" "important" "warning" "caution" -}}
+  {{- $style := cond (in $known $type) $type "note" -}}
+  {{- $title := "" -}}
+  {{- with .AlertTitle -}}
+    {{- $title = . -}}
+  {{- else -}}
+    {{- $title = title $type -}}
+  {{- end -}}
+<blockquote class="callout callout--{{ $style }}">
+  <p class="callout__title">
+    <span class="callout__icon">{{ partial "helper/icon" (printf "callout-%s" $style) }}</span>
+    <span>{{ $title }}</span>
+  </p>
+  {{ .Text }}
+</blockquote>
+{{- else -}}
+<blockquote {{- range $k, $v := .Attributes }} {{ $k }}="{{ $v }}"{{ end }}>
+  {{ .Text }}
+</blockquote>
+{{- end -}}

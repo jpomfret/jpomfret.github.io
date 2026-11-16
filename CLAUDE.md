@@ -40,6 +40,7 @@ gh api repos/CaiJimmy/hugo-theme-stack/contents/<path>?ref=v3.29.0 --jq '.conten
 - `blog/layouts/partials/article-list/{changelog-hero,changelog-entry}.html` — the two feed components. The hero's background is a fixed brand-kit image (`blog/static/img/hero-frame-{light,dark}.png`), not a per-post cover-image crop — that was tried first and abandoned because posts' own cover images have baked-in title/badge text that collided with the hero's own dynamic title.
 - `blog/layouts/partials/head/head.html` — overrides the theme's `<head>` to drop the *unconditional* Google Analytics include.
 - `blog/layouts/partials/footer/custom.html` — the theme's own designated (normally empty) extension point; holds the cookie-consent banner and the gated GA loader (only fires after "Accept", persisted in `localStorage`).
+- `blog/layouts/_default/_markup/render-blockquote.html` — turns GitHub-style alerts (`> [!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!WARNING]`, `[!CAUTION]`, optional custom title after the marker, e.g. `> [!TIP] Bonus tip`) into styled callouts; unknown types fall back to the note look, and plain `>` blockquotes render unchanged. Icons are `blog/assets/icons/callout-*.svg` (Tabler-style, via the theme's `helper/icon` partial); colours are the `.callout` block at the end of `custom.scss`.
 - `blog/layouts/partials/footer/components/custom-font.html` — overridden to a no-op; the theme's default here unconditionally fetches Google Fonts' Lato, which this site doesn't use anymore.
 
 ### Config is split across `blog/config/_default/*.toml`

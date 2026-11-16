@@ -7,7 +7,7 @@ categories:
   - "tSql"
 tags:
   - "aggregates"
-  - "tsql"
+  - "tSql"
 image: "cover.jpg"
 ---
 

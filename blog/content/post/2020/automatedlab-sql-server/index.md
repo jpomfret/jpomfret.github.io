@@ -7,7 +7,7 @@ categories:
   - "automatedLab"
   - "PowerShell"
 tags:
-  - "automatedlab"
+  - "automatedLab"
   - "PowerShell"
 ---
 

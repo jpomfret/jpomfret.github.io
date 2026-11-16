@@ -18,7 +18,7 @@ https://tablericons.com/
 
 Copy an icon - save as an svg!
 
-hugo server --poll=700ms -D
+hugo server --poll=700ms -D --buildFuture
 
 ## Make a new post
 

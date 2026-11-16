@@ -8,7 +8,6 @@ categories:
   - "PowerShell"
 tags:
   - "activeDirectory"
-  - "activedirectory"
   - "dbatools"
   - "permissions"
   - "PowerShell"
